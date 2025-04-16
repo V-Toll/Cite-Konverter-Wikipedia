@@ -1,2 +1,2 @@
-# Cite-zu-Internetquelle-Konverter
-Der Cite zu Internetquelle Konverter für Wikipedia unterstützt dich dabei, {{cite web}}, {{cite news}} und {{cite magazine}} in die deutsche Vorlage {{Internetquelle}} zu konvertieren.
+# Cite zu Internetquelle Konverter
+Der Cite zu Internetquelle Konverter für Wikipedia unterstützt dich dabei, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_web" target="_blank"><code>{{cite web}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_news" target="_blank"><code>{{cite news}}</code></a> und <a href="https://en.wikipedia.org/wiki/Template:Cite_magazine" target="_blank"><code>{{cite magazine}}</code></a> in die deutsche Vorlage <a href="https://de.wikipedia.org/wiki/Vorlage:Internetquelle" target="_blank"><code>{{Internetquelle}}</code></a> zu konvertieren. Bitte prüft jeden Einzelnachweis selbst noch einmal vor dem Einfügen.
