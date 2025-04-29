@@ -1,314 +1,357 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cite zu Internetquelle Konverter für Wikipedia</title>
-    <link rel="icon" type="image/png" href="/grafiken/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/grafiken/favicon.svg" />
-    <link rel="shortcut icon" href="/grafiken/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/grafiken/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="C zu I" />
-    <link rel="manifest" href="/grafiken/site.webmanifest" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #C250F2, #D76CD9, #D977A5);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            background-attachment: fixed;
-            padding-top: 20px;
-        }
-        .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            padding: 40px;
-            width: 95%;
-            max-width: 800px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        h1 {
-            color: #A60303;
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-        }
-        .description {
-            padding: 15px;
-            margin-bottom: 20px;
-            color: #5F0E95;
-            font-size: 16px;
-            font-weight: bold;
-            border-bottom: 2px solid #5F0E95;
-        }
-        code {
-            background-color: #F0E6F8;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-        .checkbox-container {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        input[type="checkbox"] {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #D977A5;
-            border-radius: 5px;
-            margin-right: 10px;
-            outline: none;
-            cursor: pointer;
-            transition: background 0.3s, border-color 0.3s;
-        }
-        input[type="checkbox"]:checked {
-            background-color: #D977A5;
-            border-color: #A60303;
-        }
-        hr {
-            border: none;
-            border-top: 2px solid #D977A5;
-            margin: 20px 0;
-        }
-        textarea {
-            width: 100%;
-            height: 200px;
-            border: 2px solid #D977A5;
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 20px;
-            font-size: 18px;
-            background-color: #F8E5F1;
-            font-family: 'Courier New', Courier, monospace;
-            resize: none;
-        }
-        button {
-            background: linear-gradient(135deg, #F20530, #D977A5);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 15px 25px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 20px;
-            transition: background 0.3s;
-            margin-bottom: 10px;
-        }
-        button:hover {
-            background: linear-gradient(135deg, #A60303, #C250F2);
-        }
-        .copy-confirmation {
-            color: #4CAF50;
-            font-weight: bold;
-            display: none;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cite zu Internetquelle Konverter für Wikipedia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #C250F2, #D76CD9, #D977A5);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      background-attachment: fixed;
+      padding-top: 20px;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      width: 95%;
+      max-width: 800px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    h1 {
+      color: #A60303;
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+    }
+    .description {
+      padding: 15px;
+      margin-bottom: 20px;
+      color: #5F0E95;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    code {
+      background-color: #F0E6F8;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .checkbox-container {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    input[type="checkbox"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #D977A5;
+      border-radius: 5px;
+      margin-right: 10px;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    input[type="checkbox"]:checked {
+      background-color: #D977A5;
+      border-color: #A60303;
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #D977A5;
+      margin: 20px 0;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      border: 2px solid #D977A5;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 18px;
+      background-color: #F8E5F1;
+      font-family: 'Courier New', Courier, monospace;
+      resize: none;
+    }
+    button {
+      background: linear-gradient(135deg, #F20530, #D977A5);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 15px 25px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 20px;
+      transition: background 0.3s;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #A60303, #C250F2);
+    }
+    .copy-confirmation {
+      color: #4CAF50;
+      font-weight: bold;
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Cite zu Internetquelle Konverter für Wikipedia</h1>
-        <div class="description">
-            Der Cite zu Internetquelle Konverter für Wikipedia unterstützt dich dabei, 
-            <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_web" target="_blank"><code>{{cite web}}</code></a>, 
-            <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_news" target="_blank"><code>{{cite news}}</code></a> 
-            und 
-            <a href="https://en.wikipedia.org/wiki/Template:Cite_magazine" target="_blank"><code>{{cite magazine}}</code></a>, 
-            in die deutsche Vorlage 
-            <a href="https://de.wikipedia.org/wiki/Vorlage:Internetquelle" target="_blank"><code>{{Internetquelle}}</code></a> 
-            zu konvertieren. Bitte prüft jeden Einzelnachweis selbst noch einmal vor dem Einfügen.
-        </div>
-        <div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="removeArchivesCheckbox" checked>
-                <label for="removeArchivesCheckbox">Alle Archivierungsparameter entfernen, wenn die URL noch aktiv ist</label>
-            </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="replaceWorksCheckbox" checked>
-                <label for="replaceWorksCheckbox">Werke mit Wikilinks versehen (sofern unterstützt)</label>
-            </div>
-        </div>
-        <hr>
-        <p>Füge hier den Einzelnachweis ein, der konvertiert werden soll:</p>
-        <textarea id="inputText" placeholder="Füge hier deinen Text ein..."></textarea>
-        <button onclick="transformText()">Einzelnachweis konvertieren</button>
-        <p>Konvertierter Einzelnachweis:</p>
-        <div class="output">
-            <textarea id="outputText" readonly></textarea>
-        </div>
-        <button onclick="copyToClipboard()">In Zwischenablage kopieren</button>
-        <div id="copyConfirmation" class="copy-confirmation">
-            ✔ Text kopiert!
-        </div>
+  <div class="container">
+    <h1>Cite zu Internetquelle Konverter für Wikipedia</h1>
+    <div class="description">
+      Der Cite zu Internetquelle Konverter unterstützt dich dabei,
+      <code>{{cite web}}</code>,
+      <code>{{cite news}}</code> und
+      <code>{{cite magazine}}</code>,
+      in die deutsche Vorlage
+      <code>{{Internetquelle}}</code>
+      zu konvertieren.
     </div>
-    <script>
-        const fieldOrder = [
-            'autor', 'url', 'titel', 'titelerg', 'werk', 'hrsg', 'datum', 'seiten',
-            'format', 'sprache', 'offline', 'archiv-url', 'archiv-datum', 'abruf',
-            'abruf-verborgen', 'kommentar', 'zitat'
-        ];
+    <div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="removeArchivesCheckbox" checked>
+        <label for="removeArchivesCheckbox">Alle Archivierungsparameter entfernen, wenn die URL noch aktiv ist</label>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="replaceWorksCheckbox" checked>
+        <label for="replaceWorksCheckbox">Werke mit Wikilinks versehen (sofern unterstützt)</label>
+      </div>
+    </div>
+    <hr>
+    <p>Füge hier den Einzelnachweis ein, der konvertiert werden soll:</p>
+    <textarea id="inputText" placeholder="Füge hier deinen Text ein..."></textarea>
+    <button onclick="transformText()">Einzelnachweis konvertieren</button>
+    <p>Konvertierter Einzelnachweis:</p>
+    <div class="output">
+      <textarea id="outputText" readonly></textarea>
+    </div>
+    <button onclick="copyToClipboard()">In Zwischenablage kopieren</button>
+    <div id="copyConfirmation" class="copy-confirmation">✔ Text kopiert!</div>
+  </div>
+  <script>
+    // Gewünschte Parameterreihenfolge: autor, url, titel, werk, datum, sprache, abruf
+    const fieldOrder = ['autor', 'url', 'titel', 'werk', 'datum', 'sprache', 'abruf'];
 
-        function getCurrentDateISO() {
-            const currentDate = new Date();
-            const year = currentDate.getFullYear();
-            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-            const day = String(currentDate.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
+    function getCurrentDateISO() {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+	  const monthMap = {
+  January: "01", February: "02", March: "03", April: "04", May: "05", June: "06",
+  July: "07", August: "08", September: "09", October: "10", November: "11", December: "12"
+};
+
+    function convertDateToISO(dateString) {
+  // Entferne führende und nachfolgende Leerzeichen
+  dateString = dateString.trim();
+  // Erstes Format: "MonthName dd, yyyy" (z. B. "July 21, 2020")
+  let dateRegex = /(\w+)\s+(\d{1,2}),\s+(\d{4})/;
+  let match = dateString.match(dateRegex);
+  if (match) {
+    const month = monthMap[match[1]];
+    const day = String(match[2]).padStart(2, '0');
+    const year = match[3];
+    return `${year}-${month}-${day}`;
+  }
+  // Zweites Format: "dd MonthName yyyy" (z. B. "17 December 2024")
+  dateRegex = /^(\d{1,2})\s+(\w+)\s+(\d{4})$/;
+  match = dateString.match(dateRegex);
+  if (match) {
+    const day = String(match[1]).padStart(2, '0');
+    const month = monthMap[match[2]];
+    const year = match[3];
+    return `${year}-${month}-${day}`;
+  }
+  // Falls kein bekanntes Format erfasst wird, gebe den Originalstring zurück
+  return dateString;
+}
+
+function handleYear(contentText) {
+  // Zuerst |date= verarbeiten
+  const dateRegex = /\|date=([^|]+)/i;
+  if (dateRegex.test(contentText)) {
+    contentText = contentText.replace(dateRegex, (_, d) => `|datum=${convertDateToISO(d)}`);
+  }
+  // Falls |year= vorhanden ist, ebenfalls umwandeln
+  const yearRegex = /\|year=(\d{4})/i;
+  contentText = contentText.replace(yearRegex, '|datum=$1');
+  return contentText;
+}
+
+    function removeArchiveParams(contentText) {
+      return contentText.replace(/\|archive-url=[^|]*/gi, '')
+                        .replace(/\|archiveurl=[^|]*/gi, '')
+                        .replace(/\|archive-date=[^|]*/gi, '')
+                        .replace(/\|archivedate=[^|]*/gi, '')
+                        .replace(/\|url-status=[^|]*/gi, '');
+    }
+
+    // Ersetzt "publisher=", "work=", "newspaper=" und "website=" durch "werk="
+    function replaceWorks(contentText) {
+      contentText = contentText.replace(/\|publisher=/gi, '|werk=');
+      contentText = contentText.replace(/\|work=/gi, '|werk=');
+      contentText = contentText.replace(/\|newspaper=/gi, '|werk=');
+      contentText = contentText.replace(/\|website=/gi, '|werk=');
+      return contentText;
+    }
+
+    function removeUnwantedParams(contentText) {
+      return contentText.replace(/\|issn=[^|]*/gi, '');
+    }
+
+    // Entfernt vorhandene |language bzw. |sprache und ergänzt bei Bedarf |sprache=en
+    function replaceLanguageVariants(contentText) {
+      contentText = contentText.replace(/\|(?:language|sprache)=[^|]*/gi, '');
+      if (!/\|sprache=/i.test(contentText)) {
+        contentText += " |sprache=en";
+      }
+      return contentText;
+    }
+
+    // Kombiniert |first und |last zu |autor (falls vorhanden)
+    function combineAuthors(contentText) {
+      const firstMatch = contentText.match(/\|first=([^|]+)/i);
+      const lastMatch = contentText.match(/\|last=([^|]+)/i);
+      if (firstMatch || lastMatch) {
+        let autor = "";
+        if (firstMatch) {
+          autor += firstMatch[1].trim();
         }
-
-        const monthMap = {
-            January: "01", February: "02", March: "03", April: "04", May: "05", June: "06",
-            July: "07", August: "08", September: "09", October: "10", November: "11", December: "12"
-        };
-
-        function convertDateToISO(dateString) {
-            const dateRegex = /(\w+)\s+(\d{1,2}),\s+(\d{4})/;
-            const match = dateString.match(dateRegex);
-            if (match) {
-                const month = monthMap[match[1]];
-                const day = String(match[2]).padStart(2, '0');
-                const year = match[3];
-                return `${year}-${month}-${day}`;
-            }
-            return dateString;
+        if (lastMatch) {
+          autor += " " + lastMatch[1].trim();
         }
+        contentText = contentText.replace(/\|first=[^|]+/gi, '');
+        contentText = contentText.replace(/\|last=[^|]+/gi, '');
+        contentText += " |autor=" + autor;
+      }
+      return contentText;
+    }
+    
+    // Wandelt vorhandenen |author in |autor um (falls combineAuthors nicht greift)
+    function handleAuthors(contentText) {
+      const authorRegex = /\|author=([^|]+)/i;
+      const match = authorRegex.exec(contentText);
+      if (match) {
+        const autorName = match[1].trim();
+        contentText = contentText.replace(authorRegex, '|autor=' + autorName);
+      }
+      return contentText;
+    }
 
-        function isEnglish(text) {
-            const englishKeywords = /the|is|in|and|of|to|with|for|on|at|by|from|it|that|this|was|be|as|are|an|or|but|not|if|which|about|can|will|more|up|one|all|out|we|do|what|so|his|her|like|when|who|over|also|into|their|there|been|its|knew|could|would|should|being/i;
-            return englishKeywords.test(text);
-        }
+    // Wandelt |date oder |year in |datum um
+    function handleYear(contentText) {
+      const dateRegex = /\|date=([^|]+)/i;
+      if (dateRegex.test(contentText)) {
+        contentText = contentText.replace(dateRegex, (_, d) => `|datum=${convertDateToISO(d)}`);
+      }
+      const yearRegex = /\|year=(\d{4})/i;
+      contentText = contentText.replace(yearRegex, '|datum=$1');
+      return contentText;
+    }
 
-        function removeArchiveParams(contentText) {
-            contentText = contentText.replace(/\|archive-url=[^|]*\s*/g, '');
-            contentText = contentText.replace(/\|archiveurl=[^|]*\s*/g, '');
-            contentText = contentText.replace(/\|archive-date=[^|]*\s*/g, '');
-            contentText = contentText.replace(/\|archivedate=[^|]*\s*/g, '');
-            contentText = contentText.replace(/\|url-status=[^|]*\s*/g, '');
-            return contentText;
-        }
+    // Entfernt |access-date und fügt |abruf mit dem aktuellen Datum ein
+    function handleAccessDate(contentText) {
+      contentText = contentText.replace(/\|access[-]?date=[^|]*/gi, '');
+      contentText += " |abruf=" + getCurrentDateISO();
+      return contentText;
+    }
 
-        function replaceWorks(contentText) {
-            const worksReplacements = {
-                "The New York Times": "[[The New York Times]]",
-                "The Washington Post": "[[The Washington Post]]",
-                "Deadline Hollywood": "[[Deadline (Website)|Deadline]]"
-            };
+    // Ersetzt |title durch |titel
+    function handleTitle(contentText) {
+      return contentText.replace(/\|title=/gi, '|titel=');
+    }
 
-            Object.keys(worksReplacements).forEach(work => {
-                const replacement = worksReplacements[work];
-                const workRegex = new RegExp(`\\|werk=${work}`, 'g');
-                const workRegexAlt = new RegExp(`\\|work=${work}`, 'g');
-                contentText = contentText.replace(workRegex, `|werk=${replacement}`);
-                contentText = contentText.replace(workRegexAlt, `|werk=${replacement}`);
-            });
+    // Hauptfunktion: Transformiert den Eingabetext
+    function transformText() {
+      const inputText = document.getElementById('inputText').value;
+      const refMatch = inputText.match(/^(<ref[^>]*>)([\s\S]+)(<\/ref>)$/i);
+      if (!refMatch) {
+        document.getElementById('outputText').value = "Kein gültiger Ref-Block gefunden.";
+        return;
+      }
+      const refTagStart = refMatch[1];
+      const refTagEnd = refMatch[3];
+      let contentText = refMatch[2].trim();
+      
+      // Entferne eventuell vorhandenes abschließendes "}}" im Inhalt
+      contentText = contentText.replace(/\}\}\s*$/, "");
+      
+      // Wandelt den Template-Namen um: z.B. "{{Cite web" -> "{{Internetquelle"
+      contentText = contentText.replace(/\{\{(cite|Cite)\s+(web|news|magazine)/, '{{Internetquelle');
+      
+      // Kombiniere gegebenenfalls |first und |last zu |autor
+      contentText = combineAuthors(contentText);
+      contentText = handleAuthors(contentText);
+      
+      // Wandelt |date oder |year in |datum um
+      contentText = handleYear(contentText);
+      // Ersetze "publisher=", "work=", "newspaper=" und "website=" durch "werk="
+      contentText = replaceWorks(contentText);
+      contentText = removeUnwantedParams(contentText);
+      contentText = replaceLanguageVariants(contentText);
+      contentText = handleAccessDate(contentText);
+      contentText = handleTitle(contentText);
+      
+      // Entferne doppelte Leerzeichen
+      contentText = contentText.replace(/\s{2,}/g, " ").trim();
+      
+      // Entferne Archivierungsparameter, falls Checkbox aktiv ist
+      const removeArchives = document.getElementById('removeArchivesCheckbox').checked;
+      if (removeArchives) {
+        contentText = removeArchiveParams(contentText);
+      }
+      
+      // Extrahiere alle Parameter, die mit "|" beginnen und ein "=" enthalten
+      const params = contentText.match(/\|[^|]+=[^|]*/g) || [];
+      // Sortiere Parameter nach definierter Reihenfolge
+      const reorderedParams = params.sort((a, b) => {
+        const keyA = a.split('=')[0].substring(1).trim().toLowerCase();
+        const keyB = b.split('=')[0].substring(1).trim().toLowerCase();
+        return fieldOrder.indexOf(keyA) - fieldOrder.indexOf(keyB);
+      });
+      
+      // Baue den finalen Template-String zusammen
+      contentText = '{{Internetquelle ' + reorderedParams.join(' ').trim() + '}}';
+      
+      // Ersetze in der finalen Zeichenkette nochmals doppelte Leerzeichen durch ein einzelnes
+      contentText = contentText.replace(/\s{2,}/g, " ");
+      
+      // Setze den kompletten Ref-Block zusammen
+      document.getElementById('outputText').value = refTagStart + contentText + refTagEnd;
+    }
 
-            return contentText;
-        }
+    function isEnglish(text) {
+      const englishKeywords = /the|is|in|and|of|to|with|for|on|at|by|from|that|this|was|be|as|are|an|or|but|not|if|which|about|can|will|more|up|one|all|out|we|do|what|so|his|her|like|when|who|over|also|into|their|there|been|its|knew|could|would|should|being/i;
+      return englishKeywords.test(text);
+    }
 
-        function transformText() {
-            let inputText = document.getElementById('inputText').value;
-
-            const refMatch = inputText.match(/^(<ref([^>]*)>)?([\s\S]*?)(<\/ref>)?$/i);
-            let refTagStart = "";
-            let refTagEnd = "";
-            let contentText = inputText;
-
-            if (refMatch) {
-                refTagStart = refMatch[1] || "";
-                refTagEnd = refMatch[4] || "";
-                contentText = refMatch[3];
-            }
-
-            let authors = [];
-            let authorRegex = /\|last=([^|]+)\s*\|first=([^|]+)/g;
-            let match;
-
-            while ((match = authorRegex.exec(contentText)) !== null) {
-                authors.push(`${match[2]} ${match[1]}`);
-            }
-
-            contentText = contentText.replace(authorRegex, '');
-            if (authors.length > 0) {
-                const authorText = `|autor=${authors.join(', ')}`;
-                contentText = contentText.replace(/(\{\{cite (web|news|magazine)|\{\{Cite (web|news|magazine)|\{\{Cite (Web|News|Magazine))/i, '$1 ' + authorText);
-            }
-
-            const removeArchives = document.getElementById('removeArchivesCheckbox').checked;
-            if (removeArchives && contentText.includes('|url-status=live')) {
-                contentText = removeArchiveParams(contentText);
-            }
-
-            contentText = contentText.replace(/\|access-date=/g, '|abruf=');
-            contentText = contentText.replace(/\|accessdate=/g, '|abruf=');
-            const currentDateISO = getCurrentDateISO();
-            contentText = contentText.replace(/\|abruf=[^|]*/g, `|abruf=${currentDateISO}`);
-            contentText = contentText.replace(/\|url-status=dead/g, '|offline=1');
-            contentText = contentText.replace(/\|url-status=live/g, '|offline=0');
-            contentText = contentText.replace(/\|publisher=/g, '|hrsg=');
-            contentText = contentText.replace(/\|archive-url=/g, '|archiv-url=');
-            contentText = contentText.replace(/\|archiveurl=/g, '|archiv-url=');
-            contentText = contentText.replace(/\|archive-date=([^|]*)/g, (_, date) => `|archiv-datum=${convertDateToISO(date)}`);
-            contentText = contentText.replace(/\|archivedate=([^|]*)/g, (_, date) => `|archiv-datum=${convertDateToISO(date)}`);
-            contentText = contentText.replace(/\|date=([^|]*)/g, (_, date) => `|datum=${convertDateToISO(date)}`);
-            contentText = contentText.replace(/\|accessdate=([^|]*)/g, (_, date) => `|abruf=${convertDateToISO(date)}`);
-            contentText = contentText.replace(/\|url-access=subscription/g, '|kommentar=[[Paywall]]');
-            contentText = contentText.replace(/\|language=/g, '|sprache=');
-            contentText = contentText.replace(/\|website=/g, '|werk=');
-            contentText = contentText.replace(/\|publication-date=/g, '|datum=');
-            contentText = contentText.replace(/\|quote=/g, '|zitat=');
-            contentText = contentText.replace(/\|magazine=/g, '|werk=');
-            contentText = contentText.replace(/\|newspaper=/g, '|werk=');
-            contentText = contentText.replace(/title=/g, 'titel=');
-            contentText = contentText.replace(/\|work=/g, '|werk=');
-
-            const replaceWorksCheckbox = document.getElementById('replaceWorksCheckbox').checked;
-            if (replaceWorksCheckbox) {
-                contentText = replaceWorks(contentText);
-            }
-
-            const titleMatch = contentText.match(/\|titel=([^|]+)/);
-            const needsLanguage = titleMatch && isEnglish(titleMatch[1]);
-
-            contentText = contentText.replace(/\s{2,}/g, ' ');
-
-            contentText = contentText.replace(/\{\{(cite|Cite) (web|news|magazine|Web|News|Magazine)/i, '{{Internetquelle');
-
-            if (needsLanguage && !contentText.includes('|sprache=en')) {
-                contentText += ' |sprache=en';
-            }
-
-            const params = contentText.match(/\|[^|]+=[^|]*/g);
-            const reorderedParams = params.sort((a, b) => {
-                const keyA = a.split('=')[0].substring(1).trim().toLowerCase();
-                const keyB = b.split('=')[0].substring(1).trim().toLowerCase();
-                return fieldOrder.indexOf(keyA) - fieldOrder.indexOf(keyB);
-            });
-
-            contentText = '{{Internetquelle ' + reorderedParams.join(' ').replace(/\s{2,}/g, ' ').trim() + '}}';
-
-            document.getElementById('outputText').value = refTagStart + contentText + refTagEnd;
-        }
-
-        function copyToClipboard() {
-            const outputText = document.getElementById('outputText');
-            outputText.select();
-            outputText.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(outputText.value).then(() => {
-                const confirmation = document.getElementById('copyConfirmation');
-                confirmation.style.display = 'block';
-                setTimeout(() => {
-                    confirmation.style.display = 'none';
-                }, 2000);
-            });
-        }
-    </script>
+    function copyToClipboard() {
+      const outputText = document.getElementById('outputText');
+      outputText.select();
+      outputText.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(outputText.value).then(() => {
+        const confirmation = document.getElementById('copyConfirmation');
+        confirmation.style.display = 'block';
+        setTimeout(() => {
+          confirmation.style.display = 'none';
+        }, 2000);
+      });
+    }
+  </script>
 </body>
 </html>
