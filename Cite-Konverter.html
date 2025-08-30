@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cite-Konverter → Internetquelle & Literatur (v2.4.6)</title>
+
+  <!-- Favicons (lokal im Ordner 'grafiken') -->
+  <link rel="icon" type="image/png" href="grafiken/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="grafiken/favicon.svg" />
+  <link rel="shortcut icon" href="grafiken/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="grafiken/apple-touch-icon.png" />
+
+  <style>
+    :root{
+      --transition: all 0.28s cubic-bezier(.2,.9,.3,1);
+      --card-radius:18px;
+      --glass: rgba(255,255,255,0.7);
+      --glass-dark: rgba(18,18,20,0.72);
+    }
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+    body{display:flex;justify-content:center;align-items:flex-start;padding:28px;min-height:100vh;transition:var(--transition);background-attachment:fixed}
+
+    /* Theme gradients (page background) */
+    body.theme-sunset{background:linear-gradient(135deg,#C250F2 0%,#D76CD9 50%,#D977A5 100%)}
+    body.theme-wikipedia{background:linear-gradient(180deg,#f6f7f8 0%,#eef6ff 100%)}
+    body.theme-bluewave{background:linear-gradient(135deg,#012840 0%,#0468BF 60%,#99C8F2 100%)}
+    body.theme-valley{background:linear-gradient(135deg,#387CA6 0%,#71A63C 55%,#BBF2F2 100%)}
+
+    .wrap{width:100%;max-width:980px}
+    .card{width:100%;background:var(--glass);backdrop-filter:blur(14px) saturate(140%);border-radius:var(--card-radius);padding:28px;box-shadow:0 16px 44px rgba(0,0,0,0.14);transition:var(--transition);}
+    body.force-dark .card{background:var(--glass-dark);color:#eef2f5}
+
+    h1{margin:0 0 12px;font-size:clamp(1.4rem,2.2vw,1.95rem);display:flex;align-items:center;gap:12px}
+    .desc{margin-bottom:14px;color:rgba(0,0,0,0.78)}
+
+    details{margin:12px 0}
+    details summary{cursor:pointer;font-weight:700;padding:8px;border-radius:8px}
+    .options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media(max-width:820px){.options{grid-template-columns:1fr}}
+
+    textarea{width:100%;min-height:92px;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,0.08);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;background:rgba(255,255,255,0.78);transition:var(--transition);resize:vertical;margin-bottom:18px}
+    body.force-dark textarea{background:rgba(20,20,22,0.6);color:#eef2f5;border:1px solid rgba(255,255,255,0.06)}
+
+    .btn-main{display:inline-block;padding:12px 18px;border-radius:12px;border:none;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,0.12);transition:var(--transition);width:100%}
+    .btn-main:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,0.18)}
+    .btn-row{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+
+    .badge{display:inline-block;padding:6px 12px;border-radius:999px;font-weight:800;color:#fff;cursor:pointer}
+
+    .theme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:8px}
+    .theme-option{display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;background:rgba(255,255,255,0.5);cursor:pointer;border:1px solid rgba(0,0,0,0.04)}
+    .theme-option.active{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.12)}
+    .swatch{width:62px;height:26px;border-radius:8px;flex-shrink:0}
+
+    /* Theme-specific button & badge colors (light) */
+    body.theme-sunset .btn-main, body.theme-sunset .badge{background:linear-gradient(135deg,#C250F2,#D76CD9);}
+    body.theme-wikipedia .btn-main, body.theme-wikipedia .badge{background:linear-gradient(90deg,#3366cc,#2b57b8);}
+    body.theme-bluewave .btn-main, body.theme-bluewave .badge{background:linear-gradient(135deg,#023E73,#0468BF);}
+    body.theme-valley .btn-main, body.theme-valley .badge{background:linear-gradient(135deg,#387CA6,#71A63C);}
+
+    /* Theme-specific dark variants */
+    body.force-dark.theme-sunset .btn-main, body.force-dark.theme-sunset .badge{background:linear-gradient(135deg,#8b2aa9,#9f4fb1);} /* deeper violet */
+    body.force-dark.theme-wikipedia .btn-main, body.force-dark.theme-wikipedia .badge{background:linear-gradient(90deg,#1f3f7a,#254b90);} /* muted blue */
+    body.force-dark.theme-bluewave .btn-main, body.force-dark.theme-bluewave .badge{background:linear-gradient(135deg,#012033,#02334f);} /* dark navy */
+    body.force-dark.theme-valley .btn-main, body.force-dark.theme-valley .badge{background:linear-gradient(135deg,#2f6b56,#3c7f3b);} /* dark green */
+
+    /* ensure badge contrast on light bg */
+    body.theme-wikipedia .badge{color:#fff}
+
+    /* small responsive */
+    @media(max-width:560px){.swatch{width:48px;height:20px}}
+  </style>
+</head>
+<body class="theme-sunset">
+  <div class="wrap">
+    <div class="card" role="main" aria-labelledby="mainTitle">
+      <h1 id="mainTitle">Cite-Konverter → {{Internetquelle}} & {{Literatur}} <span id="versionBadge" class="badge">v2.4.6</span></h1>
+      <p class="desc">Konvertiert <code>{{cite web}}</code>, <code>{{cite news}}</code>, <code>{{cite magazine}}</code> → <code>{{Internetquelle}}</code> und <code>{{cite book}}</code> → <code>{{Literatur}}</code>. Theme- & Darkmode-angepasste Buttons & Badges.</p>
+
+      <details>
+        <summary>⚙️ Optionen</summary>
+        <div class="options" role="group" aria-label="Einstellungen">
+          <label><input type="checkbox" id="useTodayAbruf" checked /> Abrufdatum automatisch auf heute setzen (<span id="todayLabel"></span>)</label>
+          <label><input type="checkbox" id="stripArchiveIfLive" checked /> Archiv-Parameter entfernen, wenn URL aktiv (<code>url-status=live</code>)</label>
+          <label style="grid-column:1/-1"><input type="checkbox" id="suppressGerman" checked /> <code>Sprache=de</code> unterdrücken (nur Fremdsprachen anzeigen) <button id="langInfoToggle" style="background:none;border:none;color:#0645AD;cursor:pointer;margin-left:8px">ℹ️</button></label>
+          <div id="langInfo" style="display:none; font-size:13px; margin-left:4px; grid-column:1/-1">Deutsch (de) wird standardmäßig weggelassen. Fremdsprachen erscheinen als Sprachcode (zweistellig). Mit dieser Option können Sie die Unterdrückung deaktivieren.</div>
+
+          <label><input type="checkbox" id="fullLangCodes" /> Ungekürzte Sprachcodes ausgeben (z. B. en-GB)</label>
+          <label><input type="checkbox" id="autoCopy" /> Konvertierte Ausgabe direkt in Zwischenablage kopieren</label>
+          <label><input type="checkbox" id="forceDark" /> Darkmode erzwingen</label>
+          <label><input type="checkbox" id="overrideLang" /> Sprache manuell überschreiben</label>
+
+          <div id="langSelectContainer" style="display:none; grid-column:1/-1; margin-left:6px">
+            <label style="display:block; font-weight:700; margin-bottom:6px">Manuelle Sprache (überschreibt Heuristik)</label>
+            <select id="langSelect" aria-label="Sprache wählen">
+              <option value="">— wählen —</option>
+              <option value="de">🇩🇪 Deutsch — de</option>
+              <option value="en">🇬🇧 English — en</option>
+              <option value="fr">🇫🇷 Français — fr</option>
+              <option value="es">🇪🇸 Español — es</option>
+              <option value="it">🇮🇹 Italiano — it</option>
+              <option value="nl">🇳🇱 Nederlands — nl</option>
+            </select>
+          </div>
+
+          <div style="grid-column:1/-1">
+            <div class="theme-grid" role="list">
+              <div class="theme-option" data-theme="sunset" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#C250F2,#D76CD9,#D977A5)"></div><div>Sunset on the Beach</div></div>
+              <div class="theme-option" data-theme="wikipedia" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#5a7bd8,#89a8ff,#b9c9ff)"></div><div>Wikipedia (modern)</div></div>
+              <div class="theme-option" data-theme="bluewave" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0468BF,#023E73,#012840)"></div><div>Blue Wave</div></div>
+              <div class="theme-option" data-theme="valley" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#387CA6,#71A63C,#BBF2F2)"></div><div>The Valley</div></div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <label for="inputText" style="display:block; text-align:left; font-weight:700; margin-bottom:6px">Eingabe</label>
+      <textarea id="inputText" placeholder="Hier den &lt;ref&gt;…&lt;/ref&gt; Block oder die {{cite …}}-Vorlage einfügen"></textarea>
+
+      <div class="btn-row" style="margin-bottom:26px">
+        <button id="convertBtn" class="btn-main">Einzelnachweis konvertieren</button>
+      </div>
+
+      <h2 style="margin-top:6px">Ausgabe</h2>
+      <textarea id="outputText" readonly aria-live="polite"></textarea>
+
+      <div class="btn-row" style="margin-top:18px">
+        <button id="copyBtn" class="btn-main">In die Zwischenablage kopieren</button>
+        <div id="copyStatus" role="status" aria-live="polite" style="align-self:center; min-width:160px; text-align:center"></div>
+      </div>
+
+      <details id="changelog" style="margin-top:12px">
+        <summary>📜 Versionsverlauf</summary>
+        <ul>
+          <li><strong>v2.4.6</strong> (2025-08-30): Darkmode-optimierte Button- & Badge-Farben je Theme; Buttons & Badge passen sich jetzt optisch an jedes Theme an; Farbverlauf am Seitenende bleibt erhalten; Badge visuell hervorgehoben. (Ältere Einträge wurden nicht entfernt.)</li>
+          <li><strong>v2.4.5</strong> (2025-08-30): Buttons vereinheitlicht; strengere Sprachheuristik: erkennt automatisch de, en, fr, es, it, nl; Option „Sprache manuell überschreiben“ mit Flaggen-Dropdown.</li>
+          <li><strong>v2.4.4</strong> (2025-08-30): Vollständige Integration der robusten Konvertierungslogik (fixed14) in das neue Design; Copy-Button styled + animiert; Theme-Wechsel repariert; Darkmode-Varianten pro Theme ergänzt.</li>
+          <li><strong>v2.4.3</strong> (2025-08-29): Design v2.4 wiederhergestellt; Konvertierungs-Logik integriert.</li>
+          <li><strong>v2.4.2</strong> (2025-08-29): Vorbereitende Integration.</li>
+          <li><strong>v2.4.1</strong> (2025-08-29): Bugfix Erkennung & Theme-Auswahl.</li>
+          <li><strong>v2.4</strong> (2025-08-29): Redesign (Claude-Version).</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+
+  <script>
+  /* =========================================================================
+     Vollständiges Konvertierungs-Skript (aus fixed14) – vollständig eingebunden
+     ========================================================================= */
+  (function(){
+    /* Utilities */
+    function todayISO(){ const d=new Date(); return d.toISOString().slice(0,10); }
+    function toISODate(dateString){ if(!dateString) return ''; const ds=String(dateString).trim(); const monthMap={january:'01',february:'02',march:'03',april:'04',may:'05',june:'06',july:'07',august:'08',september:'09',october:'10',november:'11',december:'12',januar:'01',februar:'02','märz':'03','maerz':'03',april:'04',mai:'05',juni:'06',juli:'07',august:'08',september:'09',oktober:'10',november:'11',dezember:'12'}; let m; if((m=ds.match(/^(\d{1,2})\s+([A-Za-zäöüÄÖÜ]+)\s+(\d{4})$/))) return `${m[3]}-${(monthMap[m[2].toLowerCase()]||m[2])}-${String(m[1]).padStart(2,'0')}`; if((m=ds.match(/^([A-Za-zäöüÄÖÜ]+)\s+(\d{1,2}),\s*(\d{4})$/))) return `${m[3]}-${(monthMap[m[1].toLowerCase()]||m[1])}-${String(m[2]).padStart(2,'0')}`; if(/^\d{4}-\d{2}-\d{2}$/.test(ds)) return ds; if(/^\d{4}-\d{2}$/.test(ds)) return ds; if(/^\d{4}$/.test(ds)) return ds; return ds; }
+    function extractYear(s){ if(!s) return ''; const m=String(s).match(/(\d{4})/); return m?m[1]:String(s); }
+    function normalizeEdition(ed){ if(!ed) return ''; let e=String(ed).trim(); e=e.replace(/(\d+)\s*(st|nd|rd|th)\b/gi,(m,n)=>`${n}.`); e=e.replace(/\bAufl\.?/i,'').trim(); return e; }
+    function normalizePages(p){ if(!p) return ''; let s=String(p); s=s.replace(/(\d+)\s*-\s*(\d+)/g,(m,a,b)=>{const x=parseInt(a,10),y=parseInt(b,10); return x<y?`${a}\u2013${b}`:`${a}-${b}`}); return s; }
+    function normalizeISBN(isbn){ if(!isbn) return ''; let s=String(isbn).trim(); s=s.replace(/x$/i,'X').replace(/\s+/g,' '); return s; }
+    function looksEnglish(text){ if(!text) return false; return /(\bthe\b|\band\b|\bof\b|\bto\b|\bwith\b|\bfor\b|\bfrom\b|\bin\b|\bis\b|\bthis\b|\bthat\b|guardian|times|news|daily|york|press|telegraph|washington post|new york times)/i.test(text); }
+
+    function detectLanguage(text){ if(!text) return ''; const t=String(text).toLowerCase(); if(/\b(der|die|das|und|nachrichten|zeitung|zeitschrift|deutschland)\b/.test(t)) return 'de'; if(/\b(le|la|les|des|du|journal|revue|france|français)\b/.test(t)) return 'fr'; if(/\b(el|la|los|las|diario|noticias|españa|español)\b/.test(t)) return 'es'; if(/\b(il|lo|la|giornale|quotidiano|italia|italiano)\b/.test(t)) return 'it'; if(/\b(de|het|nieuws|krant|nederland|nederlands)\b/.test(t)) return 'nl'; if(looksEnglish(t)) return 'en'; return ''; }
+
+    function splitTopLevelPipes(s){ let tokens=[],buf=''; let depthLink=0,depthTpl=0; for(let i=0;i<s.length;i++){ const ch=s[i], nxt=s[i+1]; if(ch==='[' && nxt==='['){ depthLink++; buf+='[['; i++; continue; } if(ch===']' && nxt===']' && depthLink>0){ depthLink--; buf+=']]'; i++; continue; } if(ch==='{' && nxt==='{'){ depthTpl++; buf+='{{'; i++; continue; } if(ch==='}' && nxt==='}' && depthTpl>0){ depthTpl--; buf+='}}'; i++; continue; } if(ch==='|' && depthLink===0 && depthTpl===0){ tokens.push(buf); buf=''; continue; } buf+=ch; } tokens.push(buf); return tokens; }
+
+    function parseTemplateParams(templateText){ const innerMatch=templateText.match(/^\s*\{\{([\s\S]*?)\}\}\s*$/); if(!innerMatch) return {name:'',params:{},raw:templateText}; const inner=innerMatch[1]; const tokens=splitTopLevelPipes(inner); const name=(tokens.shift()||'').trim(); const params={}; for(const tok of tokens){ const eq=tok.indexOf('='); if(eq===-1) continue; const key=tok.slice(0,eq).trim().toLowerCase(); const val=tok.slice(eq+1).trim(); if(key) params[key]=val; } return {name,params,raw:templateText}; }
+
+    function buildInternetquelle(finalParams){ const order=['autor','url','titel','werk','hrsg','datum','seiten','format','sprache','offline','archiv-url','archiv-datum','abruf','abruf-verborgen','kommentar','zitat']; const parts=[],used=new Set(); for(const k of order){ if(Object.prototype.hasOwnProperty.call(finalParams,k)){ parts.push('|'+k+'='+ (finalParams[k] ?? '')); used.add(k); } } Object.keys(finalParams).sort().forEach(k=>{ if(!used.has(k)) parts.push('|'+k+'='+finalParams[k]); }); return '{{Internetquelle '+parts.join(' ')+'}}'; }
+
+    function buildLiteratur(finalParams){ const order=['Autor','Titel','TitelErg','Hrsg','Sammelwerk','WerkErg','Reihe','BandReihe','HrsgReihe','NummerReihe','Band','Nummer','Auflage','Verlag','Ort','Datum','ISBN','ISBNformalFalsch','ISBNdefekt','ISSN','ISSNformalFalsch','Kapitel','Seiten','Spalten','ArtikelNr','Fundstelle','Sprache','Kommentar','Originaltitel','Originalsprache','Originaljahr','Originalort','Übersetzer','VerlagEA','OrtEA','JahrEA','Online','Format','KBytes','Abruf','arXiv','DOI','JSTOR','LCCN','OCLC','PMC','PMID','ZDB','Umfang','Typ','Lizenznummer','bibcode','URN','ID','Zitat']; const parts=[],used=new Set(); for(const k of order){ if(Object.prototype.hasOwnProperty.call(finalParams,k)){ parts.push('|'+k+'='+ (finalParams[k] ?? '')); used.add(k); } } Object.keys(finalParams).sort().forEach(k=>{ if(!used.has(k)) parts.push('|'+k+'='+finalParams[k]); }); return '{{Literatur '+parts.join(' ')+'}}'; }
+
+    function collectPersons(params, firstPrefix, lastPrefix){ const people=[]; const numbered=[]; Object.keys(params).forEach(k=>{ const m=k.match(new RegExp('^'+lastPrefix.replace(/[-]/g,'[-]')+'(\\d*)$')); if(m) numbered.push(m[1]||''); }); numbered.sort((a,b)=>{ const ai=a===''?0:parseInt(a,10); const bi=b===''?0:parseInt(b,10); return ai-bi; }); const used=new Set(); for(const suf of numbered){ const f=params[firstPrefix+suf]||''; const l=params[lastPrefix+suf]||''; const name=(f+' '+l).trim(); if(name){ people.push(name); used.add(firstPrefix+suf); used.add(lastPrefix+suf); } } if(!used.has(firstPrefix) && !used.has(lastPrefix)){ const f=params[firstPrefix]||''; const l=params[lastPrefix]||''; const name=(f+' '+l).trim(); if(name) people.push(name); } return people; }
+
+    function chooseLanguage(langChoice, explicitLang, titleText, workText, overrideChecked){ if(overrideChecked && langChoice && langChoice!=='') return langChoice; if(explicitLang){ const code=String(explicitLang).trim(); if(code.includes('-')) return code.split('-')[0].toLowerCase(); return code.toLowerCase(); } const check=[titleText||'', workText||''].join(' '); const auto=detectLanguage(check); if(auto) return auto; if(looksEnglish(check)) return 'en'; return ''; }
+
+    function convertCiteWebFamily(parsed, options){ const params=parsed.params; const finalParams={}; const authors=[]; Object.keys(params).forEach(k=>{ if(/^last\d*$/.test(k)){ const suf=k.slice(4); const name=((params['first'+suf]||'')+' '+(params[k]||'')).trim(); if(name) authors.push(name); } }); if(authors.length===0 && (params['last']||params['first'])){ const name=((params['first']||'')+' '+(params['last']||'')).trim(); if(name) authors.push(name); } if(authors.length) finalParams['autor']=authors.join(', ');
+      if(params['url']) finalParams['url']=params['url']; if(params['title']) finalParams['titel']=params['title']; if(params['website']) finalParams['werk']=params['website']; if(!finalParams['werk']){ const w=params['newspaper']||params['work']||params['publisher']||''; if(w) finalParams['werk']=w; }
+      if(params['date']||params['datum']) finalParams['datum']=toISODate(params['date']||params['datum']);
+      const lang=chooseLanguage(options.langChoice, params['language'], finalParams['titel'], finalParams['werk'], options.overrideLang);
+      if(lang) finalParams['sprache']=lang;
+      if(params['quote']) finalParams['zitat']=params['quote']; if(params['archive-url']) finalParams['archiv-url']=params['archive-url']; if(params['archive-date']) finalParams['archiv-datum']=toISODate(params['archive-date']);
+      const urlStatus=(params['url-status']||'').toLowerCase(); if(urlStatus==='dead') finalParams['offline']='1'; else if(urlStatus==='live' && options.stripArchiveIfLive){ delete finalParams['archiv-url']; delete finalParams['archiv-datum']; }
+      if(options.useToday) finalParams['abruf']=todayISO(); else { const ad=params['access-date']||params['accessdate']||params['abruf']||''; if(ad) finalParams['abruf']=toISODate(ad); }
+      return buildInternetquelle(finalParams);
+    }
+
+    function convertCiteBook(parsed, options){ const p=parsed.params; const F={}; let authors=collectPersons(p,'first','last'); if(authors.length===0 && p['author']) authors.push(p['author']); authors=authors.concat(collectPersons(p,'contributor-first','contributor-last')); authors=authors.concat(collectPersons(p,'interviewer-first','interviewer-last')); if(p['collaboration']) authors.push(p['collaboration']); if(authors.length) F['Autor']=authors.join(', ');
+      let editors=collectPersons(p,'editor-first','editor-last'); if(editors.length===0 && p['editor']) editors.push(p['editor']); if(editors.length) F['Hrsg']=editors.join(', ');
+      let translators=collectPersons(p,'translator-first','translator-last'); if(translators.length===0 && p['translator']) translators.push(p['translator']); if(translators.length) F['Übersetzer']=translators.join(', ');
+      if(p['title']) F['Titel']=p['title']; if(p['chapter']||p['script-chapter']) F['Kapitel']=p['chapter']||p['script-chapter']; if(p['series']) F['Reihe']=p['series']; if(p['volume']) F['Band']=p['volume']; if(p['edition']) F['Auflage']=normalizeEdition(p['edition']); if(p['publisher']) F['Verlag']=p['publisher']; const ort=p['publication-place']||p['location']; if(ort) F['Ort']=ort; const date=p['date']||p['publication-date']||p['year']; if(date) F['Datum']=toISODate(date); const orig=p['orig-date']||p['origyear']||p['orig-year']; if(orig) F['Originaljahr']=extractYear(orig); const seiten=p['pages']||p['page']||p['at']; if(seiten) F['Seiten']=normalizePages(seiten);
+      const lang=chooseLanguage(options.langChoice, p['language'], F['Titel'], undefined, options.overrideLang); if(lang) F['Sprache']=lang;
+      if(p['url']) F['Online']=p['url']; if(options.useToday) F['Abruf']=todayISO(); else{ const ad=p['access-date']||p['accessdate']||p['url-access']||''; if(ad) F['Abruf']=toISODate(ad); }
+      if(p['format']) F['Format']=p['format']; if(p['type']) F['Typ']=p['type']; if(p['isbn']) F['ISBN']=normalizeISBN(p['isbn']); if(p['issn']) F['ISSN']=p['issn']; if(p['doi']) F['DOI']=p['doi']; if(p['jstor']) F['JSTOR']=p['jstor']; if(p['lccn']) F['LCCN']=p['lccn']; if(p['oclc']) F['OCLC']=p['oclc']; if(p['pmc']) F['PMC']=p['pmc']; if(p['pmid']) F['PMID']=p['pmid']; if(p['arxiv']) F['arXiv']=p['arxiv']; if(p['bibcode']) F['bibcode']=p['bibcode']; if(p['urn']) F['URN']=p['urn']; const asID=['biorxiv','citeseerx','medrxiv','osti','ol','s2cid','zbl','mr','jfm','ssrn','rfc','hdl']; asID.forEach(k=>{ if(p[k]) F['ID']=(F['ID']? (F['ID']+', '+p[k]) : p[k]); }); if(p['quote']) F['Zitat']=p['quote']; return buildLiteratur(F); }
+
+    function isCiteWebFamily(name){ const n=(name||'').trim().toLowerCase(); return n==='cite web' || n==='cite news' || n==='cite magazine'; }
+    function isCiteBook(name){ const n=(name||'').trim().toLowerCase(); return n==='cite book'; }
+    function convertTemplateString(tplString, options){ const parsed=parseTemplateParams(tplString); if(!parsed.name) return tplString; if(isCiteBook(parsed.name)) return convertCiteBook(parsed, options); if(isCiteWebFamily(parsed.name)) return convertCiteWebFamily(parsed, options); return tplString; }
+
+    function transformText(){ const inputEl=document.getElementById('inputText'); const outputEl=document.getElementById('outputText'); const useToday=document.getElementById('useTodayAbruf').checked; const stripArchiveIfLive=document.getElementById('stripArchiveIfLive').checked; const overrideLang=document.getElementById('overrideLang').checked; const langChoice=(document.getElementById('langSelect') && document.getElementById('langSelect').value) || ''; const options={useToday, stripArchiveIfLive, langChoice, overrideLang}; let input=(inputEl.value||'').trim(); if(!input){ outputEl.value=''; return; }
+      const refRegex=/(<ref\b[^>]*>)([\s\S]*?)(<\/ref>)/gi; if(refRegex.test(input)){ const result=input.replace(refRegex,function(full,refOpen,inner,refClose){ const tplMatch=inner.match(/\{\{[\s\S]*?\}\}/); if(!tplMatch) return full; const converted=convertTemplateString(tplMatch[0],options); return refOpen + inner.replace(tplMatch[0],converted) + refClose; }); outputEl.value=result; return; }
+      const tplMatch=input.match(/\{\{[\s\S]*?\}\}/); if(tplMatch){ const converted=convertTemplateString(tplMatch[0],options); outputEl.value=input.replace(tplMatch[0],converted); return; } outputEl.value=input; }
+
+    /* DOM wiring */
+    document.addEventListener('DOMContentLoaded',function(){
+      // today label
+      const tl=document.getElementById('todayLabel'); if(tl) tl.textContent=todayISO();
+
+      // Convert button
+      document.getElementById('convertBtn').addEventListener('click',function(){ transformText(); if(document.getElementById('autoCopy').checked){ const out=document.getElementById('outputText'); if(out && out.value){ if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(out.value).then(()=>{ document.getElementById('copyStatus').textContent='✓ Direkt kopiert'; setTimeout(()=>document.getElementById('copyStatus').textContent='',1400); }).catch(()=>{}); } else { try{ out.select(); document.execCommand('copy'); document.getElementById('copyStatus').textContent='✓ Direkt kopiert'; setTimeout(()=>document.getElementById('copyStatus').textContent='',1400);}catch(e){} } } } });
+
+      // Copy button
+      document.getElementById('copyBtn').addEventListener('click',async function(){ const out=document.getElementById('outputText'), status=document.getElementById('copyStatus'); try{ if(navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(out.value || ''); } else { out.select(); document.execCommand('copy'); } status.textContent='✓ In Zwischenablage kopiert'; setTimeout(()=>status.textContent='',2000); }catch(err){ console.warn('copy failed',err); status.textContent='⚠ Kopieren fehlgeschlagen'; setTimeout(()=>status.textContent='',2000); } });
+
+      // lang info
+      document.getElementById('langInfoToggle').addEventListener('click',()=>{ const info=document.getElementById('langInfo'); info.style.display=(info.style.display==='none'?'block':'none'); });
+
+      // overrideLang
+      const override=document.getElementById('overrideLang'); const langContainer=document.getElementById('langSelectContainer'); function updateLangContainer(){ langContainer.style.display=(override.checked?'block':'none'); } override.addEventListener('change',updateLangContainer); updateLangContainer();
+
+      // theme selection
+      const themeOptions=Array.from(document.querySelectorAll('.theme-option'));
+      function clearThemeClasses(){ Array.from(document.body.classList).forEach(c=>{ if(c.startsWith('theme-')) document.body.classList.remove(c); }); }
+      function setTheme(name,persist=true){ clearThemeClasses(); if(name) document.body.classList.add('theme-'+name); themeOptions.forEach(el=>el.classList.toggle('active', el.dataset.theme===name)); if(persist) localStorage.setItem('theme',name); // update badge/button colors handled by CSS
+        // ensure badge has readable text color if wikipedia light
+        const badge=document.getElementById('versionBadge'); if(badge){ if(name==='wikipedia') badge.style.color='#fff'; else badge.style.color=''; }
+      }
+      themeOptions.forEach(el=>{ el.addEventListener('click',()=> setTheme(el.dataset.theme)); el.addEventListener('keydown',e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); setTheme(el.dataset.theme); } }); });
+      const savedTheme=localStorage.getItem('theme')||'sunset'; setTheme(savedTheme,false);
+
+      // force dark
+      const fd=document.getElementById('forceDark'); if(fd){ const saved=localStorage.getItem('forceDark')==='true'; fd.checked=saved; if(saved) document.body.classList.add('force-dark'); fd.addEventListener('change',()=>{ if(fd.checked){ document.body.classList.add('force-dark'); localStorage.setItem('forceDark','true'); } else { document.body.classList.remove('force-dark'); localStorage.setItem('forceDark','false'); } }); }
+
+      // persist lang select
+      const langSel=document.getElementById('langSelect'); if(langSel){ const savedLS=localStorage.getItem('langSelectValue'); if(savedLS) langSel.value=savedLS; langSel.addEventListener('change',()=> localStorage.setItem('langSelectValue', langSel.value)); }
+
+      // ensure copyStatus empty
+      const cs=document.getElementById('copyStatus'); if(cs) cs.textContent='';
+    });
+  })();
+  </script>
+</body>
+</html>
