@@ -1,98 +1,294 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cite-Konverter → Internetquelle & Literatur (v2.4.6)</title>
-
-  <!-- Favicons (lokal im Ordner 'grafiken') -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Favicons -->
   <link rel="icon" type="image/png" href="grafiken/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="grafiken/favicon.svg" />
   <link rel="shortcut icon" href="grafiken/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="grafiken/apple-touch-icon.png" />
+<title>Cite-Konverter für Wikipedia</title>
 
-  <style>
-    :root{
-      --transition: all 0.28s cubic-bezier(.2,.9,.3,1);
-      --card-radius:18px;
-      --glass: rgba(255,255,255,0.7);
-      --glass-dark: rgba(18,18,20,0.72);
-    }
-    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
-    body{display:flex;justify-content:center;align-items:flex-start;padding:28px;min-height:100vh;transition:var(--transition);background-attachment:fixed}
+<style>
+  html{min-height:100%}
+  :root{
+    --transition: all .28s cubic-bezier(.2,.9,.3,1);
+    --card-radius:18px;
+    --glass: rgba(255,255,255,0.78);
+    --glass-dark: rgba(12,12,14,0.78);
+    --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  html,body{min-height:100%;margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  body{display:flex;justify-content:center;align-items:flex-start;padding:28px;min-height:100vh;transition:var(--transition);background-attachment:fixed;background-size:cover}
 
-    /* Theme gradients (page background) */
-    body.theme-sunset{background:linear-gradient(135deg,#C250F2 0%,#D76CD9 50%,#D977A5 100%)}
-    body.theme-wikipedia{background:linear-gradient(180deg,#f6f7f8 0%,#eef6ff 100%)}
-    body.theme-bluewave{background:linear-gradient(135deg,#012840 0%,#0468BF 60%,#99C8F2 100%)}
-    body.theme-valley{background:linear-gradient(135deg,#387CA6 0%,#71A63C 55%,#BBF2F2 100%)}
+  /* Themes */
+  body.theme-sunset{background:linear-gradient(135deg,#C250F2 0%,#D76CD9 50%,#D977A5 100%)}
+  body.theme-wikipedia{background:linear-gradient(180deg,#f6f7f8 0%,#eef6ff 100%)}
+  body.theme-bluewave{background:linear-gradient(135deg,#012840 0%,#0468BF 60%,#99C8F2 100%)}
+  body.theme-valley{background:linear-gradient(135deg,#387CA6 0%,#71A63C 55%,#BBF2F2 100%)}
 
-    .wrap{width:100%;max-width:980px}
-    .card{width:100%;background:var(--glass);backdrop-filter:blur(14px) saturate(140%);border-radius:var(--card-radius);padding:28px;box-shadow:0 16px 44px rgba(0,0,0,0.14);transition:var(--transition);}
-    body.force-dark .card{background:var(--glass-dark);color:#eef2f5}
+  .wrap{width:100%;max-width:980px}
+  .card{
+    width:100%;
+    background:var(--glass);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-radius:var(--card-radius);
+    padding:28px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.14);
+    transition:var(--transition);
+    color:#071029;
+  }
+  body.force-dark .card{background:var(--glass-dark); color:#e9eef6}
 
-    h1{margin:0 0 12px;font-size:clamp(1.4rem,2.2vw,1.95rem);display:flex;align-items:center;gap:12px}
-    .desc{margin-bottom:14px;color:rgba(0,0,0,0.78)}
+  h1{margin:0 0 10px;font-size:clamp(1.3rem,2.2vw,1.9rem);display:flex;align-items:center;gap:12px}
+  .badge{display:inline-block;padding:6px 12px;border-radius:999px;font-weight:800;color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.14)}
+  .lead{margin:6px 0 16px;color:rgba(0,0,0,0.65)}
 
-    details{margin:12px 0}
-    details summary{cursor:pointer;font-weight:700;padding:8px;border-radius:8px}
-    .options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    @media(max-width:820px){.options{grid-template-columns:1fr}}
+  details{margin:14px 0}
+  details summary{cursor:pointer;font-weight:700;padding:8px;border-radius:8px}
+  .options{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .option-compact{grid-column:1 / -1;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.segmented{display:inline-flex;border:1px solid rgba(0,0,0,.12);border-radius:10px;overflow:hidden}
+.segmented button{padding:6px 10px;border:0;background:transparent;cursor:pointer;font-weight:600;line-height:1}
+.segmented button+button{border-left:1px solid rgba(0,0,0,.08)}
+body.dark .segmented{border-color:rgba(255,255,255,.18)}
+body.dark .segmented button+button{border-left-color:rgba(255,255,255,.12)}
+.segmented button[aria-pressed="true"]{background:rgba(0,0,0,.12);box-shadow:0 0 0 2px rgba(0,0,0,.10) inset}
+body.dark .segmented button[aria-pressed="true"]{background:rgba(255,255,255,.18);box-shadow:0 0 0 2px rgba(255,255,255,.22) inset}
+.segmented button{transition:background-color .15s ease, box-shadow .15s ease}
+.segmented button:focus-visible{outline:2px solid #6aa9ff;outline-offset:2px}
 
-    textarea{width:100%;min-height:92px;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,0.08);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;background:rgba(255,255,255,0.78);transition:var(--transition);resize:vertical;margin-bottom:18px}
-    body.force-dark textarea{background:rgba(20,20,22,0.6);color:#eef2f5;border:1px solid rgba(255,255,255,0.06)}
+  @media(max-width:820px){.options{grid-template-columns:1fr}}
 
-    .btn-main{display:inline-block;padding:12px 18px;border-radius:12px;border:none;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,0.12);transition:var(--transition);width:100%}
-    .btn-main:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,0.18)}
-    .btn-row{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+  .theme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:6px}
+  .theme-option{display:flex;align-items:center;gap:12px;padding:8px;border-radius:10px;background:rgba(255,255,255,0.5);cursor:pointer;border:1px solid rgba(0,0,0,0.04)}
+  .theme-option.active{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.12)}
+  .swatch{width:62px;height:26px;border-radius:8px;flex-shrink:0}
 
-    .badge{display:inline-block;padding:6px 12px;border-radius:999px;font-weight:800;color:#fff;cursor:pointer}
+  /* Buttons/Badge per theme (light) */
+  body.theme-sunset .btn-main, body.theme-sunset .badge{background:linear-gradient(135deg,#C250F2,#D76CD9);}
+  body.theme-wikipedia .btn-main, body.theme-wikipedia .badge{background:linear-gradient(90deg,#3366cc,#2b57b8); color:#fff;}
+  body.theme-bluewave .btn-main, body.theme-bluewave .badge{background:linear-gradient(135deg,#023E73,#0468BF);}
+  body.theme-valley .btn-main, body.theme-valley .badge{background:linear-gradient(135deg,#387CA6,#71A63C);}
 
-    .theme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:8px}
-    .theme-option{display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;background:rgba(255,255,255,0.5);cursor:pointer;border:1px solid rgba(0,0,0,0.04)}
-    .theme-option.active{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.12)}
-    .swatch{width:62px;height:26px;border-radius:8px;flex-shrink:0}
+  /* Dark variants */
+  body.force-dark.theme-sunset .btn-main, body.force-dark.theme-sunset .badge{background:linear-gradient(135deg,#8b2aa9,#9f4fb1)}
+  body.force-dark.theme-wikipedia .btn-main, body.force-dark.theme-wikipedia .badge{background:linear-gradient(90deg,#1b355f,#214277)}
+  body.force-dark.theme-bluewave .btn-main, body.force-dark.theme-bluewave .badge{background:linear-gradient(135deg,#012033,#02334f)}
+  body.force-dark.theme-valley .btn-main, body.force-dark.theme-valley .badge{background:linear-gradient(135deg,#2f6b56,#3c7f3b)}
 
-    /* Theme-specific button & badge colors (light) */
-    body.theme-sunset .btn-main, body.theme-sunset .badge{background:linear-gradient(135deg,#C250F2,#D76CD9);}
-    body.theme-wikipedia .btn-main, body.theme-wikipedia .badge{background:linear-gradient(90deg,#3366cc,#2b57b8);}
-    body.theme-bluewave .btn-main, body.theme-bluewave .badge{background:linear-gradient(135deg,#023E73,#0468BF);}
-    body.theme-valley .btn-main, body.theme-valley .badge{background:linear-gradient(135deg,#387CA6,#71A63C);}
+  /* Input/Output area layout */
+  .field{margin-bottom:18px}
+  label.block{display:block;text-align:left;font-weight:700;margin-bottom:8px}
+  .editor-wrap{position:relative;border-radius:12px;border:1px solid rgba(0,0,0,0.06);overflow:hidden;background:rgba(255,255,255,0.85)}
+  body.force-dark .editor-wrap{background:rgba(8,8,10,0.32);border:1px solid rgba(255,255,255,0.06)}
 
-    /* Theme-specific dark variants */
-    body.force-dark.theme-sunset .btn-main, body.force-dark.theme-sunset .badge{background:linear-gradient(135deg,#8b2aa9,#9f4fb1);} /* deeper violet */
-    body.force-dark.theme-wikipedia .btn-main, body.force-dark.theme-wikipedia .badge{background:linear-gradient(90deg,#1f3f7a,#254b90);} /* muted blue */
-    body.force-dark.theme-bluewave .btn-main, body.force-dark.theme-bluewave .badge{background:linear-gradient(135deg,#012033,#02334f);} /* dark navy */
-    body.force-dark.theme-valley .btn-main, body.force-dark.theme-valley .badge{background:linear-gradient(135deg,#2f6b56,#3c7f3b);} /* dark green */
+  /* highlighted pre (shows behind textarea) */
+  pre.highlight{
+    margin:0;
+    padding:14px;
+    min-height:80px;
+    font-family:var(--mono);
+    font-size:13.5px;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    color:inherit; /* visible base text */
+    pointer-events:none;
+    line-height:1.45;
+  }
 
-    /* ensure badge contrast on light bg */
-    body.theme-wikipedia .badge{color:#fff}
+  /* textarea sits on top, text transparent but caret visible */
+  textarea.overlay{
+    position:absolute;left:0;top:0;right:0;padding:14px;
+    width:100%;height:100%;min-height:80px;border:0;background:transparent;resize:vertical;
+    font-family:var(--mono);font-size:13.5px;line-height:1.45;color:transparent;caret-color:transparent;
+    z-index:2;
+    outline:none;
+  }
+  /* make caret visible depending on theme */
+  body:not(.force-dark) textarea.overlay{ caret-color:#071029 }
+  body.force-dark textarea.overlay{ caret-color:#e9eef6 }
 
-    /* small responsive */
-    @media(max-width:560px){.swatch{width:48px;height:20px}}
-  </style>
+  /* styling tokens inside pre */
+  .tok-template{color:#0b3b6f;font-weight:700}            /* template name */
+  .tok-brace{color:#876acc;font-weight:700}               /* braces */
+  .tok-param{color:#a63dff;font-weight:700}               /* parameter name */
+  .tok-eq{color:#999}                                     /* equals sign */
+  .tok-value{color:#0b2b12}                               /* value */
+  .tok-url{color:#0455a4;text-decoration:underline}       /* urls */
+  .tok-number{color:#b75d00}
+  .tok-comment{color:#6b6b6b;font-style:italic}
+
+  /* buttons */
+  .btn-main{display:inline-block;padding:12px 18px;border-radius:12px;border:none;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,0.12);transition:var(--transition);width:100%}
+  .btn-main:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,0.18)}
+
+  .btn-row{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+  #copyStatus{min-width:160px;text-align:center}
+
+  /* conversion summary box */
+  #conversionSummary{margin-top:12px;padding:12px;border-radius:10px;background:rgba(0,0,0,0.03);font-size:14px}
+  body.force-dark #conversionSummary{background:rgba(255,255,255,0.03);}
+
+  /* small responsive */
+  @media(max-width:560px){ .swatch{width:48px;height:20px} pre.highlight{font-size:13px} textarea.overlay{font-size:13px} }
+html,body{min-height:100%}
+
+/* token styles for highlighting */
+pre.highlight .tok-template{font-weight:800;color:#C250F2}
+pre.highlight .tok-ref{color:#007CF0;font-weight:800}
+pre.highlight .tok-attr{color:#D97706;font-weight:700}
+pre.highlight .tok-val{color:#0F766E}
+pre.highlight .tok-url{text-decoration:underline}
+
+
+/* compact version badge */
+#versionBadge{font-size:.72em;padding:2px 6px;border-radius:8px;align-self:flex-start;text-decoration:none;line-height:1}
+#versionBadge:hover{transform:translateY(-1px) scale(1.02)}
+
+
+/* Theme-bound H1 title colors (restored) */
+body.theme-sunset h1 .title-text{
+  background:linear-gradient(90deg,#C250F2,#D977A5);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+body.theme-bluewave h1 .title-text{
+  background:linear-gradient(90deg,#007CF0,#00DFD8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+body.theme-valley h1 .title-text{
+  background:linear-gradient(90deg,#28a745,#85e085);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+body.theme-wikipedia h1 .title-text{
+  background:linear-gradient(90deg,#2b57b8,#3366cc);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+
+/* Subline contrast */
+#subline{color:rgba(0,0,0,.72)}
+body.dark #subline{color:rgba(255,255,255,.85)}
+
+
+/* Dark mode token tuning */
+body.dark pre.highlight{color:rgba(255,255,255,.88)}
+body.dark pre.highlight .tok-template{color:#E7B0FF}
+body.dark pre.highlight .tok-ref{color:#7FB7FF}
+body.dark pre.highlight .tok-attr{color:#FFC466}
+body.dark pre.highlight .tok-val{color:#8FE7CF}
+body.dark pre.highlight .tok-url{text-decoration:underline}
+
+
+/* Animated flowing gradient for H1 title */
+@keyframes flowGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+body.theme-sunset h1 .title-text,
+body.theme-bluewave h1 .title-text,
+body.theme-valley h1 .title-text,
+body.theme-wikipedia h1 .title-text {
+  background-size: 400% 400%;
+  animation: flowGradient 12s ease-in-out infinite;
+}
+
+
+/* Darkmode select spacing */
+label[for="darkModeSelect"]{margin-right:4px}
+#darkModeSelect{margin-left:6px;vertical-align:middle}
+
+
+/* Dark-mode contrast fixes (intro + syntax) */
+#subline { color: rgba(0,0,0,.72); }
+body.dark #subline { color: rgba(255,255,255,.85); }
+
+/* Ensure base text is visible in code highlight blocks */
+pre.highlight { color: inherit; white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; }
+  pre.highlight span{ white-space: inherit; }
+body.dark pre.highlight { color: rgba(255,255,255,.88); }
+
+/* Brighter token colors in dark mode */
+body.dark pre.highlight .tok-template{color:#E7B0FF}
+body.dark pre.highlight .tok-ref{color:#7FB7FF}
+body.dark pre.highlight .tok-attr{color:#FFC466}
+body.dark pre.highlight .tok-val{color:#8FE7CF}
+body.dark pre.highlight .tok-url{text-decoration:underline}
+
+
+/* v2.5.12: Robust dark-mode contrast fixes (intro + syntax) */
+.lead { color: rgba(0,0,0,.72); }
+body.dark .lead, body.force-dark .lead { color: rgba(255,255,255,.90); }
+
+/* Ensure base text is visible in code highlight blocks */
+pre.highlight { color: inherit !important; }
+body.dark pre.highlight, body.force-dark pre.highlight { color: rgba(255,255,255,.92) !important; }
+
+/* Brighter token colors in dark/forced-dark */
+body.dark pre.highlight .tok-template,
+body.force-dark pre.highlight .tok-template{ color:#E7B0FF !important; }
+body.dark pre.highlight .tok-ref,
+body.force-dark pre.highlight .tok-ref{ color:#8FC2FF !important; }
+body.dark pre.highlight .tok-attr,
+body.force-dark pre.highlight .tok-attr{ color:#FFCC80 !important; }
+body.dark pre.highlight .tok-val,
+body.force-dark pre.highlight .tok-val{ color:#9DF0D8 !important; }
+body.dark pre.highlight .tok-url,
+body.force-dark pre.highlight .tok-url{ text-decoration: underline !important; }
+
+
+/* v2.5.13: brighten dark-mode syntax colors */
+body.dark pre.highlight .tok-template,
+body.force-dark pre.highlight .tok-template{ color:#F2B7FF !important; }  /* brighter for `{{cite web` */
+body.dark pre.highlight .tok-val,
+body.force-dark pre.highlight .tok-val{ color:#B8FFE9 !important; }      /* brighter for parameter values (e.g., author names) */
+/* ensure ref tags share same color for open/close */
+body.dark pre.highlight .tok-ref,
+body.force-dark pre.highlight .tok-ref{ color:#8FC2FF !important; font-weight:800; }
+
+
+/* v2.5.18.4: Darkmode visibility for highlight blocks */
+body.dark pre.highlight, body.force-dark pre.highlight { color:#ffffff !important; }
+body.dark pre.highlight .tok-template, body.force-dark pre.highlight .tok-template { color:#FFD4FF !important; font-weight:800; }
+body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color:#9BD0FF !important; font-weight:800; }
+
+</style>
 </head>
 <body class="theme-sunset">
   <div class="wrap">
-    <div class="card" role="main" aria-labelledby="mainTitle">
-      <h1 id="mainTitle">Cite-Konverter → {{Internetquelle}} & {{Literatur}} <span id="versionBadge" class="badge">v2.4.6</span></h1>
-      <p class="desc">Konvertiert <code>{{cite web}}</code>, <code>{{cite news}}</code>, <code>{{cite magazine}}</code> → <code>{{Internetquelle}}</code> und <code>{{cite book}}</code> → <code>{{Literatur}}</code>. Theme- & Darkmode-angepasste Buttons & Badges.</p>
+    <div class="card" role="main" aria-labelledby="heading">
+      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v2.5.18.4</a></h1>
+      <p class="lead">Konvertiert <code>{{cite web}}</code>, <code>{{cite news}}</code>, <code>{{cite magazine}}</code> → <code>{{Internetquelle}}</code> und <code>{{cite book}}</code> → <code>{{Literatur}}</code>.</p>
 
       <details>
         <summary>⚙️ Optionen</summary>
         <div class="options" role="group" aria-label="Einstellungen">
-          <label><input type="checkbox" id="useTodayAbruf" checked /> Abrufdatum automatisch auf heute setzen (<span id="todayLabel"></span>)</label>
-          <label><input type="checkbox" id="stripArchiveIfLive" checked /> Archiv-Parameter entfernen, wenn URL aktiv (<code>url-status=live</code>)</label>
-          <label style="grid-column:1/-1"><input type="checkbox" id="suppressGerman" checked /> <code>Sprache=de</code> unterdrücken (nur Fremdsprachen anzeigen) <button id="langInfoToggle" style="background:none;border:none;color:#0645AD;cursor:pointer;margin-left:8px">ℹ️</button></label>
-          <div id="langInfo" style="display:none; font-size:13px; margin-left:4px; grid-column:1/-1">Deutsch (de) wird standardmäßig weggelassen. Fremdsprachen erscheinen als Sprachcode (zweistellig). Mit dieser Option können Sie die Unterdrückung deaktivieren.</div>
+          <label class="inline"><input type="checkbox" id="useTodayAbruf" checked /> <span class="info">Abrufdatum automatisch auf heute setzen</span> (<span id="todayLabel"></span>)</label>
+          <label class="inline"><input type="checkbox" id="stripArchiveIfLive" checked /> <span class="info">Archiv-Parameter entfernen, wenn URL aktiv (<code>url-status=live</code>)</span></label>
+          <label style="grid-column:1/-1" class="inline"><input type="checkbox" id="suppressGerman" checked /> <span class="info"><code>Sprache=de</code> unterdrücken</span> <button id="langInfoToggle" style="background:none;border:none;color:#0645AD;cursor:pointer">ℹ️</button></label>
+          <div id="langInfo" style="display:none;margin-left:6px;font-size:13px;grid-column:1/-1">Deutsch (de) wird standardmäßig nicht ausgegeben. Fremdsprachen erscheinen als Sprachcode (zweistellig). Mit dieser Option kann die Unterdrückung deaktiviert werden.</div>
 
-          <label><input type="checkbox" id="fullLangCodes" /> Ungekürzte Sprachcodes ausgeben (z. B. en-GB)</label>
-          <label><input type="checkbox" id="autoCopy" /> Konvertierte Ausgabe direkt in Zwischenablage kopieren</label>
-          <label><input type="checkbox" id="forceDark" /> Darkmode erzwingen</label>
-          <label><input type="checkbox" id="overrideLang" /> Sprache manuell überschreiben</label>
+          <label class="inline"><input type="checkbox" id="fullLangCodes" /> <span class="info">Ungekürzte Sprachcodes ausgeben (z. B. en-GB)</span></label>
+          <label class="inline"><input type="checkbox" id="autoCopy" /> <span class="info">Konvertierte Ausgabe direkt in Zwischenablage kopieren</span></label>
 
-          <div id="langSelectContainer" style="display:none; grid-column:1/-1; margin-left:6px">
-            <label style="display:block; font-weight:700; margin-bottom:6px">Manuelle Sprache (überschreibt Heuristik)</label>
+          
+<div class="option-compact">
+<label class="inline" for="darkModeSelect">Darkmode:</label>
+<div id="darkModeSegmented" class="segmented" role="group" aria-label="Darkmode-Modus"><button type="button" data-value="auto" aria-pressed="false">Auto</button><button type="button" data-value="on" aria-pressed="false">An</button><button type="button" data-value="off" aria-pressed="false">Aus</button></div>
+<select id="darkModeSelect" class="visually-hidden">
+  <option value="auto">Automatisch (System)</option>
+  <option value="on">Immer an</option>
+  <option value="off">Immer aus</option>
+</select>
+</div>
+
+          <label class="inline"><input type="checkbox" id="overrideLang" /> <span class="info">Sprache manuell überschreiben</span></label>
+
+          <div id="langSelectContainer" style="display:none; grid-column:1/-1">
+            <label style="display:block;font-weight:700;margin-bottom:6px">Sprache wählen (überschreibt Heuristik)</label>
             <select id="langSelect" aria-label="Sprache wählen">
               <option value="">— wählen —</option>
               <option value="de">🇩🇪 Deutsch — de</option>
@@ -112,131 +308,711 @@
               <div class="theme-option" data-theme="valley" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#387CA6,#71A63C,#BBF2F2)"></div><div>The Valley</div></div>
             </div>
           </div>
+
         </div>
       </details>
 
-      <label for="inputText" style="display:block; text-align:left; font-weight:700; margin-bottom:6px">Eingabe</label>
-      <textarea id="inputText" placeholder="Hier den &lt;ref&gt;…&lt;/ref&gt; Block oder die {{cite …}}-Vorlage einfügen"></textarea>
+      <!-- INPUT -->
+      <div class="field">
+        <label class="block">Eingabe</label>
+        <div class="editor-wrap" id="inputWrap" style="min-height:120px">
+          <pre id="inputHighlight" class="highlight" aria-hidden="true"></pre>
+          <textarea id="inputText" class="overlay" placeholder="Hier den &lt;ref&gt;…&lt;/ref&gt; Block oder die {{cite …}}-Vorlage einfügen"></textarea>
+        </div>
+      </div>
 
-      <div class="btn-row" style="margin-bottom:26px">
+      <div class="btn-row" style="margin-bottom:22px">
         <button id="convertBtn" class="btn-main">Einzelnachweis konvertieren</button>
       </div>
 
-      <h2 style="margin-top:6px">Ausgabe</h2>
-      <textarea id="outputText" readonly aria-live="polite"></textarea>
-
-      <div class="btn-row" style="margin-top:18px">
-        <button id="copyBtn" class="btn-main">In die Zwischenablage kopieren</button>
-        <div id="copyStatus" role="status" aria-live="polite" style="align-self:center; min-width:160px; text-align:center"></div>
+      <!-- OUTPUT -->
+      <div class="field">
+        <label class="block">Ausgabe</label>
+        <div class="editor-wrap" id="outputWrap" style="min-height:120px">
+          <pre id="outputHighlight" class="highlight" aria-hidden="true"></pre>
+          <textarea id="outputText" class="overlay" readonly></textarea>
+        </div>
       </div>
+
+      <div class="btn-row">
+        <button id="copyBtn" class="btn-main">In die Zwischenablage kopieren</button>
+        <div id="copyStatus" style="align-self:center"></div>
+      </div>
+
+      <div id="conversionSummary" aria-live="polite"></div>
 
       <details id="changelog" style="margin-top:12px">
         <summary>📜 Versionsverlauf</summary>
         <ul>
-          <li><strong>v2.4.6</strong> (2025-08-30): Darkmode-optimierte Button- & Badge-Farben je Theme; Buttons & Badge passen sich jetzt optisch an jedes Theme an; Farbverlauf am Seitenende bleibt erhalten; Badge visuell hervorgehoben. (Ältere Einträge wurden nicht entfernt.)</li>
-          <li><strong>v2.4.5</strong> (2025-08-30): Buttons vereinheitlicht; strengere Sprachheuristik: erkennt automatisch de, en, fr, es, it, nl; Option „Sprache manuell überschreiben“ mit Flaggen-Dropdown.</li>
-          <li><strong>v2.4.4</strong> (2025-08-30): Vollständige Integration der robusten Konvertierungslogik (fixed14) in das neue Design; Copy-Button styled + animiert; Theme-Wechsel repariert; Darkmode-Varianten pro Theme ergänzt.</li>
-          <li><strong>v2.4.3</strong> (2025-08-29): Design v2.4 wiederhergestellt; Konvertierungs-Logik integriert.</li>
-          <li><strong>v2.4.2</strong> (2025-08-29): Vorbereitende Integration.</li>
-          <li><strong>v2.4.1</strong> (2025-08-29): Bugfix Erkennung & Theme-Auswahl.</li>
-          <li><strong>v2.4</strong> (2025-08-29): Redesign (Claude-Version).</li>
+                                                  <li><strong>v2.5.18.4</strong> (2025-09-01): Highlighter neu aufgebaut (verlustfrei): Template-Name mit Leerzeichen vor erster Pipe sichtbar; Overlay-Text deckt den vollen Inhalt.</li>
+<li><strong>v2.5.18.3</strong> (2025-09-01): Anzeige-Bug behoben: Leerzeichen vor der ersten Pipe bleibt bei „{{cite … |“ erhalten (Tokenizer erhält Nachlauf-Whitespace vor <code>|</code>/<code>}</code>).</li>
+<li><strong>v2.5.18.2</strong> (2025-09-01): Zeilenumbruch in Eingabe-/Ausgabe-Highlight wieder aktiv (Wrap wie Textfelder); CSS: <code>pre.highlight</code> auf <code>pre-wrap</code> umgestellt, Spans erben <code>white-space</code>.</li>
+<li><strong>v2.5.18.1</strong> (2025-09-01): Hintergrund-Verlauf füllt die gesamte Seite (auch bei aufgeklapptem Versionsverlauf); Darstellung: fehlendes Leerzeichen nach „{cite …“ bzw. vor dem ersten Pipe behoben; Konvertierung: „{*}“ im title → „•“ (U+2022).</li>
+<li><strong>v2.5.18</strong> (2025-09-01): Darkmode-Auswahl als Segmented-Control (Auto/An/Aus) ergänzt; bestehendes Dropdown bleibt (visually-hidden) und wird bidirektional synchronisiert (Klick & Tastatur); aktiver Zustand deutlicher hervorgehoben.</li>
+<li><strong>v2.5.17</strong> (2025-09-01): Darkmode-Option kompakter: Label und Auswahl stehen jetzt nebeneinander (Wrapper <code>.option-compact</code>) für bessere Lesbarkeit.</li>
+<li><strong>v2.5.16</strong> (2025-09-01): Highlighting-Fix: <code>&lt;/ref&gt;</code> wird exakt wie <code>&lt;ref&gt;</code> und <code>&lt;ref name="…"&gt;</code> eingefärbt (robuster Regex im Highlighter). Keine weiteren Änderungen.</li>
+<li><strong>v2.5.15</strong> (2025-08-31): Darkmode-Sichtbarkeit: Basistext in Codeblöcken auf #fff, „{{cite web“}} heller; </ref> wie <ref> eingefärbt. Keine weiteren Änderungen.</li>
+<li><strong>v2.5.13</strong> (2025-08-31): Darkmode-Syntax aufgehellt: „{{cite web“}} (Template) & Parametervalue heller; </ref> nun gleiche Farbe wie <ref> & <ref name="…">. Keine weiteren Änderungen.</li>
+<li><strong>v2.5.12</strong> (2025-08-31): Darkmode-Kontraste (Intro & Syntax) breit abgesichert (.dark & .force-dark; .lead statt #subline). Keine anderen Änderungen.</li>
+<li><strong>v2.5.11</strong> (2025-08-31): Darkmode-Kontraste für Intro & Syntax-Highlighting aufgehellt; sonst unverändert.</li>
+<li class="major-separator">— Version 2.5.x —</li>
+          <li><strong>v2.5.10</strong> (2025-08-31): Darkmode-Info-Icon entfernt; Abstand Label/Dropdown optimiert; Changelog vollständig wiederhergestellt (keine Einträge gelöscht).</li>
+          <li><strong>v2.5.9</strong> (2025-08-31): H1-Verlauf animiert (12s ease-in-out, sanft fließend). Alle anderen Funktionen unverändert.</li>
+          <li><strong>v2.5.8</strong> (2025-08-31): H1-Farben (theme-gebunden) wiederhergestellt; Badge dezenter; Darkmode-Kontraste für Intro & Highlighting verbessert; sonst unverändert.</li>
+          <li><strong>v2.5.7</strong> (2025-08-31): Darkmode-Auswahl mit ℹ️-Info-Hinweis (Hover-Tooltip) ergänzt.</li>
+          <li><strong>v2.5.6</strong> (2025-08-31): Option „Darkmode“ überarbeitet: Automatisch (System), Immer an, Immer aus.</li>
+          <li><strong>v2.5.5b</strong> (2025-08-31): Trenner im Changelog im Darkmode heller.</li>
+          <li><strong>v2.5.5</strong> (2025-08-31): Trenner im Changelog für Major-Versionen hinzugefügt.</li>
+          <li><strong>v2.5.4</strong> (2025-08-31): Subline-Text geändert; bessere Lesbarkeit im Darkmode.</li>
+          <li><strong>v2.5.3</strong> (2025-08-31): Smoothflow – weiche H1-Animation (400% Hintergrund; 12s ease-in-out).</li>
+          <li><strong>v2.5.2</strong> (2025-08-31): Designpolitur – H1-Verlauf animiert (erste Version).</li>
+          <li><strong>v2.5.1</strong> (2025-08-31): Badge-Link zum Changelog; H1 theme-gebunden; Syntax-Highlighting & Gradient-Fix.</li>
+          <li><strong>v2.5</strong> (2025-08-30): Syntax-Highlighting für Eingabe & Ausgabe; verständliche Konvertierungs-Zusammenfassung; Design & Konvertierungsskript unberührt.</li>
+          <li class="major-separator">— Version 2.4.x —</li>
+          <li><strong>v2.4.7</strong> (2025-08-30): Darkmode für Wikipedia-Theme deutlich dunkler gestaltet (#1a1a1a → #2a2a2a), restliche Logik und Themes unverändert aus v2.4.6 übernommen.</li>
+          <li><strong>v2.4.6</strong> (2025-08-30): Theme-Buttons & Badge passen sich an; Darkmode-Varianten für alle Themes; Farbverlauf bleibt bis unten sichtbar; Badge wieder styled; Changelog erweitert.</li>
+          <li><strong>v2.4.5</strong> (2025-08-29): Sprachheuristik ergänzt (mehr Sprachen erkannt), Checkbox mit Info-Icon, Flaggen bei Sprachoption, mehr Abstand zwischen Buttons/Textareas, Hover-Effekte verbessert.</li>
+          <li><strong>v2.4.4</strong> (2025-08-30): Vollständige Integration der robusten Konvertierungslogik (fixed14) in das neue Design; Copy-Button styled + animiert; Theme-Wechsel repariert; Darkmode-Varianten pro Theme ergänzt; kleine UI-Optimierungen (Hover/Focus, Copy-Feedback, responsive Buttons).</li>
+          <li><strong>v2.4.3</strong> (2025-08-29): Bugfix-Version, Konvertierung funktioniert wieder; Design noch unvollständig.</li>
+          <li><strong>v2.4.2</strong> (2025-08-29): Versuch der Integration, aber Teile der Logik fehlten.</li>
+          <li><strong>v2.4.1</strong> (2025-08-29): Bugfix für Erkennung von cite web/news/magazine/book auch mit Parametern; Darkmode-Override-Toggle und Theme-Auswahl mit Farbverläufen.</li>
+          <li><strong>v2.4</strong> (2025-08-29): Redesign (Claude-Version) mit modernem Glasmorphism-UI.</li>
+          <li class="major-separator">— Version 2.3.x —</li>
+          <li><strong>v2.3</strong> (2025-08-28): Neues Theme-System (4 Designs mit LocalStorage), Optionen erweitert (Sprachcodes ungekürzt, Direktkopie, Info-Hinweis per Klick), kleinere Textareas, Favicon gefixt. Neueste Version oben gelistet.</li>
+          <li><strong>v2.2</strong> (2025-08-28): Einstellungsmenü in <details>-Block; neue Checkbox „Sprache=de unterdrücken“.</li>
+          <li><strong>v2.1.2</strong> (2025-08-28): Info-Hinweis zu Sprache=de.</li>
+          <li><strong>v2.1.1</strong> (2025-08-28): Normalisierung Sprachcodes, Deutsch wird unterdrückt.</li>
+          <li><strong>v2.1</strong> (2025-08-28): ISBN-Gruppierung, strengere Sprachheuristik.</li>
+          <li><strong>v2.0</strong> (2025-08-28): Neue Konvertierung {{cite book}} → {{Literatur}}.</li>
         </ul>
       </details>
     </div>
   </div>
 
-  <script>
-  /* =========================================================================
-     Vollständiges Konvertierungs-Skript (aus fixed14) – vollständig eingebunden
-     ========================================================================= */
-  (function(){
-    /* Utilities */
-    function todayISO(){ const d=new Date(); return d.toISOString().slice(0,10); }
-    function toISODate(dateString){ if(!dateString) return ''; const ds=String(dateString).trim(); const monthMap={january:'01',february:'02',march:'03',april:'04',may:'05',june:'06',july:'07',august:'08',september:'09',october:'10',november:'11',december:'12',januar:'01',februar:'02','märz':'03','maerz':'03',april:'04',mai:'05',juni:'06',juli:'07',august:'08',september:'09',oktober:'10',november:'11',dezember:'12'}; let m; if((m=ds.match(/^(\d{1,2})\s+([A-Za-zäöüÄÖÜ]+)\s+(\d{4})$/))) return `${m[3]}-${(monthMap[m[2].toLowerCase()]||m[2])}-${String(m[1]).padStart(2,'0')}`; if((m=ds.match(/^([A-Za-zäöüÄÖÜ]+)\s+(\d{1,2}),\s*(\d{4})$/))) return `${m[3]}-${(monthMap[m[1].toLowerCase()]||m[1])}-${String(m[2]).padStart(2,'0')}`; if(/^\d{4}-\d{2}-\d{2}$/.test(ds)) return ds; if(/^\d{4}-\d{2}$/.test(ds)) return ds; if(/^\d{4}$/.test(ds)) return ds; return ds; }
-    function extractYear(s){ if(!s) return ''; const m=String(s).match(/(\d{4})/); return m?m[1]:String(s); }
-    function normalizeEdition(ed){ if(!ed) return ''; let e=String(ed).trim(); e=e.replace(/(\d+)\s*(st|nd|rd|th)\b/gi,(m,n)=>`${n}.`); e=e.replace(/\bAufl\.?/i,'').trim(); return e; }
-    function normalizePages(p){ if(!p) return ''; let s=String(p); s=s.replace(/(\d+)\s*-\s*(\d+)/g,(m,a,b)=>{const x=parseInt(a,10),y=parseInt(b,10); return x<y?`${a}\u2013${b}`:`${a}-${b}`}); return s; }
-    function normalizeISBN(isbn){ if(!isbn) return ''; let s=String(isbn).trim(); s=s.replace(/x$/i,'X').replace(/\s+/g,' '); return s; }
-    function looksEnglish(text){ if(!text) return false; return /(\bthe\b|\band\b|\bof\b|\bto\b|\bwith\b|\bfor\b|\bfrom\b|\bin\b|\bis\b|\bthis\b|\bthat\b|guardian|times|news|daily|york|press|telegraph|washington post|new york times)/i.test(text); }
+<script>
+/* =========================================================================
+   v2.5 — vollständiges Skript
+   - Original-Konvertierungslogik (erhalten und erweitert)
+   - Highlighting für input/output (nur visuell)
+   - Conversion summary (verständliche Meldungen)
+   ========================================================================= */
 
-    function detectLanguage(text){ if(!text) return ''; const t=String(text).toLowerCase(); if(/\b(der|die|das|und|nachrichten|zeitung|zeitschrift|deutschland)\b/.test(t)) return 'de'; if(/\b(le|la|les|des|du|journal|revue|france|français)\b/.test(t)) return 'fr'; if(/\b(el|la|los|las|diario|noticias|españa|español)\b/.test(t)) return 'es'; if(/\b(il|lo|la|giornale|quotidiano|italia|italiano)\b/.test(t)) return 'it'; if(/\b(de|het|nieuws|krant|nederland|nederlands)\b/.test(t)) return 'nl'; if(looksEnglish(t)) return 'en'; return ''; }
+(function(){
 
-    function splitTopLevelPipes(s){ let tokens=[],buf=''; let depthLink=0,depthTpl=0; for(let i=0;i<s.length;i++){ const ch=s[i], nxt=s[i+1]; if(ch==='[' && nxt==='['){ depthLink++; buf+='[['; i++; continue; } if(ch===']' && nxt===']' && depthLink>0){ depthLink--; buf+=']]'; i++; continue; } if(ch==='{' && nxt==='{'){ depthTpl++; buf+='{{'; i++; continue; } if(ch==='}' && nxt==='}' && depthTpl>0){ depthTpl--; buf+='}}'; i++; continue; } if(ch==='|' && depthLink===0 && depthTpl===0){ tokens.push(buf); buf=''; continue; } buf+=ch; } tokens.push(buf); return tokens; }
+  /* ---------------- Utilities ---------------- */
+  function todayISO(){ return new Date().toISOString().slice(0,10); }
 
-    function parseTemplateParams(templateText){ const innerMatch=templateText.match(/^\s*\{\{([\s\S]*?)\}\}\s*$/); if(!innerMatch) return {name:'',params:{},raw:templateText}; const inner=innerMatch[1]; const tokens=splitTopLevelPipes(inner); const name=(tokens.shift()||'').trim(); const params={}; for(const tok of tokens){ const eq=tok.indexOf('='); if(eq===-1) continue; const key=tok.slice(0,eq).trim().toLowerCase(); const val=tok.slice(eq+1).trim(); if(key) params[key]=val; } return {name,params,raw:templateText}; }
+  function escapeHtml(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
 
-    function buildInternetquelle(finalParams){ const order=['autor','url','titel','werk','hrsg','datum','seiten','format','sprache','offline','archiv-url','archiv-datum','abruf','abruf-verborgen','kommentar','zitat']; const parts=[],used=new Set(); for(const k of order){ if(Object.prototype.hasOwnProperty.call(finalParams,k)){ parts.push('|'+k+'='+ (finalParams[k] ?? '')); used.add(k); } } Object.keys(finalParams).sort().forEach(k=>{ if(!used.has(k)) parts.push('|'+k+'='+finalParams[k]); }); return '{{Internetquelle '+parts.join(' ')+'}}'; }
+  function toISODate(ds){
+    if(!ds) return '';
+    ds = String(ds).trim();
+    const monthMap = {
+      january:'01', february:'02', march:'03', april:'04', may:'05', june:'06',
+      july:'07', august:'08', september:'09', october:'10', november:'11', december:'12',
+      januar:'01', februar:'02', 'märz':'03', maerz:'03', april:'04', mai:'05', juni:'06',
+      juli:'07', august:'08', september:'09', oktober:'10', november:'11', dezember:'12'
+    };
+    let m;
+    if((m = ds.match(/^(\d{1,2})\s+([A-Za-zäöüÄÖÜ]+)\s+(\d{4})$/))){
+      const day = String(m[1]).padStart(2,'0');
+      const mon = monthMap[m[2].toLowerCase()] || m[2];
+      return `${m[3]}-${mon}-${day}`;
+    }
+    if((m = ds.match(/^([A-Za-zäöüÄÖÜ]+)\s+(\d{1,2}),\s*(\d{4})$/))){
+      const mon = monthMap[m[1].toLowerCase()] || m[1];
+      const day = String(m[2]).padStart(2,'0');
+      return `${m[3]}-${mon}-${day}`;
+    }
+    if(/^\d{4}-\d{2}-\d{2}$/.test(ds)) return ds;
+    if(/^\d{4}-\d{2}$/.test(ds)) return ds;
+    if(/^\d{4}$/.test(ds)) return ds;
+    return ds;
+  }
 
-    function buildLiteratur(finalParams){ const order=['Autor','Titel','TitelErg','Hrsg','Sammelwerk','WerkErg','Reihe','BandReihe','HrsgReihe','NummerReihe','Band','Nummer','Auflage','Verlag','Ort','Datum','ISBN','ISBNformalFalsch','ISBNdefekt','ISSN','ISSNformalFalsch','Kapitel','Seiten','Spalten','ArtikelNr','Fundstelle','Sprache','Kommentar','Originaltitel','Originalsprache','Originaljahr','Originalort','Übersetzer','VerlagEA','OrtEA','JahrEA','Online','Format','KBytes','Abruf','arXiv','DOI','JSTOR','LCCN','OCLC','PMC','PMID','ZDB','Umfang','Typ','Lizenznummer','bibcode','URN','ID','Zitat']; const parts=[],used=new Set(); for(const k of order){ if(Object.prototype.hasOwnProperty.call(finalParams,k)){ parts.push('|'+k+'='+ (finalParams[k] ?? '')); used.add(k); } } Object.keys(finalParams).sort().forEach(k=>{ if(!used.has(k)) parts.push('|'+k+'='+finalParams[k]); }); return '{{Literatur '+parts.join(' ')+'}}'; }
+  function extractYear(s){ if(!s) return ''; const m = String(s).match(/(\d{4})/); return m?m[1]:String(s); }
+  function normalizeEdition(ed){ if(!ed) return ''; let e=String(ed).trim(); e=e.replace(/(\d+)\s*(st|nd|rd|th)\b/gi,(m,n)=>`${n}.`); e=e.replace(/\bAufl\.?/i,'').trim(); return e; }
+  function normalizePages(p){ if(!p) return ''; let s=String(p); s=s.replace(/(\d+)\s*-\s*(\d+)/g,(m,a,b)=>{ const x=parseInt(a,10), y=parseInt(b,10); return x<y?`${a}\u2013${b}`:`${a}-${b}`; }); return s; }
+  function normalizeISBN(isbn){ if(!isbn) return ''; return String(isbn).trim().replace(/x$/i,'X').replace(/\s+/g,' '); }
 
-    function collectPersons(params, firstPrefix, lastPrefix){ const people=[]; const numbered=[]; Object.keys(params).forEach(k=>{ const m=k.match(new RegExp('^'+lastPrefix.replace(/[-]/g,'[-]')+'(\\d*)$')); if(m) numbered.push(m[1]||''); }); numbered.sort((a,b)=>{ const ai=a===''?0:parseInt(a,10); const bi=b===''?0:parseInt(b,10); return ai-bi; }); const used=new Set(); for(const suf of numbered){ const f=params[firstPrefix+suf]||''; const l=params[lastPrefix+suf]||''; const name=(f+' '+l).trim(); if(name){ people.push(name); used.add(firstPrefix+suf); used.add(lastPrefix+suf); } } if(!used.has(firstPrefix) && !used.has(lastPrefix)){ const f=params[firstPrefix]||''; const l=params[lastPrefix]||''; const name=(f+' '+l).trim(); if(name) people.push(name); } return people; }
+  function looksEnglish(text){
+    if(!text) return false;
+    return /(\bthe\b|\band\b|\bof\b|\bto\b|\bwith\b|\bfor\b|\bfrom\b|\bin\b|\bis\b|\bthis\b|\bthat\b|guardian|times|news|daily|york|press|telegraph|washington post|new york times)/i.test(text);
+  }
 
-    function chooseLanguage(langChoice, explicitLang, titleText, workText, overrideChecked){ if(overrideChecked && langChoice && langChoice!=='') return langChoice; if(explicitLang){ const code=String(explicitLang).trim(); if(code.includes('-')) return code.split('-')[0].toLowerCase(); return code.toLowerCase(); } const check=[titleText||'', workText||''].join(' '); const auto=detectLanguage(check); if(auto) return auto; if(looksEnglish(check)) return 'en'; return ''; }
+  function detectLanguage(text){
+    if(!text) return '';
+    const t = String(text).toLowerCase();
 
-    function convertCiteWebFamily(parsed, options){ const params=parsed.params; const finalParams={}; const authors=[]; Object.keys(params).forEach(k=>{ if(/^last\d*$/.test(k)){ const suf=k.slice(4); const name=((params['first'+suf]||'')+' '+(params[k]||'')).trim(); if(name) authors.push(name); } }); if(authors.length===0 && (params['last']||params['first'])){ const name=((params['first']||'')+' '+(params['last']||'')).trim(); if(name) authors.push(name); } if(authors.length) finalParams['autor']=authors.join(', ');
-      if(params['url']) finalParams['url']=params['url']; if(params['title']) finalParams['titel']=params['title']; if(params['website']) finalParams['werk']=params['website']; if(!finalParams['werk']){ const w=params['newspaper']||params['work']||params['publisher']||''; if(w) finalParams['werk']=w; }
-      if(params['date']||params['datum']) finalParams['datum']=toISODate(params['date']||params['datum']);
-      const lang=chooseLanguage(options.langChoice, params['language'], finalParams['titel'], finalParams['werk'], options.overrideLang);
-      if(lang) finalParams['sprache']=lang;
-      if(params['quote']) finalParams['zitat']=params['quote']; if(params['archive-url']) finalParams['archiv-url']=params['archive-url']; if(params['archive-date']) finalParams['archiv-datum']=toISODate(params['archive-date']);
-      const urlStatus=(params['url-status']||'').toLowerCase(); if(urlStatus==='dead') finalParams['offline']='1'; else if(urlStatus==='live' && options.stripArchiveIfLive){ delete finalParams['archiv-url']; delete finalParams['archiv-datum']; }
-      if(options.useToday) finalParams['abruf']=todayISO(); else { const ad=params['access-date']||params['accessdate']||params['abruf']||''; if(ad) finalParams['abruf']=toISODate(ad); }
-      return buildInternetquelle(finalParams);
+    if(/\b(der|die|das|und|nachrichten|zeitung|zeitschrift|deutschland)\b/.test(t)) return 'de';
+    if(/\b(le|la|les|des|du|journal|revue|france|français)\b/.test(t)) return 'fr';
+    if(/\b(el|la|los|las|diario|noticias|españa|español)\b/.test(t)) return 'es';
+    if(/\b(il|lo|la|giornale|quotidiano|italia|italiano)\b/.test(t)) return 'it';
+    if(/\b(de|het|nieuws|krant|nederland|nederlands)\b/.test(t)) return 'nl';
+    if(looksEnglish(t)) return 'en';
+    return '';
+  }
+
+  /* split top-level pipes while ignoring pipes inside [[...]] or {{...}} */
+  function splitTopLevelPipes(s){
+    const tokens = []; let buf=''; let depthLink=0, depthTpl=0;
+    for(let i=0;i<s.length;i++){
+      const ch=s[i], nxt=s[i+1];
+      if(ch==='[' && nxt==='['){ depthLink++; buf+='[['; i++; continue; }
+      if(ch===']' && nxt===']' && depthLink>0){ depthLink--; buf+=']]'; i++; continue; }
+      if(ch==='{' && nxt==='{'){ depthTpl++; buf+='{{'; i++; continue; }
+      if(ch==='}' && nxt==='}' && depthTpl>0){ depthTpl--; buf+='}}'; i++; continue; }
+      if(ch==='|' && depthLink===0 && depthTpl===0){ tokens.push(buf); buf=''; continue; }
+      buf+=ch;
+    }
+    tokens.push(buf);
+    return tokens;
+  }
+
+  function parseTemplateParams(templateText){
+    const innerMatch = templateText.match(/^\s*\{\{([\s\S]*?)\}\}\s*$/);
+    if(!innerMatch) return { name:'', params:{}, raw:templateText };
+    const inner = innerMatch[1];
+    const tokens = splitTopLevelPipes(inner);
+    const name = (tokens.shift()||'').trim();
+    const params = {};
+    for(const tok of tokens){
+      const eq = tok.indexOf('=');
+      if(eq === -1) continue;
+      const key = tok.slice(0,eq).trim().toLowerCase();
+      const val = tok.slice(eq+1).trim();
+      if(key) params[key] = val;
+    }
+    return { name, params, raw: templateText };
+  }
+
+  /* builders (same order as before) */
+  function buildInternetquelle(finalParams){
+    const order = ['autor','url','titel','werk','hrsg','datum','seiten','format','sprache','offline','archiv-url','archiv-datum','abruf','abruf-verborgen','kommentar','zitat'];
+    const parts = [], used = new Set();
+    for(const k of order){ if(Object.prototype.hasOwnProperty.call(finalParams,k)){ parts.push('|' + k + '=' + (finalParams[k] ?? '')); used.add(k); } }
+    Object.keys(finalParams).sort().forEach(k => { if(!used.has(k)) parts.push('|' + k + '=' + finalParams[k]); });
+    return '{{Internetquelle ' + parts.join(' ') + '}}';
+  }
+
+  function buildLiteratur(finalParams){
+    const order = ['Autor','Titel','TitelErg','Hrsg','Sammelwerk','WerkErg','Reihe','BandReihe','HrsgReihe','NummerReihe','Band','Nummer','Auflage','Verlag','Ort','Datum','ISBN','ISBNformalFalsch','ISBNdefekt','ISSN','ISSNformalFalsch','Kapitel','Seiten','Spalten','ArtikelNr','Fundstelle','Sprache','Kommentar','Originaltitel','Originalsprache','Originaljahr','Originalort','Übersetzer','VerlagEA','OrtEA','JahrEA','Online','Format','KBytes','Abruf','arXiv','DOI','JSTOR','LCCN','OCLC','PMC','PMID','ZDB','Umfang','Typ','Lizenznummer','bibcode','URN','ID','Zitat'];
+    const parts = [], used = new Set();
+    for(const k of order){ if(Object.prototype.hasOwnProperty.call(finalParams,k)){ parts.push('|' + k + '=' + (finalParams[k] ?? '')); used.add(k); } }
+    Object.keys(finalParams).sort().forEach(k => { if(!used.has(k)) parts.push('|' + k + '=' + finalParams[k]); });
+    return '{{Literatur ' + parts.join(' ') + '}}';
+  }
+
+  /* helpers */
+  function collectPersons(params, firstPrefix, lastPrefix){
+    const people = []; const numbered = [];
+    Object.keys(params).forEach(k=>{
+      const m = k.match(new RegExp('^' + lastPrefix.replace(/[-]/g,'[-]') + '(\\d*)$'));
+      if(m) numbered.push(m[1] || '');
+    });
+    numbered.sort((a,b)=>{ const ai = a===''?0:parseInt(a,10); const bi = b===''?0:parseInt(b,10); return ai - bi; });
+    const used = new Set();
+    for(const suf of numbered){
+      const f = params[firstPrefix + suf] || '';
+      const l = params[lastPrefix + suf] || '';
+      const name = (f + ' ' + l).trim();
+      if(name){ people.push(name); used.add(firstPrefix+suf); used.add(lastPrefix+suf); }
+    }
+    if(!used.has(firstPrefix) && !used.has(lastPrefix)){
+      const f = params[firstPrefix] || '';
+      const l = params[lastPrefix] || '';
+      const name = (f + ' ' + l).trim();
+      if(name) people.push(name);
+    }
+    return people;
+  }
+
+  function normalizeLangCode(code, fullMode){
+    if(!code) return '';
+    code = String(code).trim();
+    if(!fullMode){
+      if(code.includes('-')) return code.split('-')[0].toLowerCase();
+      return code.toLowerCase().slice(0,2);
+    }
+    return code.toLowerCase();
+  }
+
+  function chooseLanguage(langChoice, explicitLang, titleText, workText, overrideChecked, fullLangCodes){
+    if(overrideChecked && langChoice && langChoice !== '') return normalizeLangCode(langChoice, fullLangCodes);
+    if(explicitLang) return normalizeLangCode(explicitLang, fullLangCodes);
+    const combined = [titleText||'', workText||''].join(' ');
+    const auto = detectLanguage(combined);
+    if(auto) return normalizeLangCode(auto, fullLangCodes);
+    if(looksEnglish(combined)) return 'en';
+    return '';
+  }
+
+  /* ---------- Conversion functions (RETURN {output, log}) ---------- */
+
+  function convertCiteWebFamily(parsed, options){
+    const params = parsed.params;
+    const finalParams = {};
+    const log = [];
+
+    // Authors
+    const authors = [];
+    Object.keys(params).forEach(k=>{
+      if(/^last\d*$/.test(k)){
+        const suf = k.slice(4);
+        const name = ((params['first'+suf]||'') + ' ' + (params[k]||'')).trim();
+        if(name) authors.push(name);
+      }
+    });
+    if(authors.length === 0 && (params['last'] || params['first'])){
+      const n = ((params['first']||'') + ' ' + (params['last']||'')).trim();
+      if(n) authors.push(n);
+    }
+    if(authors.length){ finalParams['autor'] = authors.join(', '); log.push('Autor: ' + authors.join(', ') + ' (zusammengesetzt aus first/last)'); }
+
+    // title/url/werk/publisher/date
+    if(params['url']){ finalParams['url'] = params['url']; log.push('Online: URL übernommen'); }
+    if(params['title']){ const _t = String(params['title']).replace(/\{\{\*\}\}/g,'\u2022'); finalParams['titel'] = _t; log.push('Titel: ersetzt {{*}} → • und übernommen'); }
+    if(params['website']){ finalParams['werk'] = params['website']; log.push('Werk: ' + params['website'] + ' übernommen'); }
+    else if(params['newspaper']||params['work']||params['publisher']){ finalParams['werk'] = params['newspaper']||params['work']||params['publisher']; log.push('Werk/Publisher übernommen: ' + finalParams['werk']); }
+
+    if(params['date']||params['datum']){ finalParams['datum'] = toISODate(params['date']||params['datum']); log.push('Datum: ' + finalParams['datum']); }
+
+    // language
+    const lang = chooseLanguage(options.langChoice, params['language'], finalParams['titel'], finalParams['werk'], options.overrideLang, options.fullLangCodes);
+    if(lang){
+      if(!(options.suppressGerman && String(lang).toLowerCase().startsWith('de'))){
+        finalParams['sprache'] = lang;
+        log.push('Sprache automatisch erkannt: ' + lang);
+      } else {
+        log.push('Sprache wurde erkannt als de, wird aber unterdrückt (Einstellung).');
+      }
     }
 
-    function convertCiteBook(parsed, options){ const p=parsed.params; const F={}; let authors=collectPersons(p,'first','last'); if(authors.length===0 && p['author']) authors.push(p['author']); authors=authors.concat(collectPersons(p,'contributor-first','contributor-last')); authors=authors.concat(collectPersons(p,'interviewer-first','interviewer-last')); if(p['collaboration']) authors.push(p['collaboration']); if(authors.length) F['Autor']=authors.join(', ');
-      let editors=collectPersons(p,'editor-first','editor-last'); if(editors.length===0 && p['editor']) editors.push(p['editor']); if(editors.length) F['Hrsg']=editors.join(', ');
-      let translators=collectPersons(p,'translator-first','translator-last'); if(translators.length===0 && p['translator']) translators.push(p['translator']); if(translators.length) F['Übersetzer']=translators.join(', ');
-      if(p['title']) F['Titel']=p['title']; if(p['chapter']||p['script-chapter']) F['Kapitel']=p['chapter']||p['script-chapter']; if(p['series']) F['Reihe']=p['series']; if(p['volume']) F['Band']=p['volume']; if(p['edition']) F['Auflage']=normalizeEdition(p['edition']); if(p['publisher']) F['Verlag']=p['publisher']; const ort=p['publication-place']||p['location']; if(ort) F['Ort']=ort; const date=p['date']||p['publication-date']||p['year']; if(date) F['Datum']=toISODate(date); const orig=p['orig-date']||p['origyear']||p['orig-year']; if(orig) F['Originaljahr']=extractYear(orig); const seiten=p['pages']||p['page']||p['at']; if(seiten) F['Seiten']=normalizePages(seiten);
-      const lang=chooseLanguage(options.langChoice, p['language'], F['Titel'], undefined, options.overrideLang); if(lang) F['Sprache']=lang;
-      if(p['url']) F['Online']=p['url']; if(options.useToday) F['Abruf']=todayISO(); else{ const ad=p['access-date']||p['accessdate']||p['url-access']||''; if(ad) F['Abruf']=toISODate(ad); }
-      if(p['format']) F['Format']=p['format']; if(p['type']) F['Typ']=p['type']; if(p['isbn']) F['ISBN']=normalizeISBN(p['isbn']); if(p['issn']) F['ISSN']=p['issn']; if(p['doi']) F['DOI']=p['doi']; if(p['jstor']) F['JSTOR']=p['jstor']; if(p['lccn']) F['LCCN']=p['lccn']; if(p['oclc']) F['OCLC']=p['oclc']; if(p['pmc']) F['PMC']=p['pmc']; if(p['pmid']) F['PMID']=p['pmid']; if(p['arxiv']) F['arXiv']=p['arxiv']; if(p['bibcode']) F['bibcode']=p['bibcode']; if(p['urn']) F['URN']=p['urn']; const asID=['biorxiv','citeseerx','medrxiv','osti','ol','s2cid','zbl','mr','jfm','ssrn','rfc','hdl']; asID.forEach(k=>{ if(p[k]) F['ID']=(F['ID']? (F['ID']+', '+p[k]) : p[k]); }); if(p['quote']) F['Zitat']=p['quote']; return buildLiteratur(F); }
+    // quote/archive
+    if(params['quote']){ finalParams['zitat'] = params['quote']; log.push('Zitat übernommen'); }
+    if(params['archive-url']){ finalParams['archiv-url'] = params['archive-url']; log.push('Archiv-URL vorhanden (wird übernommen, sofern nicht entfernt)'); }
+    if(params['archive-date']){ finalParams['archiv-datum'] = toISODate(params['archive-date']); log.push('Archiv-Datum übernommen'); }
 
-    function isCiteWebFamily(name){ const n=(name||'').trim().toLowerCase(); return n==='cite web' || n==='cite news' || n==='cite magazine'; }
-    function isCiteBook(name){ const n=(name||'').trim().toLowerCase(); return n==='cite book'; }
-    function convertTemplateString(tplString, options){ const parsed=parseTemplateParams(tplString); if(!parsed.name) return tplString; if(isCiteBook(parsed.name)) return convertCiteBook(parsed, options); if(isCiteWebFamily(parsed.name)) return convertCiteWebFamily(parsed, options); return tplString; }
+    const urlStatus = (params['url-status']||'').toLowerCase();
+    if(urlStatus==='dead'){ finalParams['offline'] = '1'; log.push('URL-Status = dead → Offline-Markierung gesetzt'); }
+    else if(urlStatus==='live' && options.stripArchiveIfLive){
+      // remove archive info
+      delete finalParams['archiv-url']; delete finalParams['archiv-datum'];
+      log.push('Archiv-Informationen entfernt, weil url-status=live und Option aktiv');
+    }
 
-    function transformText(){ const inputEl=document.getElementById('inputText'); const outputEl=document.getElementById('outputText'); const useToday=document.getElementById('useTodayAbruf').checked; const stripArchiveIfLive=document.getElementById('stripArchiveIfLive').checked; const overrideLang=document.getElementById('overrideLang').checked; const langChoice=(document.getElementById('langSelect') && document.getElementById('langSelect').value) || ''; const options={useToday, stripArchiveIfLive, langChoice, overrideLang}; let input=(inputEl.value||'').trim(); if(!input){ outputEl.value=''; return; }
-      const refRegex=/(<ref\b[^>]*>)([\s\S]*?)(<\/ref>)/gi; if(refRegex.test(input)){ const result=input.replace(refRegex,function(full,refOpen,inner,refClose){ const tplMatch=inner.match(/\{\{[\s\S]*?\}\}/); if(!tplMatch) return full; const converted=convertTemplateString(tplMatch[0],options); return refOpen + inner.replace(tplMatch[0],converted) + refClose; }); outputEl.value=result; return; }
-      const tplMatch=input.match(/\{\{[\s\S]*?\}\}/); if(tplMatch){ const converted=convertTemplateString(tplMatch[0],options); outputEl.value=input.replace(tplMatch[0],converted); return; } outputEl.value=input; }
+    if(options.useToday){ finalParams['abruf'] = todayISO(); log.push('Abruf: heutiges Datum gesetzt'); }
+    else { const ad = params['access-date'] || params['accessdate'] || params['abruf'] || ''; if(ad){ finalParams['abruf'] = toISODate(ad); log.push('Abruf: ' + finalParams['abruf']); } }
 
-    /* DOM wiring */
-    document.addEventListener('DOMContentLoaded',function(){
-      // today label
-      const tl=document.getElementById('todayLabel'); if(tl) tl.textContent=todayISO();
+    // build result string and return with log
+    return { output: buildInternetquelle(finalParams), log };
+  }
 
-      // Convert button
-      document.getElementById('convertBtn').addEventListener('click',function(){ transformText(); if(document.getElementById('autoCopy').checked){ const out=document.getElementById('outputText'); if(out && out.value){ if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(out.value).then(()=>{ document.getElementById('copyStatus').textContent='✓ Direkt kopiert'; setTimeout(()=>document.getElementById('copyStatus').textContent='',1400); }).catch(()=>{}); } else { try{ out.select(); document.execCommand('copy'); document.getElementById('copyStatus').textContent='✓ Direkt kopiert'; setTimeout(()=>document.getElementById('copyStatus').textContent='',1400);}catch(e){} } } } });
+  function convertCiteBook(parsed, options){
+    const p = parsed.params; const F = {}; const log = [];
 
-      // Copy button
-      document.getElementById('copyBtn').addEventListener('click',async function(){ const out=document.getElementById('outputText'), status=document.getElementById('copyStatus'); try{ if(navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(out.value || ''); } else { out.select(); document.execCommand('copy'); } status.textContent='✓ In Zwischenablage kopiert'; setTimeout(()=>status.textContent='',2000); }catch(err){ console.warn('copy failed',err); status.textContent='⚠ Kopieren fehlgeschlagen'; setTimeout(()=>status.textContent='',2000); } });
+    let authors = collectPersons(p,'first','last');
+    if(authors.length===0 && p['author']){ authors.push(p['author']); log.push('Autor: Einzelparameter author übernommen'); }
+    authors = authors.concat(collectPersons(p,'contributor-first','contributor-last'));
+    authors = authors.concat(collectPersons(p,'interviewer-first','interviewer-last'));
+    if(p['collaboration']){ authors.push(p['collaboration']); log.push('Autor: collaboration übernommen'); }
+    if(authors.length){ F['Autor'] = authors.join(', '); log.push('Autor: ' + authors.join(', ') + ' (zusammengesetzt)'); }
 
-      // lang info
-      document.getElementById('langInfoToggle').addEventListener('click',()=>{ const info=document.getElementById('langInfo'); info.style.display=(info.style.display==='none'?'block':'none'); });
+    let editors = collectPersons(p,'editor-first','editor-last');
+    if(editors.length===0 && p['editor']){ editors.push(p['editor']); log.push('Hrsg: Einzelparameter editor übernommen'); }
+    if(editors.length){ F['Hrsg'] = editors.join(', '); log.push('Hrsg: ' + editors.join(', ')); }
 
-      // overrideLang
-      const override=document.getElementById('overrideLang'); const langContainer=document.getElementById('langSelectContainer'); function updateLangContainer(){ langContainer.style.display=(override.checked?'block':'none'); } override.addEventListener('change',updateLangContainer); updateLangContainer();
+    let translators = collectPersons(p,'translator-first','translator-last');
+    if(translators.length===0 && p['translator']){ translators.push(p['translator']); log.push('Übersetzer übernommen'); }
+    if(translators.length) F['Übersetzer'] = translators.join(', ');
 
-      // theme selection
-      const themeOptions=Array.from(document.querySelectorAll('.theme-option'));
-      function clearThemeClasses(){ Array.from(document.body.classList).forEach(c=>{ if(c.startsWith('theme-')) document.body.classList.remove(c); }); }
-      function setTheme(name,persist=true){ clearThemeClasses(); if(name) document.body.classList.add('theme-'+name); themeOptions.forEach(el=>el.classList.toggle('active', el.dataset.theme===name)); if(persist) localStorage.setItem('theme',name); // update badge/button colors handled by CSS
-        // ensure badge has readable text color if wikipedia light
-        const badge=document.getElementById('versionBadge'); if(badge){ if(name==='wikipedia') badge.style.color='#fff'; else badge.style.color=''; }
+    if(p['title']){ F['Titel'] = p['title']; log.push('Titel übernommen: ' + p['title']); }
+    if(p['chapter']||p['script-chapter']){ F['Kapitel'] = p['chapter']||p['script-chapter']; log.push('Kapitel übernommen: ' + (p['chapter']||p['script-chapter'])); }
+
+    if(p['series']){ F['Reihe'] = p['series']; log.push('Reihe übernommen'); }
+    if(p['volume']){ F['Band'] = p['volume']; log.push('Band übernommen'); }
+    if(p['edition']){ F['Auflage'] = normalizeEdition(p['edition']); log.push('Auflage: ' + F['Auflage']); }
+
+    if(p['publisher']){ F['Verlag'] = p['publisher']; log.push('Verlag übernommen: ' + p['publisher']); }
+    const ort = p['publication-place'] || p['location'];
+    if(ort){ F['Ort'] = ort; log.push('Ort übernommen: ' + ort); }
+
+    const date = p['date'] || p['publication-date'] || p['year'];
+    if(date){ F['Datum'] = toISODate(date); log.push('Datum übernommen: ' + F['Datum']); }
+    const orig = p['orig-date'] || p['origyear'] || p['orig-year'];
+    if(orig){ F['Originaljahr'] = extractYear(orig); log.push('Originaljahr: ' + F['Originaljahr']); }
+
+    const seiten = p['pages'] || p['page'] || p['at'];
+    if(seiten){ F['Seiten'] = normalizePages(seiten); log.push('Seiten: ' + F['Seiten']); }
+
+    const lang = chooseLanguage(options.langChoice, p['language'], F['Titel'], undefined, options.overrideLang, options.fullLangCodes);
+    if(lang){
+      if(!(options.suppressGerman && String(lang).toLowerCase().startsWith('de'))){
+        F['Sprache'] = lang; log.push('Sprache automatisch erkannt: ' + lang);
+      } else {
+        log.push('Sprache wurde erkannt als de, wird aber unterdrückt (Einstellung).');
       }
-      themeOptions.forEach(el=>{ el.addEventListener('click',()=> setTheme(el.dataset.theme)); el.addEventListener('keydown',e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); setTheme(el.dataset.theme); } }); });
-      const savedTheme=localStorage.getItem('theme')||'sunset'; setTheme(savedTheme,false);
+    }
 
-      // force dark
-      const fd=document.getElementById('forceDark'); if(fd){ const saved=localStorage.getItem('forceDark')==='true'; fd.checked=saved; if(saved) document.body.classList.add('force-dark'); fd.addEventListener('change',()=>{ if(fd.checked){ document.body.classList.add('force-dark'); localStorage.setItem('forceDark','true'); } else { document.body.classList.remove('force-dark'); localStorage.setItem('forceDark','false'); } }); }
+    if(p['url']){ F['Online'] = p['url']; log.push('Online: URL übernommen'); }
+    if(options.useToday){ F['Abruf'] = todayISO(); log.push('Abruf: heutiges Datum gesetzt'); }
+    else{ const ad = p['access-date'] || p['accessdate'] || p['url-access'] || ''; if(ad){ F['Abruf'] = toISODate(ad); log.push('Abruf: ' + F['Abruf']); } }
 
-      // persist lang select
-      const langSel=document.getElementById('langSelect'); if(langSel){ const savedLS=localStorage.getItem('langSelectValue'); if(savedLS) langSel.value=savedLS; langSel.addEventListener('change',()=> localStorage.setItem('langSelectValue', langSel.value)); }
+    if(p['format']) F['Format'] = p['format'];
+    if(p['type']) F['Typ'] = p['type'];
+    if(p['isbn']){ F['ISBN'] = normalizeISBN(p['isbn']); log.push('ISBN übernommen'); }
+    if(p['issn']) F['ISSN'] = p['issn'];
+    if(p['doi']) F['DOI'] = p['doi'];
+    if(p['jstor']) F['JSTOR'] = p['jstor'];
+    if(p['lccn']) F['LCCN'] = p['lccn'];
+    if(p['oclc']) F['OCLC'] = p['oclc'];
+    if(p['pmc']) F['PMC'] = p['pmc'];
+    if(p['pmid']) F['PMID'] = p['pmid'];
+    if(p['arxiv']) F['arXiv'] = p['arxiv'];
+    if(p['bibcode']) F['bibcode'] = p['bibcode'];
+    if(p['urn']) F['URN'] = p['urn'];
+    const asID = ['biorxiv','citeseerx','medrxiv','osti','ol','s2cid','zbl','mr','jfm','ssrn','rfc','hdl'];
+    asID.forEach(k=>{ if(p[k]) F['ID'] = (F['ID'] ? (F['ID'] + ', ' + p[k]) : p[k]); });
 
-      // ensure copyStatus empty
-      const cs=document.getElementById('copyStatus'); if(cs) cs.textContent='';
+    if(p['quote']){ F['Zitat'] = p['quote']; log.push('Zitat übernommen'); }
+
+    return { output: buildLiteratur(F), log };
+  }
+
+  function isCiteWebFamily(name){ const n=(name||'').trim().toLowerCase(); return n==='cite web' || n==='cite news' || n==='cite magazine'; }
+  function isCiteBook(name){ const n=(name||'').trim().toLowerCase(); return n==='cite book'; }
+
+  function convertTemplateString(tplString, options){
+    const parsed = parseTemplateParams(tplString);
+    if(!parsed.name) return { output: tplString, log: ['Keine Template-Erkennung'] };
+    if(isCiteBook(parsed.name)) return convertCiteBook(parsed, options);
+    if(isCiteWebFamily(parsed.name)) return convertCiteWebFamily(parsed, options);
+    return { output: tplString, log: ['Unverändertes Template: ' + parsed.name] };
+  }
+
+  /* ----------------- Highlighting ----------------- */
+
+  // basic tokenizer for template-like text (works for our templates)
+  
+function highlightTemplateText(text){
+  if(!text) return '';
+  // Safe escape
+  let s = String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  // URLs first (keine Pipes/Braces zerstören)
+  s = s.replace(/(https?:\/\/[^\s|}]+)/g, '<span class="tok-url">$1</span>');
+
+  // Template-Name: {{ <ws> NAME <ws> (vor | oder }})
+  s = s.replace(/\{\{(\s*)([^|}]+?)(\s*)(?=(\||\}\}))/g, function(_, ws1, name, ws2){
+    return '{{' + ws1 + '<span class="tok-template">' + String(name).trim() + '</span>' + ws2;
+  });
+
+  // Braces danach einfärben
+  s = s.replace(/(\{\{|\}\})/g, '<span class="tok-brace">$1</span>');
+
+  // Parameter-Namen: | <ws> name <ws> =
+  s = s.replace(/\|(\s*)([A-Za-z0-9\-\u00C0-\u017F]+)(\s*)=/g, function(_, ws1, name, ws2){
+    return '|' + ws1 + '<span class="tok-param">' + name + '</span>' + ws2 + '<span class="tok-eq">=';
+  });
+
+  // Zahlen/Daten
+  s = s.replace(/\b(\d{4}(-\d{2}(-\d{2})?)?)\b/g, '<span class="tok-number">$1</span>');
+
+  // Klammer-Kommentare
+  s = s.replace(/\(([^\)]+)\)/g, '(<span class="tok-comment">$1</span>)');
+
+  // <ref>…</ref> (escapet)
+  s = s.replace(/(&lt;\/?ref(?:\s+[^&]*?)?&gt;)/gi, '<span class="tok-ref">$1</span>');
+
+  return s;
+}
+  function updateInputHighlight(){
+    const txt = document.getElementById('inputText').value;
+    const pre = document.getElementById('inputHighlight');
+    pre.innerHTML = highlightTemplateText(txt);
+  }
+  function updateOutputHighlight(){
+    const txt = document.getElementById('outputText').value;
+    const pre = document.getElementById('outputHighlight');
+    pre.innerHTML = highlightTemplateText(txt);
+  }
+
+  /* ----------------- Driver for transform + summary ----------------- */
+
+  function transformTextAndReturnLog(){
+    const inputEl = document.getElementById('inputText');
+    const input = (inputEl.value || '').trim();
+    const options = {
+      useToday: document.getElementById('useTodayAbruf').checked,
+      stripArchiveIfLive: document.getElementById('stripArchiveIfLive').checked,
+      overrideLang: document.getElementById('overrideLang').checked,
+      langChoice: (document.getElementById('langSelect') && document.getElementById('langSelect').value) || '',
+      fullLangCodes: document.getElementById('fullLangCodes').checked,
+      suppressGerman: document.getElementById('suppressGerman').checked
+    };
+
+    const overallLog = [];
+
+    if(!input){
+      return { result: '', log: ['Keine Eingabe.'] };
+    }
+
+    // replace inside multiple <ref> blocks
+    const refRegex = /(<ref\b[^>]*>)([\s\S]*?)(<\/ref>)/gi;
+    if(refRegex.test(input)){
+      const result = input.replace(refRegex, function(full, refOpen, inner, refClose){
+        const tplMatch = inner.match(/\{\{[\s\S]*?\}\}/);
+        if(!tplMatch) { overallLog.push('Kein Template in <ref>-Block gefunden.'); return full; }
+        const converted = convertTemplateString(tplMatch[0], options);
+        // append logs
+        converted.log.forEach(l => overallLog.push(l));
+        return refOpen + inner.replace(tplMatch[0], converted.output) + refClose;
+      });
+      return { result, log: overallLog };
+    }
+
+    // standalone template
+    const tplMatch = input.match(/\{\{[\s\S]*?\}\}/);
+    if(tplMatch){
+      const converted = convertTemplateString(tplMatch[0], options);
+      converted.log.forEach(l => overallLog.push(l));
+      const out = input.replace(tplMatch[0], converted.output);
+      return { result: out, log: overallLog };
+    }
+
+    return { result: input, log: ['Eingabe enthält kein unterstütztes Template.'] };
+  }
+
+  /* ----------------- DOM wiring ----------------- */
+
+  document.addEventListener('DOMContentLoaded', function(){
+
+    // set today label
+    const tl = document.getElementById('todayLabel'); if(tl) tl.textContent = todayISO();
+
+    // highlighting sync: update highlight initially
+    const inputEl = document.getElementById('inputText');
+    const outputEl = document.getElementById('outputText');
+    updateInputHighlight(); updateOutputHighlight();
+
+    // textarea event: update highlight on input
+    inputEl.addEventListener('input', function(){
+      updateInputHighlight();
     });
-  })();
-  </script>
+
+    // convert button
+    document.getElementById('convertBtn').addEventListener('click', function(){
+      const res = transformTextAndReturnLog();
+      document.getElementById('outputText').value = res.result;
+      updateOutputHighlight();
+
+      // render the conversion summary in user-friendly text
+      const sum = document.getElementById('conversionSummary');
+      if(!res.log || res.log.length===0){ sum.innerHTML = '<em>Keine Änderungen vorgenommen.</em>'; }
+      else {
+        const items = res.log.map(function(line){
+          return '<li>' + escapeHtml(line) + '</li>';
+        }).join('');
+        sum.innerHTML = '<strong>Konvertierungs-Zusammenfassung:</strong><ul>' + items + '</ul>';
+      }
+
+      // auto copy?
+      if(document.getElementById('autoCopy').checked){
+        const outText = document.getElementById('outputText').value || '';
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(outText).then(()=>{ document.getElementById('copyStatus').textContent='✓ Direkt kopiert'; setTimeout(()=>document.getElementById('copyStatus').textContent='',1400); }).catch(()=>{});
+        } else {
+          try{ document.getElementById('outputText').select(); document.execCommand('copy'); document.getElementById('copyStatus').textContent='✓ Direkt kopiert'; setTimeout(()=>document.getElementById('copyStatus').textContent='',1400);}catch(e){}
+        }
+      }
+    });
+
+    // copy button - always plain text from textarea (unformatted)
+    document.getElementById('copyBtn').addEventListener('click', async function(){
+      const out = document.getElementById('outputText').value || '';
+      const status = document.getElementById('copyStatus');
+      try{
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          await navigator.clipboard.writeText(out);
+        } else {
+          const ta = document.getElementById('outputText');
+          ta.select(); document.execCommand('copy');
+        }
+        status.textContent = '✓ In Zwischenablage kopiert';
+        setTimeout(()=>status.textContent='',1800);
+      }catch(err){
+        console.warn('copy failed',err);
+        status.textContent = '⚠ Kopieren fehlgeschlagen';
+        setTimeout(()=>status.textContent='',1800);
+      }
+    });
+
+    // lang info toggle
+    const infoBtn = document.getElementById('langInfoToggle');
+    if(infoBtn) infoBtn.addEventListener('click',()=>{ const info=document.getElementById('langInfo'); if(info) info.style.display = (info.style.display==='none'?'block':'none'); });
+
+    // overrideLang toggle
+    const override = document.getElementById('overrideLang');
+    const langContainer = document.getElementById('langSelectContainer');
+    function updateLangContainer(){ langContainer.style.display = override.checked ? 'block' : 'none'; }
+    override.addEventListener('change', updateLangContainer); updateLangContainer();
+
+    // theme selection (unchanged logic)
+    const themeOptions = Array.from(document.querySelectorAll('.theme-option'));
+    function clearThemeClasses(){ Array.from(document.body.classList).forEach(c=>{ if(c.startsWith('theme-')) document.body.classList.remove(c); }); }
+    function setTheme(name, persist=true){
+      clearThemeClasses();
+      if(name) document.body.classList.add('theme-'+name);
+      themeOptions.forEach(el=>el.classList.toggle('active', el.dataset.theme===name));
+      if(persist) localStorage.setItem('theme', name);
+    }
+    themeOptions.forEach(el=>{
+      el.addEventListener('click', ()=> setTheme(el.dataset.theme));
+      el.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); setTheme(el.dataset.theme); }});
+    });
+    const savedTheme = localStorage.getItem('theme') || 'sunset';
+    setTheme(savedTheme, false);
+
+    // force dark
+    const fd = document.getElementById('forceDark');
+    if(fd){
+      const saved = localStorage.getItem('forceDark') === 'true';
+      fd.checked = saved;
+      if(saved) document.body.classList.add('force-dark');
+      fd.addEventListener('change', ()=> {
+        if(fd.checked){ document.body.classList.add('force-dark'); localStorage.setItem('forceDark','true'); }
+        else { document.body.classList.remove('force-dark'); localStorage.setItem('forceDark','false'); }
+        // caret color for overlay textarea is handled by css via body.force-dark
+      });
+    }
+
+    // persist lang select
+    const langSel = document.getElementById('langSelect');
+    if(langSel){
+      const savedLS = localStorage.getItem('langSelectValue');
+      if(savedLS) langSel.value = savedLS;
+      langSel.addEventListener('change', ()=> localStorage.setItem('langSelectValue', langSel.value));
+    }
+
+    // ensure highlight updates when output textarea changed programmatically
+    const obs = new MutationObserver(updateOutputHighlight);
+    obs.observe(document.getElementById('outputText'), { attributes:true, childList:true, characterData:true, subtree:true });
+
+    // initial highlight
+    updateInputHighlight();
+    updateOutputHighlight();
+
+    // keep focus behavior natural: clicking pre focuses the textarea
+    document.getElementById('inputHighlight').addEventListener('click', ()=> document.getElementById('inputText').focus());
+    document.getElementById('outputHighlight').addEventListener('click', ()=> document.getElementById('outputText').focus());
+  });
+
+})(); // IIFE
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const badge = document.getElementById("versionBadge");
+  const log = document.getElementById("changelog");
+  if(badge && log){
+    badge.addEventListener("click", function(e){
+      e.preventDefault();
+      log.open = true;
+      const sm = log.querySelector('summary');
+      if(sm){ sm.setAttribute('aria-expanded','true'); }
+      log.scrollIntoView({behavior:'smooth', block:'start'});
+      if(history.replaceState){ history.replaceState(null, '', '#changelog'); }
+    });
+  }
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  const select=document.getElementById("darkModeSelect");
+  if(select){
+    const saved=localStorage.getItem("darkMode")||"auto";
+    select.value=saved;
+    applyDark(saved);
+    select.addEventListener("change",()=>{
+      localStorage.setItem("darkMode",select.value);
+      applyDark(select.value);
+    });
+    if(saved==="auto"){
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      mq.addEventListener('change', ()=>{
+        if(localStorage.getItem("darkMode")==="auto"){ applyDark("auto"); }
+      });
+    }
+  }
+  function applyDark(mode){
+    document.body.classList.remove("force-dark","force-light");
+    if(mode==="on"){ document.body.classList.add("force-dark"); }
+    else if(mode==="off"){ document.body.classList.add("force-light"); }
+    else{ // auto
+      if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+        document.body.classList.add("force-dark");
+      } else {
+        document.body.classList.add("force-light");
+      }
+    }
+  }
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const seg = document.getElementById("darkModeSegmented");
+  const select = document.getElementById("darkModeSelect");
+  if (!seg || !select) return;
+  const buttons = Array.from(seg.querySelectorAll('button[data-value]'));
+
+  function setPressed(value){
+    buttons.forEach(btn => btn.setAttribute("aria-pressed", btn.dataset.value === value ? "true" : "false"));
+  }
+
+  // Init from select (set by existing script) or localStorage fallback
+  const initial = select.value || localStorage.getItem("darkMode") || "auto";
+  if (select.value !== initial) { select.value = initial; }
+  setPressed(initial);
+
+  // Click handler
+  seg.addEventListener("click", (e) => {
+    const btn = e.target.closest('button[data-value]');
+    if (!btn) return;
+    const val = btn.dataset.value;
+    if (select.value !== val) {
+      select.value = val;
+      setPressed(val);
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  });
+
+  // Keyboard navigation (Left/Right/Home/End)
+  seg.addEventListener("keydown", (e) => {
+    if (!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+    e.preventDefault();
+    const currentIndex = buttons.findIndex(b => b.getAttribute("aria-pressed") === "true");
+    let nextIndex = currentIndex >= 0 ? currentIndex : 0;
+    if (e.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
+    if (e.key === 'ArrowLeft')  nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+    if (e.key === 'Home') nextIndex = 0;
+    if (e.key === 'End')  nextIndex = buttons.length - 1;
+    const nextBtn = buttons[nextIndex];
+    const val = nextBtn.dataset.value;
+    nextBtn.focus();
+    if (select.value !== val) {
+      select.value = val;
+      setPressed(val);
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  });
+});
+</script>
+
 </body>
 </html>
