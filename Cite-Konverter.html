@@ -27,6 +27,11 @@
   body.theme-wikipedia{background:linear-gradient(180deg,#f6f7f8 0%,#eef6ff 100%)}
   body.theme-bluewave{background:linear-gradient(135deg,#012840 0%,#0468BF 60%,#99C8F2 100%)}
   body.theme-valley{background:linear-gradient(135deg,#387CA6 0%,#71A63C 55%,#BBF2F2 100%)}
+  body.theme-simple{background:linear-gradient(180deg,#ffffff 0%,#f2f2f5 100%)}
+  body.theme-spice{background:linear-gradient(135deg,#8C262E 0%,#D99982 60%,#732D14 100%)}
+  body.theme-jadefruit{background:linear-gradient(135deg,#03A6A6 0%,#F27405 60%,#03A696 100%)}
+  body.theme-hacker{background:linear-gradient(135deg,#205B73 0%,#49BF9E 60%,#307B8C 100%)}
+
 
   .wrap{width:100%;max-width:980px}
   .card{
@@ -62,8 +67,12 @@ body.dark .segmented button[aria-pressed="true"]{background:rgba(255,255,255,.18
 
   @media(max-width:820px){.options{grid-template-columns:1fr}}
 
-  .theme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:6px}
-  .theme-option{display:flex;align-items:center;gap:12px;padding:8px;border-radius:10px;background:rgba(255,255,255,0.5);cursor:pointer;border:1px solid rgba(0,0,0,0.04)}
+  .theme-grid{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:10px;margin-top:6px}
+  @media(max-width:980px){.theme-grid{grid-template-columns:repeat(3,minmax(140px,1fr))}}
+  @media(max-width:740px){.theme-grid{grid-template-columns:repeat(2,minmax(140px,1fr))}}
+  @media(max-width:480px){.theme-grid{grid-template-columns:1fr}}
+
+  .theme-option{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.5);cursor:pointer;border:1px solid rgba(0,0,0,0.04)}
   .theme-option.active{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.12)}
   .swatch{width:62px;height:26px;border-radius:8px;flex-shrink:0}
 
@@ -72,12 +81,22 @@ body.dark .segmented button[aria-pressed="true"]{background:rgba(255,255,255,.18
   body.theme-wikipedia .btn-main, body.theme-wikipedia .badge{background:linear-gradient(90deg,#3366cc,#2b57b8); color:#fff;}
   body.theme-bluewave .btn-main, body.theme-bluewave .badge{background:linear-gradient(135deg,#023E73,#0468BF);}
   body.theme-valley .btn-main, body.theme-valley .badge{background:linear-gradient(135deg,#387CA6,#71A63C);}
+  body.theme-simple .btn-main, body.theme-simple .badge{background:linear-gradient(90deg,#111827,#6b7280); color:#fff;}
+  body.theme-spice .btn-main, body.theme-spice .badge{background:linear-gradient(135deg,#8C262E,#D99982);}
+  body.theme-jadefruit .btn-main, body.theme-jadefruit .badge{background:linear-gradient(135deg,#03A6A6,#F27405);}
+  body.theme-hacker .btn-main, body.theme-hacker .badge{background:linear-gradient(135deg,#205B73,#49BF9E);}
+
 
   /* Dark variants */
   body.force-dark.theme-sunset .btn-main, body.force-dark.theme-sunset .badge{background:linear-gradient(135deg,#8b2aa9,#9f4fb1)}
   body.force-dark.theme-wikipedia .btn-main, body.force-dark.theme-wikipedia .badge{background:linear-gradient(90deg,#1b355f,#214277)}
   body.force-dark.theme-bluewave .btn-main, body.force-dark.theme-bluewave .badge{background:linear-gradient(135deg,#012033,#02334f)}
   body.force-dark.theme-valley .btn-main, body.force-dark.theme-valley .badge{background:linear-gradient(135deg,#2f6b56,#3c7f3b)}
+  body.force-dark.theme-simple .btn-main, body.force-dark.theme-simple .badge{background:linear-gradient(90deg,#e5e7eb,#9ca3af); color:#111;}
+  body.force-dark.theme-spice .btn-main, body.force-dark.theme-spice .badge{background:linear-gradient(135deg,#260C06,#732D14)}
+  body.force-dark.theme-jadefruit .btn-main, body.force-dark.theme-jadefruit .badge{background:linear-gradient(135deg,#731702,#03A696)}
+  body.force-dark.theme-hacker .btn-main, body.force-dark.theme-hacker .badge{background:linear-gradient(135deg,#020D0C,#307B8C)}
+
 
   /* Input/Output area layout */
   .field{margin-bottom:18px}
@@ -156,6 +175,23 @@ body.theme-sunset h1 .title-text{
 }
 body.theme-bluewave h1 .title-text{
   background:linear-gradient(90deg,#007CF0,#00DFD8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+body.theme-simple h1 .title-text{
+  background:linear-gradient(90deg,#000000,#6b7280);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+body.theme-spice h1 .title-text{
+  background:linear-gradient(90deg,#8C262E,#D99982);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+body.theme-jadefruit h1 .title-text{
+  background:linear-gradient(90deg,#03A6A6,#F27405);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+body.theme-hacker h1 .title-text{
+  background:linear-gradient(90deg,#49BF9E,#307B8C);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
 body.theme-valley h1 .title-text{
@@ -250,7 +286,7 @@ body.dark pre.highlight .tok-ref,
 body.force-dark pre.highlight .tok-ref{ color:#8FC2FF !important; font-weight:800; }
 
 
-/* v2.5.18.4: Darkmode visibility for highlight blocks */
+/* v2.5.19.1: Darkmode visibility for highlight blocks */
 body.dark pre.highlight, body.force-dark pre.highlight { color:#ffffff !important; }
 body.dark pre.highlight .tok-template, body.force-dark pre.highlight .tok-template { color:#FFD4FF !important; font-weight:800; }
 body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color:#9BD0FF !important; font-weight:800; }
@@ -260,8 +296,8 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v2.5.18.4</a></h1>
-      <p class="lead">Konvertiert <code>{{cite web}}</code>, <code>{{cite news}}</code>, <code>{{cite magazine}}</code> → <code>{{Internetquelle}}</code> und <code>{{cite book}}</code> → <code>{{Literatur}}</code>.</p>
+      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v4.0.9</a></h1>
+      <p class="lead">Konvertiert Wikipedia-Vorlagen in das deutsche Schema: {{cite web}}, {{cite book}}, {{cite journal}} und {{cite encyclopedia}} → {{Internetquelle}} bzw. {{Literatur}}. Unterstützt <ref>…</ref>, Dark Mode und Themes.</p>
 
       <details>
         <summary>⚙️ Optionen</summary>
@@ -299,13 +335,17 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
               <option value="nl">🇳🇱 Nederlands — nl</option>
             </select>
           </div>
-
+          
           <div style="grid-column:1/-1">
             <div class="theme-grid" role="list">
               <div class="theme-option" data-theme="sunset" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#C250F2,#D76CD9,#D977A5)"></div><div>Sunset on the Beach</div></div>
               <div class="theme-option" data-theme="wikipedia" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#5a7bd8,#89a8ff,#b9c9ff)"></div><div>Wikipedia (modern)</div></div>
               <div class="theme-option" data-theme="bluewave" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0468BF,#023E73,#012840)"></div><div>Blue Wave</div></div>
               <div class="theme-option" data-theme="valley" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#387CA6,#71A63C,#BBF2F2)"></div><div>The Valley</div></div>
+              <div class="theme-option" data-theme="simple" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#000000,#6b7280,#ffffff)"></div><div>Simple</div></div>
+              <div class="theme-option" data-theme="spice" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#8C262E,#D99982,#732D14)"></div><div>Spice</div></div>
+              <div class="theme-option" data-theme="jadefruit" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#03A6A6,#F27405,#03A696)"></div><div>Jade Fruit</div></div>
+              <div class="theme-option" data-theme="hacker" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#205B73,#49BF9E,#307B8C)"></div><div>Hacker</div></div>
             </div>
           </div>
 
@@ -339,20 +379,39 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
         <div id="copyStatus" style="align-self:center"></div>
       </div>
 
-      <div id="conversionSummary" aria-live="polite"></div>
-
       <details id="changelog" style="margin-top:12px">
         <summary>📜 Versionsverlauf</summary>
         <ul>
-                                                  <li><strong>v2.5.18.4</strong> (2025-09-01): Highlighter neu aufgebaut (verlustfrei): Template-Name mit Leerzeichen vor erster Pipe sichtbar; Overlay-Text deckt den vollen Inhalt.</li>
+                                                  <li><strong>v4.0.9</strong> (2025-09-06): Intro ergänzt ({{cite journal}}, {{cite encyclopedia}}); Changelog bereinigt.</li>
+<li><strong>v4.0.8</strong> (2025-09-06): Fix Doppel-Leerzeichen nach „{Internetquelle“ (Output nun „{Internetquelle |…“).</li>
+<li><strong>v4.0.7</strong> (2025-09-06): Parser-Fix für verschachtelte Templates – standalone-Erkennung nutzt jetzt brace‑Depth; verhindert abgeschnittene Konvertierung bei {google books}.</li>
+<li><strong>v4.0.6</strong> (2025-09-06): Online-Feld bereinigt – {google books}-Templates werden aus URL/Online entfernt (kein Online-Ausgabe), in allen Konvertern (web/book/journal/encyclopedia); keine UI-Änderungen.</li>
+<li><strong>v4.0.5</strong> (2025-09-06): cite encyclopedia – Hrsg unterstützt nun „editor-first/last“ (ohne Index) und „editorN-first/last“; robustere Google-Books/URL-Heuristik; keine UI-Änderungen.</li>
+<li><strong>v4.0.4</strong> (2025-09-06): cite encyclopedia Mapping finalisiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache-Heuristik). Rückbau auf buildLiteratur(); Smoke‑Test bleibt entfernt.</li>
+<li><strong>v4.0.3</strong> (2025-09-05): cite encyclopedia korrigiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache „en“ bei Google‑Books), Dispatcher‑Hook ergänzt. Smoke‑Test entfernt.</li>
+<li><strong>v4.0.0.2</strong> (2025-09-05): Fix cite encyclopedia – Sammelwerk=encyclopedia; Reihe=series; Band=volume; Verlag=publisher; Datum aus date/publication-date/year; ISBN/Seiten korrekt.</li>
+<li><strong>v4.0.0.1</strong> (2025-09-05): Fix cite encyclopedia – Autoren (first/last & editor1-first Schema), Hrsg (beide Schemata), series→Sammelwerk, Datum-Fallback (z. B. 2007a), Sprache=„en“ bei Google‑Books‑URL; keine UI-Änderungen.</li>
+<li><strong>v4.0.0</strong> (2025-09-05): Neue Variante – {cite encyclopedia} → {Literatur} (Autor/Hrsg/Kapitel/Titel/Ort/Verlag/Datum/Abruf/IDs/Seiten). Keine UI-/Design-Änderungen.</li>
+<li><strong>v3.0.3.0</strong> (2025-09-05): Dev‑Feature: Smoke‑Test‑Modus (?test=1 oder Alt+D). Tests laufen nur in der Konsole; keine UI‑Änderungen.</li>
+<li><strong>v3.0.2.22</strong> (2025-09-05): Bugfix cite web – Aufruf von toISODateFlexible entfernt (nicht definiert) und durch toISODate ersetzt.</li>
+<li><strong>v3.0.2.21</strong> (2025-09-05): Bugfix cite web – defekte Erkennung/Zuordnung ersetzt (robuste Aliase, saubere Parametermappung). Sonst keine Änderungen.</li>
+<li><strong>v3.0.2.20</strong> (2025-09-05): Konverter‑Zusammenfassung (UI + JS) entfernt. Sonst keine Änderungen.</li>
+<li><strong>v3.0.2.14</strong> (2025-09-05): Internetquelle-Summary: "Titel: ersetzt {*} → •" nur noch, wenn tatsächlich ersetzt; sonst "Titel übernommen".</li>
+<li><strong>v3.0.2.13</strong> (2025-09-04): Kritischer Fix – Builder repariert und Journal-Konverter liefert detaillierte Summary-Logs; keine UI-/Theme-Änderungen.</li>
+<li><strong>v3.0.2</strong> (2025-09-04): JS-Bereinigung für <code>cite journal</code> (dupl./abgeschnittene Fragmente entfernt); Klick auf „Konvertieren“ liefert zuverlässig Output.</li>
+<li><strong>v3.0.1</strong> (2025-09-03): Dispatcher-Fix: Branch für <code>cite journal</code> korrekt registriert.</li>
+<li><strong>v3.0.0</strong> (2025-09-03): Neue Vorlage: <code>{{cite journal}}</code> → <code>{{Literatur}}</code> (Autoren/Editoren/Übersetzer, Datum/Originaljahr, Sammelwerk/Band/Nummer, Seiten, Sprache, Online/Abruf, IDs, Typ, Zitat).</li>
+<li><strong>v2.5.19.1</strong> (2025-09-01): Theme-Grid auf max. 4 Kacheln pro Reihe begrenzt (3/2/1 Spalten bei kleineren Viewports); Wikipedia-Button erhält wieder ausreichenden Innenabstand.</li>
+<li><strong>v2.5.19</strong> (2025-09-01): Neue Themes: Simple (schwarz/weiß/grau), Spice, Jade Fruit, Hacker – inkl. H1-/Button-/Badge-Anpassungen.</li>
+<li><strong>v2.5.18.4</strong> (2025-09-01): Highlighter neu aufgebaut (verlustfrei): Template-Name mit Leerzeichen vor erster Pipe sichtbar; Overlay-Text deckt den vollen Inhalt.</li>
 <li><strong>v2.5.18.3</strong> (2025-09-01): Anzeige-Bug behoben: Leerzeichen vor der ersten Pipe bleibt bei „{{cite … |“ erhalten (Tokenizer erhält Nachlauf-Whitespace vor <code>|</code>/<code>}</code>).</li>
 <li><strong>v2.5.18.2</strong> (2025-09-01): Zeilenumbruch in Eingabe-/Ausgabe-Highlight wieder aktiv (Wrap wie Textfelder); CSS: <code>pre.highlight</code> auf <code>pre-wrap</code> umgestellt, Spans erben <code>white-space</code>.</li>
 <li><strong>v2.5.18.1</strong> (2025-09-01): Hintergrund-Verlauf füllt die gesamte Seite (auch bei aufgeklapptem Versionsverlauf); Darstellung: fehlendes Leerzeichen nach „{cite …“ bzw. vor dem ersten Pipe behoben; Konvertierung: „{*}“ im title → „•“ (U+2022).</li>
 <li><strong>v2.5.18</strong> (2025-09-01): Darkmode-Auswahl als Segmented-Control (Auto/An/Aus) ergänzt; bestehendes Dropdown bleibt (visually-hidden) und wird bidirektional synchronisiert (Klick & Tastatur); aktiver Zustand deutlicher hervorgehoben.</li>
 <li><strong>v2.5.17</strong> (2025-09-01): Darkmode-Option kompakter: Label und Auswahl stehen jetzt nebeneinander (Wrapper <code>.option-compact</code>) für bessere Lesbarkeit.</li>
-<li><strong>v2.5.16</strong> (2025-09-01): Highlighting-Fix: <code>&lt;/ref&gt;</code> wird exakt wie <code>&lt;ref&gt;</code> und <code>&lt;ref name="…"&gt;</code> eingefärbt (robuster Regex im Highlighter). Keine weiteren Änderungen.</li>
-<li><strong>v2.5.15</strong> (2025-08-31): Darkmode-Sichtbarkeit: Basistext in Codeblöcken auf #fff, „{{cite web“}} heller; </ref> wie <ref> eingefärbt. Keine weiteren Änderungen.</li>
-<li><strong>v2.5.13</strong> (2025-08-31): Darkmode-Syntax aufgehellt: „{{cite web“}} (Template) & Parametervalue heller; </ref> nun gleiche Farbe wie <ref> & <ref name="…">. Keine weiteren Änderungen.</li>
+<li><strong>v2.5.16</strong> (2025-09-01): Highlighting-Fix: <code>&lt;/ref&gt;</code> wird exakt wie <code>&lt;ref&gt;</code> und <code>&lt;ref name="…"&gt;</code> eingefärbt (robuster Regex im Highlighter).</li>
+<li><strong>v2.5.15</strong> (2025-08-31): Darkmode-Sichtbarkeit: Basistext in Codeblöcken auf #fff, „{{cite web“}} heller; </ref> wie <ref> eingefärbt.</li>
+<li><strong>v2.5.13</strong> (2025-08-31): Darkmode-Syntax aufgehellt: „{{cite web“}} (Template) & Parametervalue heller; </ref> nun gleiche Farbe wie <ref> & <ref name="…">.</li>
 <li><strong>v2.5.12</strong> (2025-08-31): Darkmode-Kontraste (Intro & Syntax) breit abgesichert (.dark & .force-dark; .lead statt #subline). Keine anderen Änderungen.</li>
 <li><strong>v2.5.11</strong> (2025-08-31): Darkmode-Kontraste für Intro & Syntax-Highlighting aufgehellt; sonst unverändert.</li>
 <li class="major-separator">— Version 2.5.x —</li>
@@ -489,21 +548,49 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
   }
 
   /* builders (same order as before) */
-  function buildInternetquelle(finalParams){
-    const order = ['autor','url','titel','werk','hrsg','datum','seiten','format','sprache','offline','archiv-url','archiv-datum','abruf','abruf-verborgen','kommentar','zitat'];
-    const parts = [], used = new Set();
-    for(const k of order){ if(Object.prototype.hasOwnProperty.call(finalParams,k)){ parts.push('|' + k + '=' + (finalParams[k] ?? '')); used.add(k); } }
-    Object.keys(finalParams).sort().forEach(k => { if(!used.has(k)) parts.push('|' + k + '=' + finalParams[k]); });
-    return '{{Internetquelle ' + parts.join(' ') + '}}';
+  
+function buildInternetquelle(finalParams){
+  const order = [
+    'autor','url','titel','werk','hrsg','datum','sprache',
+    'archiv-url','archiv-datum','abruf','abruf-verborgen',
+    'kommentar','zitat','format'
+  ];
+  const parts = []; const used = new Set();
+  for (const k of order){
+    if (Object.prototype.hasOwnProperty.call(finalParams, k)){
+      parts.push('|' + k + '=' + (finalParams[k] ?? ''));
+      used.add(k);
+    }
   }
+  Object.keys(finalParams).sort().forEach(k => {
+    if (!used.has(k)) parts.push('|' + k + '=' + finalParams[k]);
+  });
+  return '{{Internetquelle ' + parts.join(' ') + '}}';
+}
 
-  function buildLiteratur(finalParams){
-    const order = ['Autor','Titel','TitelErg','Hrsg','Sammelwerk','WerkErg','Reihe','BandReihe','HrsgReihe','NummerReihe','Band','Nummer','Auflage','Verlag','Ort','Datum','ISBN','ISBNformalFalsch','ISBNdefekt','ISSN','ISSNformalFalsch','Kapitel','Seiten','Spalten','ArtikelNr','Fundstelle','Sprache','Kommentar','Originaltitel','Originalsprache','Originaljahr','Originalort','Übersetzer','VerlagEA','OrtEA','JahrEA','Online','Format','KBytes','Abruf','arXiv','DOI','JSTOR','LCCN','OCLC','PMC','PMID','ZDB','Umfang','Typ','Lizenznummer','bibcode','URN','ID','Zitat'];
-    const parts = [], used = new Set();
-    for(const k of order){ if(Object.prototype.hasOwnProperty.call(finalParams,k)){ parts.push('|' + k + '=' + (finalParams[k] ?? '')); used.add(k); } }
-    Object.keys(finalParams).sort().forEach(k => { if(!used.has(k)) parts.push('|' + k + '=' + finalParams[k]); });
-    return '{{Literatur ' + parts.join(' ') + '}}';
+
+  
+function buildLiteratur(finalParams){
+  const order = [
+    'Autor','Titel','TitelErg','Hrsg','Übersetzer','Sammelwerk','Reihe','Band','Nummer',
+    'Ort','Verlag','Datum','Originaljahr','Auflage','Seiten','Spalten','Kapitel',
+    'Sprache','Online','Abruf','Format',
+    'ISBN','ISSN','DOI','JSTOR','LCCN','OCLC','PMID','PMC','arXiv','bibcode','URN','ID',
+    'Typ','Umfang','Lizenznummer','Zitat'
+  ];
+  const parts = []; const used = new Set();
+  for (const k of order){
+    if (Object.prototype.hasOwnProperty.call(finalParams, k)){
+      parts.push('|' + k + '=' + (finalParams[k] ?? ''));
+      used.add(k);
+    }
   }
+  Object.keys(finalParams).sort().forEach(k => {
+    if (!used.has(k)) parts.push('|' + k + '=' + finalParams[k]);
+  });
+  return '{{Literatur ' + parts.join(' ') + '}}';
+}
+
 
   /* helpers */
   function collectPersons(params, firstPrefix, lastPrefix){
@@ -552,63 +639,58 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
   /* ---------- Conversion functions (RETURN {output, log}) ---------- */
 
   function convertCiteWebFamily(parsed, options){
-    const params = parsed.params;
-    const finalParams = {};
-    const log = [];
+  const params = parsed.params;
+  const finalParams = {};
+  const log = [];
 
-    // Authors
-    const authors = [];
-    Object.keys(params).forEach(k=>{
-      if(/^last\d*$/.test(k)){
-        const suf = k.slice(4);
-        const name = ((params['first'+suf]||'') + ' ' + (params[k]||'')).trim();
-        if(name) authors.push(name);
-      }
-    });
-    if(authors.length === 0 && (params['last'] || params['first'])){
-      const n = ((params['first']||'') + ' ' + (params['last']||'')).trim();
-      if(n) authors.push(n);
-    }
-    if(authors.length){ finalParams['autor'] = authors.join(', '); log.push('Autor: ' + authors.join(', ') + ' (zusammengesetzt aus first/last)'); }
-
-    // title/url/werk/publisher/date
-    if(params['url']){ finalParams['url'] = params['url']; log.push('Online: URL übernommen'); }
-    if(params['title']){ const _t = String(params['title']).replace(/\{\{\*\}\}/g,'\u2022'); finalParams['titel'] = _t; log.push('Titel: ersetzt {{*}} → • und übernommen'); }
-    if(params['website']){ finalParams['werk'] = params['website']; log.push('Werk: ' + params['website'] + ' übernommen'); }
-    else if(params['newspaper']||params['work']||params['publisher']){ finalParams['werk'] = params['newspaper']||params['work']||params['publisher']; log.push('Werk/Publisher übernommen: ' + finalParams['werk']); }
-
-    if(params['date']||params['datum']){ finalParams['datum'] = toISODate(params['date']||params['datum']); log.push('Datum: ' + finalParams['datum']); }
-
-    // language
-    const lang = chooseLanguage(options.langChoice, params['language'], finalParams['titel'], finalParams['werk'], options.overrideLang, options.fullLangCodes);
-    if(lang){
-      if(!(options.suppressGerman && String(lang).toLowerCase().startsWith('de'))){
-        finalParams['sprache'] = lang;
-        log.push('Sprache automatisch erkannt: ' + lang);
-      } else {
-        log.push('Sprache wurde erkannt als de, wird aber unterdrückt (Einstellung).');
-      }
-    }
-
-    // quote/archive
-    if(params['quote']){ finalParams['zitat'] = params['quote']; log.push('Zitat übernommen'); }
-    if(params['archive-url']){ finalParams['archiv-url'] = params['archive-url']; log.push('Archiv-URL vorhanden (wird übernommen, sofern nicht entfernt)'); }
-    if(params['archive-date']){ finalParams['archiv-datum'] = toISODate(params['archive-date']); log.push('Archiv-Datum übernommen'); }
-
-    const urlStatus = (params['url-status']||'').toLowerCase();
-    if(urlStatus==='dead'){ finalParams['offline'] = '1'; log.push('URL-Status = dead → Offline-Markierung gesetzt'); }
-    else if(urlStatus==='live' && options.stripArchiveIfLive){
-      // remove archive info
-      delete finalParams['archiv-url']; delete finalParams['archiv-datum'];
-      log.push('Archiv-Informationen entfernt, weil url-status=live und Option aktiv');
-    }
-
-    if(options.useToday){ finalParams['abruf'] = todayISO(); log.push('Abruf: heutiges Datum gesetzt'); }
-    else { const ad = params['access-date'] || params['accessdate'] || params['abruf'] || ''; if(ad){ finalParams['abruf'] = toISODate(ad); log.push('Abruf: ' + finalParams['abruf']); } }
-
-    // build result string and return with log
-    return { output: buildInternetquelle(finalParams), log };
+  // Autoren (firstN/lastN), fallback first/last
+  const authors = [];
+  for(let i=1;i<=30;i++){
+    const f = params['first'+i];
+    const l = params['last'+i];
+    if(f || l){ authors.push([f||'', l||''].filter(Boolean).join(' ').trim()); }
   }
+  if(!authors.length && (params.first || params.last)){
+    const n = [params.first||'', params.last||''].filter(Boolean).join(' ').trim();
+    if(n) authors.push(n);
+  }
+  if(authors.length){ finalParams['autor'] = authors.join(', '); }
+
+  // Titel (+ {{*}} → • nur wenn vorhanden)
+  if(params.title){
+    const orig = String(params.title);
+    const replaced = orig.replace(/\{\{\*\}\}/g, '\u2022');
+    finalParams['titel'] = replaced;
+    if(replaced !== orig){ log.push('Titel: ersetzt {{*}} → • und übernommen'); } else { log.push('Titel übernommen'); }
+  }
+
+  if(params.website){ finalParams['werk'] = params.website; }
+  if(params.publisher){ finalParams['hrsg'] = params.publisher; }
+  if(params.url){
+    finalParams['url'] = params.url;
+    const lower = String(params.url).toLowerCase();
+    const m = lower.match(/\.(pdf|pptx?|docx?|xlsx?)$/);
+    if(m){
+      const map = { pdf:'PDF', ppt:'PPT', pptx:'PPTX', doc:'DOC', docx:'DOCX', xls:'XLS', xlsx:'XLSX' };
+      finalParams['format'] = map[m[1]] || m[1].toUpperCase();
+    }
+  }
+
+  const d = params['publication-date'] || params.date || params.year;
+  if(d){ const iso = toISODate(d); if(iso) finalParams['datum'] = iso; }
+  const acc = params['access-date'] || params.accessdate;
+  if(acc){ const isoA = toISODate(acc); if(isoA) finalParams['abruf'] = isoA; }
+  if(params.language){ finalParams['sprache'] = params.language; }
+
+  // Reihenfolge wie Internetquelle
+  const order = ['autor','titel','werk','datum','sprache','url','format','abruf'];
+  const out = ['{{Internetquelle']
+    .concat(order.filter(k => finalParams[k]).map(k => '|' + k + '=' + finalParams[k]))
+    .join(' ') + '}}';
+  return { output: out, log };
+}
+
+
 
   function convertCiteBook(parsed, options){
     const p = parsed.params; const F = {}; const log = [];
@@ -656,7 +738,7 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
       }
     }
 
-    if(p['url']){ F['Online'] = p['url']; log.push('Online: URL übernommen'); }
+    if(p['url']){ var _u = cleanOnlineValue(p['url']); if(_u) F['Online'] = _u; log.push('Online: URL übernommen'); }
     if(options.useToday){ F['Abruf'] = todayISO(); log.push('Abruf: heutiges Datum gesetzt'); }
     else{ const ad = p['access-date'] || p['accessdate'] || p['url-access'] || ''; if(ad){ F['Abruf'] = toISODate(ad); log.push('Abruf: ' + F['Abruf']); } }
 
@@ -681,14 +763,233 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
     return { output: buildLiteratur(F), log };
   }
 
-  function isCiteWebFamily(name){ const n=(name||'').trim().toLowerCase(); return n==='cite web' || n==='cite news' || n==='cite magazine'; }
+  
+function convertCiteJournal(parsed, options){
+  const p = parsed.params; const F = {}; const log = [];
+
+  // Autor(en)
+  let authors = collectPersons(p,'first','last');
+  if (authors.length===0 && p['author']) { authors.push(p['author']); log.push('Autor: Einzelparameter author übernommen'); }
+  authors = authors.concat(collectPersons(p,'interviewer-first','interviewer-last'));
+  if (p['collaboration']) { authors.push(p['collaboration']); log.push('Autor: collaboration übernommen'); }
+  if (authors.length) { F['Autor'] = authors.join(', '); log.push('Autor übernommen'); }
+
+  // Hrsg
+  let editors = collectPersons(p,'editor-first','editor-last');
+  if (editors.length===0 && p['editor']) { editors.push(p['editor']); log.push('Hrsg: Einzelparameter editor übernommen'); }
+  if (editors.length) { F['Hrsg'] = editors.join(', '); log.push('Hrsg übernommen'); }
+
+  // Übersetzer
+  let translators = collectPersons(p,'translator-first','translator-last');
+  if (translators.length===0 && p['translator']) { translators.push(p['translator']); log.push('Übersetzer übernommen'); }
+  if (translators.length) { F['Übersetzer'] = translators.join(', '); log.push('Übersetzer übernommen'); }
+
+  // Titel ({{*}} → •)
+  if (p['title']) { F['Titel'] = String(p['title']).replace(/\{\{\*\}\}/g,'\u2022'); log.push('Titel übernommen'); }
+
+  // Sammelwerk / Band / Nummer
+  if (p['journal']) { F['Sammelwerk'] = p['journal']; log.push('Sammelwerk übernommen'); }
+  if (p['volume']) { F['Band'] = p['volume']; log.push('Band übernommen'); }
+  if (p['issue']) { F['Nummer'] = String(p['issue']).replace(/\b(?:Nr\.?|No\.?)\b\s*/ig,'').trim(); log.push('Nummer übernommen'); }
+
+  // Sprache
+  const lang = chooseLanguage(options.langChoice, p['language'], p['title'], p['journal'], options.overrideLang, options.fullLangCodes);
+  if (lang) {
+    if (!(options.suppressGerman && String(lang).toLowerCase().startsWith('de'))) {
+      F['Sprache'] = lang;
+      log.push(p['language'] ? ('Sprache übernommen: ' + lang) : ('Sprache automatisch erkannt: ' + lang));
+    } else {
+      log.push('Sprache erkannt als de, aber unterdrückt (Einstellung)');
+    }
+  }
+
+  // Online / Abruf / Format
+  if (p['url']) { var _u = cleanOnlineValue(p['url']); if(_u) F['Online'] = _u; log.push('Online übernommen'); }
+  const access = p['access-date'] || p['accessdate'] || p['url-access'];
+  if (access) { F['Abruf'] = toISODate(access); log.push('Abruf: ' + F['Abruf']); }
+  if (p['format']) { F['Format'] = p['format']; log.push('Format übernommen'); }
+
+  // Auflage / Ort / Verlag
+  if (p['edition']) { F['Auflage'] = normalizeEdition(p['edition']); log.push('Auflage: ' + F['Auflage']); }
+  if (p['publication-place']) { F['Ort'] = p['publication-place']; log.push('Ort übernommen'); }
+  if (p['publisher']) { F['Verlag'] = p['publisher']; log.push('Verlag übernommen'); }
+
+  // Datum / Originaljahr
+  const date = p['publication-date'] || p['date'] || p['year'];
+  if (date) { F['Datum'] = toISODate(date); log.push('Datum übernommen: ' + F['Datum']); }
+  const orig = p['orig-date'] || p['origyear'] || p['orig-year'];
+  if (orig) { F['Originaljahr'] = extractYear(orig); log.push('Originaljahr: ' + F['Originaljahr']); }
+
+  // Seiten
+  const seiten = p['pages'] || p['page'] || p['at'];
+  if (seiten) { F['Seiten'] = normalizePages(seiten); log.push('Seiten übernommen: ' + F['Seiten']); }
+
+  // IDs
+  if (p['doi']) { F['DOI'] = p['doi']; log.push('DOI übernommen'); }
+  if (p['isbn']) { F['ISBN'] = normalizeISBN(p['isbn']); log.push('ISBN übernommen'); }
+  if (p['issn']) { F['ISSN'] = p['issn']; log.push('ISSN übernommen'); }
+  if (p['bibcode']) { F['bibcode'] = p['bibcode']; log.push('bibcode übernommen'); }
+  if (p['jstor']) { F['JSTOR'] = p['jstor']; log.push('JSTOR übernommen'); }
+  if (p['lccn']) { F['LCCN'] = p['lccn']; log.push('LCCN übernommen'); }
+  if (p['pmc']) { F['PMC'] = p['pmc']; log.push('PMC übernommen'); }
+  if (p['pmid']) { F['PMID'] = p['pmid']; log.push('PMID übernommen'); }
+  if (p['arxiv']) { F['arXiv'] = p['arxiv']; log.push('arXiv übernommen'); }
+  ['biorxiv','citeseerx','medrxiv','ol','osti','s2cid','zbl','id'].forEach(function(k){
+    if (p[k]) {
+      F['ID'] = (F['ID'] ? F['ID'] + '; ' : '') + p[k];
+      log.push('ID ergänzt: ' + k + '=' + p[k]);
+    }
+  });
+
+  // Reihe / Typ / Zitat
+  if (p['series']) { F['Reihe'] = p['series']; log.push('Reihe übernommen'); }
+  if (p['type']) { F['Typ'] = p['type']; log.push('Typ übernommen'); }
+  if (p['quote']) { F['Zitat'] = p['quote']; log.push('Zitat übernommen'); }
+
+  const out = buildLiteratur(F);
+  return { output: out, log };
+}
+
+
+function isCiteEncyclopedia(name){
+  const n = (name||'').trim().toLowerCase();
+  return n === 'cite encyclopedia';
+}
+
+
+
+
+
+
+
+function convertCiteEncyclopedia(parsed, options){
+  const p = parsed.params; const F = {}; const log = [];
+
+  // Autoren (firstN/lastN, first/last) + Interviewer + collaboration
+  let authors = collectPersons(p,'first','last');
+  // Interviewer ergänzen
+  const interviewers = collectPersons(p,'interviewer-first','interviewer-last');
+  if (interviewers.length) authors = authors.concat(interviewers);
+  if (p.collaboration) authors.push(p.collaboration);
+  if (authors.length){ F['Autor'] = authors.join(', '); }
+
+  // Übersetzer
+  const translators = collectPersons(p,'translator-first','translator-last');
+  if (translators.length) F['Übersetzer'] = translators.join(', ');
+
+  // Hrsg – Schema A: editor-firstN/editor-lastN (inkl. unindiziert), via collectPersons
+  let editors = collectPersons(p,'editor-first','editor-last');
+  // Hrsg – Schema B: editorN-first/editorN-last
+  const numbered = [];
+  Object.keys(p).forEach(k=>{
+    const m = k.match(/^editor(\d+)-last$/i);
+    if (m) numbered.push(parseInt(m[1],10));
+  });
+  numbered.sort((a,b)=>a-b);
+  for (const i of numbered){
+    const f = p[`editor${i}-first`] || '';
+    const l = p[`editor${i}-last`]  || '';
+    const name = (f + ' ' + l).trim();
+    if (name) editors.push(name);
+  }
+  if (editors.length) F['Hrsg'] = editors.join(', ');
+
+  // Titel / Kapitel
+  if (p.title) F['Titel'] = p.title;
+  else if (p.encyclopedia) F['Titel'] = p.encyclopedia;
+  if (p['chapter']) F['Kapitel'] = p['chapter'];
+  if (p['script-chapter']) F['Kapitel'] = p['script-chapter'];
+
+  // Sprache
+  if (p.language) F['Sprache'] = p.language;
+  else if (typeof p.url === 'string'){
+    const u = p.url.toLowerCase();
+    if (u.includes('books.google') || u.includes('google books')) F['Sprache'] = 'en';
+  } else if (p.url) {
+    // Bei verschachtelten Templatedaten als URL (z. B. {{google books ...}}) setzen wir en heuristisch
+    F['Sprache'] = F['Sprache'] || 'en';
+  }
+
+  // Sammelwerk / Reihe / Band / Auflage
+  if (p.encyclopedia) F['Sammelwerk'] = p.encyclopedia;
+  if (p.series)       F['Reihe']      = p.series;
+  if (p.volume)       F['Band']       = p.volume;
+  if (p.edition)      F['Auflage']    = normalizeEdition(p.edition);
+
+  // Ort / Verlag
+  const ort = p['publication-place'] || p['location'];
+  if (ort)         F['Ort']   = ort;
+  if (p.publisher) F['Verlag'] = p.publisher;
+
+  // Datum / Originaljahr
+  const d = p['publication-date'] || p['date'] || p['year'];
+  if (d){
+    const iso = toISODate(d);
+    F['Datum'] = iso || String(d);
+  }
+  const orig = p['orig-date'] || p['orig-year'];
+  if (orig){
+    const y = String(orig).match(/\d{4}/);
+    if (y) F['Originaljahr'] = y[0];
+  }
+
+  // Online / Abruf / Format
+  var _u = cleanOnlineValue(p.url); if(_u) F['Online'] = _u;
+  const access = p['url-access'] || p['access-date'];
+  if (access){
+    const a = toISODate(access);
+    F['Abruf'] = a || String(access);
+  }
+  if (p.format)         F['Format'] = p.format;
+
+  // Typ
+  if (p.type)           F['Typ'] = p.type;
+
+  // Seiten
+  const pages = p['pages'] || p['page'] || p['at'];
+  if (pages)            F['Seiten'] = normalizePages(pages);
+
+  // IDs
+  if (p.doi)            F['DOI']  = p.doi;
+  if (p.isbn)           F['ISBN'] = normalizeISBN(p.isbn);
+  if (p.issn)           F['ISSN'] = p.issn;
+  if (p.jstor)          F['JSTOR'] = p.jstor;
+  if (p.lccn)           F['LCCN'] = p.lccn;
+  if (p.oclc)           F['OCLC'] = p.oclc;
+  if (p.pmc)            F['PMC']  = p.pmc;
+  if (p.pmid)           F['PMID'] = p.pmid;
+  if (p.arxiv)          F['arXiv'] = p.arxiv;
+  if (p.bibcode)        F['bibcode'] = p.bibcode;
+  ['biorxiv','citeseerx','medrxiv','ol','osti','s2cid','zbl','id'].forEach(k=>{ if (p[k]) F['ID'] = p[k]; });
+
+  return { output: buildLiteratur(F), log };
+}
+
+
+
+
+
+
+
+
+
+
+  function isCiteWebFamily(name){
+  const n = (name||'').trim().toLowerCase();
+  const aliases = ['cite web','cite website','cite webpage','cite news','cite magazine','internetquelle'];
+  return aliases.indexOf(n) !== -1;
+}
+
   function isCiteBook(name){ const n=(name||'').trim().toLowerCase(); return n==='cite book'; }
+  function isCiteJournal(name){ const n=(name||'').trim().toLowerCase(); return n==='cite journal'; }
 
   function convertTemplateString(tplString, options){
     const parsed = parseTemplateParams(tplString);
     if(!parsed.name) return { output: tplString, log: ['Keine Template-Erkennung'] };
     if(isCiteBook(parsed.name)) return convertCiteBook(parsed, options);
+    if(isCiteJournal(parsed.name)) return convertCiteJournal(parsed, options);
     if(isCiteWebFamily(parsed.name)) return convertCiteWebFamily(parsed, options);
+        if(isCiteEncyclopedia(parsed.name)) return convertCiteEncyclopedia(parsed, options);
     return { output: tplString, log: ['Unverändertes Template: ' + parsed.name] };
   }
 
@@ -774,15 +1075,14 @@ function highlightTemplateText(text){
     }
 
     // standalone template
-    const tplMatch = input.match(/\{\{[\s\S]*?\}\}/);
-    if(tplMatch){
-      const converted = convertTemplateString(tplMatch[0], options);
-      converted.log.forEach(l => overallLog.push(l));
-      const out = input.replace(tplMatch[0], converted.output);
-      return { result: out, log: overallLog };
-    }
-
-    return { result: input, log: ['Eingabe enthält kein unterstütztes Template.'] };
+const tpl = findFirstTopLevelTemplate(input);
+if(tpl){
+  const converted = convertTemplateString(tpl.text, options);
+  converted.log.forEach(l => overallLog.push(l));
+  const out = input.slice(0, tpl.start) + converted.output + input.slice(tpl.end);
+  return { result: out, log: overallLog };
+}
+return { result: input, log: ['Eingabe enthält kein unterstütztes Template.'] };
   }
 
   /* ----------------- DOM wiring ----------------- */
@@ -809,13 +1109,13 @@ function highlightTemplateText(text){
       updateOutputHighlight();
 
       // render the conversion summary in user-friendly text
-      const sum = document.getElementById('conversionSummary');
-      if(!res.log || res.log.length===0){ sum.innerHTML = '<em>Keine Änderungen vorgenommen.</em>'; }
+      const sum = null;
+      if(!res.log || res.log.length===0){ /* summary removed */ }
       else {
         const items = res.log.map(function(line){
           return '<li>' + escapeHtml(line) + '</li>';
         }).join('');
-        sum.innerHTML = '<strong>Konvertierungs-Zusammenfassung:</strong><ul>' + items + '</ul>';
+        /* summary removed */
       }
 
       // auto copy?
@@ -910,6 +1210,38 @@ function highlightTemplateText(text){
   });
 
 })(); // IIFE
+
+
+function cleanOnlineValue(val){
+  if (val === undefined || val === null) return null;
+  const s = String(val);
+  // Entferne {{google books ...}}-Templates vollständig aus Online/URL
+  if (/\{\{\s*google\s+books/i.test(s)) return null;
+  return s;
+}
+
+
+
+function findFirstTopLevelTemplate(s){
+  const start = s.indexOf('{{');
+  if (start === -1) return null;
+  let i = start;
+  let depth = 0;
+  while (i < s.length - 1){
+    const a = s[i], b = s[i+1];
+    if (a === '{' && b === '{'){ depth++; i += 2; continue; }
+    if (a === '}' && b === '}' && depth > 0){
+      depth--; i += 2;
+      if (depth === 0){
+        return { start, end: i, text: s.slice(start, i) };
+      }
+      continue;
+    }
+    i++;
+  }
+  return null;
+}
+
 </script>
 
 <script>
@@ -1013,6 +1345,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+
+
 
 </body>
 </html>
