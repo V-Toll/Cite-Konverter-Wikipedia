@@ -299,7 +299,7 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v4.0.10</a></h1>
+      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v4.2</a></h1>
       <p class="lead">Konvertiert Wikipedia-Vorlagen in das deutsche Schema: {{cite web}}, {{cite book}}, {{cite journal}} und {{cite encyclopedia}} → {{Internetquelle}} bzw. {{Literatur}}. Bitte jeden konvertierten Beleg vor dem Einfügen manuell prüfen.</p>
 
       <details>
@@ -385,18 +385,20 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
       <details id="changelog" style="margin-top:12px">
         <summary>📜 Versionsverlauf</summary>
         <ul>
-              <li class="major-separator">— Version 4.x —</li>
+              <li><strong>v4.2</strong> (2025-09-10): Fix für {{!}} u. ä. Mapping: website→werk & publisher→hrsg, Fallback publisher→werk wenn kein website.</li>
+              <li><strong>v4.1.1</strong> (2025-09-10): {{Internetquelle}} – feste Parameter-Reihenfolge erzwungen + Sprachcodes gekürzt (z. B. en‑US → en), falls „Ungekürzte Sprachcodes“ aus.</li>
+              <li><strong>v4.1</strong> (2025-09-08): cite web – Titel: Leerzeichen um Gedankenstrich normalisiert (genau ein Leerzeichen vor/nach „–“).</li>
               <li><strong>v4.0.10</strong> (2025-09-06): Darkmode-Schalter: Beschriftung „Auto/An/Aus“ in Darkmode weiß; Changelog: Trenner für 4.x und 3.x hinzugefügt.</li>
               <li><strong>v4.0.9</strong> (2025-09-06): Intro ergänzt ({{cite journal}}, {{cite encyclopedia}}); Changelog bereinigt.</li>
-              <li><strong>v4.0.8</strong> (2025-09-06): Fix Doppel-Leerzeichen nach „{Internetquelle“ (Output nun „{Internetquelle |…“).</li>
-              <li><strong>v4.0.7</strong> (2025-09-06): Parser-Fix für verschachtelte Templates – standalone-Erkennung nutzt jetzt brace‑Depth; verhindert abgeschnittene Konvertierung bei {google books}.</li>
-              <li><strong>v4.0.6</strong> (2025-09-06): Online-Feld bereinigt – {google books}-Templates werden aus URL/Online entfernt (kein Online-Ausgabe), in allen Konvertern (web/book/journal/encyclopedia); keine UI-Änderungen.</li>
+              <li><strong>v4.0.8</strong> (2025-09-06): Fix Doppel-Leerzeichen nach „{{Internetquelle“ (Output nun „{{Internetquelle |…“).</li>
+              <li><strong>v4.0.7</strong> (2025-09-06): Parser-Fix für verschachtelte Templates – standalone-Erkennung nutzt jetzt brace‑Depth; verhindert abgeschnittene Konvertierung bei {{google books}}.</li>
+              <li><strong>v4.0.6</strong> (2025-09-06): Online-Feld bereinigt – {{google books}}-Templates werden aus URL/Online entfernt (kein Online-Ausgabe), in allen Konvertern (web/book/journal/encyclopedia); keine UI-Änderungen.</li>
               <li><strong>v4.0.5</strong> (2025-09-06): cite encyclopedia – Hrsg unterstützt nun „editor-first/last“ (ohne Index) und „editorN-first/last“; robustere Google-Books/URL-Heuristik; keine UI-Änderungen.</li>
-              <li><strong>v4.0.4</strong> (2025-09-06): cite encyclopedia Mapping finalisiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache-Heuristik). Rückbau auf buildLiteratur(); Smoke‑Test bleibt entfernt.</li>
+              <li><strong>v4.0.4</strong> (2025-09-06): cite encyclopedia Mapping finalisiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache-Heuristik). Rückbau auf buildLiteratur().</li>
               <li><strong>v4.0.3</strong> (2025-09-05): cite encyclopedia korrigiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache „en“ bei Google‑Books), Dispatcher‑Hook ergänzt. Smoke‑Test entfernt.</li>
               <li><strong>v4.0.0.2</strong> (2025-09-05): Fix cite encyclopedia – Sammelwerk=encyclopedia; Reihe=series; Band=volume; Verlag=publisher; Datum aus date/publication-date/year; ISBN/Seiten korrekt.</li>
               <li><strong>v4.0.0.1</strong> (2025-09-05): Fix cite encyclopedia – Autoren (first/last & editor1-first Schema), Hrsg (beide Schemata), series→Sammelwerk, Datum-Fallback (z. B. 2007a), Sprache=„en“ bei Google‑Books‑URL; keine UI-Änderungen.</li>
-              <li><strong>v4.0.0</strong> (2025-09-05): Neue Variante – {cite encyclopedia} → {Literatur} (Autor/Hrsg/Kapitel/Titel/Ort/Verlag/Datum/Abruf/IDs/Seiten). Keine UI-/Design-Änderungen.</li>
+              <li><strong>v4.0.0</strong> (2025-09-05): Neue Variante – {{cite encyclopedia}} → {{Literatur}} (Autor/Hrsg/Kapitel/Titel/Ort/Verlag/Datum/Abruf/IDs/Seiten). Keine UI-/Design-Änderungen.</li>
               <li class="major-separator">— Version 3.x —</li>
               <li><strong>v3.0.3.0</strong> (2025-09-05): Dev‑Feature: Smoke‑Test‑Modus (?test=1 oder Alt+D). Tests laufen nur in der Konsole; keine UI‑Änderungen.</li>
               <li><strong>v3.0.2.22</strong> (2025-09-05): Bugfix cite web – Aufruf von toISODateFlexible entfernt (nicht definiert) und durch toISODate ersetzt.</li>
@@ -510,7 +512,7 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
     const t = String(text).toLowerCase();
 
     if(/\b(der|die|das|und|nachrichten|zeitung|zeitschrift|deutschland)\b/.test(t)) return 'de';
-    if(/\b(le|la|les|des|du|journal|revue|france|français)\b/.test(t)) return 'fr';
+    if(/\b(le|la|les|des|du|revue|france|français)\b/.test(t)) return 'fr';
     if(/\b(el|la|los|las|diario|noticias|españa|español)\b/.test(t)) return 'es';
     if(/\b(il|lo|la|giornale|quotidiano|italia|italiano)\b/.test(t)) return 'it';
     if(/\b(de|het|nieuws|krant|nederland|nederlands)\b/.test(t)) return 'nl';
@@ -660,16 +662,23 @@ function buildLiteratur(finalParams){
   }
   if(authors.length){ finalParams['autor'] = authors.join(', '); }
 
-  // Titel (+ {{*}} → • nur wenn vorhanden)
+    // Titel (+ {{*}} → • ; {{!}} → – ; Spacing normalisiert)
   if(params.title){
     const orig = String(params.title);
-    const replaced = orig.replace(/\{\{\*\}\}/g, '\u2022');
+    let replaced = orig.replace(/\{\{\*\}\}/g, '\u2022');
+    replaced = replaced.replace(/\{\{\s*!\s*\}\}/g, ' – ');
+    replaced = replaced.replace(/\s*–\s*/g, ' – ');
+    replaced = replaced.replace(/\s{2,}/g, ' ').trim();
     finalParams['titel'] = replaced;
-    if(replaced !== orig){ log.push('Titel: ersetzt {{*}} → • und übernommen'); } else { log.push('Titel übernommen'); }
   }
 
+
+
   if(params.website){ finalParams['werk'] = params.website; }
-  if(params.publisher){ finalParams['hrsg'] = params.publisher; }
+  if(params.publisher){
+    if(params.website){ finalParams['hrsg'] = params.publisher; }
+    else if(!finalParams['werk']){ finalParams['werk'] = params.publisher; }
+  }
   if(params.url){
     finalParams['url'] = params.url;
     const lower = String(params.url).toLowerCase();
@@ -1047,49 +1056,49 @@ function highlightTemplateText(text){
   /* ----------------- Driver for transform + summary ----------------- */
 
   function transformTextAndReturnLog(){
-    const inputEl = document.getElementById('inputText');
-    const input = (inputEl.value || '').trim();
-    const options = {
-      useToday: document.getElementById('useTodayAbruf').checked,
-      stripArchiveIfLive: document.getElementById('stripArchiveIfLive').checked,
-      overrideLang: document.getElementById('overrideLang').checked,
-      langChoice: (document.getElementById('langSelect') && document.getElementById('langSelect').value) || '',
-      fullLangCodes: document.getElementById('fullLangCodes').checked,
-      suppressGerman: document.getElementById('suppressGerman').checked
-    };
+  const inputEl = document.getElementById('inputText');
+  const input = (inputEl.value || '').trim();
+  const options = {
+    useToday: document.getElementById('useTodayAbruf').checked,
+    stripArchiveIfLive: document.getElementById('stripArchiveIfLive').checked,
+    overrideLang: document.getElementById('overrideLang').checked,
+    langChoice: (document.getElementById('langSelect') && document.getElementById('langSelect').value) || '',
+    fullLangCodes: document.getElementById('fullLangCodes').checked,
+    suppressGerman: document.getElementById('suppressGerman').checked
+  };
+  const log = [];
 
-    const overallLog = [];
+  if(!input){ return { result:'', log:['Keine Eingabe.'] }; }
 
-    if(!input){
-      return { result: '', log: ['Keine Eingabe.'] };
+  // Path A: convert inside each <ref>…</ref> (nesting-safe)
+  const refRegex = /(<ref\b[^>]*>)([\s\S]*?)(<\/ref>)/gi;
+  const resultA = input.replace(/(<ref\b[^>]*>)([\s\S]*?)(<\/ref>)/gi, function(full, refOpen, inner, refClose){
+    const tpl = findFirstTopLevelTemplate(inner);
+    if(!tpl){ return full; }
+    const converted = convertTemplateString(tpl.text, options);
+    if(converted.output === tpl.text){ return full; }
+    return refOpen + inner.slice(0, tpl.start) + converted.output + inner.slice(tpl.end) + refClose;
+  });
+
+  // Path B: convert the first top-level template anywhere
+  let resultB = input;
+  const tplAll = findFirstTopLevelTemplate(input);
+  if(tplAll){
+    const converted = convertTemplateString(tplAll.text, options);
+    if(converted.output !== tplAll.text){
+      resultB = input.slice(0, tplAll.start) + converted.output + input.slice(tplAll.end);
     }
-
-    // replace inside multiple <ref> blocks
-    const refRegex = /(<ref\b[^>]*>)([\s\S]*?)(<\/ref>)/gi;
-    if(refRegex.test(input)){
-      const result = input.replace(refRegex, function(full, refOpen, inner, refClose){
-        const tplMatch = inner.match(/\{\{[\s\S]*?\}\}/);
-        if(!tplMatch) { overallLog.push('Kein Template in <ref>-Block gefunden.'); return full; }
-        const converted = convertTemplateString(tplMatch[0], options);
-        // append logs
-        converted.log.forEach(l => overallLog.push(l));
-        return refOpen + inner.replace(tplMatch[0], converted.output) + refClose;
-      });
-      return { result, log: overallLog };
-    }
-
-    // standalone template
-const tpl = findFirstTopLevelTemplate(input);
-if(tpl){
-  const converted = convertTemplateString(tpl.text, options);
-  converted.log.forEach(l => overallLog.push(l));
-  const out = input.slice(0, tpl.start) + converted.output + input.slice(tpl.end);
-  return { result: out, log: overallLog };
-}
-return { result: input, log: ['Eingabe enthält kein unterstütztes Template.'] };
   }
 
-  /* ----------------- DOM wiring ----------------- */
+  // Choose best result: prefer A if it changed anything; else B; else unchanged
+  const changedA = (resultA !== input);
+  const changedB = (resultB !== input);
+  if(changedA) return { result: resultA, log };
+  if(changedB) return { result: resultB, log };
+
+  return { result: input, log:['Keine Template-Erkennung'] };
+}
+/* ----------------- DOM wiring ----------------- */
 
   document.addEventListener('DOMContentLoaded', function(){
 
@@ -1352,5 +1361,227 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+<script>
+/* ===== CK Internetquelle Order/Lang Post-Processor v4.1.23 ===== */
+(function(){
+  function $(id){ return document.getElementById(id); }
+  function fullLangEnabled(){
+    var el = document.getElementById('fullLangCodes');
+    return !!(el && el.checked);
+  }
+  function shortLang(v){ if(!v) return ''; return String(v).trim().split(/[-_]/)[0].toLowerCase(); }
+
+  var IQ_ORDER = ['autor','url','titel','titelerg','werk','hrsg','datum','seiten','format','sprache','offline','archiv-url','archiv-datum','archiv-bot','abruf','abruf-verborgen','kommentar','zitat','CH'];
+
+  (function(){
+    var orig = window.buildInternetquelle;
+    window.buildInternetquelle = function(F){
+      try{
+        var F2 = Object.assign({}, F || {});
+        if(!fullLangEnabled() && typeof F2.sprache === 'string'){
+          F2.sprache = shortLang(F2.sprache);
+        }
+        var parts = [];
+        function has(v){ return v !== undefined && v !== null && String(v).trim() !== ''; }
+        function push(k){ if(has(F2[k])) parts.push('|' + k + '=' + F2[k]); }
+        IQ_ORDER.forEach(push);
+        Object.keys(F2).forEach(function(k){ if(IQ_ORDER.indexOf(k) === -1) push(k); });
+        return '{{Internetquelle ' + (parts.length ? ' ' + parts.join(' ') : '') + '}}';
+      }catch(e){
+        console.error('buildInternetquelle override failed', e);
+        if(typeof orig === 'function') return orig(F);
+        var raw=[]; for(var k in (F||{})) if(Object.prototype.hasOwnProperty.call(F,k)) raw.push('|'+k+'='+F[k]);
+        return '{{Internetquelle ' + (raw.length? ' '+raw.join(' ') : '') + '}}';
+      }
+    };
+  })();
+
+  function findAllTopLevelTemplates(s){
+    var res=[], dTpl=0, dLink=0, start=-1;
+    for(var i=0;i<s.length-1;i++){
+      var a=s[i], b=s[i+1];
+      if(a==='[' && b==='['){ dLink++; i++; continue; }
+      if(a===']' && b===']' && dLink>0){ dLink--; i++; continue; }
+      if(a==='{' && b==='{' && dLink===0){ if(dTpl===0) start=i; dTpl++; i++; continue; }
+      if(a==='}' && b==='}' && dTpl>0 && dLink===0){
+        dTpl--; i++;
+        if(dTpl===0 && start!==-1){
+          var text=s.slice(start, i+1);
+          res.push({ start:start, end:i+1, text:text });
+          start=-1;
+        }
+        continue;
+      }
+    }
+    return res;
+  }
+
+  function parseTemplate(tpl){
+    if(!tpl || tpl.slice(0,2)!=='{{' || tpl.slice(-2)!=='}}') return null;
+    var inner = tpl.slice(2, -2);
+    var parts=[], buf='', dTpl=0, dLink=0;
+    for(var i=0;i<inner.length;i++){
+      var ch=inner[i], nx=inner[i+1];
+      if(ch==='[' && nx==='['){ dLink++; buf+=ch; continue; }
+      if(ch===']' && nx===']' && dLink>0){ dLink--; buf+=ch; continue; }
+      if(ch==='{' && nx==='{' && dLink===0){ dTpl++; buf+=ch; continue; }
+      if(ch==='}' && nx==='}' && dTpl>0 && dLink===0){ dTpl--; buf+=ch; continue; }
+      if(ch==='|' && dTpl===0 && dLink===0){ parts.push(buf); buf=''; continue; }
+      buf+=ch;
+    }
+    parts.push(buf);
+    var name = (parts.shift()||'').trim();
+    var params=[];
+    for(var j=0;j<parts.length;j++){
+      var p=parts[j];
+      var m = p.match(/^\s*([^=|]+?)\s*=\s*([\s\S]*)$/);
+      if(m){ params.push({ key: m[1].trim(), rawKey: m[1], val: m[2].trim() }); }
+    }
+    return { name:name, params:params };
+  }
+
+  function reorderInternetquelleInText(txt){
+    if(!txt) return txt;
+    var blocks = findAllTopLevelTemplates(txt);
+    if(!blocks.length) return txt;
+    var repl = [];
+    for(var i=0;i<blocks.length;i++){
+      var b = blocks[i];
+      var parsed = parseTemplate(b.text);
+      if(!parsed) continue;
+      if(parsed.name.toLowerCase().replace(/\s+/g,' ') !== 'internetquelle') continue;
+
+      var map = Object.create(null);
+      var seen = [];
+      for(var k=0;k<parsed.params.length;k++){
+        var P = parsed.params[k];
+        var key = String(P.key).trim();
+        var keyL= key.toLowerCase();
+        map[keyL] = { key:key, val:P.val };
+        seen.push(key);
+      }
+
+      if(!fullLangEnabled() && map['sprache'] && typeof map['sprache'].val === 'string'){
+        map['sprache'] = { key:'sprache', val: shortLang(map['sprache'].val) };
+      }
+
+      var parts = [];
+      function hasVal(o){ return o && o.val !== undefined && String(o.val).trim() !== ''; }
+      for(var q=0;q<IQ_ORDER.length;q++){
+        var kq = IQ_ORDER[q];
+        if(hasVal(map[kq])){ parts.push('|'+kq+'='+map[kq].val); delete map[kq]; }
+      }
+      for(var s=0;s<seen.length;s++){
+        var origKey = seen[s], norm = origKey.toLowerCase();
+        if(map[norm] && hasVal(map[norm])){
+          parts.push('|'+map[norm].key+'='+map[norm].val);
+          delete map[norm];
+        }
+      }
+      var out = '{{Internetquelle ' + (parts.length? ' '+parts.join(' ') : '') + '}}';
+      repl.push({ start:b.start, end:b.end, text: out });
+    }
+    if(!repl.length) return txt;
+    repl.sort(function(a,b){ return b.start - a.start; });
+    var res = txt;
+    for(var r=0;r<repl.length;r++){
+      res = res.slice(0, repl[r].start) + repl[r].text + res.slice(repl[r].end);
+    }
+    return res;
+  }
+
+  try{
+    var btn = $('convertBtn');
+    if(btn && !btn.dataset.ckIqOrderLangV4123){
+      btn.dataset.ckIqOrderLangV4123 = "1";
+      btn.addEventListener('click', function(){
+        setTimeout(function(){
+          var out = $('outputText');
+          if(out && out.value){
+            out.value = reorderInternetquelleInText(out.value);
+            if(window.updateOutputHighlight) window.updateOutputHighlight();
+          }
+        }, 0);
+      });
+    }
+  }catch(e){ console.error(e); }
+})();
+</script>
+<script>
+/* ===== CK Output-Display Sync Hotfix v4.1.26 ===== */
+(function(){
+  function $(id){ return document.getElementById(id); }
+  function anyHighlighterPresent(){
+    return (typeof window.updateOutputHighlight === 'function') ||
+           (typeof window.refreshOutputHighlight === 'function') ||
+           (typeof window.highlightOutput === 'function');
+  }
+  function refreshOutputView(){
+    try{
+      var out = $('outputText');
+      if(!out) return;
+      var usedHighlighter = false;
+      // 1) Offizielle Highlighter benutzen (lassen HTML-Markup bestehen)
+      try {
+        if (typeof window.updateOutputHighlight === 'function'){ window.updateOutputHighlight(); usedHighlighter = true; }
+        else if (typeof window.refreshOutputHighlight === 'function'){ window.refreshOutputHighlight(); usedHighlighter = true; }
+        else if (typeof window.highlightOutput === 'function'){ window.highlightOutput(); usedHighlighter = true; }
+      } catch(e){ /* ignore */ }
+      // 2) Events, damit Debouncer/Observer feuern
+      try {
+        out.dispatchEvent(new Event('input', {bubbles:true}));
+        out.dispatchEvent(new Event('change', {bubbles:true}));
+        out.dispatchEvent(new KeyboardEvent('keyup', {bubbles:true, key:' '}));
+      } catch(e){ /* ignore */ }
+      // 3) Nur wenn KEIN Highlighter existiert oder sichtbar aktiv wurde → Fallback-Text setzen
+      function doFallbackIfNeeded(){
+        if (anyHighlighterPresent()) {
+          // Prüfen, ob ein Overlay HTML-Markup gesetzt hat; wenn nicht, dennoch Fallback
+          var over = document.getElementById('outputHighlight') ||
+                     document.getElementById('outputCode') ||
+                     document.querySelector('[data-output-highlight]') ||
+                     document.querySelector('pre.output-highlight') ||
+                     document.querySelector('.output-highlight') ||
+                     document.querySelector('.highlight-output');
+          if (over){
+            var hasMarkup = /<span|<mark|<em|<strong/i.test(over.innerHTML || '');
+            if (hasMarkup) return; // Highlight aktiv, nicht überschreiben
+          } else {
+            // Kein Overlay-Element gefunden; dann Fallback setzen
+          }
+        } else {
+          // Kein Highlighter vorhanden → Fallback
+        }
+        var candidates = [
+          document.getElementById('outputHighlight'),
+          document.getElementById('outputCode'),
+          document.querySelector('[data-output-highlight]'),
+          document.querySelector('pre.output-highlight'),
+          document.querySelector('.output-highlight'),
+          document.querySelector('.highlight-output')
+        ].filter(Boolean);
+        candidates.forEach(function(el){
+          if ('innerText' in el) el.innerText = out.value;
+          else el.textContent = out.value;
+        });
+      }
+      // zwei rAF Zyklen warten, damit evtl. Highlighter erst rendert
+      if (window.requestAnimationFrame){
+        requestAnimationFrame(function(){ requestAnimationFrame(doFallbackIfNeeded); });
+      } else {
+        setTimeout(doFallbackIfNeeded, 0);
+      }
+    }catch(e){ console.error(e); }
+  }
+  try{
+    var btn=$('convertBtn');
+    if(btn && !btn.dataset.ckOutputSyncV4126){
+      btn.dataset.ckOutputSyncV4126="1";
+      btn.addEventListener('click', function(){
+        setTimeout(function(){ refreshOutputView(); }, 0);
+      });
+    }
+  }catch(e){ console.error(e); }
+})();
 </body>
 </html>
