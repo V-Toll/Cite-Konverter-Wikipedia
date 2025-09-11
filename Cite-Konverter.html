@@ -125,8 +125,8 @@ body.dark .segmented button{color:#fff}
   textarea.overlay{
     position:absolute;left:0;top:0;right:0;padding:14px;
     width:100%;height:100%;min-height:80px;border:0;background:transparent;resize:vertical;
-    font-family:var(--mono);font-size:13.5px;line-height:1.45;color:transparent;caret-color:transparent;
-    z-index:2;
+    font-family:var(--mono);font-size:13.5px;line-height:1.45;color:transparent !important; -webkit-text-fill-color: transparent; text-shadow: none !important;caret-color:transparent !important; -webkit-text-fill-color: transparent; text-shadow: none !important;
+    z-index:3;
     outline:none;
   }
   /* make caret visible depending on theme */
@@ -294,12 +294,16 @@ body.dark pre.highlight, body.force-dark pre.highlight { color:#ffffff !importan
 body.dark pre.highlight .tok-template, body.force-dark pre.highlight .tok-template { color:#FFD4FF !important; font-weight:800; }
 body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color:#9BD0FF !important; font-weight:800; }
 
+
+/* Bootstrap highlight safety: show textarea text until overlay is ready */
+textarea.overlay{ color: inherit !important; caret-color: auto !important; }
+.hl-ready textarea.overlay{ color: transparent !important; caret-color: transparent !important; }
 </style>
 </head>
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v4.2</a></h1>
+      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v4.4</a></h1>
       <p class="lead">Konvertiert Wikipedia-Vorlagen in das deutsche Schema: {{cite web}}, {{cite book}}, {{cite journal}} und {{cite encyclopedia}} → {{Internetquelle}} bzw. {{Literatur}}. Bitte jeden konvertierten Beleg vor dem Einfügen manuell prüfen.</p>
 
       <details>
@@ -385,6 +389,11 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
       <details id="changelog" style="margin-top:12px">
         <summary>📜 Versionsverlauf</summary>
         <ul>
+              <li><strong>v4.4</strong> (2025-09-11): Kleinere Fehlerkorrekturen wie doppeltes Leerzeichen und fehlende Zitat-Konvertierungen. Weitere Ergänzungen bei getDisplaySiteNameFromUrl.</li>
+              <li><strong>v4.3.5</strong> (2025-09-10): Stabilisierung – Eingabetext sichtbar bis Highlight geladen; robustes Rebinding für Highlight & Konvertieren (Fallback aktiv).</li>
+              <li><strong>v4.3.1</strong> (2025-09-10): {{Internetquelle}} – Priorität jetzt work → website → publisher (falls kein website/work) → Domain-Fallback aus URL.</li>
+              <li><strong>v4.3</strong> (2025-09-10): {{Internetquelle}} – Fallback für „werk“: wenn website/work fehlen → Domain aus der URL (z. B. nytimes.com). Plus Auto‑Mapping einiger Domains (z. B. nytimes.com → The New York Times).</li>
+              <li><strong>v4.2.1</strong> (2025-09-10): {cite news}/{cite web} → {{Internetquelle}}: Reihenfolge korrigiert; Sprache per language/Override/Wörterliste; Abruf=heute (Option); „work“→„werk“; Doppel‑Leerzeichen nach „Internetquelle“ entfernt.</li>
               <li><strong>v4.2</strong> (2025-09-10): Fix für {{!}} u. ä. Mapping: website→werk & publisher→hrsg, Fallback publisher→werk wenn kein website.</li>
               <li><strong>v4.1.1</strong> (2025-09-10): {{Internetquelle}} – feste Parameter-Reihenfolge erzwungen + Sprachcodes gekürzt (z. B. en‑US → en), falls „Ungekürzte Sprachcodes“ aus.</li>
               <li><strong>v4.1</strong> (2025-09-08): cite web – Titel: Leerzeichen um Gedankenstrich normalisiert (genau ein Leerzeichen vor/nach „–“).</li>
@@ -644,7 +653,442 @@ function buildLiteratur(finalParams){
 
   /* ---------- Conversion functions (RETURN {output, log}) ---------- */
 
-  function convertCiteWebFamily(parsed, options){
+  
+// === Helper: derive display site name from URL when website/work missing ===
+function getDomainFromUrl(url){
+  try{
+    var u = new URL(url);
+    var host = (u.hostname || '').replace(/^www\./i, '');
+    // reduce to eTLD+1 for common multi-part TLDs
+    var multi = ['co.uk','com.au','co.jp','co.nz','com.br','co.in','co.za','com.cn','com.mx','com.tr'];
+    for(var i=0;i<multi.length;i++){
+      if(host.toLowerCase().endsWith('.'+multi[i])){
+        var parts = host.split('.');
+        return parts.slice(-3).join('.'); // e.g. news.bbc.co.uk -> bbc.co.uk
+      }
+    }
+    var parts = host.split('.');
+    if(parts.length>=2) return parts.slice(-2).join('.'); // sub.site.com -> site.com
+    return host || '';
+  }catch(e){
+    try{
+      var m = String(url||'').match(/^[a-z]+:\/\/([^\/]+)/i);
+      if(m) return m[1].replace(/^www\./i,'');
+    }catch(_e){}
+    return '';
+  }
+}
+function getDisplaySiteNameFromUrl(url){
+  var domain = getDomainFromUrl(url);
+  if(!domain) return '';
+  var map = {
+    '20minutos.es':'20 Minutos',
+    'abc.es':'ABC',
+    'abc.net.au':'ABC News Australia',
+    'abclocal.go.com':'ABC Local',
+    'abcnews.go.com':'ABC News',
+    'abcsports.go.com':'ABC Sports',
+    'accesshollywood.com':'Access Hollywood',
+    'ad.nl':'Algemeen Dagblad',
+    'adage.com':'Ad Age',
+    'adelaidenow.com.au':'The Advertiser',
+    'adnkronos.com':'Adnkronos',
+    'adweek.com':'Adweek',
+    'afp.com':'Agence France-Presse',
+    'agi.it':'AGI',
+    'ajc.com':'The Atlanta Journal-Constitution',
+    'al.com':'AL.com',
+    'aljazeera.com':'Al Jazeera',
+    'allmusic.com':'AllMusic',
+    'allure.com':'Allure',
+    'alternet.org':'AlterNet',
+    'americanprogress.org':'Center for American Progress',
+    'amnesty.org':'Amnesty International',
+    'anandtech.com':'AnandTech',
+    'ansa.it':'ANSA',
+    'ap.news':'Associated Press',
+    'ap.org':'Associated Press',
+    'apnews.com':'Associated Press',
+    'archive.org':'Internet Archive',
+    'arstechnica.com':'Ars Technica',
+    'as.com':'AS',
+    'avclub.com':'The A.V. Club',
+    'axios.com':'Axios',
+    'barrons.com':'Barron\'s',
+    'barstoolsports.com':'Barstool Sports',
+    'bbc.co.uk':'BBC',
+    'bbc.com':'BBC',
+    'bellingcat.com':'Bellingcat',
+    'bigtakeover.com':'The Big Takeover',
+    'bleacherreport.com':'Bleacher Report',
+    'bloody-disgusting.com':'Bloody Disgusting',
+    'bloomberg.com':'Bloomberg',
+    'bostonglobe.com':'The Boston Globe',
+    'boxingnewsonline.net':'Boxing News',
+    'boxofficemojo.com':'Box Office Mojo',
+    'breitbart.com':'Breitbart',
+    'britannica.com':'Encyclopedia Britannica',
+    'brooklynvegan.com':'BrooklynVegan',
+    'businessinsider.com':'Business Insider',
+    'buzzfeed.com':'BuzzFeed',
+    'buzzfeednews.com':'BuzzFeed News',
+    'calciomercato.com':'Calciomercato',
+    'cambridge.org':'Cambridge University Press',
+    'cbc.ca':'CBC',
+    'cbc.news':'CBC News',
+    'cbslocal.com':'CBS Local',
+    'cbsnews.com':'CBS News',
+    'cbssports.com':'CBS Sports',
+    'cdc.gov':'Centers for Disease Control and Prevention',
+    'census.gov':'U.S. Census Bureau',
+    'channelnewsasia.com':'Channel NewsAsia',
+    'chicagotribune.com':'Chicago Tribune',
+    'cia.gov':'CIA World Factbook',
+    'cinemablend.com':'CinemaBlend',
+    'clashmusic.com':'Clash Magazine',
+    'cleveland.com':'Cleveland.com',
+    'cnbc.com':'CNBC',
+    'cnet.com':'CNET',
+    'cnn.com':'CNN',
+    'cnnespanol.cnn.com':'CNN en Español',
+    'cnnmoney.com':'CNN Money',
+    'collider.com':'Collider',
+    'comingsoon.net':'ComingSoon.net',
+    'commondreams.org':'Common Dreams',
+    'complex.com':'Complex',
+    'consequenceofsound.net':'Consequence of Sound',
+    'corriere.it':'Corriere della Sera',
+    'corrieredellosport.it':'Corriere dello Sport',
+    'cosmopolitan.com':'Cosmopolitan',
+    'ctv.ca':'CTV',
+    'ctvnews.ca':'CTV News',
+    'curbed.com':'Curbed',
+    'cyclingnews.com':'Cycling News',
+    'dailycaller.com':'The Daily Caller',
+    'dailymail.co.uk':'Daily Mail',
+    'dailywire.com':'The Daily Wire',
+    'dallasnews.com':'The Dallas Morning News',
+    'deadline.com':'Deadline',
+    'deadspin.com':'Deadspin',
+    'decodedmagazine.com':'Decoded Magazine',
+    'denverpost.com':'The Denver Post',
+    'destructoid.com':'Destructoid',
+    'digiday.com':'Digiday',
+    'digitaltrends.com':'Digital Trends',
+    'discovery.com':'Discovery',
+    'downbeat.com':'DownBeat',
+    'dualshockers.com':'DualShockers',
+    'dutchnews.nl':'Dutch News',
+    'dw.com':'Deutsche Welle',
+    'economist.com':'The Economist',
+    'efe.com':'EFE',
+    'elconfidencial.com':'El Confidencial',
+    'eldiario.es':'elDiario.es',
+    'elle.com':'Elle',
+    'elmundo.es':'El Mundo',
+    'elpais.com':'El País',
+    'elperiodico.com':'El Periódico',
+    'engadget.com':'Engadget',
+    'entrepreneur.com':'Entrepreneur',
+    'eonline.com':'E! Online',
+    'escapistmagazine.com':'The Escapist',
+    'espn.com':'ESPN',
+    'espnfc.com':'ESPN FC',
+    'esquire.com':'Esquire',
+    'etonline.com':'Entertainment Tonight',
+    'eurogamer.net':'Eurogamer',
+    'euronews.com':'Euronews',
+    'europa.eu':'European Union',
+    'ew.com':'Entertainment Weekly',
+    'express.co.uk':'Daily Express',
+    'extratv.com':'Extra TV',
+    'fastcompany.com':'Fast Company',
+    'fd.nl':'Het Financieele Dagblad',
+    'fda.gov':'U.S. Food and Drug Administration',
+    'filmmakermagazine.com':'Filmmaker Magazine',
+    'filmschoolrejects.com':'Film School Rejects',
+    'filmstage.com':'The Film Stage',
+    'firstshowing.net':'FirstShowing.net',
+    'flickeringmyth.com':'Flickering Myth',
+    'fool.com':'The Motley Fool',
+    'forbes.com':'Forbes',
+    'fortune.com':'Fortune',
+    'fourfourtwo.com':'FourFourTwo',
+    'foxnews.com':'Fox News',
+    'foxsports.com':'Fox Sports',
+    'france24.com':'France 24',
+    'franceinfo.fr':'France Info',
+    'ft.com':'Financial Times',
+    'gameinformer.com':'Game Informer',
+    'gamerant.com':'Game Rant',
+    'gamerevolution.com':'Game Revolution',
+    'gamesindustry.biz':'GamesIndustry.biz',
+    'gamespot.com':'GameSpot',
+    'gamesradar.com':'GamesRadar+',
+    'gametrailers.com':'GameTrailers',
+    'gazzetta.it':'La Gazzetta dello Sport',
+    'giantbomb.com':'Giant Bomb',
+    'gizmodo.com':'Gizmodo',
+    'glamour.com':'Glamour',
+    'globalnews.ca':'Global News',
+    'goal.com':'Goal.com',
+    'goldderby.com':'Gold Derby',
+    'golfmonthly.com':'Golf Monthly',
+    'gov.uk':'UK Government',
+    'gq.com':'GQ',
+    'grubstreet.com':'Grub Street',
+    'hardcoregamer.com':'Hardcore Gamer',
+    'harpers.org':'Harper\'s Magazine',
+    'harpersbazaar.com':'Harper\'s Bazaar',
+    'health.com':'Health',
+    'healthline.com':'Healthline',
+    'heavy.com':'Heavy',
+    'hollywoodreporter.com':'The Hollywood Reporter',
+    'hotair.com':'Hot Air',
+    'houstonchronicle.com':'Houston Chronicle',
+    'huffingtonpost.it':'HuffPost Italia',
+    'huffpost.com':'HuffPost',
+    'ign.com':'IGN',
+    'ilfattoquotidiano.it':'Il Fatto Quotidiano',
+    'ilgiornale.it':'Il Giornale',
+    'illustratemagazine.com':'Illustrate Magazine',
+    'ilmessaggero.it':'Il Messaggero',
+    'ilpost.it':'Il Post',
+    'ilsole24ore.com':'Il Sole 24 Ore',
+    'imf.org':'International Monetary Fund',
+    'inc.com':'Inc.',
+    'independent.co.uk':'The Independent',
+    'indiewire.com':'IndieWire',
+    'instyle.com':'InStyle',
+    'investorsbusinessdaily.com':'Investor\'s Business Daily',
+    'jazzjournal.co.uk':'Jazz Journal',
+    'joblo.com':'JoBlo.com',
+    'jstor.org':'JSTOR',
+    'justjared.com':'Just Jared',
+    'justjaredjr.com':'Just Jared Jr.',
+    'kerrang.com':'Kerrang!',
+    'kiplinger.com':'Kiplinger',
+    'kotaku.com':'Kotaku',
+    'larazon.es':'La Razón',
+    'lastampa.it':'La Stampa',
+    'latimes.com':'Los Angeles Times',
+    'lavanguardia.com':'La Vanguardia',
+    'lefigaro.fr':'Le Figaro',
+    'lemonde.fr':'Le Monde',
+    'leparisien.fr':'Le Parisien',
+    'lepoint.fr':'Le Point',
+    'lesechos.fr':'Les Échos',
+    'lexpres.fr':'L\'Express',
+    'liberation.fr':'Libération',
+    'lifehacker.com':'Lifehacker',
+    'livescience.com':'Live Science',
+    'macworld.com':'Macworld',
+    'magneticmag.com':'Magnetic Magazine',
+    'marca.com':'MARCA',
+    'marieclaire.com':'Marie Claire',
+    'marketwatch.com':'MarketWatch',
+    'mashable.com':'Mashable',
+    'mayoclinic.org':'Mayo Clinic',
+    'mediaite.com':'Mediaite',
+    'mediapart.fr':'Mediapart',
+    'mediapost.com':'MediaPost',
+    'menshealth.com':'Men\'s Health',
+    'mercurynews.com':'The Mercury News',
+    'merriam-webster.com':'Merriam-Webster',
+    'metacritic.com':'Metacritic',
+    'metro.co.uk':'Metro',
+    'miamiherald.com':'Miami Herald',
+    'mirror.co.uk':'The Mirror',
+    'mixmag.net':'Mixmag',
+    'mmogames.com':'MMOGames',
+    'mmorpg.com':'MMORPG.com',
+    'mojo4music.com':'MOJO',
+    'money.com':'Money',
+    'morningstar.com':'Morningstar',
+    'motherjones.com':'Mother Jones',
+    'motorsportmagazine.com':'Motor Sport Magazine',
+    'movieweb.com':'MovieWeb',
+    'msnbc.com':'MSNBC',
+    'mundialmag.com':'MUNDIAL',
+    'mundodeportivo.com':'Mundo Deportivo',
+    'musicmayhemmagazine.com':'Music Mayhem Magazine',
+    'nasa.gov':'NASA',
+    'nationalgeographic.com':'National Geographic',
+    'nationalpost.com':'National Post',
+    'nationalreview.com':'National Review',
+    'nature.com':'Nature',
+    'nbclocal.com':'NBC Local',
+    'nbcnews.com':'NBC News',
+    'nbcsports.com':'NBC Sports',
+    'ncbi.nlm.nih.gov':'NCBI',
+    'news.co.nz':'Stuff.co.nz',
+    'news.com.au':'News.com.au',
+    'news.sky.com':'Sky News',
+    'news.yahoo.com':'Yahoo News',
+    'newscientist.com':'New Scientist',
+    'newsweek.com':'Newsweek',
+    'newyorker.com':'The New Yorker',
+    'newyorkmag.com':'New York Magazine',
+    'nextbestpicture.com':'Next Best Picture',
+    'nintendolife.com':'Nintendo Life',
+    'nist.gov':'National Institute of Standards and Technology',
+    'nltimes.nl':'NL Times',
+    'nobelprize.org':'Nobel Prize Organization',
+    'nola.com':'The Times-Picayune',
+    'nos.nl':'NOS',
+    'nouvelobs.com':'L\'Obs',
+    'npr.org':'NPR',
+    'nrc.nl':'NRC',
+    'nu.nl':'NU.nl',
+    'nypost.com':'New York Post',
+    'nytimes.com':'The New York Times',
+    'nzherald.co.nz':'New Zealand Herald',
+    'oecd.org':'Organisation for Economic Co-operation and Development',
+    'orcz.com':'Orcz',
+    'oregonian.com':'The Oregonian',
+    'oregonlive.com':'OregonLive',
+    'outsidemagazine.com':'Outside Magazine',
+    'oxforddictionaries.com':'Oxford Dictionaries',
+    'parool.nl':'Het Parool',
+    'pbs.org':'PBS',
+    'pcgamer.com':'PC Gamer',
+    'pcmag.com':'PC Magazine',
+    'pcworld.com':'PCWorld',
+    'pennlive.com':'PennLive',
+    'people.com':'People',
+    'perezhilton.com':'Perez Hilton',
+    'pitchfork.com':'Pitchfork',
+    'politico.com':'Politico',
+    'polygon.com':'Polygon',
+    'popcrush.com':'PopCrush',
+    'popsci.com':'Popular Science',
+    'popsugar.com':'PopSugar',
+    'prevention.com':'Prevention',
+    'publico.es':'Público',
+    'pubmed.ncbi.nlm.nih.gov':'PubMed',
+    'purexbox.com':'Pure Xbox',
+    'pushsquare.com':'Push Square',
+    'rainews.it':'Rai News',
+    'rawstory.com':'Raw Story',
+    'reason.com':'Reason',
+    'redstate.com':'RedState',
+    'refinery29.com':'Refinery29',
+    'repubblica.it':'la Repubblica',
+    'reuters.com':'Reuters',
+    'rfi.fr':'RFI',
+    'rockpapershotgun.com':'Rock Paper Shotgun',
+    'rogerebert.com':'RogerEbert.com',
+    'rollingstone.com':'Rolling Stone',
+    'rpgamer.com':'RPGamer',
+    'rpgfan.com':'RPGFan',
+    'rtl.nl':'RTL Nieuws',
+    'rtve.es':'RTVE',
+    'rugbyworld.com':'Rugby World',
+    'runnersworld.com':'Runner\'s World',
+    'sacbee.com':'The Sacramento Bee',
+    'salon.com':'Salon',
+    'sbnation.com':'SB Nation',
+    'sciencedaily.com':'Science Daily',
+    'sciencedirect.com':'ScienceDirect',
+    'scientificamerican.com':'Scientific American',
+    'scmp.com':'South China Morning Post',
+    'screenjunkies.com':'Screen Junkies',
+    'scriptnotes.net':'Script Notes',
+    'seattletimes.com':'The Seattle Times',
+    'seeking.com':'Seeking Alpha',
+    'seventeen.com':'Seventeen',
+    'sfchronicle.com':'San Francisco Chronicle',
+    'sfgate.com':'SFGATE',
+    'shacknews.com':'Shacknews',
+    'shoot.co.uk':'Shoot Magazine',
+    'si.com':'Sports Illustrated',
+    'skimag.com':'SKI Magazine',
+    'skysports.com':'Sky Sports',
+    'slashfilm.com':'SlashFilm',
+    'slate.com':'Slate',
+    'smh.com.au':'Sydney Morning Herald',
+    'smithsonianmag.com':'Smithsonian Magazine',
+    'soccer360magazine.com':'Soccer360 Magazine',
+    'soccer365.com':'Soccer365',
+    'space.com':'Space.com',
+    'spectator.org':'The American Spectator',
+    'spin.com':'SPIN',
+    'sport.es':'Sport',
+    'startribune.com':'Star Tribune',
+    'statesman.com':'Austin American-Statesman',
+    'stereogum.com':'Stereogum',
+    'straitstimes.com':'The Straits Times',
+    'surfer.com':'Surfer Magazine',
+    'swimswam.com':'SwimSwam',
+    'tampabay.com':'Tampa Bay Times',
+    'tapeop.com':'Tape Op',
+    'techcrunch.com':'TechCrunch',
+    'teenvogue.com':'Teen Vogue',
+    'telegraaf.nl':'De Telegraaf',
+    'telegraph.co.uk':'The Telegraph',
+    'tennismagazine.com':'Tennis Magazine',
+    'theage.com.au':'The Age',
+    'theathletic.com':'The Athletic',
+    'theatlantic.com':'The Atlantic',
+    'theaustralian.com.au':'The Australian',
+    'theblaze.com':'The Blaze',
+    'theconversation.com':'The Conversation',
+    'thecut.com':'The Cut',
+    'thedailybeast.com':'The Daily Beast',
+    'thegamer.com':'TheGamer',
+    'theglobeandmail.com':'The Globe and Mail',
+    'theguardian.com':'The Guardian',
+    'thehill.com':'The Hill',
+    'thescore.com':'theScore',
+    'thesixthaxis.com':'TheSixthAxis',
+    'thestar.com':'Toronto Star',
+    'theverge.com':'The Verge',
+    'thewest.com.au':'The West Australian',
+    'thewrap.com':'TheWrap',
+    'thinkprogress.org':'ThinkProgress',
+    'time.com':'Time',
+    'tmz.com':'TMZ',
+    'tomshardware.com':'Tom\'s Hardware',
+    'torontosun.com':'Toronto Sun',
+    'townhall.com':'Townhall',
+    'trouw.nl':'Trouw',
+    'truthout.org':'Truthout',
+    'tuttosport.com':'Tuttosport',
+    'tv5monde.com':'TV5 Monde',
+    'un.org':'United Nations',
+    'unicef.org':'UNICEF',
+    'upi.com':'United Press International',
+    'uproxx.com':'Uproxx',
+    'usatoday.com':'USA Today',
+    'usmagazine.com':'Us Weekly',
+    'vanityfair.com':'Vanity Fair',
+    'variety.com':'Variety',
+    'ventsmagazine.com':'Vents Magazine',
+    'vg247.com':'VG247',
+    'vibe.com':'Vibe',
+    'videogamer.com':'VideoGamer.com',
+    'vogue.com':'Vogue',
+    'volkskrant.nl':'de Volkskrant',
+    'vox.com':'Vox',
+    'vulture.com':'Vulture',
+    'washingtonpost.com':'The Washington Post',
+    'webmd.com':'WebMD',
+    'weeklystandard.com':'The Weekly Standard',
+    'wegotthiscovered.com':'We Got This Covered',
+    'whensaturdaycomes.co.uk':'When Saturday Comes',
+    'who.int':'World Health Organization',
+    'wired.com':'WIRED',
+    'womenshealthmag.com':'Women\'s Health',
+    'worldbank.org':'World Bank',
+    'worldcat.org':'WorldCat',
+    'worldsoccer.com':'World Soccer',
+    'wsj.com':'The Wall Street Journal',
+    'zdnet.com':'ZDNet'
+  };
+  return map[domain.toLowerCase()] || domain;
+}
+
+function convertCiteWebFamily(parsed, options){
   const params = parsed.params;
   const finalParams = {};
   const log = [];
@@ -674,11 +1118,30 @@ function buildLiteratur(finalParams){
 
 
 
-  if(params.website){ finalParams['werk'] = params.website; }
+
+  // Zitat (quote -> zitat) mit gleichen Ersetzungen wie Titel
+  if(params.quote){
+    const qOrig = String(params.quote);
+    let q = qOrig.replace(/\{\{\*\}\}/g, '\u2022');
+    q = q.replace(/\{\{\s*!\s*\}\}/g, ' – ');
+    q = q.replace(/\s*–\s*/g, ' – ');
+    q = q.replace(/\s{2,}/g, ' ').trim();
+    finalParams['zitat'] = q;
+  }
+  if(params.work){ finalParams['werk'] = params.work; }
+  if(params.website){ finalParams['werk'] = finalParams['werk'] || params.website; }
   if(params.publisher){
     if(params.website){ finalParams['hrsg'] = params.publisher; }
-    else if(!finalParams['werk']){ finalParams['werk'] = params.publisher; }
+    
   }
+  if(!finalParams['werk'] && params.publisher){ finalParams['werk'] = params.publisher; }
+  if(!finalParams['werk'] && params.url){
+    var _site = (typeof getDisplaySiteNameFromUrl==='function' ? getDisplaySiteNameFromUrl(params.url) : '');
+    if(!_site && typeof getDomainFromUrl==='function'){ _site = getDomainFromUrl(params.url); }
+    if(_site){ finalParams['werk'] = _site; }
+  }
+    
+  // continue building params
   if(params.url){
     finalParams['url'] = params.url;
     const lower = String(params.url).toLowerCase();
@@ -689,18 +1152,37 @@ function buildLiteratur(finalParams){
     }
   }
 
-  const d = params['publication-date'] || params.date || params.year;
-  if(d){ const iso = toISODate(d); if(iso) finalParams['datum'] = iso; }
-  const acc = params['access-date'] || params.accessdate;
-  if(acc){ const isoA = toISODate(acc); if(isoA) finalParams['abruf'] = isoA; }
-  if(params.language){ finalParams['sprache'] = params.language; }
+  
+const d = params['publication-date'] || params.date || params.year;
+if(d){ const iso = toISODate(d); if(iso) finalParams['datum'] = iso; }
 
-  // Reihenfolge wie Internetquelle
-  const order = ['autor','titel','werk','datum','sprache','url','format','abruf'];
-  const out = ['{{Internetquelle']
-    .concat(order.filter(k => finalParams[k]).map(k => '|' + k + '=' + finalParams[k]))
-    .join(' ') + '}}';
-  return { output: out, log };
+// Abruf: heute wenn Option aktiv, sonst access-date/accessdate/url-access
+if(options.useToday){
+  finalParams['abruf'] = todayISO();
+} else {
+  const acc = params['access-date'] || params.accessdate || params['url-access'];
+  if(acc){ const isoA = toISODate(acc); if(isoA) finalParams['abruf'] = isoA; }
+}
+
+// Sprache: explicit → override → Wörterlisten/Heuristik
+(function(){
+  const lang = chooseLanguage(options.langChoice, params.language, params.title, (params.website || params.work || params.publisher || ''), options.overrideLang, options.fullLangCodes);
+  if (lang) {
+    if (!(options.suppressGerman && String(lang).toLowerCase().startsWith('de'))) {
+      finalParams['sprache'] = lang;
+    }
+  }
+})();
+
+// Reihenfolge exakt wie gefordert
+const order = ['autor','url','titel','titelerg','werk','hrsg','datum','seiten','format','sprache','offline','archiv-url','archiv-datum','archiv-bot','abruf','abruf-verborgen','kommentar','zitat','CH'];
+
+// String bauen – exakt ein Leerzeichen nach dem Templatenamen
+const parts = [];
+order.forEach(function(k){ if(finalParams[k]) parts.push('|' + k + '=' + finalParams[k]); });
+const out = '{{Internetquelle ' + parts.join(' ') + '}}';
+return { output: out, log };
+
 }
 
 
@@ -1583,5 +2065,79 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }catch(e){ console.error(e); }
 })();
+
+<script>
+// Robust highlight + convert bootstrap (non-invasive)
+(function(){
+  function $(id){ return document.getElementById(id); }
+  function markReady(){
+    try{
+      var pre = $('inputHighlight');
+      if(pre && (pre.innerHTML || pre.textContent)) document.body.classList.add('hl-ready');
+    }catch(e){}
+  }
+  function refreshHighlight(){
+    try{ if(typeof window.updateInputHighlight==='function') window.updateInputHighlight(); }catch(e){}
+    markReady();
+  }
+  function bindInput(){
+    var ta = $('inputText'); if(!ta) return;
+    if(ta.dataset.hlBound) return;
+    ta.dataset.hlBound = "1";
+    ta.addEventListener('input', refreshHighlight);
+    ta.addEventListener('scroll', function(){ var pre=$('inputHighlight'); if(pre) pre.scrollTop = ta.scrollTop; });
+    refreshHighlight();
+  }
+  function fallbackConvert(){
+    try{
+      var ta = $('inputText'), outEl = $('outputText');
+      var input = ta && ta.value ? ta.value : '';
+      if(!input.trim()) return;
+      var opts = {
+        useToday: !!$('useTodayAbruf')?.checked,
+        stripArchiveIfLive: !!$('stripArchiveIfLive')?.checked,
+        overrideLang: !!$('overrideLang')?.checked,
+        langChoice: ($('langSelect') && $('langSelect').value) || '',
+        fullLangCodes: !!$('fullLangCodes')?.checked,
+        suppressGerman: !!$('suppressGerman')?.checked
+      };
+      if(typeof window.findFirstTopLevelTemplate!=='function' || typeof window.convertTemplateString!=='function'){
+        return;
+      }
+      var blk = window.findFirstTopLevelTemplate(input);
+      if(!blk || !blk.text) return;
+      var conv = window.convertTemplateString(blk.text, opts) || {};
+      var out = input.slice(0, blk.start) + (conv.output || blk.text) + input.slice(blk.end);
+      if(outEl){ outEl.value = out; }
+      try{ if(typeof window.updateOutputHighlight==='function') window.updateOutputHighlight(); }catch(e){}
+    }catch(e){ /* swallow */ }
+  }
+  function bindConvert(){
+    var btn = $('convertBtn'); if(!btn) return;
+    if(btn.dataset.convBound) return;
+    btn.dataset.convBound = "1";
+    btn.addEventListener('click', function(){
+      var ok = false, res=null;
+      try{
+        if(typeof window.transformTextAndReturnLog==='function'){
+          res = window.transformTextAndReturnLog();
+          if(res && typeof res.result==='string'){
+            $('outputText').value = res.result || '';
+            ok = true;
+          }
+        }
+      }catch(e){ ok = false; }
+      if(!ok){ fallbackConvert(); }
+      try{ if(typeof window.updateOutputHighlight==='function') window.updateOutputHighlight(); }catch(e){}
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', function(){ bindInput(); bindConvert(); refreshHighlight(); });
+  }else{
+    bindInput(); bindConvert(); refreshHighlight();
+  }
+})();
+</script>
+
 </body>
 </html>
