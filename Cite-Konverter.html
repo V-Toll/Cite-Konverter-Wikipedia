@@ -303,7 +303,7 @@ textarea.overlay{ color: inherit !important; caret-color: auto !important; }
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v4.4.1</a></h1>
+      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v4.4.2</a></h1>
       <p class="lead">Konvertiert Wikipedia-Vorlagen in das deutsche Schema: {{cite web}}, {{cite book}}, {{cite journal}} und {{cite encyclopedia}} → {{Internetquelle}} bzw. {{Literatur}}. Bitte jeden konvertierten Beleg vor dem Einfügen manuell prüfen.</p>
 
       <details>
@@ -389,6 +389,7 @@ textarea.overlay{ color: inherit !important; caret-color: auto !important; }
       <details id="changelog" style="margin-top:12px">
         <summary>📜 Versionsverlauf</summary>
         <ul>
+            <li><strong>v4.4.2</strong> (2025-11-26): Archiv-Parameter-Logik korrigiert – Checkbox "Archiv-Parameter entfernen, wenn URL aktiv" funktioniert jetzt korrekt: Bei deaktivierter Checkbox werden archiveurl, archivedate und url-status übernommen (url-status=live → offline=0, url-status=dead → offline=1).</li>
               <li><strong>v4.4.1</strong> (2025-09-11): Reihenfolge der Parameter in {{Literatur}} korrigiert.</li>
               <li><strong>v4.4</strong> (2025-09-11): Kleinere Fehlerkorrekturen wie doppeltes Leerzeichen und fehlende Zitat-Konvertierungen. Weitere Ergänzungen bei getDisplaySiteNameFromUrl.</li>
               <li><strong>v4.3.5</strong> (2025-09-10): Stabilisierung – Eingabetext sichtbar bis Highlight geladen; robustes Rebinding für Highlight & Konvertieren (Fallback aktiv).</li>
@@ -1170,6 +1171,52 @@ if(options.useToday){
   if (lang) {
     if (!(options.suppressGerman && String(lang).toLowerCase().startsWith('de'))) {
       finalParams['sprache'] = lang;
+    }
+  }
+})();
+
+
+// Archiv-Parameter: archiveurl, archivedate, url-status
+// Checkbox-Logik: stripArchiveIfLive
+(function(){
+  const archiveurl = params.archiveurl || params['archive-url'];
+  const archivedate = params.archivedate || params['archive-date'];
+  const urlStatus = params['url-status'];
+
+  // Wenn archiveurl vorhanden ist
+  if(archiveurl){
+    // Checkbox AKTIVIERT: Archiv-Parameter nur übernehmen wenn NICHT url-status=live
+    if(options.stripArchiveIfLive){
+      if(urlStatus && String(urlStatus).toLowerCase() === 'live'){
+        // url-status=live und Checkbox aktiviert → Parameter NICHT übernehmen
+        return;
+      }
+      // url-status=dead oder kein url-status → übernehmen
+      if(urlStatus && String(urlStatus).toLowerCase() === 'dead'){
+        finalParams['offline'] = '1';
+      }
+      // archiv-url und archiv-datum übernehmen
+      finalParams['archiv-url'] = archiveurl;
+      if(archivedate){
+        const isoArchive = toISODate(archivedate);
+        if(isoArchive) finalParams['archiv-datum'] = isoArchive;
+      }
+    } else {
+      // Checkbox DEAKTIVIERT: Archiv-Parameter IMMER übernehmen
+      finalParams['archiv-url'] = archiveurl;
+      if(archivedate){
+        const isoArchive = toISODate(archivedate);
+        if(isoArchive) finalParams['archiv-datum'] = isoArchive;
+      }
+      // offline-Parameter basierend auf url-status setzen
+      if(urlStatus){
+        if(String(urlStatus).toLowerCase() === 'live'){
+          finalParams['offline'] = '0';
+        } else if(String(urlStatus).toLowerCase() === 'dead'){
+          finalParams['offline'] = '1';
+        }
+      }
+      // Kein url-status angegeben → kein offline-Parameter
     }
   }
 })();
