@@ -298,19 +298,122 @@ body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color
 /* Bootstrap highlight safety: show textarea text until overlay is ready */
 textarea.overlay{ color: inherit !important; caret-color: auto !important; }
 .hl-ready textarea.overlay{ color: transparent !important; caret-color: transparent !important; }
+
+
+/* Wikidata Progress Bar */
+.wikidata-progress-container {
+  display: none;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+}
+
+body.force-dark .wikidata-progress-container {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.progress-label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #071029;
+}
+
+body.force-dark .progress-label {
+  color: #e9eef6;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+body.force-dark .progress-track {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #C250F2, #D76CD9);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+body.theme-wikipedia .progress-bar {
+  background: linear-gradient(90deg, #3366cc, #2b57b8);
+}
+
+body.theme-bluewave .progress-bar {
+  background: linear-gradient(90deg, #023E73, #0468BF);
+}
+
+body.theme-valley .progress-bar {
+  background: linear-gradient(90deg, #387CA6, #71A63C);
+}
+
+body.theme-simple .progress-bar {
+  background: linear-gradient(90deg, #111827, #6b7280);
+}
+
+body.theme-spice .progress-bar {
+  background: linear-gradient(90deg, #8C262E, #D99982);
+}
+
+body.theme-jadefruit .progress-bar {
+  background: linear-gradient(90deg, #03A6A6, #F27405);
+}
+
+body.theme-hacker .progress-bar {
+  background: linear-gradient(90deg, #205B73, #49BF9E);
+}
+
+  /* ==========================================
+     v6.1.5: Sichtbare Selektion (minimal, ohne Layering)
+     ========================================== */
+
+  #inputText::selection,
+  #outputText::selection {
+    background-color: rgba(100, 149, 237, 0.6) !important;
+    color: inherit !important;
+  }
+
+  body.dark #inputText::selection,
+  body.dark #outputText::selection {
+    background-color: rgba(135, 206, 250, 0.5) !important;
+    color: inherit !important;
+  }
+
+  #inputText::-moz-selection,
+  #outputText::-moz-selection {
+    background-color: rgba(100, 149, 237, 0.6) !important;
+    color: inherit !important;
+  }
+
+  body.dark #inputText::-moz-selection,
+  body.dark #outputText::-moz-selection {
+    background-color: rgba(135, 206, 250, 0.5) !important;
+    color: inherit !important;
+  }
+
 </style>
 </head>
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v4.4.2</a></h1>
-      <p class="lead">Konvertiert Wikipedia-Vorlagen in das deutsche Schema: {{cite web}}, {{cite book}}, {{cite journal}} und {{cite encyclopedia}} → {{Internetquelle}} bzw. {{Literatur}}. Bitte jeden konvertierten Beleg vor dem Einfügen manuell prüfen.</p>
+      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v7.0</a></h1>
+      <p class="lead">Der <i>Cite-Konverter für Wikipedia</i> unterstützt dich dabei, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_web" target="_blank"><code>{{cite web}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_news" target="_blank"><code>{{cite news}}</code></a> und <a href="https://en.wikipedia.org/wiki/Template:Cite_magazine" target="_blank"><code>{{cite magazine}}</code></a> in die deutsche Vorlage <a href="https://de.wikipedia.org/wiki/Vorlage:Internetquelle" target="_blank"><code>{{Internetquelle}}</code></a> zu konvertieren. Zudem wird <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_book" target="_blank"><code>{{cite book}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_journal" target="_blank"><code>{{cite journal}}</code></a> und <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia" target="_blank"><code>{{cite encyclopedia}}</code></a> in <a href="https://de.wikipedia.org/wiki/Vorlage:Literatur" target="_blank"><code>{{Literatur}}</code></a> konvertiert.</p>
 
       <details>
         <summary>⚙️ Optionen</summary>
         <div class="options" role="group" aria-label="Einstellungen">
           <label class="inline"><input type="checkbox" id="useTodayAbruf" checked /> <span class="info">Abrufdatum automatisch auf heute setzen</span> (<span id="todayLabel"></span>)</label>
           <label class="inline"><input type="checkbox" id="stripArchiveIfLive" checked /> <span class="info">Archiv-Parameter entfernen, wenn URL aktiv (<code>url-status=live</code>)</span></label>
+          <label class="inline"><input type="checkbox" id="convertSubref" checked /> <span class="info">Subreferenzierung konvertieren (<code>{{rp|...}}</code> → <code>details=</code>)</span></label>
           <label style="grid-column:1/-1" class="inline"><input type="checkbox" id="suppressGerman" checked /> <span class="info"><code>Sprache=de</code> unterdrücken</span> <button id="langInfoToggle" style="background:none;border:none;color:#0645AD;cursor:pointer">ℹ️</button></label>
           <div id="langInfo" style="display:none;margin-left:6px;font-size:13px;grid-column:1/-1">Deutsch (de) wird standardmäßig nicht ausgegeben. Fremdsprachen erscheinen als Sprachcode (zweistellig). Mit dieser Option kann die Unterdrückung deaktiviert werden.</div>
 
@@ -329,6 +432,12 @@ textarea.overlay{ color: inherit !important; caret-color: auto !important; }
 </div>
 
           <label class="inline"><input type="checkbox" id="overrideLang" /> <span class="info">Sprache manuell überschreiben</span></label>
+
+        <label class="inline"><input type="checkbox" id="wikidataLookup" checked> <span class="info">Wikilinks → Deutsch (Wikidata)</span></label>
+
+        <label class="inline"><input type="checkbox" id="keepDisplayNames" checked> <span class="info">Display-Namen beibehalten</span></label>
+
+        <label class="inline"><input type="checkbox" id="removeNonExistingLinks" checked> <span class="info">Klammern entfernen, wenn kein deutscher Artikel existiert</span></label>
 
           <div id="langSelectContainer" style="display:none; grid-column:1/-1">
             <label style="display:block;font-weight:700;margin-bottom:6px">Sprache wählen (überschreibt Heuristik)</label>
@@ -369,7 +478,7 @@ textarea.overlay{ color: inherit !important; caret-color: auto !important; }
       </div>
 
       <div class="btn-row" style="margin-bottom:22px">
-        <button id="convertBtn" class="btn-main">Einzelnachweis konvertieren</button>
+        <button id="convertBtn" class="btn-main">🔀 Konvertieren</button>
       </div>
 
       <!-- OUTPUT -->
@@ -389,77 +498,78 @@ textarea.overlay{ color: inherit !important; caret-color: auto !important; }
       <details id="changelog" style="margin-top:12px">
         <summary>📜 Versionsverlauf</summary>
         <ul>
-            <li><strong>v4.4.2</strong> (2025-11-26): Archiv-Parameter-Logik korrigiert – Checkbox "Archiv-Parameter entfernen, wenn URL aktiv" funktioniert jetzt korrekt: Bei deaktivierter Checkbox werden archiveurl, archivedate und url-status übernommen (url-status=live → offline=0, url-status=dead → offline=1).</li>
-              <li><strong>v4.4.1</strong> (2025-09-11): Reihenfolge der Parameter in {{Literatur}} korrigiert.</li>
-              <li><strong>v4.4</strong> (2025-09-11): Kleinere Fehlerkorrekturen wie doppeltes Leerzeichen und fehlende Zitat-Konvertierungen. Weitere Ergänzungen bei getDisplaySiteNameFromUrl.</li>
-              <li><strong>v4.3.5</strong> (2025-09-10): Stabilisierung – Eingabetext sichtbar bis Highlight geladen; robustes Rebinding für Highlight & Konvertieren (Fallback aktiv).</li>
-              <li><strong>v4.3.1</strong> (2025-09-10): {{Internetquelle}} – Priorität jetzt work → website → publisher (falls kein website/work) → Domain-Fallback aus URL.</li>
-              <li><strong>v4.3</strong> (2025-09-10): {{Internetquelle}} – Fallback für „werk“: wenn website/work fehlen → Domain aus der URL (z. B. nytimes.com). Plus Auto‑Mapping einiger Domains (z. B. nytimes.com → The New York Times).</li>
-              <li><strong>v4.2.1</strong> (2025-09-10): {cite news}/{cite web} → {{Internetquelle}}: Reihenfolge korrigiert; Sprache per language/Override/Wörterliste; Abruf=heute (Option); „work“→„werk“; Doppel‑Leerzeichen nach „Internetquelle“ entfernt.</li>
-              <li><strong>v4.2</strong> (2025-09-10): Fix für {{!}} u. ä. Mapping: website→werk & publisher→hrsg, Fallback publisher→werk wenn kein website.</li>
-              <li><strong>v4.1.1</strong> (2025-09-10): {{Internetquelle}} – feste Parameter-Reihenfolge erzwungen + Sprachcodes gekürzt (z. B. en‑US → en), falls „Ungekürzte Sprachcodes“ aus.</li>
-              <li><strong>v4.1</strong> (2025-09-08): cite web – Titel: Leerzeichen um Gedankenstrich normalisiert (genau ein Leerzeichen vor/nach „–“).</li>
-              <li><strong>v4.0.10</strong> (2025-09-06): Darkmode-Schalter: Beschriftung „Auto/An/Aus“ in Darkmode weiß; Changelog: Trenner für 4.x und 3.x hinzugefügt.</li>
-              <li><strong>v4.0.9</strong> (2025-09-06): Intro ergänzt ({{cite journal}}, {{cite encyclopedia}}); Changelog bereinigt.</li>
-              <li><strong>v4.0.8</strong> (2025-09-06): Fix Doppel-Leerzeichen nach „{{Internetquelle“ (Output nun „{{Internetquelle |…“).</li>
-              <li><strong>v4.0.7</strong> (2025-09-06): Parser-Fix für verschachtelte Templates – standalone-Erkennung nutzt jetzt brace‑Depth; verhindert abgeschnittene Konvertierung bei {{google books}}.</li>
-              <li><strong>v4.0.6</strong> (2025-09-06): Online-Feld bereinigt – {{google books}}-Templates werden aus URL/Online entfernt (kein Online-Ausgabe), in allen Konvertern (web/book/journal/encyclopedia); keine UI-Änderungen.</li>
-              <li><strong>v4.0.5</strong> (2025-09-06): cite encyclopedia – Hrsg unterstützt nun „editor-first/last“ (ohne Index) und „editorN-first/last“; robustere Google-Books/URL-Heuristik; keine UI-Änderungen.</li>
-              <li><strong>v4.0.4</strong> (2025-09-06): cite encyclopedia Mapping finalisiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache-Heuristik). Rückbau auf buildLiteratur().</li>
-              <li><strong>v4.0.3</strong> (2025-09-05): cite encyclopedia korrigiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache „en“ bei Google‑Books), Dispatcher‑Hook ergänzt. Smoke‑Test entfernt.</li>
-              <li><strong>v4.0.0.2</strong> (2025-09-05): Fix cite encyclopedia – Sammelwerk=encyclopedia; Reihe=series; Band=volume; Verlag=publisher; Datum aus date/publication-date/year; ISBN/Seiten korrekt.</li>
-              <li><strong>v4.0.0.1</strong> (2025-09-05): Fix cite encyclopedia – Autoren (first/last & editor1-first Schema), Hrsg (beide Schemata), series→Sammelwerk, Datum-Fallback (z. B. 2007a), Sprache=„en“ bei Google‑Books‑URL; keine UI-Änderungen.</li>
-              <li><strong>v4.0.0</strong> (2025-09-05): Neue Variante – {{cite encyclopedia}} → {{Literatur}} (Autor/Hrsg/Kapitel/Titel/Ort/Verlag/Datum/Abruf/IDs/Seiten). Keine UI-/Design-Änderungen.</li>
-              <li class="major-separator">— Version 3.x —</li>
-              <li><strong>v3.0.3.0</strong> (2025-09-05): Dev‑Feature: Smoke‑Test‑Modus (?test=1 oder Alt+D). Tests laufen nur in der Konsole; keine UI‑Änderungen.</li>
-              <li><strong>v3.0.2.22</strong> (2025-09-05): Bugfix cite web – Aufruf von toISODateFlexible entfernt (nicht definiert) und durch toISODate ersetzt.</li>
-              <li><strong>v3.0.2.21</strong> (2025-09-05): Bugfix cite web – defekte Erkennung/Zuordnung ersetzt (robuste Aliase, saubere Parametermappung). Sonst keine Änderungen.</li>
-              <li><strong>v3.0.2.20</strong> (2025-09-05): Konverter‑Zusammenfassung (UI + JS) entfernt. Sonst keine Änderungen.</li>
-              <li><strong>v3.0.2.14</strong> (2025-09-05): Internetquelle-Summary: "Titel: ersetzt {*} → •" nur noch, wenn tatsächlich ersetzt; sonst "Titel übernommen".</li>
-              <li><strong>v3.0.2.13</strong> (2025-09-04): Kritischer Fix – Builder repariert und Journal-Konverter liefert detaillierte Summary-Logs; keine UI-/Theme-Änderungen.</li>
-              <li><strong>v3.0.2</strong> (2025-09-04): JS-Bereinigung für <code>cite journal</code> (dupl./abgeschnittene Fragmente entfernt); Klick auf „Konvertieren“ liefert zuverlässig Output.</li>
-              <li><strong>v3.0.1</strong> (2025-09-03): Dispatcher-Fix: Branch für <code>cite journal</code> korrekt registriert.</li>
-              <li><strong>v3.0.0</strong> (2025-09-03): Neue Vorlage: <code>{{cite journal}}</code> → <code>{{Literatur}}</code> (Autoren/Editoren/Übersetzer, Datum/Originaljahr, Sammelwerk/Band/Nummer, Seiten, Sprache, Online/Abruf, IDs, Typ, Zitat).</li>
-              <li class="major-separator">— Version 2.x —</li>
-              <li><strong>v2.5.19.1</strong> (2025-09-01): Theme-Grid auf max. 4 Kacheln pro Reihe begrenzt (3/2/1 Spalten bei kleineren Viewports); Wikipedia-Button erhält wieder ausreichenden Innenabstand.</li>
-              <li><strong>v2.5.19</strong> (2025-09-01): Neue Themes: Simple (schwarz/weiß/grau), Spice, Jade Fruit, Hacker – inkl. H1-/Button-/Badge-Anpassungen.</li>
-              <li><strong>v2.5.18.4</strong> (2025-09-01): Highlighter neu aufgebaut (verlustfrei): Template-Name mit Leerzeichen vor erster Pipe sichtbar; Overlay-Text deckt den vollen Inhalt.</li>
-              <li><strong>v2.5.18.3</strong> (2025-09-01): Anzeige-Bug behoben: Leerzeichen vor der ersten Pipe bleibt bei „{{cite … |“ erhalten (Tokenizer erhält Nachlauf-Whitespace vor <code>|</code>/<code>}</code>).</li>
-              <li><strong>v2.5.18.2</strong> (2025-09-01): Zeilenumbruch in Eingabe-/Ausgabe-Highlight wieder aktiv (Wrap wie Textfelder); CSS: <code>pre.highlight</code> auf <code>pre-wrap</code> umgestellt, Spans erben <code>white-space</code>.</li>
-              <li><strong>v2.5.18.1</strong> (2025-09-01): Hintergrund-Verlauf füllt die gesamte Seite (auch bei aufgeklapptem Versionsverlauf); Darstellung: fehlendes Leerzeichen nach „{cite …“ bzw. vor dem ersten Pipe behoben; Konvertierung: „{*}“ im title → „•“ (U+2022).</li>
-              <li><strong>v2.5.18</strong> (2025-09-01): Darkmode-Auswahl als Segmented-Control (Auto/An/Aus) ergänzt; bestehendes Dropdown bleibt (visually-hidden) und wird bidirektional synchronisiert (Klick & Tastatur); aktiver Zustand deutlicher hervorgehoben.</li>
-              <li><strong>v2.5.17</strong> (2025-09-01): Darkmode-Option kompakter: Label und Auswahl stehen jetzt nebeneinander (Wrapper <code>.option-compact</code>) für bessere Lesbarkeit.</li>
-              <li><strong>v2.5.16</strong> (2025-09-01): Highlighting-Fix: <code>&lt;/ref&gt;</code> wird exakt wie <code>&lt;ref&gt;</code> und <code>&lt;ref name="…"&gt;</code> eingefärbt (robuster Regex im Highlighter).</li>
-              <li><strong>v2.5.15</strong> (2025-08-31): Darkmode-Sichtbarkeit: Basistext in Codeblöcken auf #fff, „{{cite web“}} heller; </ref> wie <ref> eingefärbt.</li>
-              <li><strong>v2.5.13</strong> (2025-08-31): Darkmode-Syntax aufgehellt: „{{cite web“}} (Template) & Parametervalue heller; </ref> nun gleiche Farbe wie <code><ref></code> & <code><ref name="…"></code>.</li>
-              <li><strong>v2.5.12</strong> (2025-08-31): Darkmode-Kontraste (Intro & Syntax) breit abgesichert (.dark & .force-dark; .lead statt #subline). Keine anderen Änderungen.</li>
-              <li><strong>v2.5.11</strong> (2025-08-31): Darkmode-Kontraste für Intro & Syntax-Highlighting aufgehellt.</li>
-              <li><strong>v2.5.10</strong> (2025-08-31): Darkmode-Info-Icon entfernt; Abstand Label/Dropdown optimiert; Changelog vollständig wiederhergestellt (keine Einträge gelöscht).</li>
-              <li><strong>v2.5.9</strong> (2025-08-31): H1-Verlauf animiert (12s ease-in-out, sanft fließend).</li>
-              <li><strong>v2.5.8</strong> (2025-08-31): H1-Farben (theme-gebunden) wiederhergestellt; Badge dezenter; Darkmode-Kontraste für Intro & Highlighting verbessert.</li>
-              <li><strong>v2.5.7</strong> (2025-08-31): Darkmode-Auswahl mit ℹ️-Info-Hinweis (Hover-Tooltip) ergänzt.</li>
-              <li><strong>v2.5.6</strong> (2025-08-31): Option „Darkmode“ überarbeitet: Automatisch (System), Immer an, Immer aus.</li>
-              <li><strong>v2.5.5b</strong> (2025-08-31): Trenner im Changelog im Darkmode heller.</li>
-              <li><strong>v2.5.5</strong> (2025-08-31): Trenner im Changelog für Major-Versionen hinzugefügt.</li>
-              <li><strong>v2.5.4</strong> (2025-08-31): Subline-Text geändert; bessere Lesbarkeit im Darkmode.</li>
-              <li><strong>v2.5.3</strong> (2025-08-31): Smoothflow – weiche H1-Animation (400% Hintergrund; 12s ease-in-out).</li>
-              <li><strong>v2.5.2</strong> (2025-08-31): Designpolitur – H1-Verlauf animiert (erste Version).</li>
-              <li><strong>v2.5.1</strong> (2025-08-31): Badge-Link zum Changelog; H1 theme-gebunden; Syntax-Highlighting & Gradient-Fix.</li>
-              <li><strong>v2.5</strong> (2025-08-30): Syntax-Highlighting für Eingabe & Ausgabe; verständliche Konvertierungs-Zusammenfassung; Design & Konvertierungsskript unberührt.</li>
-              <li><strong>v2.4.7</strong> (2025-08-30): Darkmode für Wikipedia-Theme deutlich dunkler gestaltet (#1a1a1a → #2a2a2a).</li>
-              <li><strong>v2.4.6</strong> (2025-08-30): Theme-Buttons & Badge passen sich an; Darkmode-Varianten für alle Themes; Farbverlauf bleibt bis unten sichtbar; Badge wieder styled; Changelog erweitert.</li>
-              <li><strong>v2.4.5</strong> (2025-08-29): Sprachheuristik ergänzt (mehr Sprachen erkannt), Checkbox mit Info-Icon, Flaggen bei Sprachoption, mehr Abstand zwischen Buttons/Textareas, Hover-Effekte verbessert.</li>
-              <li><strong>v2.4.4</strong> (2025-08-30): Vollständige Integration der robusten Konvertierungslogik (fixed14) in das neue Design; Copy-Button styled + animiert; Theme-Wechsel repariert; Darkmode-Varianten pro Theme ergänzt; kleine UI-Optimierungen (Hover/Focus, Copy-Feedback, responsive Buttons).</li>
-              <li><strong>v2.4.3</strong> (2025-08-29): Bugfix-Version, Konvertierung funktioniert wieder; Design noch unvollständig.</li>
-              <li><strong>v2.4.2</strong> (2025-08-29): Versuch der Integration, aber Teile der Logik fehlten.</li>
-              <li><strong>v2.4.1</strong> (2025-08-29): Bugfix für Erkennung von cite web/news/magazine/book auch mit Parametern; Darkmode-Override-Toggle und Theme-Auswahl mit Farbverläufen.</li>
-              <li><strong>v2.4</strong> (2025-08-29): Redesign (Claude-Version) mit modernem Glasmorphism-UI.</li>
-              <li><strong>v2.3</strong> (2025-08-28): Neues Theme-System (4 Designs mit LocalStorage), Optionen erweitert (Sprachcodes ungekürzt, Direktkopie, Info-Hinweis per Klick), kleinere Textareas, Favicon gefixt. Neueste Version oben gelistet.</li>
-              <li><strong>v2.2</strong> (2025-08-28): Einstellungsmenü in <code>details</code>-Block; neue Checkbox „Sprache=de unterdrücken“.</li>
-              <li><strong>v2.1.2</strong> (2025-08-28): Info-Hinweis zu Sprache=de.</li>
-              <li><strong>v2.1.1</strong> (2025-08-28): Normalisierung Sprachcodes, Deutsch wird unterdrückt.</li>
-              <li><strong>v2.1</strong> (2025-08-28): ISBN-Gruppierung, strengere Sprachheuristik.</li>
-              <li><strong>v2.0</strong> (2025-08-28): Neue Konvertierung {{cite book}} → {{Literatur}}.</li>
+          <li><strong>v7.0 "The Redirection"</strong> (2025-12-20): Wikipedia-Redirects werden automatisch befolgt – Englische Wikilinks mit Redirects (z.B. <code>[[Eastern Band Cherokee]]</code> → <code>[[Eastern Band of Cherokee Indians]]</code>) werden erkannt und der finale Artikel wird zur deutschen Übersetzung verwendet. Button umbenannt: "🔀 Konvertieren". Progress Bar zeigt jetzt auch die Anzahl der aufgelösten Redirects. Separater Redirect-Cache für bessere Performance beim erneuten Konvertieren.</li>
+          <li><strong>v6.0 "Welcome to Wikidata"</strong> (2025-12-10): Wikidata-Integration – Englische Wikilinks werden automatisch in deutsche übersetzt (z.B. <code>[[Yellowstone National Park]]</code> → <code>[[Yellowstone-Nationalpark]]</code>). Features: Checkbox "Wikilinks → Deutsch (Wikidata)" (optional), "Display-Namen beibehalten" (standardmäßig aktiv), "Klammern entfernen bei fehlendem deutschen Artikel" (standardmäßig aktiv), Progress Bar zeigt Fortschritt bei mehreren Links, Cache (365 Tage), Rate Limiting (100ms zwischen API-Calls).</li>
+          <li><strong>v5.0</strong> (2025-12-09): Neue Funktion: Subreferenzierung – <code>{{rp|...}}</code> wird automatisch in <code>details=</code>-Attribut konvertiert (z.B. <code>{{rp|10–20}}</code> → <code>details="S. 10–20"</code>). Mehrere <code>{{rp}}</code> werden zusammengeführt. Bindestriche werden zu Bistrich normalisiert. Option standardmäßig aktiviert.</li>
+          <li><strong>v4.4.3</strong> (2025-11-26): Intro-Text aktualisiert.</li>
+          <li><strong>v4.4.2</strong> (2025-11-26): Archiv-Parameter-Logik korrigiert – Checkbox "Archiv-Parameter entfernen, wenn URL aktiv" funktioniert jetzt korrekt: Bei deaktivierter Checkbox werden archiveurl, archivedate und url-status übernommen (url-status=live → offline=0, url-status=dead → offline=1).</li>
+          <li><strong>v4.4.1</strong> (2025-09-11): Reihenfolge der Parameter in {{Literatur}} korrigiert.</li>
+          <li><strong>v4.4</strong> (2025-09-11): Kleinere Fehlerkorrekturen wie doppeltes Leerzeichen und fehlende Zitat-Konvertierungen. Weitere Ergänzungen bei getDisplaySiteNameFromUrl.</li>
+          <li><strong>v4.3.5</strong> (2025-09-10): Stabilisierung – Eingabetext sichtbar bis Highlight geladen; robustes Rebinding für Highlight & Konvertieren (Fallback aktiv).</li>
+          <li><strong>v4.3.1</strong> (2025-09-10): {{Internetquelle}} – Priorität jetzt work → website → publisher (falls kein website/work) → Domain-Fallback aus URL.</li>
+          <li><strong>v4.3</strong> (2025-09-10): {{Internetquelle}} – Fallback für „werk“: wenn website/work fehlen → Domain aus der URL (z. B. nytimes.com). Plus Auto‑Mapping einiger Domains (z. B. nytimes.com → The New York Times).</li>
+          <li><strong>v4.2.1</strong> (2025-09-10): {cite news}/{cite web} → {{Internetquelle}}: Reihenfolge korrigiert; Sprache per language/Override/Wörterliste; Abruf=heute (Option); „work“→„werk“; Doppel‑Leerzeichen nach „Internetquelle“ entfernt.</li>
+          <li><strong>v4.2</strong> (2025-09-10): Fix für {{!}} u. ä. Mapping: website→werk & publisher→hrsg, Fallback publisher→werk wenn kein website.</li>
+          <li><strong>v4.1.1</strong> (2025-09-10): {{Internetquelle}} – feste Parameter-Reihenfolge erzwungen + Sprachcodes gekürzt (z. B. en‑US → en), falls „Ungekürzte Sprachcodes“ aus.</li>
+          <li><strong>v4.1</strong> (2025-09-08): cite web – Titel: Leerzeichen um Gedankenstrich normalisiert (genau ein Leerzeichen vor/nach „–“).</li>
+          <li><strong>v4.0.10</strong> (2025-09-06): Darkmode-Schalter: Beschriftung „Auto/An/Aus“ in Darkmode weiß; Changelog: Trenner für 4.x und 3.x hinzugefügt.</li>
+          <li><strong>v4.0.9</strong> (2025-09-06): Intro ergänzt ({{cite journal}}, {{cite encyclopedia}}); Changelog bereinigt.</li>
+          <li><strong>v4.0.8</strong> (2025-09-06): Fix Doppel-Leerzeichen nach „{{Internetquelle“ (Output nun „{{Internetquelle |…“).</li>
+          <li><strong>v4.0.7</strong> (2025-09-06): Parser-Fix für verschachtelte Templates – standalone-Erkennung nutzt jetzt brace‑Depth; verhindert abgeschnittene Konvertierung bei {{google books}}.</li>
+          <li><strong>v4.0.6</strong> (2025-09-06): Online-Feld bereinigt – {{google books}}-Templates werden aus URL/Online entfernt (kein Online-Ausgabe), in allen Konvertern (web/book/journal/encyclopedia); keine UI-Änderungen.</li>
+          <li><strong>v4.0.5</strong> (2025-09-06): cite encyclopedia – Hrsg unterstützt nun „editor-first/last“ (ohne Index) und „editorN-first/last“; robustere Google-Books/URL-Heuristik; keine UI-Änderungen.</li>
+          <li><strong>v4.0.4</strong> (2025-09-06): cite encyclopedia Mapping finalisiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache-Heuristik). Rückbau auf buildLiteratur().</li>
+          <li><strong>v4.0.3</strong> (2025-09-05): cite encyclopedia korrigiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache „en“ bei Google‑Books), Dispatcher‑Hook ergänzt. Smoke‑Test entfernt.</li>
+          <li><strong>v4.0.0.2</strong> (2025-09-05): Fix cite encyclopedia – Sammelwerk=encyclopedia; Reihe=series; Band=volume; Verlag=publisher; Datum aus date/publication-date/year; ISBN/Seiten korrekt.</li>
+          <li><strong>v4.0.0.1</strong> (2025-09-05): Fix cite encyclopedia – Autoren (first/last & editor1-first Schema), Hrsg (beide Schemata), series→Sammelwerk, Datum-Fallback (z. B. 2007a), Sprache=„en“ bei Google‑Books‑URL; keine UI-Änderungen.</li>
+          <li><strong>v4.0.0</strong> (2025-09-05): Neue Variante – {{cite encyclopedia}} → {{Literatur}} (Autor/Hrsg/Kapitel/Titel/Ort/Verlag/Datum/Abruf/IDs/Seiten). Keine UI-/Design-Änderungen.</li>
+          <li><strong>v3.0.3.0</strong> (2025-09-05): Dev‑Feature: Smoke‑Test‑Modus (?test=1 oder Alt+D). Tests laufen nur in der Konsole; keine UI‑Änderungen.</li>
+          <li><strong>v3.0.2.22</strong> (2025-09-05): Bugfix cite web – Aufruf von toISODateFlexible entfernt (nicht definiert) und durch toISODate ersetzt.</li>
+          <li><strong>v3.0.2.21</strong> (2025-09-05): Bugfix cite web – defekte Erkennung/Zuordnung ersetzt (robuste Aliase, saubere Parametermappung). Sonst keine Änderungen.</li>
+          <li><strong>v3.0.2.20</strong> (2025-09-05): Konverter‑Zusammenfassung (UI + JS) entfernt. Sonst keine Änderungen.</li>
+          <li><strong>v3.0.2.14</strong> (2025-09-05): Internetquelle-Summary: "Titel: ersetzt {*} → •" nur noch, wenn tatsächlich ersetzt; sonst "Titel übernommen".</li>
+          <li><strong>v3.0.2.13</strong> (2025-09-04): Kritischer Fix – Builder repariert und Journal-Konverter liefert detaillierte Summary-Logs; keine UI-/Theme-Änderungen.</li>
+          <li><strong>v3.0.1</strong> (2025-09-03): Dispatcher-Fix: Branch für <code>cite journal</code> korrekt registriert.</li>
+          <li><strong>v3.0.0</strong> (2025-09-03): Neue Vorlage: <code>{{cite journal}}</code> → <code>{{Literatur}}</code> (Autoren/Editoren/Übersetzer, Datum/Originaljahr, Sammelwerk/Band/Nummer, Seiten, Sprache, Online/Abruf, IDs, Typ, Zitat).</li>
+          <li><strong>v2.5.19.1</strong> (2025-09-01): Theme-Grid auf max. 4 Kacheln pro Reihe begrenzt (3/2/1 Spalten bei kleineren Viewports); Wikipedia-Button erhält wieder ausreichenden Innenabstand.</li>
+          <li><strong>v2.5.19</strong> (2025-09-01): Neue Themes: Simple (schwarz/weiß/grau), Spice, Jade Fruit, Hacker – inkl. H1-/Button-/Badge-Anpassungen.</li>
+          <li><strong>v2.5.18.4</strong> (2025-09-01): Highlighter neu aufgebaut (verlustfrei): Template-Name mit Leerzeichen vor erster Pipe sichtbar; Overlay-Text deckt den vollen Inhalt.</li>
+          <li><strong>v2.5.18.3</strong> (2025-09-01): Anzeige-Bug behoben: Leerzeichen vor der ersten Pipe bleibt bei „{{cite … |“ erhalten (Tokenizer erhält Nachlauf-Whitespace vor <code>|</code>/<code>}</code>).</li>
+          <li><strong>v2.5.18.2</strong> (2025-09-01): Zeilenumbruch in Eingabe-/Ausgabe-Highlight wieder aktiv (Wrap wie Textfelder); CSS: <code>pre.highlight</code> auf <code>pre-wrap</code> umgestellt, Spans erben <code>white-space</code>.</li>
+          <li><strong>v2.5.18.1</strong> (2025-09-01): Hintergrund-Verlauf füllt die gesamte Seite (auch bei aufgeklapptem Versionsverlauf); Darstellung: fehlendes Leerzeichen nach „{cite …“ bzw. vor dem ersten Pipe behoben; Konvertierung: „{*}“ im title → „•“ (U+2022).</li>
+          <li><strong>v2.5.17</strong> (2025-09-01): Darkmode-Option kompakter: Label und Auswahl stehen jetzt nebeneinander (Wrapper <code>.option-compact</code>) für bessere Lesbarkeit.</li>
+          <li><strong>v2.5.16</strong> (2025-09-01): Highlighting-Fix: <code>&lt;/ref&gt;</code> wird exakt wie <code>&lt;ref&gt;</code> und <code>&lt;ref name="…"&gt;</code> eingefärbt (robuster Regex im Highlighter).</li>
+          <li><strong>v2.5.15</strong> (2025-08-31): Darkmode-Sichtbarkeit: Basistext in Codeblöcken auf #fff, „{{cite web“}} heller; </ref> wie <ref> eingefärbt.</li>
+          <li><strong>v2.5.13</strong> (2025-08-31): Darkmode-Syntax aufgehellt: „{{cite web“}} (Template) & Parametervalue heller; </ref> nun gleiche Farbe wie <code><ref></code> & <code><ref name="…"></code>.</li>
+          <li><strong>v2.5.12</strong> (2025-08-31): Darkmode-Kontraste (Intro & Syntax) breit abgesichert (.dark & .force-dark; .lead statt #subline). Keine anderen Änderungen.</li>
+          <li><strong>v2.5.11</strong> (2025-08-31): Darkmode-Kontraste für Intro & Syntax-Highlighting aufgehellt.</li>
+          <li><strong>v2.5.10</strong> (2025-08-31): Darkmode-Info-Icon entfernt; Abstand Label/Dropdown optimiert; Changelog vollständig wiederhergestellt (keine Einträge gelöscht).</li>
+          <li><strong>v2.5.9</strong> (2025-08-31): H1-Verlauf animiert (12s ease-in-out, sanft fließend).</li>
+          <li><strong>v2.5.8</strong> (2025-08-31): H1-Farben (theme-gebunden) wiederhergestellt; Badge dezenter; Darkmode-Kontraste für Intro & Highlighting verbessert.</li>
+          <li><strong>v2.5.7</strong> (2025-08-31): Darkmode-Auswahl mit ℹ️-Info-Hinweis (Hover-Tooltip) ergänzt.</li>
+          <li><strong>v2.5.6</strong> (2025-08-31): Option „Darkmode“ überarbeitet: Automatisch (System), Immer an, Immer aus.</li>
+          <li><strong>v2.5.5b</strong> (2025-08-31): Trenner im Changelog im Darkmode heller.</li>
+          <li><strong>v2.5.5</strong> (2025-08-31): Trenner im Changelog für Major-Versionen hinzugefügt.</li>
+          <li><strong>v2.5.4</strong> (2025-08-31): Subline-Text geändert; bessere Lesbarkeit im Darkmode.</li>
+          <li><strong>v2.5.3</strong> (2025-08-31): Smoothflow – weiche H1-Animation (400% Hintergrund; 12s ease-in-out).</li>
+          <li><strong>v2.5.2</strong> (2025-08-31): Designpolitur – H1-Verlauf animiert (erste Version).</li>
+          <li><strong>v2.5.1</strong> (2025-08-31): Badge-Link zum Changelog; H1 theme-gebunden; Syntax-Highlighting & Gradient-Fix.</li>
+          <li><strong>v2.5</strong> (2025-08-30): Syntax-Highlighting für Eingabe & Ausgabe; verständliche Konvertierungs-Zusammenfassung; Design & Konvertierungsskript unberührt.</li>
+          <li><strong>v2.4.7</strong> (2025-08-30): Darkmode für Wikipedia-Theme deutlich dunkler gestaltet (#1a1a1a → #2a2a2a).</li>
+          <li><strong>v2.4.6</strong> (2025-08-30): Theme-Buttons & Badge passen sich an; Darkmode-Varianten für alle Themes; Farbverlauf bleibt bis unten sichtbar; Badge wieder styled; Changelog erweitert.</li>
+          <li><strong>v2.4.5</strong> (2025-08-29): Sprachheuristik ergänzt (mehr Sprachen erkannt), Checkbox mit Info-Icon, Flaggen bei Sprachoption, mehr Abstand zwischen Buttons/Textareas, Hover-Effekte verbessert.</li>
+          <li><strong>v2.4.4</strong> (2025-08-30): Vollständige Integration der robusten Konvertierungslogik (fixed14) in das neue Design; Copy-Button styled + animiert; Theme-Wechsel repariert; Darkmode-Varianten pro Theme ergänzt; kleine UI-Optimierungen (Hover/Focus, Copy-Feedback, responsive Buttons).</li>
+          <li><strong>v2.4.3</strong> (2025-08-29): Bugfix-Version, Konvertierung funktioniert wieder; Design noch unvollständig.</li>
+          <li><strong>v2.4.2</strong> (2025-08-29): Versuch der Integration, aber Teile der Logik fehlten.</li>
+          <li><strong>v2.4.1</strong> (2025-08-29): Bugfix für Erkennung von cite web/news/magazine/book auch mit Parametern; Darkmode-Override-Toggle und Theme-Auswahl mit Farbverläufen.</li>
+          <li><strong>v2.4</strong> (2025-08-29): Redesign (Claude-Version) mit modernem Glasmorphism-UI.</li>
+          <li><strong>v2.3</strong> (2025-08-28): Neues Theme-System (4 Designs mit LocalStorage), Optionen erweitert (Sprachcodes ungekürzt, Direktkopie, Info-Hinweis per Klick), kleinere Textareas, Favicon gefixt. Neueste Version oben gelistet.</li>
+          <li><strong>v2.2</strong> (2025-08-28): Einstellungsmenü in <code>details</code>-Block; neue Checkbox „Sprache=de unterdrücken“.</li>
+          <li><strong>v2.1.2</strong> (2025-08-28): Info-Hinweis zu Sprache=de.</li>
+          <li><strong>v2.1.1</strong> (2025-08-28): Normalisierung Sprachcodes, Deutsch wird unterdrückt.</li>
+          <li><strong>v2.1</strong> (2025-08-28): ISBN-Gruppierung, strengere Sprachheuristik.</li>
+          <li><strong>v2.0</strong> (2025-08-28): Neue Konvertierung {{cite book}} → {{Literatur}}.</li>
+          <li><strong>v1.0</strong> (2025-04-2): Erste Version.</li>
         </ul>
       </details>
     </div>
@@ -1584,16 +1694,102 @@ function highlightTemplateText(text){
 
   /* ----------------- Driver for transform + summary ----------------- */
 
-  function transformTextAndReturnLog(){
-  const inputEl = document.getElementById('inputText');
-  const input = (inputEl.value || '').trim();
+
+  /**
+   * convertSubreferencing
+   * Konvertiert {{rp|...}} oder {{RP|...}} in details-Attribut für <ref>-Tags.
+   * 
+   * Regeln:
+   * - Mehrere {{rp|...}} direkt hintereinander werden zusammengeführt
+   * - Bindestriche/Gedankenstriche werden zu Bistrich (–, U+2013)
+   * - Prefix "S." wird hinzugefügt
+   * - Wenn <ref> kein name hat, bleibt es ohne name
+   * 
+   * @param {string} text - Der zu konvertierende Text
+   * @return {string} - Der konvertierte Text
+   */
+  /**
+   * convertSubreferencing
+   * Konvertiert {{rp|...}} oder {{RP|...}} in details-Attribut für <ref>-Tags.
+   */
+  function convertSubreferencing(text) {
+    if (!text) return text;
+  
+    // Hilfsfunktion: Normalisiere Bindestriche zu Bistrich
+    function normalizeToBistrich(str) {
+      return str.replace(/[-—]/g, '–');
+    }
+  
+    // Hilfsfunktion: Formatiere Seitenangabe
+    function formatPages(pages) {
+      if (!pages || pages.trim() === '') return '';
+      pages = pages.trim();
+      pages = normalizeToBistrich(pages);
+      pages = pages.replace(/(\d+)f(?!f)/g, '$1 f.');
+      pages = pages.replace(/(\d+)ff/g, '$1 ff.');
+      return 'S. ' + pages;
+    }
+  
+    // KORRIGIERTE Hauptlogik mit verbessertem Regex
+    const result = text.replace(
+      /(<ref\b[^>]*?)(\/?>|>([\s\S]*?)<\/ref>)\s*((?:\{\{\s*rp\s*\|[^}]*\}\}\s*)*(?:\{\{\s*rp\s*\|[^}]*\}\}))/gi,
+      function(fullMatch, refOpen, refMiddle, refContent, rpTemplates) {
+        
+        // Prüfe, ob es ein self-closing tag ist
+        const isSelfClosing = refMiddle.startsWith('/');
+        const refInner = isSelfClosing ? '' : (refContent || '');
+        const refClose = isSelfClosing ? '' : '</ref>';
+        
+        // Sammle alle {{rp|...}} Templates
+        const rpMatches = rpTemplates.match(/\{\{\s*rp\s*\|([^}]*)\}\}/gi) || [];
+        
+        // Extrahiere alle Seitenangaben
+        const allPages = [];
+        for (let rpMatch of rpMatches) {
+          const pageMatch = rpMatch.match(/\{\{\s*rp\s*\|([^}]*)\}\}/i);
+          if (pageMatch && pageMatch[1].trim()) {
+            allPages.push(pageMatch[1].trim());
+          }
+        }
+        
+        // Wenn keine Seiten gefunden wurden (leer), lösche {{rp}}
+        if (allPages.length === 0) {
+          return fullMatch.replace(/\{\{\s*rp\s*\|[^}]*\}\}\s*/gi, '');
+        }
+        
+        // Kombiniere alle Seiten mit Komma
+        const combinedPages = allPages.join(', ');
+        const formattedPages = formatPages(combinedPages);
+        
+        // KRITISCH: Entferne ALLE trailing Leerzeichen von refOpen
+        let cleanRefOpen = refOpen.replace(/\s+$/, '');
+        
+        // Füge details-Attribut mit GENAU einem Leerzeichen hinzu
+        const finalRefOpen = cleanRefOpen + ' details="' + formattedPages + '"';
+        
+        // Baue das finale <ref>-Tag zusammen
+        if (isSelfClosing) {
+          // WICHTIG: Leerzeichen vor /> und nach />
+          return finalRefOpen + ' /> ';
+        } else {
+          return finalRefOpen + '>' + refInner + refClose + ' ';
+        }
+      }
+    );
+    
+    return result;
+  }
+  
+  function transformTextAndReturnLog(overrideText){
+  const input = overrideText ? overrideText.trim() : (document.getElementById('inputText').value || '').trim();
   const options = {
     useToday: document.getElementById('useTodayAbruf').checked,
     stripArchiveIfLive: document.getElementById('stripArchiveIfLive').checked,
     overrideLang: document.getElementById('overrideLang').checked,
     langChoice: (document.getElementById('langSelect') && document.getElementById('langSelect').value) || '',
     fullLangCodes: document.getElementById('fullLangCodes').checked,
-    suppressGerman: document.getElementById('suppressGerman').checked
+    suppressGerman: document.getElementById('suppressGerman').checked,
+    convertSubref: document.getElementById('convertSubref').checked
   };
   const log = [];
 
@@ -1622,9 +1818,24 @@ function highlightTemplateText(text){
   // Choose best result: prefer A if it changed anything; else B; else unchanged
   const changedA = (resultA !== input);
   const changedB = (resultB !== input);
-  if(changedA) return { result: resultA, log };
-  if(changedB) return { result: resultB, log };
-
+  
+  let finalResult = input;
+  if(changedA) {
+    finalResult = resultA;
+  } else if(changedB) {
+    finalResult = resultB;
+  }
+  
+  // Subreferenzierung anwenden (falls aktiviert)
+  if(options.convertSubref) {
+    finalResult = convertSubreferencing(finalResult);
+  }
+  
+  // Prüfe, ob sich etwas geändert hat
+  if(finalResult !== input) {
+    return { result: finalResult, log };
+  }
+  
   return { result: input, log:['Keine Template-Erkennung'] };
 }
 /* ----------------- DOM wiring ----------------- */
@@ -1645,31 +1856,47 @@ function highlightTemplateText(text){
     });
 
     // convert button
-    document.getElementById('convertBtn').addEventListener('click', function(){
-      const res = transformTextAndReturnLog();
+    document.getElementById('convertBtn').addEventListener('click', async function(){
+      // Wikidata-Verarbeitung wenn aktiviert
+      var wikidataCheckbox = document.getElementById('wikidataLookup');
+      var inputTextEl = document.getElementById('inputText');
+
+      if (wikidataCheckbox && wikidataCheckbox.checked && inputTextEl) {
+        var keepDisplay = document.getElementById('keepDisplayNames').checked;
+        var removeNonExisting = document.getElementById('removeNonExistingLinks').checked;
+
+        try {
+          var processedText = inputTextEl.value;
+          processedText = await processWikidataLinks(inputTextEl.value, keepDisplay, removeNonExisting);
+        } catch(e) {
+          console.error('Wikidata processing failed:', e);
+        }
+      }
+
+      // Original-Konvertierung
+      var textToConvert = (wikidataCheckbox && wikidataCheckbox.checked && processedText) ? processedText : inputTextEl.value;
+      const res = transformTextAndReturnLog(textToConvert);
       document.getElementById('outputText').value = res.result;
       updateOutputHighlight();
 
-      // render the conversion summary in user-friendly text
-      const sum = null;
-      if(!res.log || res.log.length===0){ /* summary removed */ }
-      else {
-        const items = res.log.map(function(line){
-          return '<li>' + escapeHtml(line) + '</li>';
-        }).join('');
-        /* summary removed */
-      }
-
       // auto copy?
       if(document.getElementById('autoCopy').checked){
-        const outText = document.getElementById('outputText').value || '';
+        const outText = document.getElementById('outputText').value;
         if(navigator.clipboard && navigator.clipboard.writeText){
-          navigator.clipboard.writeText(outText).then(()=>{ document.getElementById('copyStatus').textContent='✓ Direkt kopiert'; setTimeout(()=>document.getElementById('copyStatus').textContent='',1400); }).catch(()=>{});
-        } else {
-          try{ document.getElementById('outputText').select(); document.execCommand('copy'); document.getElementById('copyStatus').textContent='✓ Direkt kopiert'; setTimeout(()=>document.getElementById('copyStatus').textContent='',1400);}catch(e){}
+          navigator.clipboard.writeText(outText).then(function(){
+            document.getElementById('copyStatus').textContent='✓ Direkt kopiert';
+            setTimeout(function(){ document.getElementById('copyStatus').textContent=''; },1400);
+          }).catch(function(){});
+        }else{
+          try{
+            document.getElementById('outputText').select();
+            document.execCommand('copy');
+            document.getElementById('copyStatus').textContent='✓ Direkt kopiert';
+            setTimeout(function(){ document.getElementById('copyStatus').textContent=''; },1400);
+          }catch(e){}
         }
       }
-    });
+    })
 
     // copy button - always plain text from textarea (unformatted)
     document.getElementById('copyBtn').addEventListener('click', async function(){
@@ -2112,6 +2339,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }catch(e){ console.error(e); }
 })();
+</script>
 
 <script>
 // Robust highlight + convert bootstrap (non-invasive)
@@ -2184,6 +2412,205 @@ document.addEventListener("DOMContentLoaded", () => {
     bindInput(); bindConvert(); refreshHighlight();
   }
 })();
+
+
+// ==========================================
+// Wikidata Integration v6.1.5 "Redirect Resolver"
+// ==========================================
+
+var WIKIDATA_CACHE_KEY = 'wikidataTranslationCache';
+var WIKIDATA_REDIRECT_CACHE_KEY = 'wikidataRedirectCache';
+var CACHE_EXPIRY_DAYS = 365;
+
+function getCache(cacheKey) {
+  try {
+    var stored = localStorage.getItem(cacheKey);
+    if (!stored) return {};
+    var cache = JSON.parse(stored);
+    var now = Date.now();
+    if (cache.expires && cache.expires < now) {
+      localStorage.removeItem(cacheKey);
+      return {};
+    }
+    return cache.data || {};
+  } catch(e) {
+    return {};
+  }
+}
+
+function setCache(cacheKey, key, value) {
+  try {
+    var cache = getCache(cacheKey);
+    cache[key] = value;
+    var expires = Date.now() + (CACHE_EXPIRY_DAYS * 24 * 60 * 60 * 1000);
+    localStorage.setItem(cacheKey, JSON.stringify({data: cache, expires: expires}));
+  } catch(e) {}
+}
+
+function getWikidataCache() { return getCache(WIKIDATA_CACHE_KEY); }
+function setWikidataCache(key, value) { setCache(WIKIDATA_CACHE_KEY, key, value); }
+function getRedirectCache() { return getCache(WIKIDATA_REDIRECT_CACHE_KEY); }
+function setRedirectCache(key, value) { setCache(WIKIDATA_REDIRECT_CACHE_KEY, key, value); }
+
+function followWikipediaRedirects(title) {
+  return new Promise(function(resolve) {
+    var cleanTitle = String(title).trim();
+    var cached = getRedirectCache()[cleanTitle];
+    if (cached !== undefined) { resolve(cached); return; }
+    var apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + 
+                 encodeURIComponent(cleanTitle) + '&redirects=1&format=json&origin=*';
+    fetch(apiUrl)
+      .then(function(response) { return response.json(); })
+      .then(function(data) {
+        var finalTitle = cleanTitle;
+        if (data.query && data.query.redirects && data.query.redirects.length > 0) {
+          finalTitle = data.query.redirects[data.query.redirects.length - 1].to;
+        }
+        if (data.query && data.query.normalized && data.query.normalized.length > 0) {
+          finalTitle = data.query.normalized[0].to;
+        }
+        setRedirectCache(cleanTitle, finalTitle);
+        resolve(finalTitle);
+      })
+      .catch(function(error) {
+        setRedirectCache(cleanTitle, cleanTitle);
+        resolve(cleanTitle);
+      });
+  });
+}
+
+function fetchGermanWikilink(englishTitle) {
+  return new Promise(function(resolve) {
+    followWikipediaRedirects(englishTitle).then(function(finalTitle) {
+      var cached = getWikidataCache()[finalTitle];
+      if (cached !== undefined) {
+        resolve({german: cached, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
+        return;
+      }
+      var apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=pageprops&ppprop=wikibase_item&titles=' + 
+                   encodeURIComponent(finalTitle) + '&format=json&origin=*';
+      fetch(apiUrl)
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+          var pages = data.query.pages;
+          var pageId = Object.keys(pages)[0];
+          if (pageId === '-1' || !pages[pageId].pageprops || !pages[pageId].pageprops.wikibase_item) {
+            setWikidataCache(finalTitle, null);
+            resolve({german: null, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
+            return;
+          }
+          var wikidataId = pages[pageId].pageprops.wikibase_item;
+          return fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&ids=' + 
+                      wikidataId + '&props=sitelinks&sitefilter=dewiki&format=json&origin=*');
+        })
+        .then(function(response) { return response ? response.json() : null; })
+        .then(function(data) {
+          if (!data || !data.entities) {
+            setWikidataCache(finalTitle, null);
+            resolve({german: null, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
+            return;
+          }
+          var entity = data.entities[Object.keys(data.entities)[0]];
+          if (entity.sitelinks && entity.sitelinks.dewiki) {
+            var germanTitle = entity.sitelinks.dewiki.title;
+            setWikidataCache(finalTitle, germanTitle);
+            resolve({german: germanTitle, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
+          } else {
+            setWikidataCache(finalTitle, null);
+            resolve({german: null, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
+          }
+        })
+        .catch(function(error) {
+          resolve({german: null, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
+        });
+    });
+  });
+}
+
+function extractWikilinks(text) {
+  var links = [];
+  var regex = /\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|([^\]]+))?\]\]/g;
+  var match;
+  while ((match = regex.exec(text)) !== null) {
+    links.push({full: match[0], article: match[1].trim(), display: match[2] ? match[2].trim() : null, hasSection: match[0].indexOf('#') !== -1});
+  }
+  return links;
+}
+
+function updateProgressBar(current, total, redirectCount) {
+  var progressContainer = document.getElementById('wikidataProgress');
+  if (!progressContainer) return;
+  var percent = Math.round((current / total) * 100);
+  var bar = progressContainer.querySelector('.progress-bar');
+  var label = progressContainer.querySelector('.progress-label');
+  if (bar) bar.style.width = percent + '%';
+  var labelText = current + ' von ' + total + ' Links (' + percent + '%)';
+  if (redirectCount > 0) labelText += ' • ' + redirectCount + ' Redirect' + (redirectCount > 1 ? 's' : '');
+  if (label) label.textContent = labelText;
+}
+
+function showProgressBar(total) {
+  var progressContainer = document.getElementById('wikidataProgress');
+  if (!progressContainer) {
+    progressContainer = document.createElement('div');
+    progressContainer.id = 'wikidataProgress';
+    progressContainer.className = 'wikidata-progress-container';
+    progressContainer.innerHTML = '<div class="progress-label">0 von ' + total + ' Links (0%)</div>' +
+      '<div class="progress-track"><div class="progress-bar"></div></div>';
+    var outputField = document.querySelector('#outputWrap').parentElement;
+    outputField.insertBefore(progressContainer, outputField.firstChild);
+  }
+  progressContainer.style.display = 'block';
+  updateProgressBar(0, total, 0);
+}
+
+function hideProgressBar() {
+  var progressContainer = document.getElementById('wikidataProgress');
+  if (progressContainer) setTimeout(function() { progressContainer.style.display = 'none'; }, 1500);
+}
+
+function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
+  return new Promise(function(resolve) {
+    var wikilinks = extractWikilinks(text);
+    if (wikilinks.length === 0) { resolve(text); return; }
+    showProgressBar(wikilinks.length);
+    var uniqueArticles = {};
+    wikilinks.forEach(function(link) {
+      if (!uniqueArticles[link.article]) uniqueArticles[link.article] = [];
+      uniqueArticles[link.article].push(link);
+    });
+    var articleList = Object.keys(uniqueArticles);
+    var processed = 0, redirectCount = 0, replacements = {};
+    function processNext(index) {
+      if (index >= articleList.length) {
+        var result = text;
+        wikilinks.forEach(function(link) {
+          var lookupResult = replacements[link.article];
+          var germanTitle = lookupResult ? lookupResult.german : null;
+          var newLink = germanTitle ? 
+            ((link.display && keepDisplayNames) ? '[[' + germanTitle + '|' + link.display + ']]' : '[[' + germanTitle + ']]') :
+            (removeNonExisting ? (link.display || link.article) : link.full);
+          var escapedFull = link.full.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          result = result.replace(new RegExp(escapedFull, 'g'), newLink);
+        });
+        hideProgressBar();
+        resolve(result);
+        return;
+      }
+      var article = articleList[index];
+      fetchGermanWikilink(article).then(function(lookupResult) {
+        replacements[article] = lookupResult;
+        if (lookupResult.redirected) redirectCount++;
+        processed++;
+        updateProgressBar(processed, articleList.length, redirectCount);
+        setTimeout(function() { processNext(index + 1); }, 100);
+      });
+    }
+    processNext(0);
+  });
+}
+
+
 </script>
 
 </body>
