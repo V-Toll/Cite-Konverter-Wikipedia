@@ -8,7 +8,7 @@
   <link rel="icon" type="image/svg+xml" href="grafiken/favicon.svg" />
   <link rel="shortcut icon" href="grafiken/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="grafiken/apple-touch-icon.png" />
-<title>Cite-Konverter für Wikipedia</title>
+<title>Cite-Konverter für Wikipedia – v8.0</title>
 
 <style>
   html{min-height:100%}
@@ -31,6 +31,38 @@
   body.theme-spice{background:linear-gradient(135deg,#8C262E 0%,#D99982 60%,#732D14 100%)}
   body.theme-jadefruit{background:linear-gradient(135deg,#03A6A6 0%,#F27405 60%,#03A696 100%)}
   body.theme-hacker{background:linear-gradient(135deg,#205B73 0%,#49BF9E 60%,#307B8C 100%)}
+/* v7.1 – Neue Themes: Hintergrund-Verläufe */
+body.theme-celestial{background:linear-gradient(135deg,#2E0854 0%,#800080 50%,#DDA0DD 100%)}
+body.theme-daffodil{background:linear-gradient(135deg,#9ACD32 0%,#FFEA00 60%,#FFF566 100%)}
+body.theme-mistylavender{background:linear-gradient(135deg,#143642 0%,#0F8B8D 60%,#DAD2D8 100%)}
+body.theme-vibrantamber{background:linear-gradient(135deg,#CC8400 0%,#FFA500 60%,#FFBE47 100%)}
+body.theme-crimsontide{background:linear-gradient(135deg,#9B111E 0%,#DC143C 60%,#F08080 100%)}
+/* v7.2 – Neue Themes: Hintergrund-Verläufe */
+body.theme-rusticsienna{background:linear-gradient(135deg,#933227 0%,#C44536 55%,#E9D758 100%)}
+body.theme-terracottasunset{background:linear-gradient(135deg,#472D30 0%,#723D46 50%,#E26D5C 100%)}
+body.theme-coralhorizon{background:linear-gradient(135deg,#58A6FF 0%,#FF6B6B 55%,#FFEDD5 100%)}
+body.theme-toxicnightfall{background:linear-gradient(135deg,#240060 0%,#DB123C 55%,#ADFF30 100%)}
+body.theme-colonialcobalt{background:linear-gradient(135deg,#0C10E3 0%,#D1B17C 60%,#F8E6D2 100%)}
+/* v7.3 – Hintergrundverläufe */
+body.theme-neontwilight{background:linear-gradient(135deg,#4B0082 0%,#FF1493 55%,#FE865B 100%)}
+body.theme-ancientgild{background:linear-gradient(135deg,#550003 0%,#B8AB38 60%,#E0D794 100%)}
+body.theme-vintagehearth{background:linear-gradient(135deg,#AA0003 0%,#BFB4DC 70%,#FAFBFD 100%)}
+body.theme-espressobrown{background:linear-gradient(135deg,#4E2C23 0%,#E2725B 55%,#FFDAB9 100%)}
+body.theme-darkorchidvine{background:linear-gradient(135deg,#4B0082 0%,#9932CC 55%,#DDA0DD 100%)}
+body.theme-frenchceladon{background:linear-gradient(135deg,#213F95 0%,#A1E1BC 100%)}
+body.theme-burgundychampagne{background:linear-gradient(135deg,#80011F 0%,#c47840 60%,#F7E7CE 100%)}
+body.theme-hunterdune{background:linear-gradient(135deg,#3E5F44 0%,#DDD6B9 100%)}
+body.theme-coffeebutter{background:linear-gradient(135deg,#20130D 0%,#8a6030 55%,#F3D98F 100%)}
+body.theme-regalchiffon{background:linear-gradient(135deg,#0D3B66 0%,#6a9acc 60%,#FAF0CA 100%)}
+body.theme-espressopeony{background:linear-gradient(135deg,#3E2723 0%,#c08090 60%,#F4C9D6 100%)}
+body.theme-deeppetal{background:linear-gradient(135deg,#3D2E2B 0%,#a87a68 60%,#E1D0C9 100%)}
+body.theme-coffeered{background:linear-gradient(135deg,#2E1E1F 0%,#8a0838 50%,#E30B5C 100%)}
+body.theme-indigobrown{background:linear-gradient(135deg,#432371 0%,#8a6aaa 55%,#FAAE7B 100%)}
+body.theme-hotwhite{background:linear-gradient(135deg,#c01040 0%,#F8395A 55%,#F7E6D2 100%)}
+body.theme-petalbean{background:linear-gradient(135deg,#1B1110 0%,#8a3050 55%,#FFD1DC 100%)}
+body.theme-celadonplum{background:linear-gradient(135deg,#553832 0%,#7a9a7a 55%,#A8D3A8 100%)}
+body.theme-crimsonperiwinkle{background:linear-gradient(135deg,#470B24 0%,#8a70aa 55%,#B5BEDD 100%)}
+body.theme-evergreencream{background:linear-gradient(135deg,#143731 0%,#5a9a50 55%,#CEFF8C 100%)}
 
 
   .wrap{width:100%;max-width:980px}
@@ -88,6 +120,38 @@ body.dark .segmented button{color:#fff}
   body.theme-spice .btn-main, body.theme-spice .badge{background:linear-gradient(135deg,#8C262E,#D99982);}
   body.theme-jadefruit .btn-main, body.theme-jadefruit .badge{background:linear-gradient(135deg,#03A6A6,#F27405);}
   body.theme-hacker .btn-main, body.theme-hacker .badge{background:linear-gradient(135deg,#205B73,#49BF9E);}
+/* v7.1 – Neue Themes: Buttons & Badge (Light) */
+body.theme-celestial .btn-main,body.theme-celestial .badge{background:linear-gradient(135deg,#800080,#B266B2)}
+body.theme-daffodil .btn-main,body.theme-daffodil .badge{background:linear-gradient(135deg,#C7B600,#9ACD32);color:#111}
+body.theme-mistylavender .btn-main,body.theme-mistylavender .badge{background:linear-gradient(135deg,#143642,#0F8B8D)}
+body.theme-vibrantamber .btn-main,body.theme-vibrantamber .badge{background:linear-gradient(135deg,#CC8400,#FFA500)}
+body.theme-crimsontide .btn-main,body.theme-crimsontide .badge{background:linear-gradient(135deg,#9B111E,#DC143C)}
+/* v7.2 – Neue Themes: Buttons & Badge (Light) */
+body.theme-rusticsienna .btn-main,body.theme-rusticsienna .badge{background:linear-gradient(135deg,#933227,#C44536)}
+body.theme-terracottasunset .btn-main,body.theme-terracottasunset .badge{background:linear-gradient(135deg,#472D30,#C85646)}
+body.theme-coralhorizon .btn-main,body.theme-coralhorizon .badge{background:linear-gradient(135deg,#58A6FF,#FF6B6B)}
+body.theme-toxicnightfall .btn-main,body.theme-toxicnightfall .badge{background:linear-gradient(135deg,#240060,#DB123C)}
+body.theme-colonialcobalt .btn-main,body.theme-colonialcobalt .badge{background:linear-gradient(135deg,#0C10E3,#D1B17C)}
+/* v7.3 – Buttons & Badge (Light) */
+body.theme-neontwilight .btn-main,body.theme-neontwilight .badge{background:linear-gradient(135deg,#4B0082,#FF1493)}
+body.theme-ancientgild .btn-main,body.theme-ancientgild .badge{background:linear-gradient(135deg,#550003,#B8AB38)}
+body.theme-vintagehearth .btn-main,body.theme-vintagehearth .badge{background:linear-gradient(135deg,#AA0003,#9a88c0)}
+body.theme-espressobrown .btn-main,body.theme-espressobrown .badge{background:linear-gradient(135deg,#4E2C23,#E2725B)}
+body.theme-darkorchidvine .btn-main,body.theme-darkorchidvine .badge{background:linear-gradient(135deg,#4B0082,#9932CC)}
+body.theme-frenchceladon .btn-main,body.theme-frenchceladon .badge{background:linear-gradient(135deg,#213F95,#508a68)}
+body.theme-burgundychampagne .btn-main,body.theme-burgundychampagne .badge{background:linear-gradient(135deg,#80011F,#c47840)}
+body.theme-hunterdune .btn-main,body.theme-hunterdune .badge{background:linear-gradient(135deg,#3E5F44,#7a8a5a)}
+body.theme-coffeebutter .btn-main,body.theme-coffeebutter .badge{background:linear-gradient(135deg,#20130D,#8a6030)}
+body.theme-regalchiffon .btn-main,body.theme-regalchiffon .badge{background:linear-gradient(135deg,#0D3B66,#6a9acc)}
+body.theme-espressopeony .btn-main,body.theme-espressopeony .badge{background:linear-gradient(135deg,#3E2723,#c08090)}
+body.theme-deeppetal .btn-main,body.theme-deeppetal .badge{background:linear-gradient(135deg,#3D2E2B,#a87a68)}
+body.theme-coffeered .btn-main,body.theme-coffeered .badge{background:linear-gradient(135deg,#2E1E1F,#E30B5C)}
+body.theme-indigobrown .btn-main,body.theme-indigobrown .badge{background:linear-gradient(135deg,#432371,#8a6aaa)}
+body.theme-hotwhite .btn-main,body.theme-hotwhite .badge{background:linear-gradient(135deg,#c01040,#F8395A)}
+body.theme-petalbean .btn-main,body.theme-petalbean .badge{background:linear-gradient(135deg,#1B1110,#8a3050)}
+body.theme-celadonplum .btn-main,body.theme-celadonplum .badge{background:linear-gradient(135deg,#553832,#7a9a7a)}
+body.theme-crimsonperiwinkle .btn-main,body.theme-crimsonperiwinkle .badge{background:linear-gradient(135deg,#470B24,#8a70aa)}
+body.theme-evergreencream .btn-main,body.theme-evergreencream .badge{background:linear-gradient(135deg,#143731,#5a9a50)}
 
 
   /* Dark variants */
@@ -99,6 +163,38 @@ body.dark .segmented button{color:#fff}
   body.force-dark.theme-spice .btn-main, body.force-dark.theme-spice .badge{background:linear-gradient(135deg,#260C06,#732D14)}
   body.force-dark.theme-jadefruit .btn-main, body.force-dark.theme-jadefruit .badge{background:linear-gradient(135deg,#731702,#03A696)}
   body.force-dark.theme-hacker .btn-main, body.force-dark.theme-hacker .badge{background:linear-gradient(135deg,#020D0C,#307B8C)}
+/* v7.1 – Neue Themes: Buttons & Badge (Dark) */
+body.force-dark.theme-celestial .btn-main,body.force-dark.theme-celestial .badge{background:linear-gradient(135deg,#4B004B,#2E0854)}
+body.force-dark.theme-daffodil .btn-main,body.force-dark.theme-daffodil .badge{background:linear-gradient(135deg,#9ACD32,#C7B600);color:#111}
+body.force-dark.theme-mistylavender .btn-main,body.force-dark.theme-mistylavender .badge{background:linear-gradient(135deg,#0F8B8D,#143642)}
+body.force-dark.theme-vibrantamber .btn-main,body.force-dark.theme-vibrantamber .badge{background:linear-gradient(135deg,#87CEFA,#CC8400);color:#111}
+body.force-dark.theme-crimsontide .btn-main,body.force-dark.theme-crimsontide .badge{background:linear-gradient(135deg,#990F2A,#9B111E)}
+/* v7.2 – Neue Themes: Buttons & Badge (Dark) */
+body.force-dark.theme-rusticsienna .btn-main,body.force-dark.theme-rusticsienna .badge{background:linear-gradient(135deg,#5a1a10,#933227)}
+body.force-dark.theme-terracottasunset .btn-main,body.force-dark.theme-terracottasunset .badge{background:linear-gradient(135deg,#2a1a1c,#472D30)}
+body.force-dark.theme-coralhorizon .btn-main,body.force-dark.theme-coralhorizon .badge{background:linear-gradient(135deg,#1a5cbf,#cc4444)}
+body.force-dark.theme-toxicnightfall .btn-main,body.force-dark.theme-toxicnightfall .badge{background:linear-gradient(135deg,#0d0030,#8a0025)}
+body.force-dark.theme-colonialcobalt .btn-main,body.force-dark.theme-colonialcobalt .badge{background:linear-gradient(135deg,#060880,#a08050)}
+/* v7.3 – Buttons & Badge (Dark) */
+body.force-dark.theme-neontwilight .btn-main,body.force-dark.theme-neontwilight .badge{background:linear-gradient(135deg,#2a0047,#8a0055)}
+body.force-dark.theme-ancientgild .btn-main,body.force-dark.theme-ancientgild .badge{background:linear-gradient(135deg,#2a0001,#7a7020)}
+body.force-dark.theme-vintagehearth .btn-main,body.force-dark.theme-vintagehearth .badge{background:linear-gradient(135deg,#5a0001,#7a709a)}
+body.force-dark.theme-espressobrown .btn-main,body.force-dark.theme-espressobrown .badge{background:linear-gradient(135deg,#2a1510,#8a3a28)}
+body.force-dark.theme-darkorchidvine .btn-main,body.force-dark.theme-darkorchidvine .badge{background:linear-gradient(135deg,#2a0047,#4B0082)}
+body.force-dark.theme-frenchceladon .btn-main,body.force-dark.theme-frenchceladon .badge{background:linear-gradient(135deg,#0f1f4a,#508a68)}
+body.force-dark.theme-burgundychampagne .btn-main,body.force-dark.theme-burgundychampagne .badge{background:linear-gradient(135deg,#3d0010,#7a4a20)}
+body.force-dark.theme-hunterdune .btn-main,body.force-dark.theme-hunterdune .badge{background:linear-gradient(135deg,#1e2f22,#4a5a38)}
+body.force-dark.theme-coffeebutter .btn-main,body.force-dark.theme-coffeebutter .badge{background:linear-gradient(135deg,#0a0806,#4a3010)}
+body.force-dark.theme-regalchiffon .btn-main,body.force-dark.theme-regalchiffon .badge{background:linear-gradient(135deg,#061c33,#3a6080)}
+body.force-dark.theme-espressopeony .btn-main,body.force-dark.theme-espressopeony .badge{background:linear-gradient(135deg,#1e1210,#5a2830)}
+body.force-dark.theme-deeppetal .btn-main,body.force-dark.theme-deeppetal .badge{background:linear-gradient(135deg,#1e1615,#5a3a34)}
+body.force-dark.theme-coffeered .btn-main,body.force-dark.theme-coffeered .badge{background:linear-gradient(135deg,#170f10,#6a0428)}
+body.force-dark.theme-indigobrown .btn-main,body.force-dark.theme-indigobrown .badge{background:linear-gradient(135deg,#210f38,#5a3a60)}
+body.force-dark.theme-hotwhite .btn-main,body.force-dark.theme-hotwhite .badge{background:linear-gradient(135deg,#500818,#a01030)}
+body.force-dark.theme-petalbean .btn-main,body.force-dark.theme-petalbean .badge{background:linear-gradient(135deg,#0d0908,#4a1828)}
+body.force-dark.theme-celadonplum .btn-main,body.force-dark.theme-celadonplum .badge{background:linear-gradient(135deg,#2a1c18,#3a5a3a)}
+body.force-dark.theme-crimsonperiwinkle .btn-main,body.force-dark.theme-crimsonperiwinkle .badge{background:linear-gradient(135deg,#230512,#4a3868)}
+body.force-dark.theme-evergreencream .btn-main,body.force-dark.theme-evergreencream .badge{background:linear-gradient(135deg,#0a1b18,#2a5028)}
 
 
   /* Input/Output area layout */
@@ -197,6 +293,70 @@ body.theme-hacker h1 .title-text{
   background:linear-gradient(90deg,#49BF9E,#307B8C);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
+/* v7.1 – Neue Themes: H1-Titelfarben */
+body.theme-celestial h1 .title-text{background:linear-gradient(90deg,#DDA0DD,#B266B2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-daffodil h1 .title-text{background:linear-gradient(90deg,#9ACD32,#C7B600);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-mistylavender h1 .title-text{background:linear-gradient(90deg,#0F8B8D,#143642);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-vibrantamber h1 .title-text{background:linear-gradient(90deg,#CC8400,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-crimsontide h1 .title-text{background:linear-gradient(90deg,#DC143C,#F08080);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+/* v7.2 – Neue Themes: H1-Titelfarben */
+body.theme-rusticsienna h1 .title-text{background:linear-gradient(90deg,#C44536,#E9D758);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-terracottasunset h1 .title-text{background:linear-gradient(90deg,#E26D5C,#EB8A7A);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-coralhorizon h1 .title-text{background:linear-gradient(90deg,#58A6FF,#FF6B6B);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-toxicnightfall h1 .title-text{background:linear-gradient(90deg,#DB123C,#ADFF30);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-colonialcobalt h1 .title-text{background:linear-gradient(90deg,#0C10E3,#D1B17C);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+/* v7.3 – H1-Titelfarben */
+body.theme-neontwilight h1 .title-text{background:linear-gradient(90deg,#FF1493,#FE865B);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-ancientgild h1 .title-text{background:linear-gradient(90deg,#B8AB38,#E0D794);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-vintagehearth h1 .title-text{background:linear-gradient(90deg,#AA0003,#9a88c0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-espressobrown h1 .title-text{background:linear-gradient(90deg,#E2725B,#c4905a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-darkorchidvine h1 .title-text{background:linear-gradient(90deg,#9932CC,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-frenchceladon h1 .title-text{background:linear-gradient(90deg,#213F95,#A1E1BC);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-burgundychampagne h1 .title-text{background:linear-gradient(90deg,#80011F,#c47840);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-hunterdune h1 .title-text{background:linear-gradient(90deg,#3E5F44,#a0a878);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-coffeebutter h1 .title-text{background:linear-gradient(90deg,#8a6030,#c4a040);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-regalchiffon h1 .title-text{background:linear-gradient(90deg,#0D3B66,#6a9acc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-espressopeony h1 .title-text{background:linear-gradient(90deg,#3E2723,#c08090);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-deeppetal h1 .title-text{background:linear-gradient(90deg,#3D2E2B,#a87a68);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-coffeered h1 .title-text{background:linear-gradient(90deg,#8a0838,#E30B5C);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-indigobrown h1 .title-text{background:linear-gradient(90deg,#432371,#FAAE7B);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-hotwhite h1 .title-text{background:linear-gradient(90deg,#c01040,#F8395A);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-petalbean h1 .title-text{background:linear-gradient(90deg,#8a3050,#cc6080);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-celadonplum h1 .title-text{background:linear-gradient(90deg,#553832,#7a9a7a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-crimsonperiwinkle h1 .title-text{background:linear-gradient(90deg,#470B24,#B5BEDD);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.theme-evergreencream h1 .title-text{background:linear-gradient(90deg,#143731,#5a9a50);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+/* v7.3 H1-Animation */
+body.theme-neontwilight h1 .title-text,
+body.theme-ancientgild h1 .title-text,
+body.theme-vintagehearth h1 .title-text,
+body.theme-espressobrown h1 .title-text,
+body.theme-darkorchidvine h1 .title-text,
+body.theme-frenchceladon h1 .title-text,
+body.theme-burgundychampagne h1 .title-text,
+body.theme-hunterdune h1 .title-text,
+body.theme-coffeebutter h1 .title-text,
+body.theme-regalchiffon h1 .title-text,
+body.theme-espressopeony h1 .title-text,
+body.theme-deeppetal h1 .title-text,
+body.theme-coffeered h1 .title-text,
+body.theme-indigobrown h1 .title-text,
+body.theme-hotwhite h1 .title-text,
+body.theme-petalbean h1 .title-text,
+body.theme-celadonplum h1 .title-text,
+body.theme-crimsonperiwinkle h1 .title-text,
+body.theme-evergreencream h1 .title-text{background-size:400% 400%;animation:flowGradient 12s ease-in-out infinite}
+/* v7.2 – H1-Animation für neue Themes */
+body.theme-rusticsienna h1 .title-text,
+body.theme-terracottasunset h1 .title-text,
+body.theme-coralhorizon h1 .title-text,
+body.theme-toxicnightfall h1 .title-text,
+body.theme-colonialcobalt h1 .title-text{background-size:400% 400%;animation:flowGradient 12s ease-in-out infinite}
+/* v7.1 – H1-Animation für neue Themes */
+body.theme-celestial h1 .title-text,
+body.theme-daffodil h1 .title-text,
+body.theme-mistylavender h1 .title-text,
+body.theme-vibrantamber h1 .title-text,
+body.theme-crimsontide h1 .title-text{background-size:400% 400%;animation:flowGradient 12s ease-in-out infinite}
 body.theme-valley h1 .title-text{
   background:linear-gradient(90deg,#28a745,#85e085);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
@@ -371,6 +531,38 @@ body.theme-jadefruit .progress-bar {
 body.theme-hacker .progress-bar {
   background: linear-gradient(90deg, #205B73, #49BF9E);
 }
+/* v7.1 – Neue Themes: Progress Bar */
+body.theme-celestial .progress-bar{background:linear-gradient(90deg,#800080,#DDA0DD)}
+body.theme-daffodil .progress-bar{background:linear-gradient(90deg,#C7B600,#9ACD32)}
+body.theme-mistylavender .progress-bar{background:linear-gradient(90deg,#143642,#0F8B8D)}
+body.theme-vibrantamber .progress-bar{background:linear-gradient(90deg,#CC8400,#FFA500)}
+body.theme-crimsontide .progress-bar{background:linear-gradient(90deg,#9B111E,#DC143C)}
+/* v7.2 – Neue Themes: Progress Bar */
+body.theme-rusticsienna .progress-bar{background:linear-gradient(90deg,#933227,#C44536)}
+body.theme-terracottasunset .progress-bar{background:linear-gradient(90deg,#472D30,#E26D5C)}
+body.theme-coralhorizon .progress-bar{background:linear-gradient(90deg,#58A6FF,#FF6B6B)}
+body.theme-toxicnightfall .progress-bar{background:linear-gradient(90deg,#240060,#DB123C)}
+body.theme-colonialcobalt .progress-bar{background:linear-gradient(90deg,#0C10E3,#D1B17C)}
+/* v7.3 – Progress Bar */
+body.theme-neontwilight .progress-bar{background:linear-gradient(90deg,#4B0082,#FF1493)}
+body.theme-ancientgild .progress-bar{background:linear-gradient(90deg,#550003,#B8AB38)}
+body.theme-vintagehearth .progress-bar{background:linear-gradient(90deg,#AA0003,#BFB4DC)}
+body.theme-espressobrown .progress-bar{background:linear-gradient(90deg,#4E2C23,#E2725B)}
+body.theme-darkorchidvine .progress-bar{background:linear-gradient(90deg,#4B0082,#9932CC)}
+body.theme-frenchceladon .progress-bar{background:linear-gradient(90deg,#213F95,#A1E1BC)}
+body.theme-burgundychampagne .progress-bar{background:linear-gradient(90deg,#80011F,#c47840)}
+body.theme-hunterdune .progress-bar{background:linear-gradient(90deg,#3E5F44,#DDD6B9)}
+body.theme-coffeebutter .progress-bar{background:linear-gradient(90deg,#20130D,#8a6030)}
+body.theme-regalchiffon .progress-bar{background:linear-gradient(90deg,#0D3B66,#6a9acc)}
+body.theme-espressopeony .progress-bar{background:linear-gradient(90deg,#3E2723,#c08090)}
+body.theme-deeppetal .progress-bar{background:linear-gradient(90deg,#3D2E2B,#a87a68)}
+body.theme-coffeered .progress-bar{background:linear-gradient(90deg,#2E1E1F,#E30B5C)}
+body.theme-indigobrown .progress-bar{background:linear-gradient(90deg,#432371,#8a6aaa)}
+body.theme-hotwhite .progress-bar{background:linear-gradient(90deg,#c01040,#F8395A)}
+body.theme-petalbean .progress-bar{background:linear-gradient(90deg,#1B1110,#8a3050)}
+body.theme-celadonplum .progress-bar{background:linear-gradient(90deg,#553832,#A8D3A8)}
+body.theme-crimsonperiwinkle .progress-bar{background:linear-gradient(90deg,#470B24,#8a70aa)}
+body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731,#CEFF8C)}
 
   /* ==========================================
      v6.1.5: Sichtbare Selektion (minimal, ohne Layering)
@@ -405,8 +597,8 @@ body.theme-hacker .progress-bar {
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v7.0</a></h1>
-      <p class="lead">Der <i>Cite-Konverter für Wikipedia</i> unterstützt dich dabei, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_web" target="_blank"><code>{{cite web}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_news" target="_blank"><code>{{cite news}}</code></a> und <a href="https://en.wikipedia.org/wiki/Template:Cite_magazine" target="_blank"><code>{{cite magazine}}</code></a> in die deutsche Vorlage <a href="https://de.wikipedia.org/wiki/Vorlage:Internetquelle" target="_blank"><code>{{Internetquelle}}</code></a> zu konvertieren. Zudem wird <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_book" target="_blank"><code>{{cite book}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_journal" target="_blank"><code>{{cite journal}}</code></a> und <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia" target="_blank"><code>{{cite encyclopedia}}</code></a> in <a href="https://de.wikipedia.org/wiki/Vorlage:Literatur" target="_blank"><code>{{Literatur}}</code></a> konvertiert.</p>
+      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v8.0</a></h1>
+      <p class="lead">Der <i>Cite-Konverter für Wikipedia</i> unterstützt dich dabei, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_web" target="_blank"><code>{{cite web}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_news" target="_blank"><code>{{cite news}}</code></a> und <a href="https://en.wikipedia.org/wiki/Template:Cite_magazine" target="_blank"><code>{{cite magazine}}</code></a> in die deutsche Vorlage <a href="https://de.wikipedia.org/wiki/Vorlage:Internetquelle" target="_blank"><code>{{Internetquelle}}</code></a> zu konvertieren. Zudem wird <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_book" target="_blank"><code>{{cite book}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_journal" target="_blank"><code>{{cite journal}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia" target="_blank"><code>{{cite encyclopedia}}</code></a> und <a href="https://en.wikipedia.org/wiki/Template:Citation" target="_blank"><code>{{Citation}}</code></a> in <a href="https://de.wikipedia.org/wiki/Vorlage:Literatur" target="_blank"><code>{{Literatur}}</code></a> konvertiert (bei <code>{{Citation}}</code> ohne Seitenangabe und mit URL alternativ in <a href="https://de.wikipedia.org/wiki/Vorlage:Internetquelle" target="_blank"><code>{{Internetquelle}}</code></a>).</p>
 
       <details>
         <summary>⚙️ Optionen</summary>
@@ -454,15 +646,47 @@ body.theme-hacker .progress-bar {
           
           <div style="grid-column:1/-1">
             <div class="theme-grid" role="list">
-              <div class="theme-option" data-theme="sunset" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#C250F2,#D76CD9,#D977A5)"></div><div>Sunset on the Beach</div></div>
-              <div class="theme-option" data-theme="wikipedia" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#5a7bd8,#89a8ff,#b9c9ff)"></div><div>Wikipedia (modern)</div></div>
+              <div class="theme-option" data-theme="sunset" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#C250F2,#D76CD9,#D977A5)"></div><div>Sunset</div></div>
+              <div class="theme-option" data-theme="wikipedia" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#5a7bd8,#89a8ff,#b9c9ff)"></div><div>Wiki modern</div></div>
               <div class="theme-option" data-theme="bluewave" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0468BF,#023E73,#012840)"></div><div>Blue Wave</div></div>
               <div class="theme-option" data-theme="valley" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#387CA6,#71A63C,#BBF2F2)"></div><div>The Valley</div></div>
               <div class="theme-option" data-theme="simple" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#000000,#6b7280,#ffffff)"></div><div>Simple</div></div>
               <div class="theme-option" data-theme="spice" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#8C262E,#D99982,#732D14)"></div><div>Spice</div></div>
               <div class="theme-option" data-theme="jadefruit" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#03A6A6,#F27405,#03A696)"></div><div>Jade Fruit</div></div>
               <div class="theme-option" data-theme="hacker" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#205B73,#49BF9E,#307B8C)"></div><div>Hacker</div></div>
-            </div>
+            
+		<div class="theme-option" data-theme="celestial" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#800080,#DDA0DD,#B266B2)"></div>Celestial</div>
+		<div class="theme-option" data-theme="daffodil" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#FFEA00,#9ACD32,#FFF566)"></div>Daffodil</div>
+		<div class="theme-option" data-theme="mistylavender" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0F8B8D,#DAD2D8,#E7E1E6)"></div>Misty Lavender</div>
+		<div class="theme-option" data-theme="vibrantamber" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#FFA500,#FFBE47,#87CEFA)"></div>Vibrant Amber</div>
+		<div class="theme-option" data-theme="crimsontide" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#DC143C,#F08080,#F26A84)"></div>Crimson Tide</div>
+        
+        <div class="theme-option" data-theme="rusticsienna" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#C44536,#E9D758,#197278)"></div>Rustic Sienna</div>
+        <div class="theme-option" data-theme="terracottasunset" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#472D30,#C85646,#EB8A7A)"></div>Terracotta Sunset</div>
+        <div class="theme-option" data-theme="coralhorizon" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#58A6FF,#FF6B6B,#FFEDD5)"></div>Coral Horizon</div>
+        <div class="theme-option" data-theme="toxicnightfall" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#240060,#DB123C,#ADFF30)"></div>Toxic Nightfall</div>
+        <div class="theme-option" data-theme="colonialcobalt" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0C10E3,#D1B17C,#F8E6D2)"></div>Colonial Cobalt</div>
+        
+        <div class="theme-option" data-theme="neontwilight" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#4B0082,#FF1493,#FE865B)"></div>Neon Twilight</div>
+        <div class="theme-option" data-theme="ancientgild" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#550003,#B8AB38,#E0D794)"></div>Ancient Gild</div>
+        <div class="theme-option" data-theme="vintagehearth" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#AA0003,#BFB4DC,#FAFBFD)"></div>Vintage Hearth</div>
+        <div class="theme-option" data-theme="espressobrown" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#4E2C23,#E2725B,#FFDAB9)"></div>Espresso</div>
+        <div class="theme-option" data-theme="darkorchidvine" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#4B0082,#9932CC,#DDA0DD)"></div>Dark Orchid Vine</div>
+        <div class="theme-option" data-theme="frenchceladon" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#213F95,#A1E1BC,#d0f5e0)"></div>French Celadon</div>
+        <div class="theme-option" data-theme="burgundychampagne" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#80011F,#c47840,#F7E7CE)"></div>Burgundy Champagne</div>
+        <div class="theme-option" data-theme="hunterdune" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#3E5F44,#8a9e72,#DDD6B9)"></div>Hunter Dune</div>
+        <div class="theme-option" data-theme="coffeebutter" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#20130D,#8a6030,#F3D98F)"></div>Coffee Butter</div>
+        <div class="theme-option" data-theme="regalchiffon" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0D3B66,#6a9acc,#FAF0CA)"></div>Regal Chiffon</div>
+        <div class="theme-option" data-theme="espressopeony" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#3E2723,#c08090,#F4C9D6)"></div>Espresso Peony</div>
+        <div class="theme-option" data-theme="deeppetal" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#3D2E2B,#a87a68,#E1D0C9)"></div>Deep Petal</div>
+        <div class="theme-option" data-theme="coffeered" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#2E1E1F,#8a0838,#E30B5C)"></div>Coffee Red</div>
+        <div class="theme-option" data-theme="indigobrown" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#432371,#8a6aaa,#FAAE7B)"></div>Indigo Brown</div>
+        <div class="theme-option" data-theme="hotwhite" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#c01040,#F8395A,#F7E6D2)"></div>Hot White</div>
+        <div class="theme-option" data-theme="petalbean" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#1B1110,#8a3050,#FFD1DC)"></div>Petal Bean</div>
+        <div class="theme-option" data-theme="celadonplum" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#553832,#7a9a7a,#A8D3A8)"></div>Celadon Plum</div>
+        <div class="theme-option" data-theme="crimsonperiwinkle" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#470B24,#8a70aa,#B5BEDD)"></div>Crimson Periwinkle</div>
+        <div class="theme-option" data-theme="evergreencream" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#143731,#5a9a50,#CEFF8C)"></div>Evergreen Cream</div>
+        </div>
           </div>
 
         </div>
@@ -498,7 +722,11 @@ body.theme-hacker .progress-bar {
       <details id="changelog" style="margin-top:12px">
         <summary>📜 Versionsverlauf</summary>
         <ul>
-          <li><strong>v7.0 "The Redirection"</strong> (2025-12-20): Wikipedia-Redirects werden automatisch befolgt – Englische Wikilinks mit Redirects (z.B. <code>[[Eastern Band Cherokee]]</code> → <code>[[Eastern Band of Cherokee Indians]]</code>) werden erkannt und der finale Artikel wird zur deutschen Übersetzung verwendet. Button umbenannt: "🔀 Konvertieren". Progress Bar zeigt jetzt auch die Anzahl der aufgelösten Redirects. Separater Redirect-Cache für bessere Performance beim erneuten Konvertieren.</li>
+          <li><strong>v8.0 &ldquo;Citation Horizon&rdquo;</strong> (2026-06-01): Neue Vorlage: <code>{{Citation}}</code> wird jetzt unterstützt – Konvertierung in <code>{{Literatur}}</code> (mit Seitenangabe oder ohne URL) oder <code>{{Internetquelle}}</code> (ohne Seitenangabe, mit URL). Vollständiges Parameter-Mapping: Autor/Hrsg./Übersetzer (Vorname Nachname), Datum-Normalisierung (auch jahres-only), Archiv-Parameter (<code>offline=1</code> nur bei <code>url-status=dead</code>), Wikilink-URL-Bereinigung, Sprachautomatik.</li>
+          <li><strong>v7.3 &ldquo;Velvet Garden&rdquo;</strong> (2026-03-30): 19 neue Farbthemen: <em>Neon Twilight</em>, <em>Ancient Gild</em>, <em>Vintage Hearth</em>, <em>Espresso</em>, <em>Dark Orchid Vine</em>, <em>French Celadon</em>, <em>Burgundy Champagne</em>, <em>Hunter Dune</em>, <em>Coffee Butter</em>, <em>Regal Chiffon</em>, <em>Espresso Peony</em>, <em>Deep Petal</em>, <em>Coffee Red</em>, <em>Indigo Brown</em>, <em>Hot White</em>, <em>Petal Bean</em>, <em>Celadon Plum</em>, <em>Crimson Periwinkle</em>, <em>Evergreen Cream</em>.</li>
+        <li><strong>v7.2 &ldquo;Earthen Glow&rdquo;</strong> (2026-03-30): 5 neue Farbthemen: <em>Rustic Sienna</em> (Rostrot/Gelb), <em>Terracotta Sunset</em> (Terrakotta), <em>Coral Horizon</em> (Blau/Korall), <em>Toxic Nightfall</em> (Lila/Neongrün), <em>Colonial Cobalt</em> (Kobaltblau/Sand). Jedes Theme mit Hintergrund, Button/Badge, H1-Titelfarbe, Fortschrittsbalken und Dark-Mode-Variante.</li>
+        <li><strong>v7.1 &ldquo;Chromatic Bloom&rdquo;</strong> (2026-03-30): 5 neue Farbthemen: <em>Celestial</em> (Lila), <em>Daffodil</em> (Gelb/Gr&uuml;n), <em>Misty Lavender</em> (Blaugr&uuml;n/Teal), <em>Vibrant Amber</em> (Orange) und <em>Crimson Tide</em> (Rot). Jedes Theme enth&auml;lt Hintergrund-Verlauf, Button/Badge, H1-Titelfarbe, Fortschrittsbalken und Dark-Mode-Variante.</li>
+        <li><strong>v7.0 "The Redirection"</strong> (2025-12-20): Wikipedia-Redirects werden automatisch befolgt – Englische Wikilinks mit Redirects (z.B. <code>[[Eastern Band Cherokee]]</code> → <code>[[Eastern Band of Cherokee Indians]]</code>) werden erkannt und der finale Artikel wird zur deutschen Übersetzung verwendet. Button umbenannt: "🔀 Konvertieren". Progress Bar zeigt jetzt auch die Anzahl der aufgelösten Redirects. Separater Redirect-Cache für bessere Performance beim erneuten Konvertieren.</li>
           <li><strong>v6.0 "Welcome to Wikidata"</strong> (2025-12-10): Wikidata-Integration – Englische Wikilinks werden automatisch in deutsche übersetzt (z.B. <code>[[Yellowstone National Park]]</code> → <code>[[Yellowstone-Nationalpark]]</code>). Features: Checkbox "Wikilinks → Deutsch (Wikidata)" (optional), "Display-Namen beibehalten" (standardmäßig aktiv), "Klammern entfernen bei fehlendem deutschen Artikel" (standardmäßig aktiv), Progress Bar zeigt Fortschritt bei mehreren Links, Cache (365 Tage), Rate Limiting (100ms zwischen API-Calls).</li>
           <li><strong>v5.0</strong> (2025-12-09): Neue Funktion: Subreferenzierung – <code>{{rp|...}}</code> wird automatisch in <code>details=</code>-Attribut konvertiert (z.B. <code>{{rp|10–20}}</code> → <code>details="S. 10–20"</code>). Mehrere <code>{{rp}}</code> werden zusammengeführt. Bindestriche werden zu Bistrich normalisiert. Option standardmäßig aktiviert.</li>
           <li><strong>v4.4.3</strong> (2025-11-26): Intro-Text aktualisiert.</li>
@@ -1626,6 +1854,241 @@ function convertCiteEncyclopedia(parsed, options){
 
 
 
+
+// ═══════════════════════════════════════════════════════════════════════════
+// convertCitation – {{Citation}} → {{Literatur}} or {{Internetquelle}}
+// v8.0 "Citation Horizon"
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Collects numbered person fields for {{Citation}}'s first/last schema.
+ * Supports: last1/first1, last2/first2, ... and fallback last/first.
+ * Output format: "Vorname Nachname" (first last), joined by ", ".
+ */
+function collectPersonsCitation(params, firstPfx, lastPfx) {
+  var people = [];
+  var numbered = [];
+  // Find all indexed keys e.g. last1, last2, editor-last1 ...
+  Object.keys(params).forEach(function(k) {
+    var re = new RegExp('^' + lastPfx.replace(/-/g,'[-]') + '(\\d+)$');
+    var m = k.match(re);
+    if (m) numbered.push(parseInt(m[1], 10));
+  });
+  numbered.sort(function(a, b){ return a - b; });
+
+  numbered.forEach(function(n) {
+    var f = (params[firstPfx + n] || '').trim();
+    var l = (params[lastPfx  + n] || '').trim();
+    var name = (f + ' ' + l).trim();
+    if (name) people.push(name);
+  });
+
+  // Fallback: unnumbered last/first (only if no indexed entries found)
+  if (numbered.length === 0) {
+    var f = (params[firstPfx] || '').trim();
+    var l = (params[lastPfx]  || '').trim();
+    var name = (f + ' ' + l).trim();
+    if (name) people.push(name);
+  }
+
+  return people;
+}
+
+/**
+ * Cleans a URL from {{Citation}} which may contain:
+ *   [http://url label text]  →  http://url
+ *   [[http://url]]           →  http://url
+ *   multi-line fragments     →  joined with space
+ * Then delegates to cleanOnlineValue() for google-books cleanup etc.
+ */
+function cleanCitationUrl(raw) {
+  if (!raw) return '';
+  var s = String(raw).trim();
+  // Strip [url label] Wikilink syntax (capture the URL part only)
+  s = s.replace(/^\[([^\[\]\s]+)[^\]]*\]$/, '$1');
+  // Strip [[url]] double-bracket
+  s = s.replace(/^\[\[([^\[\]]+)\]\]$/, '$1');
+  // Join multi-line URL fragments (wiki markup sometimes splits URLs)
+  s = s.replace(/\n\s*/g, ' ').trim();
+  if (typeof cleanOnlineValue === 'function') return cleanOnlineValue(s);
+  return s;
+}
+
+/**
+ * Main converter: {{Citation}} → {{Literatur}} or {{Internetquelle}}
+ *
+ * Routing:
+ *   has page/pages               → always {{Literatur}}
+ *   no page/pages + has URL      → {{Internetquelle}}
+ *   no page/pages + no URL       → {{Literatur}}
+ *
+ * @param {Object} parsed   Output of parseTemplateParams()
+ * @param {Object} options  Converter options passed by the UI
+ */
+function convertCitation(parsed, options) {
+  var p = parsed.params;
+  var F = {};
+  var log = [];
+
+  // ── 1. Authors (last1/first1, last2/first2, ...) ──────────────────────
+  var authors = collectPersonsCitation(p, 'first', 'last');
+  // interviewer-firstN/lastN → treated as co-authors per spec
+  var interviewers = collectPersonsCitation(p, 'interviewer-first', 'interviewer-last');
+  authors = authors.concat(interviewers);
+  if (authors.length === 0 && p['author']) {
+    authors.push(String(p['author']).trim());
+    log.push('Autor: Einzelparameter author übernommen');
+  }
+  if (authors.length) {
+    F['Autor'] = authors.join(', ');
+    log.push('Autor übernommen: ' + F['Autor']);
+  }
+
+  // ── 2. Editors (editor-last1/editor-first1, ...) ─────────────────────
+  var editors = collectPersonsCitation(p, 'editor-first', 'editor-last');
+  if (editors.length === 0 && p['editor']) {
+    editors.push(String(p['editor']).trim());
+    log.push('Hrsg: Einzelparameter editor übernommen');
+  }
+  if (editors.length) {
+    F['Hrsg'] = editors.join(', ');
+    log.push('Hrsg übernommen: ' + F['Hrsg']);
+  }
+
+  // ── 3. Translators (translator-last1/translator-first1, ...) ─────────
+  var translators = collectPersonsCitation(p, 'translator-first', 'translator-last');
+  if (translators.length === 0 && p['translator']) {
+    translators.push(String(p['translator']).trim());
+  }
+  if (translators.length) {
+    F['Übersetzer'] = translators.join(', ');
+    log.push('Übersetzer übernommen: ' + F['Übersetzer']);
+  }
+
+  // ── 4. Title ({{*}} → •) ─────────────────────────────────────────────
+  if (p['title']) {
+    F['Titel'] = String(p['title']).replace(/\{\{\*\}\}/g, '\u2022').trim();
+    log.push('Titel übernommen');
+  }
+
+  // ── 5. Sammelwerk: newspaper > journal > website > work ───────────────
+  var sammelwerk = p['newspaper'] || p['journal'] || p['website'] || p['work'] || '';
+  if (sammelwerk) {
+    F['Sammelwerk'] = String(sammelwerk).trim();
+    log.push('Sammelwerk übernommen: ' + F['Sammelwerk']);
+  }
+
+  // ── 6. Band / Nummer / Reihe ──────────────────────────────────────────
+  if (p['volume']) { F['Band']   = String(p['volume']).trim(); log.push('Band übernommen'); }
+  if (p['issue'])  { F['Nummer'] = String(p['issue']).replace(/\b(?:Nr\.?|No\.?)\b\s*/ig,'').trim(); log.push('Nummer übernommen'); }
+  if (p['series']) { F['Reihe']  = String(p['series']).trim(); log.push('Reihe übernommen'); }
+
+  // ── 7. Ort / Verlag / Auflage ─────────────────────────────────────────
+  var ort = p['location'] || p['publication-place'] || '';
+  if (ort) { F['Ort'] = String(ort).trim(); log.push('Ort übernommen'); }
+  if (p['publisher']) { F['Verlag'] = String(p['publisher']).trim(); log.push('Verlag übernommen'); }
+  if (p['edition']) { F['Auflage'] = normalizeEdition(p['edition']); log.push('Auflage: ' + F['Auflage']); }
+
+  // ── 8. Datum (publication-date > date > year > orig-date) ────────────
+  var rawDate = p['publication-date'] || p['date'] || p['year'] || p['orig-date'] || '';
+  if (rawDate) {
+    F['Datum'] = toISODate(String(rawDate).trim());
+    log.push('Datum übernommen: ' + F['Datum']);
+  }
+
+  // ── 9. Sprache (existing heuristic) ──────────────────────────────────
+  var lang = chooseLanguage(
+    options.langChoice,
+    p['language'],
+    p['title'],
+    sammelwerk,
+    options.overrideLang,
+    options.fullLangCodes
+  );
+  if (lang) {
+    if (!(options.suppressGerman && String(lang).toLowerCase().startsWith('de'))) {
+      F['Sprache'] = lang;
+      log.push(p['language'] ? ('Sprache übernommen: ' + lang) : ('Sprache automatisch erkannt: ' + lang));
+    } else {
+      log.push('Sprache erkannt als de, aber unterdrückt (Einstellung)');
+    }
+  }
+
+  // ── 10. Seiten ────────────────────────────────────────────────────────
+  var seiten = p['pages'] || p['page'] || '';
+  if (seiten) {
+    F['Seiten'] = normalizePages(String(seiten).trim());
+    log.push('Seiten übernommen: ' + F['Seiten']);
+  }
+
+  // ── 11. URL cleanup ───────────────────────────────────────────────────
+  var cleanUrl = cleanCitationUrl(p['url'] || '');
+
+  // ── 12. Abruf: access-date or today ──────────────────────────────────
+  var access = p['access-date'] || p['accessdate'] || '';
+  var abrufDate = access ? toISODate(String(access).trim()) : todayISO();
+
+  // ── 13. Format ────────────────────────────────────────────────────────
+  if (p['format']) { F['Format'] = String(p['format']).trim(); log.push('Format übernommen'); }
+
+  // ── 14. IDs ───────────────────────────────────────────────────────────
+  if (p['doi'])     { F['DOI']     = String(p['doi']).trim();     log.push('DOI übernommen'); }
+  if (p['isbn'])    { F['ISBN']    = normalizeISBN(p['isbn']);     log.push('ISBN übernommen'); }
+  if (p['issn'])    { F['ISSN']    = String(p['issn']).trim();     log.push('ISSN übernommen'); }
+  if (p['pmid'])    { F['PMID']    = String(p['pmid']).trim();     log.push('PMID übernommen'); }
+  if (p['pmc'])     { F['PMC']     = String(p['pmc']).trim();      log.push('PMC übernommen'); }
+  if (p['arxiv'])   { F['arXiv']   = String(p['arxiv']).trim();    log.push('arXiv übernommen'); }
+  if (p['bibcode']) { F['bibcode'] = String(p['bibcode']).trim();  log.push('bibcode übernommen'); }
+  if (p['jstor'])   { F['JSTOR']   = String(p['jstor']).trim();    log.push('JSTOR übernommen'); }
+  if (p['lccn'])    { F['LCCN']    = String(p['lccn']).trim();     log.push('LCCN übernommen'); }
+  if (p['oclc'])    { F['OCLC']    = String(p['oclc']).trim();     log.push('OCLC übernommen'); }
+  if (p['id'])      { F['ID']      = String(p['id']).trim();       log.push('ID übernommen'); }
+
+  // ── 15. Route to output template ─────────────────────────────────────
+  // Rule: has page/pages → {{Literatur}} (even if URL present)
+  //       no page + has URL → {{Internetquelle}}
+  //       no page + no URL  → {{Literatur}}
+  var hasPage = Boolean(seiten);
+  var hasUrl  = Boolean(cleanUrl);
+
+  if (!hasPage && hasUrl) {
+    // ── {{Internetquelle}} ─────────────────────────────────────────────
+    log.push('→ {{Internetquelle}} (keine Seiten, URL vorhanden)');
+    var IQ = {};
+    if (F['Autor'])      IQ['autor']  = F['Autor'];
+    IQ['url']                         = cleanUrl;
+    if (F['Titel'])      IQ['titel']  = F['Titel'];
+    if (F['Sammelwerk']) IQ['werk']   = F['Sammelwerk'];
+    if (F['Datum'])      IQ['datum']  = F['Datum'];
+    if (F['Sprache'])    IQ['sprache']= F['Sprache'];
+
+    // offline=1 ONLY when url-status=dead
+    var urlStatus = (p['url-status'] || '').trim().toLowerCase();
+    if (urlStatus === 'dead' && p['archive-url']) {
+      IQ['offline'] = '1';
+      var archUrl = cleanCitationUrl(p['archive-url'] || '');
+      if (archUrl) IQ['archiv-url'] = archUrl;
+      var archDate = toISODate((p['archive-date'] || '').trim());
+      if (archDate) IQ['archiv-datum'] = archDate;
+      log.push('Archiv-URL übernommen (url-status=dead)');
+    }
+
+    IQ['abruf'] = abrufDate;
+    return { output: buildInternetquelle(IQ), log: log };
+
+  } else {
+    // ── {{Literatur}} ──────────────────────────────────────────────────
+    log.push('→ {{Literatur}}' + (hasPage ? ' (Seitenangabe vorhanden)' : ' (keine URL, kein Seitenangabe)'));
+    if (cleanUrl) { F['Online'] = cleanUrl; log.push('Online übernommen'); }
+    // Abruf in {{Literatur}} only when Online URL is set
+    if (cleanUrl && abrufDate) {
+      F['Abruf'] = abrufDate;
+      log.push('Abruf: ' + abrufDate);
+    }
+    return { output: buildLiteratur(F), log: log };
+  }
+}
+
   function isCiteWebFamily(name){
   const n = (name||'').trim().toLowerCase();
   const aliases = ['cite web','cite website','cite webpage','cite news','cite magazine','internetquelle'];
@@ -1634,14 +2097,17 @@ function convertCiteEncyclopedia(parsed, options){
 
   function isCiteBook(name){ const n=(name||'').trim().toLowerCase(); return n==='cite book'; }
   function isCiteJournal(name){ const n=(name||'').trim().toLowerCase(); return n==='cite journal'; }
+  // v8.0: recognise {{Citation}} (exact match, case-insensitive)
+  function isCitation(name){ const n=(name||'').trim().toLowerCase(); return n==='citation'; }
 
   function convertTemplateString(tplString, options){
     const parsed = parseTemplateParams(tplString);
     if(!parsed.name) return { output: tplString, log: ['Keine Template-Erkennung'] };
     if(isCiteBook(parsed.name)) return convertCiteBook(parsed, options);
     if(isCiteJournal(parsed.name)) return convertCiteJournal(parsed, options);
+    if(isCiteEncyclopedia(parsed.name)) return convertCiteEncyclopedia(parsed, options);
+    if(isCitation(parsed.name)) return convertCitation(parsed, options);
     if(isCiteWebFamily(parsed.name)) return convertCiteWebFamily(parsed, options);
-        if(isCiteEncyclopedia(parsed.name)) return convertCiteEncyclopedia(parsed, options);
     return { output: tplString, log: ['Unverändertes Template: ' + parsed.name] };
   }
 
