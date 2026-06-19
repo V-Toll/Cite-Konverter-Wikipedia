@@ -8,7 +8,7 @@
   <link rel="icon" type="image/svg+xml" href="grafiken/favicon.svg" />
   <link rel="shortcut icon" href="grafiken/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="grafiken/apple-touch-icon.png" />
-<title>Cite-Konverter für Wikipedia – v8.0</title>
+<title>Cite-Konverter für Wikipedia – v9.0.2</title>
 
 <style>
   html{min-height:100%}
@@ -65,7 +65,7 @@ body.theme-crimsonperiwinkle{background:linear-gradient(135deg,#470B24 0%,#8a70a
 body.theme-evergreencream{background:linear-gradient(135deg,#143731 0%,#5a9a50 55%,#CEFF8C 100%)}
 
 
-  .wrap{width:100%;max-width:980px}
+  .wrap{width:100%;max-width:1180px}
   .card{
     width:100%;
     background:var(--glass);
@@ -111,90 +111,115 @@ body.dark .segmented button{color:#fff}
   .theme-option.active{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.12)}
   .swatch{width:62px;height:26px;border-radius:8px;flex-shrink:0}
 
-  /* Buttons/Badge per theme (light) */
-  body.theme-sunset .btn-main, body.theme-sunset .badge{background:linear-gradient(135deg,#C250F2,#D76CD9);}
-  body.theme-wikipedia .btn-main, body.theme-wikipedia .badge{background:linear-gradient(90deg,#3366cc,#2b57b8); color:#fff;}
-  body.theme-bluewave .btn-main, body.theme-bluewave .badge{background:linear-gradient(135deg,#023E73,#0468BF);}
-  body.theme-valley .btn-main, body.theme-valley .badge{background:linear-gradient(135deg,#387CA6,#71A63C);}
-  body.theme-simple .btn-main, body.theme-simple .badge{background:linear-gradient(90deg,#111827,#6b7280); color:#fff;}
-  body.theme-spice .btn-main, body.theme-spice .badge{background:linear-gradient(135deg,#8C262E,#D99982);}
-  body.theme-jadefruit .btn-main, body.theme-jadefruit .badge{background:linear-gradient(135deg,#03A6A6,#F27405);}
-  body.theme-hacker .btn-main, body.theme-hacker .badge{background:linear-gradient(135deg,#205B73,#49BF9E);}
-/* v7.1 – Neue Themes: Buttons & Badge (Light) */
-body.theme-celestial .btn-main,body.theme-celestial .badge{background:linear-gradient(135deg,#800080,#B266B2)}
-body.theme-daffodil .btn-main,body.theme-daffodil .badge{background:linear-gradient(135deg,#C7B600,#9ACD32);color:#111}
-body.theme-mistylavender .btn-main,body.theme-mistylavender .badge{background:linear-gradient(135deg,#143642,#0F8B8D)}
-body.theme-vibrantamber .btn-main,body.theme-vibrantamber .badge{background:linear-gradient(135deg,#CC8400,#FFA500)}
-body.theme-crimsontide .btn-main,body.theme-crimsontide .badge{background:linear-gradient(135deg,#9B111E,#DC143C)}
-/* v7.2 – Neue Themes: Buttons & Badge (Light) */
-body.theme-rusticsienna .btn-main,body.theme-rusticsienna .badge{background:linear-gradient(135deg,#933227,#C44536)}
-body.theme-terracottasunset .btn-main,body.theme-terracottasunset .badge{background:linear-gradient(135deg,#472D30,#C85646)}
-body.theme-coralhorizon .btn-main,body.theme-coralhorizon .badge{background:linear-gradient(135deg,#58A6FF,#FF6B6B)}
-body.theme-toxicnightfall .btn-main,body.theme-toxicnightfall .badge{background:linear-gradient(135deg,#240060,#DB123C)}
-body.theme-colonialcobalt .btn-main,body.theme-colonialcobalt .badge{background:linear-gradient(135deg,#0C10E3,#D1B17C)}
-/* v7.3 – Buttons & Badge (Light) */
-body.theme-neontwilight .btn-main,body.theme-neontwilight .badge{background:linear-gradient(135deg,#4B0082,#FF1493)}
-body.theme-ancientgild .btn-main,body.theme-ancientgild .badge{background:linear-gradient(135deg,#550003,#B8AB38)}
-body.theme-vintagehearth .btn-main,body.theme-vintagehearth .badge{background:linear-gradient(135deg,#AA0003,#9a88c0)}
-body.theme-espressobrown .btn-main,body.theme-espressobrown .badge{background:linear-gradient(135deg,#4E2C23,#E2725B)}
-body.theme-darkorchidvine .btn-main,body.theme-darkorchidvine .badge{background:linear-gradient(135deg,#4B0082,#9932CC)}
-body.theme-frenchceladon .btn-main,body.theme-frenchceladon .badge{background:linear-gradient(135deg,#213F95,#508a68)}
-body.theme-burgundychampagne .btn-main,body.theme-burgundychampagne .badge{background:linear-gradient(135deg,#80011F,#c47840)}
-body.theme-hunterdune .btn-main,body.theme-hunterdune .badge{background:linear-gradient(135deg,#3E5F44,#7a8a5a)}
-body.theme-coffeebutter .btn-main,body.theme-coffeebutter .badge{background:linear-gradient(135deg,#20130D,#8a6030)}
-body.theme-regalchiffon .btn-main,body.theme-regalchiffon .badge{background:linear-gradient(135deg,#0D3B66,#6a9acc)}
-body.theme-espressopeony .btn-main,body.theme-espressopeony .badge{background:linear-gradient(135deg,#3E2723,#c08090)}
-body.theme-deeppetal .btn-main,body.theme-deeppetal .badge{background:linear-gradient(135deg,#3D2E2B,#a87a68)}
-body.theme-coffeered .btn-main,body.theme-coffeered .badge{background:linear-gradient(135deg,#2E1E1F,#E30B5C)}
-body.theme-indigobrown .btn-main,body.theme-indigobrown .badge{background:linear-gradient(135deg,#432371,#8a6aaa)}
-body.theme-hotwhite .btn-main,body.theme-hotwhite .badge{background:linear-gradient(135deg,#c01040,#F8395A)}
-body.theme-petalbean .btn-main,body.theme-petalbean .badge{background:linear-gradient(135deg,#1B1110,#8a3050)}
-body.theme-celadonplum .btn-main,body.theme-celadonplum .badge{background:linear-gradient(135deg,#553832,#7a9a7a)}
-body.theme-crimsonperiwinkle .btn-main,body.theme-crimsonperiwinkle .badge{background:linear-gradient(135deg,#470B24,#8a70aa)}
-body.theme-evergreencream .btn-main,body.theme-evergreencream .badge{background:linear-gradient(135deg,#143731,#5a9a50)}
+  /* v8.6: Optionen in einem Modal (per Zahnrad geöffnet) */
+  .header-actions{margin-left:auto;display:inline-flex;gap:8px;align-items:center}
+  .icon-btn{width:40px;height:40px;flex:none;display:inline-flex;align-items:center;justify-content:center;font-size:18px;line-height:1;border-radius:11px;border:1px solid rgba(0,0,0,0.10);background:rgba(255,255,255,0.55);cursor:pointer;transition:background .15s ease, transform .15s ease}
+  .icon-btn:hover{background:rgba(255,255,255,0.85);transform:rotate(20deg)}
+  .icon-btn:focus-visible{outline:2px solid #6aa9ff;outline-offset:2px}
+  body.dark .icon-btn, body.force-dark .icon-btn{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.16)}
+  body.dark .icon-btn:hover, body.force-dark .icon-btn:hover{background:rgba(255,255,255,0.20)}
 
+  .modal{position:fixed;inset:0;z-index:1000;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto}
+  .modal.is-open{display:flex}
+  .modal-backdrop{position:fixed;inset:0;background:rgba(8,10,20,0.45);backdrop-filter:blur(3px)}
+  .modal-dialog{position:relative;z-index:1;width:100%;max-width:460px;background:var(--glass);backdrop-filter:blur(14px) saturate(140%);border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,0.30);color:#071029;animation:modalIn .16s ease-out}
+  body.dark .modal-dialog, body.force-dark .modal-dialog{background:var(--glass-dark);color:#e9eef6}
+  @keyframes modalIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid rgba(0,0,0,0.08)}
+  body.dark .modal-head, body.force-dark .modal-head{border-bottom-color:rgba(255,255,255,0.10)}
+  .modal-head h2{margin:0;font-size:1.05rem}
+  .modal-close{width:34px;height:34px;flex:none;border:0;border-radius:9px;background:rgba(0,0,0,0.06);cursor:pointer;font-size:15px;line-height:1;color:inherit}
+  .modal-close:hover{background:rgba(0,0,0,0.12)}
+  body.dark .modal-close, body.force-dark .modal-close{background:rgba(255,255,255,0.10)}
+  .modal-body{padding:18px 20px}
+  .modal-dialog.wide{max-width:720px}
+  .modal .theme-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-top:0}
 
-  /* Dark variants */
-  body.force-dark.theme-sunset .btn-main, body.force-dark.theme-sunset .badge{background:linear-gradient(135deg,#8b2aa9,#9f4fb1)}
-  body.force-dark.theme-wikipedia .btn-main, body.force-dark.theme-wikipedia .badge{background:linear-gradient(90deg,#1b355f,#214277)}
-  body.force-dark.theme-bluewave .btn-main, body.force-dark.theme-bluewave .badge{background:linear-gradient(135deg,#012033,#02334f)}
-  body.force-dark.theme-valley .btn-main, body.force-dark.theme-valley .badge{background:linear-gradient(135deg,#2f6b56,#3c7f3b)}
-  body.force-dark.theme-simple .btn-main, body.force-dark.theme-simple .badge{background:linear-gradient(90deg,#e5e7eb,#9ca3af); color:#111;}
-  body.force-dark.theme-spice .btn-main, body.force-dark.theme-spice .badge{background:linear-gradient(135deg,#260C06,#732D14)}
-  body.force-dark.theme-jadefruit .btn-main, body.force-dark.theme-jadefruit .badge{background:linear-gradient(135deg,#731702,#03A696)}
-  body.force-dark.theme-hacker .btn-main, body.force-dark.theme-hacker .badge{background:linear-gradient(135deg,#020D0C,#307B8C)}
-/* v7.1 – Neue Themes: Buttons & Badge (Dark) */
-body.force-dark.theme-celestial .btn-main,body.force-dark.theme-celestial .badge{background:linear-gradient(135deg,#4B004B,#2E0854)}
-body.force-dark.theme-daffodil .btn-main,body.force-dark.theme-daffodil .badge{background:linear-gradient(135deg,#9ACD32,#C7B600);color:#111}
-body.force-dark.theme-mistylavender .btn-main,body.force-dark.theme-mistylavender .badge{background:linear-gradient(135deg,#0F8B8D,#143642)}
-body.force-dark.theme-vibrantamber .btn-main,body.force-dark.theme-vibrantamber .badge{background:linear-gradient(135deg,#87CEFA,#CC8400);color:#111}
-body.force-dark.theme-crimsontide .btn-main,body.force-dark.theme-crimsontide .badge{background:linear-gradient(135deg,#990F2A,#9B111E)}
-/* v7.2 – Neue Themes: Buttons & Badge (Dark) */
-body.force-dark.theme-rusticsienna .btn-main,body.force-dark.theme-rusticsienna .badge{background:linear-gradient(135deg,#5a1a10,#933227)}
-body.force-dark.theme-terracottasunset .btn-main,body.force-dark.theme-terracottasunset .badge{background:linear-gradient(135deg,#2a1a1c,#472D30)}
-body.force-dark.theme-coralhorizon .btn-main,body.force-dark.theme-coralhorizon .badge{background:linear-gradient(135deg,#1a5cbf,#cc4444)}
-body.force-dark.theme-toxicnightfall .btn-main,body.force-dark.theme-toxicnightfall .badge{background:linear-gradient(135deg,#0d0030,#8a0025)}
-body.force-dark.theme-colonialcobalt .btn-main,body.force-dark.theme-colonialcobalt .badge{background:linear-gradient(135deg,#060880,#a08050)}
-/* v7.3 – Buttons & Badge (Dark) */
-body.force-dark.theme-neontwilight .btn-main,body.force-dark.theme-neontwilight .badge{background:linear-gradient(135deg,#2a0047,#8a0055)}
-body.force-dark.theme-ancientgild .btn-main,body.force-dark.theme-ancientgild .badge{background:linear-gradient(135deg,#2a0001,#7a7020)}
-body.force-dark.theme-vintagehearth .btn-main,body.force-dark.theme-vintagehearth .badge{background:linear-gradient(135deg,#5a0001,#7a709a)}
-body.force-dark.theme-espressobrown .btn-main,body.force-dark.theme-espressobrown .badge{background:linear-gradient(135deg,#2a1510,#8a3a28)}
-body.force-dark.theme-darkorchidvine .btn-main,body.force-dark.theme-darkorchidvine .badge{background:linear-gradient(135deg,#2a0047,#4B0082)}
-body.force-dark.theme-frenchceladon .btn-main,body.force-dark.theme-frenchceladon .badge{background:linear-gradient(135deg,#0f1f4a,#508a68)}
-body.force-dark.theme-burgundychampagne .btn-main,body.force-dark.theme-burgundychampagne .badge{background:linear-gradient(135deg,#3d0010,#7a4a20)}
-body.force-dark.theme-hunterdune .btn-main,body.force-dark.theme-hunterdune .badge{background:linear-gradient(135deg,#1e2f22,#4a5a38)}
-body.force-dark.theme-coffeebutter .btn-main,body.force-dark.theme-coffeebutter .badge{background:linear-gradient(135deg,#0a0806,#4a3010)}
-body.force-dark.theme-regalchiffon .btn-main,body.force-dark.theme-regalchiffon .badge{background:linear-gradient(135deg,#061c33,#3a6080)}
-body.force-dark.theme-espressopeony .btn-main,body.force-dark.theme-espressopeony .badge{background:linear-gradient(135deg,#1e1210,#5a2830)}
-body.force-dark.theme-deeppetal .btn-main,body.force-dark.theme-deeppetal .badge{background:linear-gradient(135deg,#1e1615,#5a3a34)}
-body.force-dark.theme-coffeered .btn-main,body.force-dark.theme-coffeered .badge{background:linear-gradient(135deg,#170f10,#6a0428)}
-body.force-dark.theme-indigobrown .btn-main,body.force-dark.theme-indigobrown .badge{background:linear-gradient(135deg,#210f38,#5a3a60)}
-body.force-dark.theme-hotwhite .btn-main,body.force-dark.theme-hotwhite .badge{background:linear-gradient(135deg,#500818,#a01030)}
-body.force-dark.theme-petalbean .btn-main,body.force-dark.theme-petalbean .badge{background:linear-gradient(135deg,#0d0908,#4a1828)}
-body.force-dark.theme-celadonplum .btn-main,body.force-dark.theme-celadonplum .badge{background:linear-gradient(135deg,#2a1c18,#3a5a3a)}
-body.force-dark.theme-crimsonperiwinkle .btn-main,body.force-dark.theme-crimsonperiwinkle .badge{background:linear-gradient(135deg,#230512,#4a3868)}
-body.force-dark.theme-evergreencream .btn-main,body.force-dark.theme-evergreencream .badge{background:linear-gradient(135deg,#0a1b18,#2a5028)}
+  /* v8.8: Versionsverlauf-Modal – aufgeräumte, moderne Liste */
+  .cl-dialog{display:flex;flex-direction:column;max-height:calc(100vh - 80px)}
+  .cl-dialog .modal-head{flex:none}
+  .cl-body{flex:1 1 auto;overflow-y:auto}
+  .cl-hint{margin:0 0 12px;font-size:12px;opacity:.6}
+  .cl-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .cl-list li{padding:11px 14px;border:1px solid rgba(0,0,0,0.06);border-left:3px solid #7c3aed;border-radius:10px;background:rgba(0,0,0,0.025);font-size:13.5px;line-height:1.55}
+  .cl-list li>strong:first-child{display:block;margin-bottom:2px;color:#6d28d9;font-size:13px;letter-spacing:.01em}
+  .cl-list code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;padding:1px 6px;border-radius:6px;background:rgba(0,0,0,0.06)}
+  body.dark .cl-list li, body.force-dark .cl-list li{border-color:rgba(255,255,255,0.10);border-left-color:#a78bfa;background:rgba(255,255,255,0.04)}
+  body.dark .cl-list li>strong:first-child, body.force-dark .cl-list li>strong:first-child{color:#c4b5fd}
+  body.dark .cl-list code, body.force-dark .cl-list code{background:rgba(255,255,255,0.12)}
+  @media(prefers-reduced-motion:reduce){ .modal-dialog{animation:none} .icon-btn:hover{transform:none} }
+
+  /* Optionen-Steuerelemente (Inhalt des Modals) */
+  .opt-group{margin:0 0 16px}
+  .opt-group:last-child{margin-bottom:0}
+  .opt-group>h3{margin:0 0 10px;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;opacity:.55}
+  .opt-panel label.inline{display:block;position:relative;padding-left:24px;margin:0 0 9px;font-size:13.5px;line-height:1.4;cursor:pointer}
+  .opt-panel label.inline input{position:absolute;left:0;top:3px;margin:0}
+  .opt-panel .option-compact{margin:4px 0 0;gap:10px}
+  .opt-panel .option-compact label.inline{padding-left:0;position:static;margin:0}
+  .opt-panel #langInfo, .opt-panel #langSelectContainer{margin-left:24px;font-size:13px}
+  .opt-panel #langSelectContainer select{max-width:100%}
+
+  /* v8.5: Intro-Routen statt dichtem Fließtext */
+  .routes{display:flex;flex-direction:column;gap:8px;margin:2px 0 4px}
+  .route{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .route-src{display:inline-flex;gap:6px;flex-wrap:wrap}
+  .route code{display:inline-block;padding:3px 9px;border-radius:8px;background:rgba(0,0,0,0.055);border:1px solid rgba(0,0,0,0.06);font-size:12.5px}
+  .route a{text-decoration:none;color:inherit}
+  .route a:hover code{background:rgba(0,0,0,0.11)}
+  .route-arrow{opacity:.45;font-weight:700}
+  .route-dst code{background:rgba(0,0,0,0.09);border-color:rgba(0,0,0,0.12);font-weight:700}
+  .route-note{margin:2px 0 0;font-size:12.5px;opacity:.7}
+  body.dark .route code, body.force-dark .route code{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.10)}
+  body.dark .route-dst code, body.force-dark .route-dst code{background:rgba(255,255,255,0.15)}
+  body.dark .route a:hover code, body.force-dark .route a:hover code{background:rgba(255,255,255,0.18)}
+
+  .theme-details{margin-top:10px}
+
+  /* Buttons/Badge pro Theme - datengetrieben (v8.2.1): jedes Theme setzt nur
+     Variablen; die beiden gemeinsamen Regeln wenden sie an. Neues Theme: eine
+     Zeile mit --th-accent (hell) und --th-accent-dark (dunkel); optional
+     --th-accent-fg / --th-accent-fg-dark fuer abweichende Textfarbe (Default #fff). */
+  body .btn-main, body .badge { background: var(--th-accent); color: var(--th-accent-fg, #fff); }
+  body.force-dark .btn-main, body.force-dark .badge { background: var(--th-accent-dark); color: var(--th-accent-fg-dark, #fff); }
+
+  body.theme-sunset { --th-accent: linear-gradient(135deg,#C250F2,#D76CD9); --th-accent-dark: linear-gradient(135deg,#8b2aa9,#9f4fb1); }
+  body.theme-wikipedia { --th-accent: linear-gradient(90deg,#3366cc,#2b57b8); --th-accent-dark: linear-gradient(90deg,#1b355f,#214277); --th-accent-fg: #fff; }
+  body.theme-bluewave { --th-accent: linear-gradient(135deg,#023E73,#0468BF); --th-accent-dark: linear-gradient(135deg,#012033,#02334f); }
+  body.theme-valley { --th-accent: linear-gradient(135deg,#387CA6,#71A63C); --th-accent-dark: linear-gradient(135deg,#2f6b56,#3c7f3b); }
+  body.theme-simple { --th-accent: linear-gradient(90deg,#111827,#6b7280); --th-accent-dark: linear-gradient(90deg,#e5e7eb,#9ca3af); --th-accent-fg: #fff; --th-accent-fg-dark: #111; }
+  body.theme-spice { --th-accent: linear-gradient(135deg,#8C262E,#D99982); --th-accent-dark: linear-gradient(135deg,#260C06,#732D14); }
+  body.theme-jadefruit { --th-accent: linear-gradient(135deg,#03A6A6,#F27405); --th-accent-dark: linear-gradient(135deg,#731702,#03A696); }
+  body.theme-hacker { --th-accent: linear-gradient(135deg,#205B73,#49BF9E); --th-accent-dark: linear-gradient(135deg,#020D0C,#307B8C); }
+  body.theme-celestial { --th-accent: linear-gradient(135deg,#800080,#B266B2); --th-accent-dark: linear-gradient(135deg,#4B004B,#2E0854); }
+  body.theme-daffodil { --th-accent: linear-gradient(135deg,#C7B600,#9ACD32); --th-accent-dark: linear-gradient(135deg,#9ACD32,#C7B600); --th-accent-fg: #111; --th-accent-fg-dark: #111; }
+  body.theme-mistylavender { --th-accent: linear-gradient(135deg,#143642,#0F8B8D); --th-accent-dark: linear-gradient(135deg,#0F8B8D,#143642); }
+  body.theme-vibrantamber { --th-accent: linear-gradient(135deg,#CC8400,#FFA500); --th-accent-dark: linear-gradient(135deg,#87CEFA,#CC8400); --th-accent-fg-dark: #111; }
+  body.theme-crimsontide { --th-accent: linear-gradient(135deg,#9B111E,#DC143C); --th-accent-dark: linear-gradient(135deg,#990F2A,#9B111E); }
+  body.theme-rusticsienna { --th-accent: linear-gradient(135deg,#933227,#C44536); --th-accent-dark: linear-gradient(135deg,#5a1a10,#933227); }
+  body.theme-terracottasunset { --th-accent: linear-gradient(135deg,#472D30,#C85646); --th-accent-dark: linear-gradient(135deg,#2a1a1c,#472D30); }
+  body.theme-coralhorizon { --th-accent: linear-gradient(135deg,#58A6FF,#FF6B6B); --th-accent-dark: linear-gradient(135deg,#1a5cbf,#cc4444); }
+  body.theme-toxicnightfall { --th-accent: linear-gradient(135deg,#240060,#DB123C); --th-accent-dark: linear-gradient(135deg,#0d0030,#8a0025); }
+  body.theme-colonialcobalt { --th-accent: linear-gradient(135deg,#0C10E3,#D1B17C); --th-accent-dark: linear-gradient(135deg,#060880,#a08050); }
+  body.theme-neontwilight { --th-accent: linear-gradient(135deg,#4B0082,#FF1493); --th-accent-dark: linear-gradient(135deg,#2a0047,#8a0055); }
+  body.theme-ancientgild { --th-accent: linear-gradient(135deg,#550003,#B8AB38); --th-accent-dark: linear-gradient(135deg,#2a0001,#7a7020); }
+  body.theme-vintagehearth { --th-accent: linear-gradient(135deg,#AA0003,#9a88c0); --th-accent-dark: linear-gradient(135deg,#5a0001,#7a709a); }
+  body.theme-espressobrown { --th-accent: linear-gradient(135deg,#4E2C23,#E2725B); --th-accent-dark: linear-gradient(135deg,#2a1510,#8a3a28); }
+  body.theme-darkorchidvine { --th-accent: linear-gradient(135deg,#4B0082,#9932CC); --th-accent-dark: linear-gradient(135deg,#2a0047,#4B0082); }
+  body.theme-frenchceladon { --th-accent: linear-gradient(135deg,#213F95,#508a68); --th-accent-dark: linear-gradient(135deg,#0f1f4a,#508a68); }
+  body.theme-burgundychampagne { --th-accent: linear-gradient(135deg,#80011F,#c47840); --th-accent-dark: linear-gradient(135deg,#3d0010,#7a4a20); }
+  body.theme-hunterdune { --th-accent: linear-gradient(135deg,#3E5F44,#7a8a5a); --th-accent-dark: linear-gradient(135deg,#1e2f22,#4a5a38); }
+  body.theme-coffeebutter { --th-accent: linear-gradient(135deg,#20130D,#8a6030); --th-accent-dark: linear-gradient(135deg,#0a0806,#4a3010); }
+  body.theme-regalchiffon { --th-accent: linear-gradient(135deg,#0D3B66,#6a9acc); --th-accent-dark: linear-gradient(135deg,#061c33,#3a6080); }
+  body.theme-espressopeony { --th-accent: linear-gradient(135deg,#3E2723,#c08090); --th-accent-dark: linear-gradient(135deg,#1e1210,#5a2830); }
+  body.theme-deeppetal { --th-accent: linear-gradient(135deg,#3D2E2B,#a87a68); --th-accent-dark: linear-gradient(135deg,#1e1615,#5a3a34); }
+  body.theme-coffeered { --th-accent: linear-gradient(135deg,#2E1E1F,#E30B5C); --th-accent-dark: linear-gradient(135deg,#170f10,#6a0428); }
+  body.theme-indigobrown { --th-accent: linear-gradient(135deg,#432371,#8a6aaa); --th-accent-dark: linear-gradient(135deg,#210f38,#5a3a60); }
+  body.theme-hotwhite { --th-accent: linear-gradient(135deg,#c01040,#F8395A); --th-accent-dark: linear-gradient(135deg,#500818,#a01030); }
+  body.theme-petalbean { --th-accent: linear-gradient(135deg,#1B1110,#8a3050); --th-accent-dark: linear-gradient(135deg,#0d0908,#4a1828); }
+  body.theme-celadonplum { --th-accent: linear-gradient(135deg,#553832,#7a9a7a); --th-accent-dark: linear-gradient(135deg,#2a1c18,#3a5a3a); }
+  body.theme-crimsonperiwinkle { --th-accent: linear-gradient(135deg,#470B24,#8a70aa); --th-accent-dark: linear-gradient(135deg,#230512,#4a3868); }
+  body.theme-evergreencream { --th-accent: linear-gradient(135deg,#143731,#5a9a50); --th-accent-dark: linear-gradient(135deg,#0a1b18,#2a5028); }
 
 
   /* Input/Output area layout */
@@ -206,6 +231,7 @@ body.force-dark.theme-evergreencream .btn-main,body.force-dark.theme-evergreencr
   /* highlighted pre (shows behind textarea) */
   pre.highlight{
     margin:0;
+    box-sizing:border-box;       /* v8.0.2: gleiches Box-Modell wie textarea.overlay */
     padding:14px;
     min-height:80px;
     font-family:var(--mono);
@@ -220,6 +246,9 @@ body.force-dark.theme-evergreencream .btn-main,body.force-dark.theme-evergreencr
   /* textarea sits on top, text transparent but caret visible */
   textarea.overlay{
     position:absolute;left:0;top:0;right:0;padding:14px;
+    /* v8.0.2: identisches Box-Modell + Umbruchverhalten wie pre.highlight,
+       damit Caret und Markierung exakt unter dem farbigen Text liegen. */
+    box-sizing:border-box;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;
     width:100%;height:100%;min-height:80px;border:0;background:transparent;resize:vertical;
     font-family:var(--mono);font-size:13.5px;line-height:1.45;color:transparent !important; -webkit-text-fill-color: transparent; text-shadow: none !important;caret-color:transparent !important; -webkit-text-fill-color: transparent; text-shadow: none !important;
     z-index:3;
@@ -244,7 +273,26 @@ body.force-dark.theme-evergreencream .btn-main,body.force-dark.theme-evergreencr
   .btn-main:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,0.18)}
 
   .btn-row{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
-  #copyStatus{min-width:160px;text-align:center}
+  /* v9.0: zwei Buttons teilen sich eine Reihe; sekundärer (Übersetzen) dezenter */
+  .btn-row .btn-main, .btn-row .btn-secondary{flex:1 1 200px;width:auto;min-width:0}
+  .btn-secondary{display:inline-block;padding:12px 18px;border-radius:12px;border:1px solid rgba(0,0,0,0.12);background:rgba(255,255,255,0.62);color:#1a2230;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.08);transition:var(--transition)}
+  .btn-secondary:hover:not(:disabled){background:rgba(255,255,255,0.9)}
+  .btn-secondary:disabled{opacity:.6;cursor:progress}
+  body.dark .btn-secondary, body.force-dark .btn-secondary{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);color:#e9eef6}
+  body.dark .btn-secondary:hover:not(:disabled), body.force-dark .btn-secondary:hover:not(:disabled){background:rgba(255,255,255,0.18)}
+  /* v9.0: Optionsfeld (DeepL-Key/Zielsprache) */
+  .opt-field{margin:2px 0 0}
+  .opt-field>label{display:block;font-weight:700;margin:0 0 6px;font-size:13px}
+  .opt-panel input.opt-input, .opt-panel select.opt-input{width:100%;padding:8px 10px;border-radius:9px;border:1px solid rgba(0,0,0,0.15);background:rgba(255,255,255,0.72);font-size:13px;font-family:inherit;box-sizing:border-box}
+  body.dark .opt-panel input.opt-input, body.force-dark .opt-panel input.opt-input, body.dark .opt-panel select.opt-input, body.force-dark .opt-panel select.opt-input{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);color:#e9eef6}
+  .opt-hint{margin:8px 0 0;font-size:12px;opacity:.65;line-height:1.45}
+  .opt-hint code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;padding:1px 5px;border-radius:5px;background:rgba(0,0,0,0.06)}
+  body.dark .opt-hint code, body.force-dark .opt-hint code{background:rgba(255,255,255,0.12)}
+  .translate-status{margin:6px 0 0;font-size:12.5px;min-height:1.2em}
+  .translate-status.err{color:#b91c1c}
+  .translate-status.ok{color:#15803d}
+  body.dark .translate-status.err, body.force-dark .translate-status.err{color:#fca5a5}
+  body.dark .translate-status.ok, body.force-dark .translate-status.ok{color:#86efac}
 
   /* conversion summary box */
   #conversionSummary{margin-top:12px;padding:12px;border-radius:10px;background:rgba(0,0,0,0.03);font-size:14px}
@@ -455,6 +503,41 @@ body.dark pre.highlight .tok-template, body.force-dark pre.highlight .tok-templa
 body.dark pre.highlight .tok-ref, body.force-dark pre.highlight .tok-ref { color:#9BD0FF !important; font-weight:800; }
 
 
+/* ============================================================================
+   v8.1 „Prismatic Links“ – Einheitliche, kontraststarke Token-Farben.
+   Dieser Block ist bewusst der LETZTE Token-Block und überschreibt damit die
+   historisch gewachsenen Einzelregeln darüber. Hell- und Dunkelmodus getrennt.
+   Semantik: Vorlagenname=Magenta · {{ }}=Violett · |Parameter=Purpur ·
+   = und Werte=Schiefer · URL=Blau · <ref>=Türkis · Zahl/Datum=Bernstein ·
+   Kommentar=Grau · [[Wikilink]]=Grün
+   ============================================================================ */
+pre.highlight .tok-template { color:#C026A8 !important; font-weight:800; }              /* cite web / Internetquelle */
+pre.highlight .tok-brace    { color:#6D4AC4 !important; font-weight:700; }              /* {{  }} */
+pre.highlight .tok-param    { color:#9421C9 !important; font-weight:700; }              /* |titel, |url … */
+pre.highlight .tok-eq       { color:#5B6470 !important; }                               /* = und Werte */
+pre.highlight .tok-refblock { color:#5B6470 !important; }                               /* v8.3.1: <ref>-Inhalt grau (endet am </ref>) */
+pre.highlight .tok-url      { color:#0B66C3 !important; text-decoration:underline; }    /* http(s)-URLs */
+pre.highlight .tok-ref      { color:#0E8AA0 !important; font-weight:800; }              /* <ref>…</ref> */
+pre.highlight .tok-number   { color:#B5560A !important; }                               /* Zahlen / Datum */
+pre.highlight .tok-comment  { color:#6B7280 !important; font-style:italic; }            /* (…) */
+pre.highlight .tok-wikilink { color:#1F8B4C !important; font-weight:600; }              /* [[Wikilink]] */
+pre.highlight .tok-wikilink span { color:inherit !important; font-style:inherit !important; }   /* v8.3/v8.7: verschachtelte Tokens erben Farbe UND Schriftstil (Klammerzusatz nicht kursiv) */
+pre.highlight .tok-italic { font-style:italic; }                                       /* v8.4: ''kursiv'' */
+pre.highlight .tok-bold, pre.highlight .tok-bold * { font-weight:700 !important; }      /* v8.4: '''fett''' (auch enthaltene Wikilinks) */
+
+body.dark pre.highlight .tok-template, body.force-dark pre.highlight .tok-template { color:#F2A8E8 !important; }
+body.dark pre.highlight .tok-brace,    body.force-dark pre.highlight .tok-brace    { color:#C4B0FF !important; }
+body.dark pre.highlight .tok-param,    body.force-dark pre.highlight .tok-param    { color:#E0A8FF !important; }
+body.dark pre.highlight .tok-eq,       body.force-dark pre.highlight .tok-eq       { color:#C2CAD6 !important; }
+body.dark pre.highlight .tok-refblock, body.force-dark pre.highlight .tok-refblock { color:#C2CAD6 !important; }
+body.dark pre.highlight .tok-url,      body.force-dark pre.highlight .tok-url      { color:#8FBFFF !important; }
+body.dark pre.highlight .tok-ref,      body.force-dark pre.highlight .tok-ref      { color:#7FD8E8 !important; }
+body.dark pre.highlight .tok-number,   body.force-dark pre.highlight .tok-number   { color:#FFC07A !important; }
+body.dark pre.highlight .tok-comment,  body.force-dark pre.highlight .tok-comment  { color:#9AA4B2 !important; }
+body.dark pre.highlight .tok-wikilink, body.force-dark pre.highlight .tok-wikilink { color:#74E69B !important; }
+body.dark pre.highlight .tok-wikilink span, body.force-dark pre.highlight .tok-wikilink span { color:inherit !important; }
+
+
 /* Bootstrap highlight safety: show textarea text until overlay is ready */
 textarea.overlay{ color: inherit !important; caret-color: auto !important; }
 .hl-ready textarea.overlay{ color: transparent !important; caret-color: transparent !important; }
@@ -597,100 +680,21 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#changelog" id="versionBadge" class="badge">v8.0</a></h1>
-      <p class="lead">Der <i>Cite-Konverter für Wikipedia</i> unterstützt dich dabei, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_web" target="_blank"><code>{{cite web}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_news" target="_blank"><code>{{cite news}}</code></a> und <a href="https://en.wikipedia.org/wiki/Template:Cite_magazine" target="_blank"><code>{{cite magazine}}</code></a> in die deutsche Vorlage <a href="https://de.wikipedia.org/wiki/Vorlage:Internetquelle" target="_blank"><code>{{Internetquelle}}</code></a> zu konvertieren. Zudem wird <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_book" target="_blank"><code>{{cite book}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_journal" target="_blank"><code>{{cite journal}}</code></a>, <a href="https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia" target="_blank"><code>{{cite encyclopedia}}</code></a> und <a href="https://en.wikipedia.org/wiki/Template:Citation" target="_blank"><code>{{Citation}}</code></a> in <a href="https://de.wikipedia.org/wiki/Vorlage:Literatur" target="_blank"><code>{{Literatur}}</code></a> konvertiert (bei <code>{{Citation}}</code> ohne Seitenangabe und mit URL alternativ in <a href="https://de.wikipedia.org/wiki/Vorlage:Internetquelle" target="_blank"><code>{{Internetquelle}}</code></a>).</p>
-
-      <details>
-        <summary>⚙️ Optionen</summary>
-        <div class="options" role="group" aria-label="Einstellungen">
-          <label class="inline"><input type="checkbox" id="useTodayAbruf" checked /> <span class="info">Abrufdatum automatisch auf heute setzen</span> (<span id="todayLabel"></span>)</label>
-          <label class="inline"><input type="checkbox" id="stripArchiveIfLive" checked /> <span class="info">Archiv-Parameter entfernen, wenn URL aktiv (<code>url-status=live</code>)</span></label>
-          <label class="inline"><input type="checkbox" id="convertSubref" checked /> <span class="info">Subreferenzierung konvertieren (<code>{{rp|...}}</code> → <code>details=</code>)</span></label>
-          <label style="grid-column:1/-1" class="inline"><input type="checkbox" id="suppressGerman" checked /> <span class="info"><code>Sprache=de</code> unterdrücken</span> <button id="langInfoToggle" style="background:none;border:none;color:#0645AD;cursor:pointer">ℹ️</button></label>
-          <div id="langInfo" style="display:none;margin-left:6px;font-size:13px;grid-column:1/-1">Deutsch (de) wird standardmäßig nicht ausgegeben. Fremdsprachen erscheinen als Sprachcode (zweistellig). Mit dieser Option kann die Unterdrückung deaktiviert werden.</div>
-
-          <label class="inline"><input type="checkbox" id="fullLangCodes" /> <span class="info">Ungekürzte Sprachcodes ausgeben (z. B. en-GB)</span></label>
-          <label class="inline"><input type="checkbox" id="autoCopy" /> <span class="info">Konvertierte Ausgabe direkt in Zwischenablage kopieren</span></label>
-
-          
-<div class="option-compact">
-<label class="inline" for="darkModeSelect">Darkmode:</label>
-<div id="darkModeSegmented" class="segmented" role="group" aria-label="Darkmode-Modus"><button type="button" data-value="auto" aria-pressed="false">Auto</button><button type="button" data-value="on" aria-pressed="false">An</button><button type="button" data-value="off" aria-pressed="false">Aus</button></div>
-<select id="darkModeSelect" class="visually-hidden">
-  <option value="auto">Automatisch (System)</option>
-  <option value="on">Immer an</option>
-  <option value="off">Immer aus</option>
-</select>
-</div>
-
-          <label class="inline"><input type="checkbox" id="overrideLang" /> <span class="info">Sprache manuell überschreiben</span></label>
-
-        <label class="inline"><input type="checkbox" id="wikidataLookup" checked> <span class="info">Wikilinks → Deutsch (Wikidata)</span></label>
-
-        <label class="inline"><input type="checkbox" id="keepDisplayNames" checked> <span class="info">Display-Namen beibehalten</span></label>
-
-        <label class="inline"><input type="checkbox" id="removeNonExistingLinks" checked> <span class="info">Klammern entfernen, wenn kein deutscher Artikel existiert</span></label>
-
-          <div id="langSelectContainer" style="display:none; grid-column:1/-1">
-            <label style="display:block;font-weight:700;margin-bottom:6px">Sprache wählen (überschreibt Heuristik)</label>
-            <select id="langSelect" aria-label="Sprache wählen">
-              <option value="">— wählen —</option>
-              <option value="de">🇩🇪 Deutsch — de</option>
-              <option value="en">🇬🇧 English — en</option>
-              <option value="fr">🇫🇷 Français — fr</option>
-              <option value="es">🇪🇸 Español — es</option>
-              <option value="it">🇮🇹 Italiano — it</option>
-              <option value="nl">🇳🇱 Nederlands — nl</option>
-            </select>
-          </div>
-          
-          <div style="grid-column:1/-1">
-            <div class="theme-grid" role="list">
-              <div class="theme-option" data-theme="sunset" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#C250F2,#D76CD9,#D977A5)"></div><div>Sunset</div></div>
-              <div class="theme-option" data-theme="wikipedia" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#5a7bd8,#89a8ff,#b9c9ff)"></div><div>Wiki modern</div></div>
-              <div class="theme-option" data-theme="bluewave" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0468BF,#023E73,#012840)"></div><div>Blue Wave</div></div>
-              <div class="theme-option" data-theme="valley" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#387CA6,#71A63C,#BBF2F2)"></div><div>The Valley</div></div>
-              <div class="theme-option" data-theme="simple" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#000000,#6b7280,#ffffff)"></div><div>Simple</div></div>
-              <div class="theme-option" data-theme="spice" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#8C262E,#D99982,#732D14)"></div><div>Spice</div></div>
-              <div class="theme-option" data-theme="jadefruit" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#03A6A6,#F27405,#03A696)"></div><div>Jade Fruit</div></div>
-              <div class="theme-option" data-theme="hacker" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#205B73,#49BF9E,#307B8C)"></div><div>Hacker</div></div>
-            
-		<div class="theme-option" data-theme="celestial" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#800080,#DDA0DD,#B266B2)"></div>Celestial</div>
-		<div class="theme-option" data-theme="daffodil" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#FFEA00,#9ACD32,#FFF566)"></div>Daffodil</div>
-		<div class="theme-option" data-theme="mistylavender" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0F8B8D,#DAD2D8,#E7E1E6)"></div>Misty Lavender</div>
-		<div class="theme-option" data-theme="vibrantamber" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#FFA500,#FFBE47,#87CEFA)"></div>Vibrant Amber</div>
-		<div class="theme-option" data-theme="crimsontide" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#DC143C,#F08080,#F26A84)"></div>Crimson Tide</div>
-        
-        <div class="theme-option" data-theme="rusticsienna" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#C44536,#E9D758,#197278)"></div>Rustic Sienna</div>
-        <div class="theme-option" data-theme="terracottasunset" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#472D30,#C85646,#EB8A7A)"></div>Terracotta Sunset</div>
-        <div class="theme-option" data-theme="coralhorizon" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#58A6FF,#FF6B6B,#FFEDD5)"></div>Coral Horizon</div>
-        <div class="theme-option" data-theme="toxicnightfall" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#240060,#DB123C,#ADFF30)"></div>Toxic Nightfall</div>
-        <div class="theme-option" data-theme="colonialcobalt" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0C10E3,#D1B17C,#F8E6D2)"></div>Colonial Cobalt</div>
-        
-        <div class="theme-option" data-theme="neontwilight" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#4B0082,#FF1493,#FE865B)"></div>Neon Twilight</div>
-        <div class="theme-option" data-theme="ancientgild" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#550003,#B8AB38,#E0D794)"></div>Ancient Gild</div>
-        <div class="theme-option" data-theme="vintagehearth" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#AA0003,#BFB4DC,#FAFBFD)"></div>Vintage Hearth</div>
-        <div class="theme-option" data-theme="espressobrown" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#4E2C23,#E2725B,#FFDAB9)"></div>Espresso</div>
-        <div class="theme-option" data-theme="darkorchidvine" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#4B0082,#9932CC,#DDA0DD)"></div>Dark Orchid Vine</div>
-        <div class="theme-option" data-theme="frenchceladon" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#213F95,#A1E1BC,#d0f5e0)"></div>French Celadon</div>
-        <div class="theme-option" data-theme="burgundychampagne" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#80011F,#c47840,#F7E7CE)"></div>Burgundy Champagne</div>
-        <div class="theme-option" data-theme="hunterdune" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#3E5F44,#8a9e72,#DDD6B9)"></div>Hunter Dune</div>
-        <div class="theme-option" data-theme="coffeebutter" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#20130D,#8a6030,#F3D98F)"></div>Coffee Butter</div>
-        <div class="theme-option" data-theme="regalchiffon" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0D3B66,#6a9acc,#FAF0CA)"></div>Regal Chiffon</div>
-        <div class="theme-option" data-theme="espressopeony" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#3E2723,#c08090,#F4C9D6)"></div>Espresso Peony</div>
-        <div class="theme-option" data-theme="deeppetal" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#3D2E2B,#a87a68,#E1D0C9)"></div>Deep Petal</div>
-        <div class="theme-option" data-theme="coffeered" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#2E1E1F,#8a0838,#E30B5C)"></div>Coffee Red</div>
-        <div class="theme-option" data-theme="indigobrown" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#432371,#8a6aaa,#FAAE7B)"></div>Indigo Brown</div>
-        <div class="theme-option" data-theme="hotwhite" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#c01040,#F8395A,#F7E6D2)"></div>Hot White</div>
-        <div class="theme-option" data-theme="petalbean" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#1B1110,#8a3050,#FFD1DC)"></div>Petal Bean</div>
-        <div class="theme-option" data-theme="celadonplum" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#553832,#7a9a7a,#A8D3A8)"></div>Celadon Plum</div>
-        <div class="theme-option" data-theme="crimsonperiwinkle" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#470B24,#8a70aa,#B5BEDD)"></div>Crimson Periwinkle</div>
-        <div class="theme-option" data-theme="evergreencream" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#143731,#5a9a50,#CEFF8C)"></div>Evergreen Cream</div>
+      <h1 id="heading"><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v9.0.2</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <p class="lead">Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen.</p>
+      <div class="routes" aria-label="Unterstützte Konvertierungen">
+        <div class="route">
+          <span class="route-src"><a href="https://de.wikipedia.org/wiki/Vorlage:Cite_web" target="_blank" rel="noopener"><code>cite web</code></a><a href="https://de.wikipedia.org/wiki/Vorlage:Cite_news" target="_blank" rel="noopener"><code>cite news</code></a><a href="https://en.wikipedia.org/wiki/Template:Cite_magazine" target="_blank" rel="noopener"><code>cite magazine</code></a></span>
+          <span class="route-arrow" aria-hidden="true">→</span>
+          <span class="route-dst"><a href="https://de.wikipedia.org/wiki/Vorlage:Internetquelle" target="_blank" rel="noopener"><code>Internetquelle</code></a></span>
         </div>
-          </div>
-
+        <div class="route">
+          <span class="route-src"><a href="https://de.wikipedia.org/wiki/Vorlage:Cite_book" target="_blank" rel="noopener"><code>cite book</code></a><a href="https://de.wikipedia.org/wiki/Vorlage:Cite_journal" target="_blank" rel="noopener"><code>cite journal</code></a><a href="https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia" target="_blank" rel="noopener"><code>cite encyclopedia</code></a><a href="https://en.wikipedia.org/wiki/Template:Citation" target="_blank" rel="noopener"><code>Citation</code></a></span>
+          <span class="route-arrow" aria-hidden="true">→</span>
+          <span class="route-dst"><a href="https://de.wikipedia.org/wiki/Vorlage:Literatur" target="_blank" rel="noopener"><code>Literatur</code></a></span>
         </div>
-      </details>
+        <p class="route-note"><code>Citation</code> ohne Seitenangabe und mit URL wird stattdessen zu <code>Internetquelle</code>.</p>
+      </div>
 
       <!-- INPUT -->
       <div class="field">
@@ -715,91 +719,180 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       </div>
 
       <div class="btn-row">
-        <button id="copyBtn" class="btn-main">In die Zwischenablage kopieren</button>
-        <div id="copyStatus" style="align-self:center"></div>
+        <button id="copyBtn" class="btn-main">📋 In die Zwischenablage kopieren</button>
+        <button id="translateBtn" class="btn-secondary" title="Schwarzen Text per DeepL übersetzen (ref/Wikilinks bleiben unverändert)">🌐 Übersetzen (DeepL)</button>
       </div>
+      <p id="translateStatus" class="translate-status" role="status" aria-live="polite"></p>
+    </div>
+  </div>
 
-      <details id="changelog" style="margin-top:12px">
-        <summary>📜 Versionsverlauf</summary>
-        <ul>
-          <li><strong>v8.0 &ldquo;Citation Horizon&rdquo;</strong> (2026-06-01): Neue Vorlage: <code>{{Citation}}</code> wird jetzt unterstützt – Konvertierung in <code>{{Literatur}}</code> (mit Seitenangabe oder ohne URL) oder <code>{{Internetquelle}}</code> (ohne Seitenangabe, mit URL). Vollständiges Parameter-Mapping: Autor/Hrsg./Übersetzer (Vorname Nachname), Datum-Normalisierung (auch jahres-only), Archiv-Parameter (<code>offline=1</code> nur bei <code>url-status=dead</code>), Wikilink-URL-Bereinigung, Sprachautomatik.</li>
-          <li><strong>v7.3 &ldquo;Velvet Garden&rdquo;</strong> (2026-03-30): 19 neue Farbthemen: <em>Neon Twilight</em>, <em>Ancient Gild</em>, <em>Vintage Hearth</em>, <em>Espresso</em>, <em>Dark Orchid Vine</em>, <em>French Celadon</em>, <em>Burgundy Champagne</em>, <em>Hunter Dune</em>, <em>Coffee Butter</em>, <em>Regal Chiffon</em>, <em>Espresso Peony</em>, <em>Deep Petal</em>, <em>Coffee Red</em>, <em>Indigo Brown</em>, <em>Hot White</em>, <em>Petal Bean</em>, <em>Celadon Plum</em>, <em>Crimson Periwinkle</em>, <em>Evergreen Cream</em>.</li>
-        <li><strong>v7.2 &ldquo;Earthen Glow&rdquo;</strong> (2026-03-30): 5 neue Farbthemen: <em>Rustic Sienna</em> (Rostrot/Gelb), <em>Terracotta Sunset</em> (Terrakotta), <em>Coral Horizon</em> (Blau/Korall), <em>Toxic Nightfall</em> (Lila/Neongrün), <em>Colonial Cobalt</em> (Kobaltblau/Sand). Jedes Theme mit Hintergrund, Button/Badge, H1-Titelfarbe, Fortschrittsbalken und Dark-Mode-Variante.</li>
-        <li><strong>v7.1 &ldquo;Chromatic Bloom&rdquo;</strong> (2026-03-30): 5 neue Farbthemen: <em>Celestial</em> (Lila), <em>Daffodil</em> (Gelb/Gr&uuml;n), <em>Misty Lavender</em> (Blaugr&uuml;n/Teal), <em>Vibrant Amber</em> (Orange) und <em>Crimson Tide</em> (Rot). Jedes Theme enth&auml;lt Hintergrund-Verlauf, Button/Badge, H1-Titelfarbe, Fortschrittsbalken und Dark-Mode-Variante.</li>
-        <li><strong>v7.0 "The Redirection"</strong> (2025-12-20): Wikipedia-Redirects werden automatisch befolgt – Englische Wikilinks mit Redirects (z.B. <code>[[Eastern Band Cherokee]]</code> → <code>[[Eastern Band of Cherokee Indians]]</code>) werden erkannt und der finale Artikel wird zur deutschen Übersetzung verwendet. Button umbenannt: "🔀 Konvertieren". Progress Bar zeigt jetzt auch die Anzahl der aufgelösten Redirects. Separater Redirect-Cache für bessere Performance beim erneuten Konvertieren.</li>
+  <div id="optionsModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="optionsTitle">
+      <div class="modal-head">
+        <h2 id="optionsTitle">⚙️ Optionen</h2>
+        <button type="button" class="modal-close" id="optionsClose" data-close="1" aria-label="Schließen">✕</button>
+      </div>
+      <div class="modal-body opt-panel">
+        <div class="opt-group">
+          <h3>Konvertierung</h3>
+          <label class="inline"><input type="checkbox" id="useTodayAbruf" checked /> <span class="info">Abrufdatum automatisch auf heute setzen</span> (<span id="todayLabel"></span>)</label>
+          <label class="inline"><input type="checkbox" id="stripArchiveIfLive" checked /> <span class="info">Archiv-Parameter entfernen, wenn URL aktiv (<code>url-status=live</code>)</span></label>
+          <label class="inline"><input type="checkbox" id="convertSubref" checked /> <span class="info">Subreferenzierung konvertieren (<code>{{rp|...}}</code> → <code>details=</code>)</span></label>
+          <label style="grid-column:1/-1" class="inline"><input type="checkbox" id="suppressGerman" checked /> <span class="info"><code>Sprache=de</code> unterdrücken</span> <button id="langInfoToggle" style="background:none;border:none;color:#0645AD;cursor:pointer">ℹ️</button></label>
+          <div id="langInfo" style="display:none;margin-left:6px;font-size:13px;grid-column:1/-1">Deutsch (de) wird standardmäßig nicht ausgegeben. Fremdsprachen erscheinen als Sprachcode (zweistellig). Mit dieser Option kann die Unterdrückung deaktiviert werden.</div>
+          <label class="inline"><input type="checkbox" id="fullLangCodes" /> <span class="info">Ungekürzte Sprachcodes ausgeben (z. B. en-GB)</span></label>
+          <label class="inline"><input type="checkbox" id="overrideLang" /> <span class="info">Sprache manuell überschreiben</span></label>
+          <div id="langSelectContainer" style="display:none; grid-column:1/-1">
+                      <label style="display:block;font-weight:700;margin-bottom:6px">Sprache wählen (überschreibt Heuristik)</label>
+                      <select id="langSelect" aria-label="Sprache wählen">
+                        <option value="">— wählen —</option>
+                        <option value="de">🇩🇪 Deutsch — de</option>
+                        <option value="en">🇬🇧 English — en</option>
+                        <option value="fr">🇫🇷 Français — fr</option>
+                        <option value="es">🇪🇸 Español — es</option>
+                        <option value="it">🇮🇹 Italiano — it</option>
+                        <option value="nl">🇳🇱 Nederlands — nl</option>
+                      </select>
+                    </div>
+        </div>
+        <div class="opt-group">
+          <h3>Wikilinks (Wikidata)</h3>
+          <label class="inline"><input type="checkbox" id="wikidataLookup" checked> <span class="info">Wikilinks → Deutsch (Wikidata)</span></label>
+          <label class="inline"><input type="checkbox" id="keepDisplayNames" checked> <span class="info">Display-Namen beibehalten</span></label>
+          <label class="inline"><input type="checkbox" id="removeNonExistingLinks" checked> <span class="info">Klammern entfernen, wenn kein deutscher Artikel existiert</span></label>
+        </div>
+        <div class="opt-group">
+          <h3>Ausgabe</h3>
+          <label class="inline"><input type="checkbox" id="autoCopy" /> <span class="info">Konvertierte Ausgabe direkt in Zwischenablage kopieren</span></label>
+        </div>
+        <div class="opt-group">
+          <h3>Übersetzung (DeepL)</h3>
+          <div class="opt-field">
+            <label for="deeplKey">DeepL API-Key</label>
+            <input type="password" id="deeplKey" class="opt-input" autocomplete="off" spellcheck="false" placeholder="xxxxxxxx-xxxx-…-xxxx:fx" />
+          </div>
+          <div class="opt-field" style="margin-top:12px">
+            <label for="deeplTarget">Zielsprache</label>
+            <select id="deeplTarget" class="opt-input">
+              <option value="DE">Deutsch</option>
+              <option value="EN-GB">English (British)</option>
+              <option value="EN-US">English (American)</option>
+              <option value="FR">Français</option>
+              <option value="ES">Español</option>
+              <option value="IT">Italiano</option>
+              <option value="NL">Nederlands</option>
+            </select>
+          </div>
+          <p class="opt-hint">Der Schlüssel wird nur lokal in diesem Browser gespeichert (bleibt nach dem Schließen erhalten) und ausschließlich direkt an DeepL gesendet. Beim Übersetzen bleiben <code>&lt;ref&gt;…&lt;/ref&gt;</code> und Wikilinks <code>[[…]]</code> unverändert. Hinweis: Als lokale Datei benötigt der Aufruf eine CORS-Erweiterung (z. B. „CORS Unblock“), die nur während der Übersetzung aktiv sein sollte.</p>
+        </div>
+        <div class="opt-group">
+          <h3>Darstellung</h3>
+          <div class="option-compact">
+          <label class="inline" for="darkModeSelect">Darkmode:</label>
+          <div id="darkModeSegmented" class="segmented" role="group" aria-label="Darkmode-Modus"><button type="button" data-value="auto" aria-pressed="false">Auto</button><button type="button" data-value="on" aria-pressed="false">An</button><button type="button" data-value="off" aria-pressed="false">Aus</button></div>
+          <select id="darkModeSelect" class="visually-hidden">
+            <option value="auto">Automatisch (System)</option>
+            <option value="on">Immer an</option>
+            <option value="off">Immer aus</option>
+          </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="themeModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-dialog wide" role="dialog" aria-modal="true" aria-labelledby="themeTitle">
+      <div class="modal-head">
+        <h2 id="themeTitle">🎨 Farbschema</h2>
+        <button type="button" class="modal-close" data-close="1" aria-label="Schließen">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="theme-grid" role="list">
+          <div class="theme-option" data-theme="sunset" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#C250F2,#D76CD9,#D977A5)"></div><div>Sunset</div></div>
+          <div class="theme-option" data-theme="wikipedia" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#5a7bd8,#89a8ff,#b9c9ff)"></div><div>Wiki modern</div></div>
+          <div class="theme-option" data-theme="bluewave" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0468BF,#023E73,#012840)"></div><div>Blue Wave</div></div>
+          <div class="theme-option" data-theme="valley" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#387CA6,#71A63C,#BBF2F2)"></div><div>The Valley</div></div>
+          <div class="theme-option" data-theme="simple" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#000000,#6b7280,#ffffff)"></div><div>Simple</div></div>
+          <div class="theme-option" data-theme="spice" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#8C262E,#D99982,#732D14)"></div><div>Spice</div></div>
+          <div class="theme-option" data-theme="jadefruit" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#03A6A6,#F27405,#03A696)"></div><div>Jade Fruit</div></div>
+          <div class="theme-option" data-theme="hacker" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#205B73,#49BF9E,#307B8C)"></div><div>Hacker</div></div>
+          <div class="theme-option" data-theme="celestial" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#800080,#DDA0DD,#B266B2)"></div>Celestial</div>
+          <div class="theme-option" data-theme="daffodil" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#FFEA00,#9ACD32,#FFF566)"></div>Daffodil</div>
+          <div class="theme-option" data-theme="mistylavender" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0F8B8D,#DAD2D8,#E7E1E6)"></div>Misty Lavender</div>
+          <div class="theme-option" data-theme="vibrantamber" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#FFA500,#FFBE47,#87CEFA)"></div>Vibrant Amber</div>
+          <div class="theme-option" data-theme="crimsontide" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#DC143C,#F08080,#F26A84)"></div>Crimson Tide</div>
+          <div class="theme-option" data-theme="rusticsienna" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#C44536,#E9D758,#197278)"></div>Rustic Sienna</div>
+          <div class="theme-option" data-theme="terracottasunset" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#472D30,#C85646,#EB8A7A)"></div>Terracotta Sunset</div>
+          <div class="theme-option" data-theme="coralhorizon" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#58A6FF,#FF6B6B,#FFEDD5)"></div>Coral Horizon</div>
+          <div class="theme-option" data-theme="toxicnightfall" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#240060,#DB123C,#ADFF30)"></div>Toxic Nightfall</div>
+          <div class="theme-option" data-theme="colonialcobalt" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0C10E3,#D1B17C,#F8E6D2)"></div>Colonial Cobalt</div>
+          <div class="theme-option" data-theme="neontwilight" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#4B0082,#FF1493,#FE865B)"></div>Neon Twilight</div>
+          <div class="theme-option" data-theme="ancientgild" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#550003,#B8AB38,#E0D794)"></div>Ancient Gild</div>
+          <div class="theme-option" data-theme="vintagehearth" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#AA0003,#BFB4DC,#FAFBFD)"></div>Vintage Hearth</div>
+          <div class="theme-option" data-theme="espressobrown" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#4E2C23,#E2725B,#FFDAB9)"></div>Espresso</div>
+          <div class="theme-option" data-theme="darkorchidvine" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#4B0082,#9932CC,#DDA0DD)"></div>Dark Orchid Vine</div>
+          <div class="theme-option" data-theme="frenchceladon" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#213F95,#A1E1BC,#d0f5e0)"></div>French Celadon</div>
+          <div class="theme-option" data-theme="burgundychampagne" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#80011F,#c47840,#F7E7CE)"></div>Burgundy Champagne</div>
+          <div class="theme-option" data-theme="hunterdune" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#3E5F44,#8a9e72,#DDD6B9)"></div>Hunter Dune</div>
+          <div class="theme-option" data-theme="coffeebutter" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#20130D,#8a6030,#F3D98F)"></div>Coffee Butter</div>
+          <div class="theme-option" data-theme="regalchiffon" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#0D3B66,#6a9acc,#FAF0CA)"></div>Regal Chiffon</div>
+          <div class="theme-option" data-theme="espressopeony" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#3E2723,#c08090,#F4C9D6)"></div>Espresso Peony</div>
+          <div class="theme-option" data-theme="deeppetal" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#3D2E2B,#a87a68,#E1D0C9)"></div>Deep Petal</div>
+          <div class="theme-option" data-theme="coffeered" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#2E1E1F,#8a0838,#E30B5C)"></div>Coffee Red</div>
+          <div class="theme-option" data-theme="indigobrown" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#432371,#8a6aaa,#FAAE7B)"></div>Indigo Brown</div>
+          <div class="theme-option" data-theme="hotwhite" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#c01040,#F8395A,#F7E6D2)"></div>Hot White</div>
+          <div class="theme-option" data-theme="petalbean" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#1B1110,#8a3050,#FFD1DC)"></div>Petal Bean</div>
+          <div class="theme-option" data-theme="celadonplum" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#553832,#7a9a7a,#A8D3A8)"></div>Celadon Plum</div>
+          <div class="theme-option" data-theme="crimsonperiwinkle" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#470B24,#8a70aa,#B5BEDD)"></div>Crimson Periwinkle</div>
+          <div class="theme-option" data-theme="evergreencream" role="button" tabindex="0"><div class="swatch" style="background:linear-gradient(90deg,#143731,#5a9a50,#CEFF8C)"></div>Evergreen Cream</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="changelogModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-dialog wide cl-dialog" role="dialog" aria-modal="true" aria-labelledby="clTitle">
+      <div class="modal-head">
+        <h2 id="clTitle">📜 Versionsverlauf</h2>
+        <button type="button" class="modal-close" data-close="1" aria-label="Schließen">✕</button>
+      </div>
+      <div class="modal-body cl-body">
+        <p class="cl-hint">Neueste Version zuerst.</p>
+        <ul class="cl-list">
+          <li><strong>v9.0.2</strong> (2026-06-18): Übersetzung – Wiki-Kursiv/Fett (<code>''…''</code>, <code>'''…'''</code>) bleibt erhalten. Ein entlinkter Werktitel ohne deutschen Artikel (z. B. <code>''A Blank on the Map''</code>) wird nicht mehr von DeepL in Anführungszeichen umgewandelt, sondern bleibt kursiv.</li>
+          <li><strong>v9.0.1</strong> (2026-06-18): Feinschliff der DeepL-Übersetzung – das von DeepL eingefügte Leerzeichen vor <code>&lt;ref&gt;</code> wird wieder entfernt (<code>an. &lt;ref&gt;</code> → <code>an.&lt;ref&gt;</code>), und die von DeepL um Wikilinks gesetzten deutschen Anführungszeichen werden entfernt (<code>&bdquo;[[Tansania]]&ldquo;</code> → <code>[[Tansania]]</code>).</li>
+          <li><strong>v9.0 &ldquo;Polyglot&rdquo;</strong> (2026-06-18): Optionale Übersetzung der Ausgabe über DeepL. In den Optionen lässt sich ein DeepL-API-Key hinterlegen (nur lokal im Browser gespeichert, bleibt nach dem Schließen erhalten) sowie die Zielsprache wählen. Der neue Button &bdquo;🌐 Übersetzen (DeepL)&ldquo; übersetzt nur den Fließtext – <code>&lt;ref&gt;…&lt;/ref&gt;</code> und Wikilinks <code>[[…]]</code> bleiben unverändert. Hinweis: Als lokale Datei verlangt der direkte DeepL-Aufruf eine CORS-Erweiterung (z. B. &bdquo;CORS Unblock&ldquo;), die nur während der Übersetzung aktiv sein sollte; der Schlüssel wird ausschließlich direkt an DeepL gesendet.</li>
+          <li><strong>v8.8 &ldquo;Chronik&rdquo;</strong> (2026-06-18): Der Versionsverlauf steht nicht mehr als Aufklapp-Block am Seitenende, sondern öffnet sich (wie Optionen und Farbschema) über ein eigenes Symbol (📜) – ebenso per Klick auf das Versions-Abzeichen. Die Einträge sind als aufgeräumte, klar gegliederte Liste mit hervorgehobener Versionsnummer dargestellt; Schließen per ✕, Klick außerhalb oder Esc. Außerdem wurde der Verlauf selbst konsolidiert: viele kleinteilige Patch-Einträge (u.&nbsp;a. vierstellige Versionen wie <code>v4.0.0.1</code>) wurden zu ihren Hauptversionen zusammengefasst.</li>
+          <li><strong>v8.7 &ldquo;Palette&rdquo;</strong> (2026-06-18): Das Farbschema öffnet jetzt (wie die Optionen) über ein eigenes Symbol (🎨) ein Modal, statt als Aufklapp-Block unten zu stehen. Außerdem behoben: Der Klammerzusatz in Wikilinks (z. B. <code>(television executive)</code> in <code>[[Michael Peacock (television executive)|Michael Peacock]]</code>) wurde fälschlich kursiv dargestellt – er erscheint nun normal grün wie der übrige Wikilink.</li>
+          <li><strong>v8.6 &ldquo;Optionen-Modal&rdquo;</strong> (2026-06-18): Die Seitenleiste wurde durch ein Optionen-Fenster ersetzt. Ein Zahnrad-Symbol (⚙️) oben rechts öffnet ein übersichtliches Modal mit den gewohnten Gruppen (Konvertierung, Wikilinks, Ausgabe, Darstellung); Schließen per ✕, Klick außerhalb oder Esc. Der Konverter nutzt damit wieder die volle Breite. Funktion und Optionen sind unverändert.</li>
+          <li><strong>v8.5 &ldquo;Sidebar&rdquo;</strong> (2026-06-18): Layout aufgeräumt. Die Einstellungen stehen jetzt als gegliederte Seitenleiste rechts neben dem Konverter (Gruppen: Konvertierung, Wikilinks, Ausgabe, Darstellung) statt in einem aufklappbaren Block darüber. Das Farbschema ist ein eigener Aufklapp-Block, und der Einleitungstext zeigt die unterstützten Konvertierungen kompakt als „Routen“. Auf schmalen Bildschirmen rutscht die Seitenleiste unter den Konverter. Funktion und Optionen sind unverändert.</li>
+          <li><strong>v8.4 &ldquo;Emphasis&rdquo;</strong> (2026-06-18): Wiki-Formatierung im Syntax-Highlighting. Text in <code>''…''</code> wird jetzt kursiv, Text in <code>'''…'''</code> fett dargestellt – passend zur Wikitext-Syntax. Die Formatierung umfasst auch enthaltene Wikilinks (z. B. <code>'''[[Snooker|Snookie]]'''</code> wird fett und bleibt grün). Die Apostrophe bleiben als Quelltext sichtbar; einzelne Apostrophe in Wörtern wie „public&rsquo;s&ldquo; werden nicht verändert.</li>
+          <li><strong>v8.3 &ldquo;Clean Read&rdquo;</strong> (2026-06-18): Jahreszahlen werden nicht mehr farblich hervorgehoben – sie erscheinen als normaler Text (schwarz im Fließtext, grau innerhalb von Referenzen); verschachtelte Tokens in Wikilinks erben die grüne Farbe. Behoben: Die graue Färbung der Referenz-Inhalte lief zuvor über das schließende <code>&lt;/ref&gt;</code> hinaus, sodass nachfolgender Fließtext grau blieb.</li>
+          <li><strong>v8.2 &ldquo;Swift Current&rdquo;</strong> (2026-06-17): Deutlich schnellere Wikilink-Übersetzung über Wikidata – statt bis zu drei einzelner, nacheinander ausgeführter API-Aufrufe pro Artikel werden die Titel jetzt gebündelt in wenigen Aufrufen abgefragt. Intern: Die Button-/Badge-Farben der Themes laufen nun über CSS-Variablen statt über viele wiederholte Regeln.</li>
+          <li><strong>v8.1 &ldquo;Prismatic Links&rdquo;</strong> (2026-06-17): Wikilinks – <code>[[Ziel]]</code> und <code>[[Ziel|Anzeige]]</code> – werden in der Syntaxhervorhebung jetzt in einer eigenen Farbe (Grün) dargestellt; zuvor erschienen sie wie normaler Text. Zusätzlich wurde die gesamte Farbpalette der Hervorhebung vereinheitlicht und für bessere Lesbarkeit und Kontrast optimiert – getrennt abgestimmt für Hell- und Dunkelmodus (Vorlagenname, Klammern, Parameter, Werte, URLs, <code>&lt;ref&gt;</code>, Zahlen/Datum und Kommentare).</li>
+          <li><strong>v8.0 &ldquo;Citation Horizon&rdquo;</strong> (2026-06-01): Neue Vorlage <code>{{Citation}}</code> – Konvertierung in <code>{{Literatur}}</code> (mit Seitenangabe oder ohne URL) oder <code>{{Internetquelle}}</code> (ohne Seitenangabe, mit URL). Folgekorrekturen (06-17): Syntax-Hervorhebung pro Frame gebündelt (<code>requestAnimationFrame</code>, weniger Neu-Rendern); &bdquo;Alles markieren&ldquo; (⌘/Strg&nbsp;+&nbsp;A) markiert nun den gesamten Text auch sichtbar.</li>
+          <li><strong>v7.1 – v7.3 &ldquo;Chromatic Bloom / Earthen Glow / Velvet Garden&rdquo;</strong> (2026-03-30): Insgesamt 29 neue Farbthemen in drei Paketen (u.&nbsp;a. Celestial, Daffodil, Misty Lavender, Vibrant Amber, Crimson Tide, Rustic Sienna, Terracotta Sunset, Coral Horizon, Neon Twilight, Dark Orchid Vine, French Celadon …), jeweils mit abgestimmten H1-, Button- und Badge-Farben sowie Darkmode-Varianten.</li>
+          <li><strong>v7.0 "The Redirection"</strong> (2025-12-20): Wikipedia-Redirects werden automatisch befolgt – Englische Wikilinks mit Redirects (z.B. <code>[[Eastern Band Cherokee]]</code> → <code>[[Eastern Band of Cherokee Indians]]</code>) werden erkannt und der finale Artikel wird zur deutschen Übersetzung verwendet. Button umbenannt: "🔀 Konvertieren". Progress Bar zeigt jetzt auch die Anzahl der aufgelösten Redirects. Separater Redirect-Cache für bessere Performance beim erneuten Konvertieren.</li>
           <li><strong>v6.0 "Welcome to Wikidata"</strong> (2025-12-10): Wikidata-Integration – Englische Wikilinks werden automatisch in deutsche übersetzt (z.B. <code>[[Yellowstone National Park]]</code> → <code>[[Yellowstone-Nationalpark]]</code>). Features: Checkbox "Wikilinks → Deutsch (Wikidata)" (optional), "Display-Namen beibehalten" (standardmäßig aktiv), "Klammern entfernen bei fehlendem deutschen Artikel" (standardmäßig aktiv), Progress Bar zeigt Fortschritt bei mehreren Links, Cache (365 Tage), Rate Limiting (100ms zwischen API-Calls).</li>
           <li><strong>v5.0</strong> (2025-12-09): Neue Funktion: Subreferenzierung – <code>{{rp|...}}</code> wird automatisch in <code>details=</code>-Attribut konvertiert (z.B. <code>{{rp|10–20}}</code> → <code>details="S. 10–20"</code>). Mehrere <code>{{rp}}</code> werden zusammengeführt. Bindestriche werden zu Bistrich normalisiert. Option standardmäßig aktiviert.</li>
-          <li><strong>v4.4.3</strong> (2025-11-26): Intro-Text aktualisiert.</li>
-          <li><strong>v4.4.2</strong> (2025-11-26): Archiv-Parameter-Logik korrigiert – Checkbox "Archiv-Parameter entfernen, wenn URL aktiv" funktioniert jetzt korrekt: Bei deaktivierter Checkbox werden archiveurl, archivedate und url-status übernommen (url-status=live → offline=0, url-status=dead → offline=1).</li>
-          <li><strong>v4.4.1</strong> (2025-09-11): Reihenfolge der Parameter in {{Literatur}} korrigiert.</li>
-          <li><strong>v4.4</strong> (2025-09-11): Kleinere Fehlerkorrekturen wie doppeltes Leerzeichen und fehlende Zitat-Konvertierungen. Weitere Ergänzungen bei getDisplaySiteNameFromUrl.</li>
-          <li><strong>v4.3.5</strong> (2025-09-10): Stabilisierung – Eingabetext sichtbar bis Highlight geladen; robustes Rebinding für Highlight & Konvertieren (Fallback aktiv).</li>
-          <li><strong>v4.3.1</strong> (2025-09-10): {{Internetquelle}} – Priorität jetzt work → website → publisher (falls kein website/work) → Domain-Fallback aus URL.</li>
-          <li><strong>v4.3</strong> (2025-09-10): {{Internetquelle}} – Fallback für „werk“: wenn website/work fehlen → Domain aus der URL (z. B. nytimes.com). Plus Auto‑Mapping einiger Domains (z. B. nytimes.com → The New York Times).</li>
-          <li><strong>v4.2.1</strong> (2025-09-10): {cite news}/{cite web} → {{Internetquelle}}: Reihenfolge korrigiert; Sprache per language/Override/Wörterliste; Abruf=heute (Option); „work“→„werk“; Doppel‑Leerzeichen nach „Internetquelle“ entfernt.</li>
-          <li><strong>v4.2</strong> (2025-09-10): Fix für {{!}} u. ä. Mapping: website→werk & publisher→hrsg, Fallback publisher→werk wenn kein website.</li>
-          <li><strong>v4.1.1</strong> (2025-09-10): {{Internetquelle}} – feste Parameter-Reihenfolge erzwungen + Sprachcodes gekürzt (z. B. en‑US → en), falls „Ungekürzte Sprachcodes“ aus.</li>
-          <li><strong>v4.1</strong> (2025-09-08): cite web – Titel: Leerzeichen um Gedankenstrich normalisiert (genau ein Leerzeichen vor/nach „–“).</li>
-          <li><strong>v4.0.10</strong> (2025-09-06): Darkmode-Schalter: Beschriftung „Auto/An/Aus“ in Darkmode weiß; Changelog: Trenner für 4.x und 3.x hinzugefügt.</li>
-          <li><strong>v4.0.9</strong> (2025-09-06): Intro ergänzt ({{cite journal}}, {{cite encyclopedia}}); Changelog bereinigt.</li>
-          <li><strong>v4.0.8</strong> (2025-09-06): Fix Doppel-Leerzeichen nach „{{Internetquelle“ (Output nun „{{Internetquelle |…“).</li>
-          <li><strong>v4.0.7</strong> (2025-09-06): Parser-Fix für verschachtelte Templates – standalone-Erkennung nutzt jetzt brace‑Depth; verhindert abgeschnittene Konvertierung bei {{google books}}.</li>
-          <li><strong>v4.0.6</strong> (2025-09-06): Online-Feld bereinigt – {{google books}}-Templates werden aus URL/Online entfernt (kein Online-Ausgabe), in allen Konvertern (web/book/journal/encyclopedia); keine UI-Änderungen.</li>
-          <li><strong>v4.0.5</strong> (2025-09-06): cite encyclopedia – Hrsg unterstützt nun „editor-first/last“ (ohne Index) und „editorN-first/last“; robustere Google-Books/URL-Heuristik; keine UI-Änderungen.</li>
-          <li><strong>v4.0.4</strong> (2025-09-06): cite encyclopedia Mapping finalisiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache-Heuristik). Rückbau auf buildLiteratur().</li>
-          <li><strong>v4.0.3</strong> (2025-09-05): cite encyclopedia korrigiert (Sammelwerk=encyclopedia, Reihe=series, Band=volume, Verlag=publisher, Datum‑Fallback, Sprache „en“ bei Google‑Books), Dispatcher‑Hook ergänzt. Smoke‑Test entfernt.</li>
-          <li><strong>v4.0.0.2</strong> (2025-09-05): Fix cite encyclopedia – Sammelwerk=encyclopedia; Reihe=series; Band=volume; Verlag=publisher; Datum aus date/publication-date/year; ISBN/Seiten korrekt.</li>
-          <li><strong>v4.0.0.1</strong> (2025-09-05): Fix cite encyclopedia – Autoren (first/last & editor1-first Schema), Hrsg (beide Schemata), series→Sammelwerk, Datum-Fallback (z. B. 2007a), Sprache=„en“ bei Google‑Books‑URL; keine UI-Änderungen.</li>
-          <li><strong>v4.0.0</strong> (2025-09-05): Neue Variante – {{cite encyclopedia}} → {{Literatur}} (Autor/Hrsg/Kapitel/Titel/Ort/Verlag/Datum/Abruf/IDs/Seiten). Keine UI-/Design-Änderungen.</li>
-          <li><strong>v3.0.3.0</strong> (2025-09-05): Dev‑Feature: Smoke‑Test‑Modus (?test=1 oder Alt+D). Tests laufen nur in der Konsole; keine UI‑Änderungen.</li>
-          <li><strong>v3.0.2.22</strong> (2025-09-05): Bugfix cite web – Aufruf von toISODateFlexible entfernt (nicht definiert) und durch toISODate ersetzt.</li>
-          <li><strong>v3.0.2.21</strong> (2025-09-05): Bugfix cite web – defekte Erkennung/Zuordnung ersetzt (robuste Aliase, saubere Parametermappung). Sonst keine Änderungen.</li>
-          <li><strong>v3.0.2.20</strong> (2025-09-05): Konverter‑Zusammenfassung (UI + JS) entfernt. Sonst keine Änderungen.</li>
-          <li><strong>v3.0.2.14</strong> (2025-09-05): Internetquelle-Summary: "Titel: ersetzt {*} → •" nur noch, wenn tatsächlich ersetzt; sonst "Titel übernommen".</li>
-          <li><strong>v3.0.2.13</strong> (2025-09-04): Kritischer Fix – Builder repariert und Journal-Konverter liefert detaillierte Summary-Logs; keine UI-/Theme-Änderungen.</li>
-          <li><strong>v3.0.1</strong> (2025-09-03): Dispatcher-Fix: Branch für <code>cite journal</code> korrekt registriert.</li>
-          <li><strong>v3.0.0</strong> (2025-09-03): Neue Vorlage: <code>{{cite journal}}</code> → <code>{{Literatur}}</code> (Autoren/Editoren/Übersetzer, Datum/Originaljahr, Sammelwerk/Band/Nummer, Seiten, Sprache, Online/Abruf, IDs, Typ, Zitat).</li>
-          <li><strong>v2.5.19.1</strong> (2025-09-01): Theme-Grid auf max. 4 Kacheln pro Reihe begrenzt (3/2/1 Spalten bei kleineren Viewports); Wikipedia-Button erhält wieder ausreichenden Innenabstand.</li>
-          <li><strong>v2.5.19</strong> (2025-09-01): Neue Themes: Simple (schwarz/weiß/grau), Spice, Jade Fruit, Hacker – inkl. H1-/Button-/Badge-Anpassungen.</li>
-          <li><strong>v2.5.18.4</strong> (2025-09-01): Highlighter neu aufgebaut (verlustfrei): Template-Name mit Leerzeichen vor erster Pipe sichtbar; Overlay-Text deckt den vollen Inhalt.</li>
-          <li><strong>v2.5.18.3</strong> (2025-09-01): Anzeige-Bug behoben: Leerzeichen vor der ersten Pipe bleibt bei „{{cite … |“ erhalten (Tokenizer erhält Nachlauf-Whitespace vor <code>|</code>/<code>}</code>).</li>
-          <li><strong>v2.5.18.2</strong> (2025-09-01): Zeilenumbruch in Eingabe-/Ausgabe-Highlight wieder aktiv (Wrap wie Textfelder); CSS: <code>pre.highlight</code> auf <code>pre-wrap</code> umgestellt, Spans erben <code>white-space</code>.</li>
-          <li><strong>v2.5.18.1</strong> (2025-09-01): Hintergrund-Verlauf füllt die gesamte Seite (auch bei aufgeklapptem Versionsverlauf); Darstellung: fehlendes Leerzeichen nach „{cite …“ bzw. vor dem ersten Pipe behoben; Konvertierung: „{*}“ im title → „•“ (U+2022).</li>
-          <li><strong>v2.5.17</strong> (2025-09-01): Darkmode-Option kompakter: Label und Auswahl stehen jetzt nebeneinander (Wrapper <code>.option-compact</code>) für bessere Lesbarkeit.</li>
-          <li><strong>v2.5.16</strong> (2025-09-01): Highlighting-Fix: <code>&lt;/ref&gt;</code> wird exakt wie <code>&lt;ref&gt;</code> und <code>&lt;ref name="…"&gt;</code> eingefärbt (robuster Regex im Highlighter).</li>
-          <li><strong>v2.5.15</strong> (2025-08-31): Darkmode-Sichtbarkeit: Basistext in Codeblöcken auf #fff, „{{cite web“}} heller; </ref> wie <ref> eingefärbt.</li>
-          <li><strong>v2.5.13</strong> (2025-08-31): Darkmode-Syntax aufgehellt: „{{cite web“}} (Template) & Parametervalue heller; </ref> nun gleiche Farbe wie <code><ref></code> & <code><ref name="…"></code>.</li>
-          <li><strong>v2.5.12</strong> (2025-08-31): Darkmode-Kontraste (Intro & Syntax) breit abgesichert (.dark & .force-dark; .lead statt #subline). Keine anderen Änderungen.</li>
-          <li><strong>v2.5.11</strong> (2025-08-31): Darkmode-Kontraste für Intro & Syntax-Highlighting aufgehellt.</li>
-          <li><strong>v2.5.10</strong> (2025-08-31): Darkmode-Info-Icon entfernt; Abstand Label/Dropdown optimiert; Changelog vollständig wiederhergestellt (keine Einträge gelöscht).</li>
-          <li><strong>v2.5.9</strong> (2025-08-31): H1-Verlauf animiert (12s ease-in-out, sanft fließend).</li>
-          <li><strong>v2.5.8</strong> (2025-08-31): H1-Farben (theme-gebunden) wiederhergestellt; Badge dezenter; Darkmode-Kontraste für Intro & Highlighting verbessert.</li>
-          <li><strong>v2.5.7</strong> (2025-08-31): Darkmode-Auswahl mit ℹ️-Info-Hinweis (Hover-Tooltip) ergänzt.</li>
-          <li><strong>v2.5.6</strong> (2025-08-31): Option „Darkmode“ überarbeitet: Automatisch (System), Immer an, Immer aus.</li>
-          <li><strong>v2.5.5b</strong> (2025-08-31): Trenner im Changelog im Darkmode heller.</li>
-          <li><strong>v2.5.5</strong> (2025-08-31): Trenner im Changelog für Major-Versionen hinzugefügt.</li>
-          <li><strong>v2.5.4</strong> (2025-08-31): Subline-Text geändert; bessere Lesbarkeit im Darkmode.</li>
-          <li><strong>v2.5.3</strong> (2025-08-31): Smoothflow – weiche H1-Animation (400% Hintergrund; 12s ease-in-out).</li>
-          <li><strong>v2.5.2</strong> (2025-08-31): Designpolitur – H1-Verlauf animiert (erste Version).</li>
-          <li><strong>v2.5.1</strong> (2025-08-31): Badge-Link zum Changelog; H1 theme-gebunden; Syntax-Highlighting & Gradient-Fix.</li>
+          <li><strong>v4.4 – v4.4.3</strong> (2025-09-11 – 11-26): Kleinere Fehlerkorrekturen (doppelte Leerzeichen, fehlende Zitat-Konvertierungen, Parameter-Reihenfolge in <code>{{Literatur}}</code>); Archiv-Parameter-Logik korrigiert (<code>archiveurl</code>/<code>archivedate</code> werden nur bei aktiver URL entfernt); Intro aktualisiert.</li>
+          <li><strong>v4.1 – v4.3.5</strong> (2025-09-08 – 09-10): <code>{{Internetquelle}}</code> verfeinert – feste Parameter-Reihenfolge, gekürzte Sprachcodes (z.&nbsp;B. <code>en-US</code> → <code>en</code>), Mapping <code>website</code>→<code>werk</code> und <code>publisher</code>→<code>hrsg</code>, Domain-Fallback für &bdquo;werk&ldquo; inkl. Auto-Mapping (z.&nbsp;B. nytimes.com → The New York Times), Titel-Normalisierung um Gedankenstriche; stabileres Rebinding von Highlight und Konvertieren.</li>
+          <li><strong>v4.0 – v4.0.10</strong> (2025-09-05 – 09-06): Neue Vorlage <code>{{cite encyclopedia}}</code> → <code>{{Literatur}}</code> (Autor/Hrsg/Sammelwerk/Band/Verlag/Datum/IDs/Seiten). Zahlreiche Folgekorrekturen am Encyclopedia-Mapping, Parser-Fix für verschachtelte Templates (<code>{{google books}}</code>), Fix für doppelte Leerzeichen nach &bdquo;<code>{{Internetquelle</code>&ldquo;, Darkmode-Beschriftung weiß.</li>
+          <li><strong>v3.0 – v3.0.3</strong> (2025-09-03 – 09-05): Neue Vorlage <code>{{cite journal}}</code> → <code>{{Literatur}}</code> (Autoren/Editoren, Datum, Sammelwerk/Band/Nummer, Seiten, IDs, Zitat). Dispatcher- und Builder-Korrekturen, cite-web-Bugfixes (robuste Aliase, <code>toISODate</code> statt nicht definierter Funktion); Dev-Smoke-Test-Modus (<code>?test=1</code>).</li>
+          <li><strong>v2.5.1 – v2.5.19.1</strong> (2025-08-31 – 09-01): Verfeinerungen – Darkmode-Optionen (Automatisch / An / Aus) und durchgängig bessere Kontraste, animierter H1-Verlauf, neue Themes (Simple, Spice, Jade Fruit, Hacker), verlustfrei neu aufgebauter Highlighter (Vorlagenname und Leerzeichen vor der ersten Pipe korrekt, Zeilenumbruch aktiv), responsives Theme-Grid (max.&nbsp;4 Spalten) und diverse Anzeige-Fixes.</li>
           <li><strong>v2.5</strong> (2025-08-30): Syntax-Highlighting für Eingabe & Ausgabe; verständliche Konvertierungs-Zusammenfassung; Design & Konvertierungsskript unberührt.</li>
-          <li><strong>v2.4.7</strong> (2025-08-30): Darkmode für Wikipedia-Theme deutlich dunkler gestaltet (#1a1a1a → #2a2a2a).</li>
-          <li><strong>v2.4.6</strong> (2025-08-30): Theme-Buttons & Badge passen sich an; Darkmode-Varianten für alle Themes; Farbverlauf bleibt bis unten sichtbar; Badge wieder styled; Changelog erweitert.</li>
-          <li><strong>v2.4.5</strong> (2025-08-29): Sprachheuristik ergänzt (mehr Sprachen erkannt), Checkbox mit Info-Icon, Flaggen bei Sprachoption, mehr Abstand zwischen Buttons/Textareas, Hover-Effekte verbessert.</li>
-          <li><strong>v2.4.4</strong> (2025-08-30): Vollständige Integration der robusten Konvertierungslogik (fixed14) in das neue Design; Copy-Button styled + animiert; Theme-Wechsel repariert; Darkmode-Varianten pro Theme ergänzt; kleine UI-Optimierungen (Hover/Focus, Copy-Feedback, responsive Buttons).</li>
-          <li><strong>v2.4.3</strong> (2025-08-29): Bugfix-Version, Konvertierung funktioniert wieder; Design noch unvollständig.</li>
-          <li><strong>v2.4.2</strong> (2025-08-29): Versuch der Integration, aber Teile der Logik fehlten.</li>
-          <li><strong>v2.4.1</strong> (2025-08-29): Bugfix für Erkennung von cite web/news/magazine/book auch mit Parametern; Darkmode-Override-Toggle und Theme-Auswahl mit Farbverläufen.</li>
-          <li><strong>v2.4</strong> (2025-08-29): Redesign (Claude-Version) mit modernem Glasmorphism-UI.</li>
+          <li><strong>v2.4 – v2.4.7</strong> (2025-08-29 – 08-30): Redesign mit modernem Glasmorphism-UI. Robuste Konvertierungslogik integriert, animierter Copy-Button, Theme-Wechsel mit Darkmode-Varianten pro Theme, erweiterte Sprachheuristik (Flaggen, Info-Icon); diverse Bugfixes (Erkennung von cite web/news/magazine/book auch mit Parametern).</li>
           <li><strong>v2.3</strong> (2025-08-28): Neues Theme-System (4 Designs mit LocalStorage), Optionen erweitert (Sprachcodes ungekürzt, Direktkopie, Info-Hinweis per Klick), kleinere Textareas, Favicon gefixt. Neueste Version oben gelistet.</li>
           <li><strong>v2.2</strong> (2025-08-28): Einstellungsmenü in <code>details</code>-Block; neue Checkbox „Sprache=de unterdrücken“.</li>
-          <li><strong>v2.1.2</strong> (2025-08-28): Info-Hinweis zu Sprache=de.</li>
-          <li><strong>v2.1.1</strong> (2025-08-28): Normalisierung Sprachcodes, Deutsch wird unterdrückt.</li>
-          <li><strong>v2.1</strong> (2025-08-28): ISBN-Gruppierung, strengere Sprachheuristik.</li>
+          <li><strong>v2.1 – v2.1.2</strong> (2025-08-28): ISBN-Gruppierung und strengere Sprachheuristik; Normalisierung der Sprachcodes (Deutsch wird unterdrückt) und Info-Hinweis zu <code>Sprache=de</code>.</li>
           <li><strong>v2.0</strong> (2025-08-28): Neue Konvertierung {{cite book}} → {{Literatur}}.</li>
           <li><strong>v1.0</strong> (2025-04-2): Erste Version.</li>
         </ul>
-      </details>
+      </div>
     </div>
   </div>
 
@@ -2120,6 +2213,30 @@ function highlightTemplateText(text){
   // Safe escape
   let s = String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
+  // v8.3.1: Den gesamten <ref>…</ref>-Block (auch selbstschließend <ref …/>) als
+  // Einheit umschließen. So wird der Referenz-Inhalt grau und endet sauber am
+  // </ref>; danach ist der Text wieder schwarz. Früh auf dem rohen (escapeten)
+  // Text ausgeführt – die Detail-Tokens unten setzen ihre Farben anschließend
+  // INNERHALB dieses Blocks und überschreiben das Grau gezielt.
+  s = s.replace(/&lt;ref(?:\s[^&]*?)?\/&gt;|&lt;ref(?:\s[^&]*?)?&gt;[\s\S]*?&lt;\/ref&gt;/gi,
+                function(m){ return '<span class="tok-refblock">' + m + '</span>'; });
+
+  // v8.1: Wikilinks [[Ziel]] bzw. [[Ziel|Anzeige]] eigenständig hervorheben.
+  // Früh ausgeführt, damit die eckigen Klammern sauber erfasst werden; eckige
+  // Klammern werden vom HTML-Escaping oben nicht verändert.
+  s = s.replace(/\[\[([^\[\]]+)\]\]/g, '<span class="tok-wikilink">[[$1]]</span>');
+
+  // v8.4: Wiki-Formatierung – '''fett''' und ''kursiv''. Direkt nach dem Wikilink-
+  // Pass, damit enthaltene Wikilinks (z. B. '''[[Snooker|Snookie]]''') mitformatiert
+  // werden. Fett (drei Apostrophe) wird vor Kursiv (zwei) geprüft, sonst würde ''
+  // die ersten beiden Apostrophe von ''' greifen. Die Apostrophe bleiben sichtbar
+  // (Quelltext-Ansicht); nur der eingeschlossene Text wird formatiert. Einzelne
+  // Apostrophe in Wörtern wie „public's" bleiben unberührt (es braucht genau '' bzw. ''').
+  s = s.replace(/'''([^\n]+?)'''|''([^\n]+?)''/g, function(m, bold, italic){
+    if (bold !== undefined) return "'''" + '<span class="tok-bold">' + bold + '</span>' + "'''";
+    return "''" + '<span class="tok-italic">' + italic + '</span>' + "''";
+  });
+
   // URLs first (keine Pipes/Braces zerstören)
   s = s.replace(/(https?:\/\/[^\s|}]+)/g, '<span class="tok-url">$1</span>');
 
@@ -2131,13 +2248,16 @@ function highlightTemplateText(text){
   // Braces danach einfärben
   s = s.replace(/(\{\{|\}\})/g, '<span class="tok-brace">$1</span>');
 
-  // Parameter-Namen: | <ws> name <ws> =
+  // Parameter-Namen: | <ws> name <ws> =  — nur der NAME wird eingefärbt. "=" und
+  // Wert bleiben neutral und erben die Umgebungsfarbe (schwarz bzw. grau in <ref>).
+  // v8.3.1: kein offenes <span class="tok-eq"> mehr – das verursachte sonst das
+  // „Auslaufen" der grauen Farbe über das schließende </ref> hinaus.
   s = s.replace(/\|(\s*)([A-Za-z0-9\-\u00C0-\u017F]+)(\s*)=/g, function(_, ws1, name, ws2){
-    return '|' + ws1 + '<span class="tok-param">' + name + '</span>' + ws2 + '<span class="tok-eq">=';
+    return '|' + ws1 + '<span class="tok-param">' + name + '</span>' + ws2 + '=';
   });
 
-  // Zahlen/Daten
-  s = s.replace(/\b(\d{4}(-\d{2}(-\d{2})?)?)\b/g, '<span class="tok-number">$1</span>');
+  // v8.3: Jahres-/Datums-Hervorhebung entfernt – Zahlen erscheinen als normaler
+  // Text (schwarz im Fließtext, grau innerhalb von Referenzen über die Wert-Farbe).
 
   // Klammer-Kommentare
   s = s.replace(/\(([^\)]+)\)/g, '(<span class="tok-comment">$1</span>)');
@@ -2147,16 +2267,30 @@ function highlightTemplateText(text){
 
   return s;
 }
+  // v8.0.1: Highlight-Updates werden pro Animationsframe gebündelt (requestAnimationFrame).
+  // Mehrfachaufrufe innerhalb desselben Frames – etwa durch die doppelte input-Bindung
+  // oder schnelles Tippen – lösen so nur EINE teure innerHTML-Neuberechnung aus.
+  let _inputHLraf = 0;
   function updateInputHighlight(){
-    const txt = document.getElementById('inputText').value;
-    const pre = document.getElementById('inputHighlight');
-    pre.innerHTML = highlightTemplateText(txt);
+    if(_inputHLraf) return;                 // für diesen Frame bereits geplant
+    _inputHLraf = requestAnimationFrame(function(){
+      _inputHLraf = 0;
+      const txt = document.getElementById('inputText').value;
+      const pre = document.getElementById('inputHighlight');
+      pre.innerHTML = highlightTemplateText(txt);
+    });
   }
+  let _outputHLraf = 0;
   function updateOutputHighlight(){
-    const txt = document.getElementById('outputText').value;
-    const pre = document.getElementById('outputHighlight');
-    pre.innerHTML = highlightTemplateText(txt);
+    if(_outputHLraf) return;                // für diesen Frame bereits geplant
+    _outputHLraf = requestAnimationFrame(function(){
+      _outputHLraf = 0;
+      const txt = document.getElementById('outputText').value;
+      const pre = document.getElementById('outputHighlight');
+      pre.innerHTML = highlightTemplateText(txt);
+    });
   }
+  try { window.updateOutputHighlight = updateOutputHighlight; } catch(e){}
 
   /* ----------------- Driver for transform + summary ----------------- */
 
@@ -2350,24 +2484,33 @@ function highlightTemplateText(text){
         const outText = document.getElementById('outputText').value;
         if(navigator.clipboard && navigator.clipboard.writeText){
           navigator.clipboard.writeText(outText).then(function(){
-            document.getElementById('copyStatus').textContent='✓ Direkt kopiert';
-            setTimeout(function(){ document.getElementById('copyStatus').textContent=''; },1400);
+            flashCopyButton('success','Direkt kopiert');
           }).catch(function(){});
         }else{
           try{
             document.getElementById('outputText').select();
             document.execCommand('copy');
-            document.getElementById('copyStatus').textContent='✓ Direkt kopiert';
-            setTimeout(function(){ document.getElementById('copyStatus').textContent=''; },1400);
+            flashCopyButton('success','Direkt kopiert');
           }catch(e){}
         }
       }
     })
 
+    // v8.0.2: Statt eines separaten Statustextes wechselt der Kopier-Button selbst
+    // kurz in einen Erfolgs-/Fehlerzustand (Icon + Beschriftung) und kehrt dann zurück.
+    function flashCopyButton(state, message){
+      const btn = document.getElementById('copyBtn');
+      if(!btn) return;
+      if(!btn.dataset.defaultHtml) btn.dataset.defaultHtml = btn.innerHTML; // Originalzustand sichern
+      clearTimeout(btn._copyFlashTimer);
+      if(state === 'error') btn.innerHTML = '⚠️ ' + (message || 'Kopieren fehlgeschlagen');
+      else btn.innerHTML = '✅ ' + (message || 'In Zwischenablage kopiert');
+      btn._copyFlashTimer = setTimeout(function(){ btn.innerHTML = btn.dataset.defaultHtml; }, 1800);
+    }
+
     // copy button - always plain text from textarea (unformatted)
     document.getElementById('copyBtn').addEventListener('click', async function(){
       const out = document.getElementById('outputText').value || '';
-      const status = document.getElementById('copyStatus');
       try{
         if(navigator.clipboard && navigator.clipboard.writeText){
           await navigator.clipboard.writeText(out);
@@ -2375,12 +2518,10 @@ function highlightTemplateText(text){
           const ta = document.getElementById('outputText');
           ta.select(); document.execCommand('copy');
         }
-        status.textContent = '✓ In Zwischenablage kopiert';
-        setTimeout(()=>status.textContent='',1800);
+        flashCopyButton('success');
       }catch(err){
         console.warn('copy failed',err);
-        status.textContent = '⚠ Kopieren fehlgeschlagen';
-        setTimeout(()=>status.textContent='',1800);
+        flashCopyButton('error');
       }
     });
 
@@ -2477,23 +2618,6 @@ function findFirstTopLevelTemplate(s){
   return null;
 }
 
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-  const badge = document.getElementById("versionBadge");
-  const log = document.getElementById("changelog");
-  if(badge && log){
-    badge.addEventListener("click", function(e){
-      e.preventDefault();
-      log.open = true;
-      const sm = log.querySelector('summary');
-      if(sm){ sm.setAttribute('aria-expanded','true'); }
-      log.scrollIntoView({behavior:'smooth', block:'start'});
-      if(history.replaceState){ history.replaceState(null, '', '#changelog'); }
-    });
-  }
-});
 </script>
 
 
@@ -2881,7 +3005,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ==========================================
-// Wikidata Integration v6.1.5 "Redirect Resolver"
+// Wikidata Integration v6.2.0 "Batch Resolver"
 // ==========================================
 
 var WIKIDATA_CACHE_KEY = 'wikidataTranslationCache';
@@ -2918,79 +3042,107 @@ function setWikidataCache(key, value) { setCache(WIKIDATA_CACHE_KEY, key, value)
 function getRedirectCache() { return getCache(WIKIDATA_REDIRECT_CACHE_KEY); }
 function setRedirectCache(key, value) { setCache(WIKIDATA_REDIRECT_CACHE_KEY, key, value); }
 
-function followWikipediaRedirects(title) {
-  return new Promise(function(resolve) {
-    var cleanTitle = String(title).trim();
-    var cached = getRedirectCache()[cleanTitle];
-    if (cached !== undefined) { resolve(cached); return; }
-    var apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + 
-                 encodeURIComponent(cleanTitle) + '&redirects=1&format=json&origin=*';
-    fetch(apiUrl)
-      .then(function(response) { return response.json(); })
-      .then(function(data) {
-        var finalTitle = cleanTitle;
-        if (data.query && data.query.redirects && data.query.redirects.length > 0) {
-          finalTitle = data.query.redirects[data.query.redirects.length - 1].to;
-        }
-        if (data.query && data.query.normalized && data.query.normalized.length > 0) {
-          finalTitle = data.query.normalized[0].to;
-        }
-        setRedirectCache(cleanTitle, finalTitle);
-        resolve(finalTitle);
-      })
-      .catch(function(error) {
-        setRedirectCache(cleanTitle, cleanTitle);
-        resolve(cleanTitle);
-      });
-  });
+// v8.0.1: fetch mit Timeout (AbortController). Verhindert, dass eine einzelne hängende
+// API-Anfrage die komplette – sequentiell ablaufende – Wikidata-Verarbeitung blockiert.
+// Bei Abbruch greift automatisch das bestehende .catch() der jeweiligen Funktion.
+function fetchWithTimeout(url, timeoutMs) {
+  var ms = timeoutMs || 8000;
+  if (typeof AbortController === 'undefined') return fetch(url); // Fallback für alte Engines
+  var controller = new AbortController();
+  var timer = setTimeout(function(){ controller.abort(); }, ms);
+  return fetch(url, { signal: controller.signal })
+    .finally(function(){ clearTimeout(timer); });
 }
 
-function fetchGermanWikilink(englishTitle) {
-  return new Promise(function(resolve) {
-    followWikipediaRedirects(englishTitle).then(function(finalTitle) {
-      var cached = getWikidataCache()[finalTitle];
-      if (cached !== undefined) {
-        resolve({german: cached, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
-        return;
+// v8.2: Gebündelte (batched) Wikidata-Auflösung.
+// Statt pro Artikel bis zu drei sequenzielle API-Aufrufe (Redirect -> pageprops
+// -> Wikidata) werden Titel zusammengefasst: ein kombinierter en.wikipedia-Aufruf
+// je bis zu 50 Titel (loest Redirects/Normalisierung UND liefert wikibase_item)
+// und ein wikidata-Aufruf je bis zu 50 Q-IDs. Caches werden weiter genutzt.
+var WIKIDATA_BATCH_SIZE = 50;     // API-Limit fuer anonyme Anfragen
+var WIKIDATA_CHUNK_DELAY = 120;   // ms Pause zwischen Batch-Anfragen (hoeflich zur API)
+
+function chunkArray(arr, size) {
+  var out = [];
+  for (var i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+  return out;
+}
+
+function wikiDelay(ms) {
+  return new Promise(function (r) { setTimeout(r, ms); });
+}
+
+// Kombinierter en.wikipedia-Aufruf: loest Redirects/Normalisierung auf UND liefert
+// die wikibase_item-IDs. Ergebnis: { angeforderterTitel: { final, qid|null } }.
+function fetchWikibaseIds(titles) {
+  var apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*' +
+               '&redirects=1&prop=pageprops&ppprop=wikibase_item&titles=' +
+               encodeURIComponent(titles.join('|'));
+  return fetchWithTimeout(apiUrl)
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var q = (data && data.query) || {};
+      var normalized = q.normalized || [];
+      var redirects = q.redirects || [];
+      var pages = q.pages || {};
+
+      // Endtitel -> wikibase_item aus den zurueckgelieferten Seiten aufbauen
+      var qidByTitle = {};
+      Object.keys(pages).forEach(function (pid) {
+        var p = pages[pid];
+        if (p && p.title) {
+          qidByTitle[p.title] = (p.pageprops && p.pageprops.wikibase_item) ? p.pageprops.wikibase_item : null;
+        }
+      });
+
+      // angeforderten Titel ueber Normalisierung + Redirect(s) zum Endtitel aufloesen
+      function resolveFinal(req) {
+        var t = req;
+        for (var n = 0; n < normalized.length; n++) { if (normalized[n].from === t) { t = normalized[n].to; break; } }
+        var changed = true, guard = 0;
+        while (changed && guard++ < 10) {
+          changed = false;
+          for (var d = 0; d < redirects.length; d++) { if (redirects[d].from === t) { t = redirects[d].to; changed = true; break; } }
+        }
+        return t;
       }
-      var apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=pageprops&ppprop=wikibase_item&titles=' + 
-                   encodeURIComponent(finalTitle) + '&format=json&origin=*';
-      fetch(apiUrl)
-        .then(function(response) { return response.json(); })
-        .then(function(data) {
-          var pages = data.query.pages;
-          var pageId = Object.keys(pages)[0];
-          if (pageId === '-1' || !pages[pageId].pageprops || !pages[pageId].pageprops.wikibase_item) {
-            setWikidataCache(finalTitle, null);
-            resolve({german: null, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
-            return;
-          }
-          var wikidataId = pages[pageId].pageprops.wikibase_item;
-          return fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&ids=' + 
-                      wikidataId + '&props=sitelinks&sitefilter=dewiki&format=json&origin=*');
-        })
-        .then(function(response) { return response ? response.json() : null; })
-        .then(function(data) {
-          if (!data || !data.entities) {
-            setWikidataCache(finalTitle, null);
-            resolve({german: null, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
-            return;
-          }
-          var entity = data.entities[Object.keys(data.entities)[0]];
-          if (entity.sitelinks && entity.sitelinks.dewiki) {
-            var germanTitle = entity.sitelinks.dewiki.title;
-            setWikidataCache(finalTitle, germanTitle);
-            resolve({german: germanTitle, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
-          } else {
-            setWikidataCache(finalTitle, null);
-            resolve({german: null, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
-          }
-        })
-        .catch(function(error) {
-          resolve({german: null, original: englishTitle, redirected: finalTitle !== englishTitle ? finalTitle : null});
-        });
+
+      var result = {};
+      titles.forEach(function (req) {
+        var fin = resolveFinal(req);
+        var qid = Object.prototype.hasOwnProperty.call(qidByTitle, fin) ? qidByTitle[fin] : null;
+        result[req] = { final: fin, qid: qid };
+      });
+      return result;
+    })
+    .catch(function () {
+      // Bei Fehler: jeden Titel als unaufgeloest behandeln (kein Redirect, keine ID)
+      var result = {};
+      titles.forEach(function (req) { result[req] = { final: req, qid: null }; });
+      return result;
     });
-  });
+}
+
+// wikidata wbgetentities: Q-IDs -> deutscher Sitelink-Titel. Ergebnis: { qid: deTitel|null }.
+function fetchGermanTitles(qids) {
+  var apiUrl = 'https://www.wikidata.org/w/api.php?action=wbgetentities&props=sitelinks' +
+               '&sitefilter=dewiki&format=json&origin=*&ids=' + encodeURIComponent(qids.join('|'));
+  return fetchWithTimeout(apiUrl)
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var entities = (data && data.entities) || {};
+      var out = {};
+      qids.forEach(function (qid) {
+        var e = entities[qid];
+        out[qid] = (e && e.sitelinks && e.sitelinks.dewiki) ? e.sitelinks.dewiki.title : null;
+      });
+      return out;
+    })
+    .catch(function () {
+      var out = {};
+      qids.forEach(function (qid) { out[qid] = null; });
+      return out;
+    });
 }
 
 function extractWikilinks(text) {
@@ -3035,49 +3187,215 @@ function hideProgressBar() {
   if (progressContainer) setTimeout(function() { progressContainer.style.display = 'none'; }, 1500);
 }
 
-function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
-  return new Promise(function(resolve) {
-    var wikilinks = extractWikilinks(text);
-    if (wikilinks.length === 0) { resolve(text); return; }
-    showProgressBar(wikilinks.length);
-    var uniqueArticles = {};
-    wikilinks.forEach(function(link) {
-      if (!uniqueArticles[link.article]) uniqueArticles[link.article] = [];
-      uniqueArticles[link.article].push(link);
-    });
-    var articleList = Object.keys(uniqueArticles);
-    var processed = 0, redirectCount = 0, replacements = {};
-    function processNext(index) {
-      if (index >= articleList.length) {
-        var result = text;
-        wikilinks.forEach(function(link) {
-          var lookupResult = replacements[link.article];
-          var germanTitle = lookupResult ? lookupResult.german : null;
-          var newLink = germanTitle ? 
-            ((link.display && keepDisplayNames) ? '[[' + germanTitle + '|' + link.display + ']]' : '[[' + germanTitle + ']]') :
-            (removeNonExisting ? (link.display || link.article) : link.full);
-          var escapedFull = link.full.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          result = result.replace(new RegExp(escapedFull, 'g'), newLink);
-        });
-        hideProgressBar();
-        resolve(result);
+async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
+  var wikilinks = extractWikilinks(text);
+  if (wikilinks.length === 0) return text;
+  showProgressBar(wikilinks.length);
+
+  // eindeutige Artikel sammeln
+  var uniqueArticles = {};
+  wikilinks.forEach(function (link) {
+    if (!uniqueArticles[link.article]) uniqueArticles[link.article] = [];
+    uniqueArticles[link.article].push(link);
+  });
+  var articleList = Object.keys(uniqueArticles);
+  var total = articleList.length;
+
+  // Cache nutzen: bereits vollstaendig aufgeloeste Artikel ueberspringen
+  var redirectCache = getRedirectCache();
+  var wikidataCache = getWikidataCache();
+  var resolved = {};   // artikel -> { final, german }
+  var needWiki = [];   // artikel, die noch Netzwerk benoetigen
+  articleList.forEach(function (c) {
+    if (Object.prototype.hasOwnProperty.call(redirectCache, c)) {
+      var fin = redirectCache[c];
+      if (Object.prototype.hasOwnProperty.call(wikidataCache, fin)) {
+        resolved[c] = { final: fin, german: wikidataCache[fin] };
         return;
       }
-      var article = articleList[index];
-      fetchGermanWikilink(article).then(function(lookupResult) {
-        replacements[article] = lookupResult;
-        if (lookupResult.redirected) redirectCount++;
-        processed++;
-        updateProgressBar(processed, articleList.length, redirectCount);
-        setTimeout(function() { processNext(index + 1); }, 100);
-      });
     }
-    processNext(0);
+    needWiki.push(c);
   });
+
+  var processed = total - needWiki.length;
+  var redirectCount = 0;
+  Object.keys(resolved).forEach(function (c) { if (resolved[c].final !== c) redirectCount++; });
+  updateProgressBar(processed, total, redirectCount);
+
+  // Stufe A: kombinierte en.wikipedia-Aufrufe (Bloecke zu je 50 Titeln)
+  var wikiInfo = {};
+  var aChunks = chunkArray(needWiki, WIKIDATA_BATCH_SIZE);
+  for (var a = 0; a < aChunks.length; a++) {
+    var chunk = aChunks[a];
+    var res = await fetchWikibaseIds(chunk);
+    chunk.forEach(function (c) {
+      var info = res[c] || { final: c, qid: null };
+      wikiInfo[c] = info;
+      if (info.final !== c) redirectCount++;
+    });
+    processed += chunk.length;
+    updateProgressBar(processed, total, redirectCount);
+    if (a < aChunks.length - 1) await wikiDelay(WIKIDATA_CHUNK_DELAY);
+  }
+
+  // Stufe B: wikidata-Aufrufe fuer benoetigte Q-IDs (Endtitel noch nicht im Cache)
+  var needQids = {};
+  needWiki.forEach(function (c) {
+    var info = wikiInfo[c];
+    if (info && info.qid && !Object.prototype.hasOwnProperty.call(wikidataCache, info.final)) {
+      needQids[info.qid] = true;
+    }
+  });
+  var qidList = Object.keys(needQids);
+  var germanByQid = {};
+  var bChunks = chunkArray(qidList, WIKIDATA_BATCH_SIZE);
+  for (var b = 0; b < bChunks.length; b++) {
+    var qids = bChunks[b];
+    var gres = await fetchGermanTitles(qids);
+    qids.forEach(function (qid) { germanByQid[qid] = (gres[qid] !== undefined ? gres[qid] : null); });
+    if (b < bChunks.length - 1) await wikiDelay(WIKIDATA_CHUNK_DELAY);
+  }
+
+  // Ergebnisse zusammenfuehren + Caches schreiben
+  needWiki.forEach(function (c) {
+    var info = wikiInfo[c] || { final: c, qid: null };
+    var fin = info.final;
+    var german;
+    if (Object.prototype.hasOwnProperty.call(wikidataCache, fin)) german = wikidataCache[fin];
+    else if (info.qid) german = (germanByQid[info.qid] !== undefined ? germanByQid[info.qid] : null);
+    else german = null;
+    setRedirectCache(c, fin);
+    setWikidataCache(fin, german);
+    resolved[c] = { final: fin, german: german };
+  });
+
+  // Ersetzungstabelle aufbauen
+  var replacements = {};
+  articleList.forEach(function (c) {
+    var r = resolved[c] || { final: c, german: null };
+    replacements[c] = { german: r.german, redirected: (r.final !== c ? r.final : null) };
+  });
+
+  // Im Text ersetzen (identische Logik wie zuvor, inkl. $-Schutz aus v8.0.1)
+  var result = text;
+  wikilinks.forEach(function (link) {
+    var lookupResult = replacements[link.article];
+    var germanTitle = lookupResult ? lookupResult.german : null;
+    var newLink = germanTitle ?
+      ((link.display && keepDisplayNames) ? '[[' + germanTitle + '|' + link.display + ']]' : '[[' + germanTitle + ']]') :
+      (removeNonExisting ? (link.display || link.article) : link.full);
+    var escapedFull = link.full.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    result = result.replace(new RegExp(escapedFull, 'g'), function () { return newLink; });
+  });
+
+  updateProgressBar(total, total, redirectCount);
+  hideProgressBar();
+  return result;
 }
 
 
 </script>
 
+<script>
+(function(){
+  function init(){
+    var lastFocus = null;
+    function openModal(modal){ if(!modal) return; lastFocus = document.activeElement; modal.classList.add("is-open"); modal.setAttribute("aria-hidden","false"); var f = modal.querySelector("input,select,button"); if(f) f.focus(); }
+    function closeModal(modal){ modal.classList.remove("is-open"); modal.setAttribute("aria-hidden","true"); if(lastFocus && lastFocus.focus){ try{ lastFocus.focus(); }catch(e){} } }
+    document.querySelectorAll("[data-modal-open]").forEach(function(btn){
+      btn.addEventListener("click", function(e){ if(e && e.preventDefault) e.preventDefault(); openModal(document.getElementById(btn.getAttribute("data-modal-open"))); });
+    });
+    document.querySelectorAll(".modal").forEach(function(modal){
+      modal.addEventListener("click", function(e){ var t=e.target; if(t && (t.getAttribute("data-close") || (t.closest && t.closest("[data-close]")))) closeModal(modal); });
+    });
+    document.addEventListener("keydown", function(e){ if(e.key === "Escape"){ document.querySelectorAll(".modal.is-open").forEach(closeModal); } });
+  }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+</script>
+<script>
+/* v9.0: Optionale DeepL-Uebersetzung der Ausgabe (schwarzer Text; <ref> und [[...]] bleiben unveraendert) */
+(function(){
+  function init(){
+    var keyEl=document.getElementById("deeplKey");
+    var tgtEl=document.getElementById("deeplTarget");
+    var btn=document.getElementById("translateBtn");
+    var statusEl=document.getElementById("translateStatus");
+    var outEl=document.getElementById("outputText");
+    if(!btn||!outEl) return;
+
+    try{
+      if(keyEl){ var sk=localStorage.getItem("deeplKey"); if(sk!=null) keyEl.value=sk;
+        keyEl.addEventListener("input", function(){ try{ localStorage.setItem("deeplKey", keyEl.value.trim()); }catch(e){} }); }
+      if(tgtEl){ var st=localStorage.getItem("deeplTarget"); if(st) tgtEl.value=st;
+        tgtEl.addEventListener("change", function(){ try{ localStorage.setItem("deeplTarget", tgtEl.value); }catch(e){} }); }
+    }catch(e){}
+
+    var PROTECT=/<ref\b[^>]*?\/>|<ref\b[^>]*?>[\s\S]*?<\/ref>|'''[^\n]+?'''|''[^\n]+?''|\[\[[^\]]*?\]\]/gi;
+    function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+    function unesc(s){ return s.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"); }
+    function build(text){
+      var spans=[];
+      var t=text.replace(PROTECT, function(m){ spans.push(m); return "\uE000"+(spans.length-1)+"\uE001"; });
+      t=esc(t);
+      t=t.replace(/\uE000(\d+)\uE001/g, function(_,n){ return "<x>"+n+"</x>"; });
+      return {payload:t, spans:spans};
+    }
+    function restore(tr, spans){
+      var t=tr.replace(/<x>(\d+)<\/x>/g, function(_,n){ return "\uE000"+n+"\uE001"; });
+      t=unesc(t);
+      t=t.replace(/\uE000(\d+)\uE001/g, function(_,n){ return spans[+n]; });
+      return t;
+    }
+    function setStatus(msg,cls){ if(!statusEl) return; statusEl.textContent=msg||""; statusEl.className="translate-status"+(cls?(" "+cls):""); }
+
+    btn.addEventListener("click", async function(){
+      var text=outEl.value||"";
+      if(!text.trim()){ setStatus("Keine Ausgabe zum Uebersetzen.","err"); return; }
+      var key=(keyEl&&keyEl.value||"").trim();
+      if(!key){ setStatus("Bitte zuerst den DeepL API-Key in den Optionen (Zahnrad) eintragen.","err"); return; }
+      var target=(tgtEl&&tgtEl.value)||"DE";
+      var built=build(text);
+      var bare=built.payload.replace(/<x>\d+<\/x>/g,"").replace(/\s+/g,"");
+      if(!bare){ setStatus("Nichts zu uebersetzen - der Text besteht nur aus ref/Wikilinks.",""); return; }
+      var endpoint=/:fx$/.test(key) ? "https://api-free.deepl.com/v2/translate" : "https://api.deepl.com/v2/translate";
+      var orig=btn.textContent;
+      btn.disabled=true; btn.textContent="\u23F3 Uebersetze..."; setStatus("");
+      try{
+        var body=new URLSearchParams();
+        body.set("text",built.payload); body.set("target_lang",target);
+        body.set("tag_handling","xml"); body.set("ignore_tags","x"); body.set("outline_detection","0");
+        var r=await fetch(endpoint,{method:"POST",headers:{"Authorization":"DeepL-Auth-Key "+key},body:body});
+        if(!r.ok){
+          var m;
+          if(r.status===403) m="DeepL-API-Key ungueltig (403).";
+          else if(r.status===456) m="DeepL-Kontingent fuer diesen Monat aufgebraucht (456).";
+          else if(r.status===429) m="Zu viele Anfragen (429) - bitte kurz warten.";
+          else m="DeepL-Fehler (HTTP "+r.status+").";
+          setStatus(m,"err"); return;
+        }
+        var data=await r.json();
+        var tr=data&&data.translations&&data.translations[0]&&data.translations[0].text;
+        if(tr==null){ setStatus("Unerwartete Antwort von DeepL.","err"); return; }
+        // DeepL setzt um die geschützten Platzhalter teils Anführungszeichen – vor dem Wiederherstellen entfernen
+        // (gilt einheitlich für Wikilinks, Kursiv/Fett und ref):
+        tr=tr.replace(/[\u201E\u201C\u0022](<x>\d+<\/x>)[\u201C\u201D\u0022]/g,"$1");
+        var fixed=restore(tr,built.spans);
+        fixed=fixed.replace(/[ \t]+(<ref\b)/g,"$1");   // von DeepL eingefügtes Leerzeichen vor <ref> entfernen
+        outEl.value=fixed;
+        try{ if(typeof window.updateOutputHighlight==="function") window.updateOutputHighlight(); }catch(e){}
+        setStatus("Uebersetzt \u2713 (ref und Wikilinks unveraendert)","ok");
+        if(window.__tlClear) clearTimeout(window.__tlClear);
+        window.__tlClear=setTimeout(function(){ setStatus(""); },6000);
+      }catch(e){
+        setStatus("DeepL ist nicht erreichbar. Als lokale Datei muss eine CORS-Erweiterung (z. B. \u201eCORS Unblock\u201c) waehrend der Uebersetzung aktiv sein.","err");
+      }finally{
+        btn.disabled=false; btn.textContent=orig;
+      }
+    });
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+</script>
 </body>
 </html>
