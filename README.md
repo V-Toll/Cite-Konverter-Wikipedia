@@ -1,6 +1,8 @@
 <div align="center">
 
-# 📚 Cite-Konverter für Wikipedia
+<img src="icon.svg" alt="Cite-Konverter für Wikipedia Logo" width="120" height="120">
+
+# Cite-Konverter für Wikipedia
 
 **Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – mit automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts, Subreferenzierung (`{{rp}}` → `details=`), Redirect-Auflösung und Syntax-Highlighting. Alles in einer einzigen HTML-Datei, ganz ohne Server, Installation oder externe Abhängigkeiten.**
 
