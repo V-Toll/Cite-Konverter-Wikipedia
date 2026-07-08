@@ -4,6 +4,7 @@ Alle nennenswerten Änderungen am *Cite-Konverter für Wikipedia* – neueste Ve
 
 Benannte Minor-Versionen (mit Codename) sind Funktions-Releases, Patches betreffen Fehlerbehebungen und Robustheit. Mehrere kleine, am selben Tag entstandene Patches sind zu Bereichen zusammengefasst (z. B. `v4.0 – v4.0.10`).
 
+- **v10.2.0 “Control Panel”** (2026-07-09): Das Optionen-Fenster wurde modernisiert – die Gruppen erscheinen als abgesetzte Karten, jede Zeile hat einen Hover-Effekt, und die Kontrollkästchen sind jetzt moderne Umschalter (Toggle-Switches) im Akzent-Verlauf des gewählten Themes. Funktion und Optionen sind unverändert.
 - **v10.1.3** (2026-07-09): Mehr Abstand zwischen den Routen-Pills und dem Eingabefeld; die Feldbeschriftungen „Eingabe“/„Ausgabe“ erscheinen jetzt als moderne, versale Labels mit kleinem Akzent-Punkt im Theme-Verlauf.
 - **v10.1.2** (2026-07-09): Mehr Abstand zwischen den Eingabe-/Ausgabe-Feldern und den darunterliegenden Knöpfen im Zwei-Spalten-Layout. Der Hinweis „Citation ohne Seitenangabe …“ wurde entfernt.
 - **v10.1.1** (2026-07-09): Feinschliff der Kopfzeile – der Untertitel „der Cite-Konverter für Wikipedia“ erscheint jetzt als versale, gesperrte Zeile im Akzent-Verlauf des Themes; das Versions-Abzeichen wurde etwas verkleinert.

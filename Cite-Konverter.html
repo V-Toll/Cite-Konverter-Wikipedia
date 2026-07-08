@@ -6,7 +6,7 @@
   <!-- Favicon: v9.2 „Sigil" – wird per Skript als eingebettetes SVG erzeugt und
        folgt dem gewählten Theme (siehe Skript am Seitenende). Keine externen Dateien. -->
   <link rel="icon" type="image/svg+xml" id="faviconSvg" />
-<title>Curly – der Cite-Konverter für Wikipedia – v10.1.3</title>
+<title>Curly – der Cite-Konverter für Wikipedia – v10.2.0</title>
 
 <style>
   html{min-height:100%}
@@ -167,15 +167,31 @@ body.dark .segmented button{color:#fff}
   body.dark .cl-list code, body.force-dark .cl-list code{background:rgba(255,255,255,0.12)}
   @media(prefers-reduced-motion:reduce){ .modal-dialog{animation:none} .icon-btn:hover{transform:none} }
 
-  /* Optionen-Steuerelemente (Inhalt des Modals) */
-  .opt-group{margin:0 0 16px}
+  /* Optionen-Steuerelemente (Inhalt des Modals)
+     v10.2 „Control Panel": moderne Optionen – Gruppen als Karten, Zeilen mit
+     Hover, native Checkboxen als Umschalter (Toggle-Switches) im Theme-Akzent. */
+  .opt-group{margin:0 0 12px;padding:12px 12px 8px;border-radius:14px;background:rgba(0,0,0,0.035);border:1px solid rgba(0,0,0,0.07)}
+  body.dark .opt-group, body.force-dark .opt-group{background:rgba(255,255,255,0.045);border-color:rgba(255,255,255,0.09)}
   .opt-group:last-child{margin-bottom:0}
-  .opt-group>h3{margin:0 0 10px;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;opacity:.55}
-  .opt-panel label.inline{display:block;position:relative;padding-left:24px;margin:0 0 9px;font-size:13.5px;line-height:1.4;cursor:pointer}
-  .opt-panel label.inline input{position:absolute;left:0;top:3px;margin:0}
-  .opt-panel .option-compact{margin:4px 0 0;gap:10px}
-  .opt-panel .option-compact label.inline{padding-left:0;position:static;margin:0}
-  .opt-panel #langInfo, .opt-panel #langSelectContainer{margin-left:24px;font-size:13px}
+  .opt-group>h3{margin:0 0 6px;padding:0 6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.6}
+
+  /* Umschalter-Zeilen: Label links, Toggle als führendes Steuerelement */
+  .opt-panel label.inline{display:flex;align-items:center;gap:12px;padding:9px 10px;margin:0;border-radius:10px;font-size:13.5px;line-height:1.4;cursor:pointer;transition:background .15s ease}
+  .opt-panel label.inline:hover{background:rgba(0,0,0,0.05)}
+  body.dark .opt-panel label.inline:hover, body.force-dark .opt-panel label.inline:hover{background:rgba(255,255,255,0.06)}
+  .opt-panel label.inline > input[type=checkbox]{appearance:none;-webkit-appearance:none;flex:none;position:relative;width:38px;height:22px;margin:0;border-radius:999px;background:rgba(0,0,0,0.24);cursor:pointer;transition:background .2s ease}
+  .opt-panel label.inline > input[type=checkbox]::before{content:"";position:absolute;left:2px;top:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.35);transition:transform .2s ease}
+  .opt-panel label.inline > input[type=checkbox]:checked{background:var(--th-accent, linear-gradient(135deg,#C250F2,#D76CD9))}
+  .opt-panel label.inline > input[type=checkbox]:checked::before{transform:translateX(16px)}
+  .opt-panel label.inline > input[type=checkbox]:focus-visible{outline:2px solid #6aa9ff;outline-offset:2px}
+  body.dark .opt-panel label.inline > input[type=checkbox], body.force-dark .opt-panel label.inline > input[type=checkbox]{background:rgba(255,255,255,0.22)}
+  body.dark .opt-panel label.inline > input[type=checkbox]:checked, body.force-dark .opt-panel label.inline > input[type=checkbox]:checked{background:var(--th-accent-dark, linear-gradient(135deg,#8b2aa9,#9f4fb1))}
+  .opt-panel label.inline .info{flex:1}
+  .opt-panel label.inline .opt-value{flex:none;font-size:12px;opacity:.6;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  .opt-panel .option-compact{margin:2px 6px;gap:12px;display:flex;align-items:center}
+  .opt-panel .option-compact label.inline{padding:0;margin:0;display:inline;font-weight:600}
+  .opt-panel #langInfo, .opt-panel #langSelectContainer{margin:6px 6px 4px;font-size:13px}
   .opt-panel #langSelectContainer select{max-width:100%}
 
   /* v8.5: Intro-Routen statt dichtem Fließtext */
@@ -718,7 +734,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v10.1.3</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v10.2.0</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
       <p class="brand-tagline">der Cite-Konverter für Wikipedia</p>
       <p class="lead">Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – inklusive automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts sowie Subreferenzierung und Syntax-Highlighting.</p>
       <div class="routes" aria-label="Unterstützte Konvertierungen">
@@ -783,7 +799,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       <div class="modal-body opt-panel">
         <div class="opt-group">
           <h3>Konvertierung</h3>
-          <label class="inline"><input type="checkbox" id="useTodayAbruf" checked /> <span class="info">Abrufdatum automatisch auf heute setzen</span> (<span id="todayLabel"></span>)</label>
+          <label class="inline"><input type="checkbox" id="useTodayAbruf" checked /> <span class="info">Abrufdatum automatisch auf heute setzen</span> <span id="todayLabel" class="opt-value"></span></label>
           <label class="inline"><input type="checkbox" id="stripArchiveIfLive" checked /> <span class="info">Archiv-Parameter entfernen, wenn URL aktiv (<code>url-status=live</code>)</span></label>
           <label class="inline"><input type="checkbox" id="convertSubref" checked /> <span class="info">Subreferenzierung konvertieren (<code>{{rp|...}}</code> → <code>details=</code>)</span></label>
           <label style="grid-column:1/-1" class="inline"><input type="checkbox" id="suppressGerman" checked /> <span class="info"><code>Sprache=de</code> unterdrücken</span> <button id="langInfoToggle" style="background:none;border:none;color:#0645AD;cursor:pointer">ℹ️</button></label>
@@ -910,6 +926,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       <div class="modal-body cl-body">
         <p class="cl-hint">Neueste Version zuerst.</p>
         <ul class="cl-list">
+          <li><strong>v10.2.0 &ldquo;Control Panel&rdquo;</strong> (2026-07-09): Das Optionen-Fenster wurde modernisiert – die Gruppen erscheinen als abgesetzte Karten, jede Zeile hat einen Hover-Effekt, und die Kontrollkästchen sind jetzt moderne Umschalter (Toggle-Switches) im Akzent-Verlauf des gewählten Themes. Funktion und Optionen sind unverändert.</li>
           <li><strong>v10.1.3</strong> (2026-07-09): Mehr Abstand zwischen den Routen-Pills und dem Eingabefeld; die Feldbeschriftungen „Eingabe"/„Ausgabe" erscheinen jetzt als moderne, versale Labels mit kleinem Akzent-Punkt im Theme-Verlauf.</li>
           <li><strong>v10.1.2</strong> (2026-07-09): Mehr Abstand zwischen den Eingabe-/Ausgabe-Feldern und den darunterliegenden Knöpfen im Zwei-Spalten-Layout. Der Hinweis „Citation ohne Seitenangabe …" wurde entfernt.</li>
           <li><strong>v10.1.1</strong> (2026-07-09): Feinschliff der Kopfzeile – der Untertitel „der Cite-Konverter für Wikipedia" erscheint jetzt als versale, gesperrte Zeile im Akzent-Verlauf des Themes; das Versions-Abzeichen wurde etwas verkleinert.</li>
