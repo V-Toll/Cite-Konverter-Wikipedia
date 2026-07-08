@@ -4,6 +4,7 @@ Alle nennenswerten Änderungen am *Cite-Konverter für Wikipedia* – neueste Ve
 
 Benannte Minor-Versionen (mit Codename) sind Funktions-Releases, Patches betreffen Fehlerbehebungen und Robustheit. Mehrere kleine, am selben Tag entstandene Patches sind zu Bereichen zusammengefasst (z. B. `v4.0 – v4.0.10`).
 
+- **v10.1.2** (2026-07-09): Mehr Abstand zwischen den Eingabe-/Ausgabe-Feldern und den darunterliegenden Knöpfen im Zwei-Spalten-Layout. Der Hinweis „Citation ohne Seitenangabe …“ wurde entfernt.
 - **v10.1.1** (2026-07-09): Feinschliff der Kopfzeile – der Untertitel „der Cite-Konverter für Wikipedia“ erscheint jetzt als versale, gesperrte Zeile im Akzent-Verlauf des Themes; das Versions-Abzeichen wurde etwas verkleinert.
 - **v10.1.0 “Twin View”** (2026-07-09): Auf großen Bildschirmen (ab 900 px Breite) stehen Eingabe- und Ausgabefeld jetzt nebeneinander, mit einem kompakten `🔀`-Knopf dazwischen – so lassen sich Original und Ergebnis direkt vergleichen. Auf schmalen Bildschirmen bleibt der gewohnte, gestapelte Aufbau mit dem vollbreiten Knopf „🔀 Konvertieren“. Die Einleitung/Beschreibung nutzt nun die volle Breite und wirkt so im breiteren Layout ausgewogener.
 - **v10.0.0 “Namesake”** (2026-07-08): Rebranding – das Tool heißt jetzt **Curly**. Das Klammern-Icon `{ }` dient als Markenzeichen; darunter steht der Untertitel „der Cite-Konverter für Wikipedia“. Funktion und Bedienung bleiben unverändert; angepasst wurden Kopfzeile, Seitentitel, README und Projektbeschreibung.
