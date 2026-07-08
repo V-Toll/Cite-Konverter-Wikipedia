@@ -6,7 +6,7 @@
   <!-- Favicon: v9.2 „Sigil" – wird per Skript als eingebettetes SVG erzeugt und
        folgt dem gewählten Theme (siehe Skript am Seitenende). Keine externen Dateien. -->
   <link rel="icon" type="image/svg+xml" id="faviconSvg" />
-<title>Cite-Konverter für Wikipedia – v9.2.0</title>
+<title>Curly – der Cite-Konverter für Wikipedia – v10.0.0</title>
 
 <style>
   html{min-height:100%}
@@ -79,6 +79,8 @@ body.theme-evergreencream{background:linear-gradient(135deg,#143731 0%,#5a9a50 5
   h1{margin:0 0 10px;font-size:clamp(1.3rem,2.2vw,1.9rem);display:flex;align-items:center;gap:12px}
   .badge{display:inline-block;padding:6px 12px;border-radius:999px;font-weight:800;color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.14)}
   .lead{margin:6px 0 16px;color:rgba(0,0,0,0.65)}
+  /* v10.0 „Namesake": Marken-Untertitel (Tagline) direkt unter dem Wortzeichen „Curly". */
+  .brand-tagline{margin:2px 0 0;font-size:1.03rem;font-weight:600;color:rgba(0,0,0,0.62);letter-spacing:.01em}
 
   details{margin:14px 0}
   details summary{cursor:pointer;font-weight:700;padding:8px;border-radius:8px}
@@ -473,6 +475,7 @@ body.dark pre.highlight .tok-url{text-decoration:underline}
 /* v2.5.12: Robust dark-mode contrast fixes (intro + syntax) */
 .lead { color: rgba(0,0,0,.72); }
 body.dark .lead, body.force-dark .lead { color: rgba(255,255,255,.90); }
+body.dark .brand-tagline, body.force-dark .brand-tagline { color: rgba(255,255,255,.72); }
 
 /* Ensure base text is visible in code highlight blocks */
 pre.highlight { color: inherit !important; }
@@ -684,7 +687,8 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Cite-Konverter für Wikipedia</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v9.2.0</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v10.0.0</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <p class="brand-tagline">der Cite-Konverter für Wikipedia</p>
       <p class="lead">Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen.</p>
       <div class="routes" aria-label="Unterstützte Konvertierungen">
         <div class="route">
@@ -872,6 +876,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       <div class="modal-body cl-body">
         <p class="cl-hint">Neueste Version zuerst.</p>
         <ul class="cl-list">
+          <li><strong>v10.0.0 &ldquo;Namesake&rdquo;</strong> (2026-07-08): Rebranding – das Tool heißt jetzt <strong>Curly</strong>. Das Klammern-Icon <code>{ }</code> dient als Markenzeichen; darunter steht der Untertitel &bdquo;der Cite-Konverter für Wikipedia&ldquo;. Funktion und Bedienung bleiben unverändert; angepasst wurden Kopfzeile, Seitentitel, README und Projektbeschreibung.</li>
           <li><strong>v9.2.0 &ldquo;Sigil&rdquo;</strong> (2026-07-08): Neues Marken-Icon – ein Logo mit geschweiften Klammern <code>{ }</code> (Vorlagen-Syntax) auf einem Verlaufs-Quadrat erscheint links vom Titel. Der Verlauf übernimmt automatisch die Akzentfarben des gewählten Themes (im Dunkelmodus die dunkle Variante) und passt sich damit allen Farbschemata an. Auch das Browser-Tab-Favicon wird als passendes SVG erzeugt und wechselt beim Theme-Wechsel mit. Die bisherigen externen Favicon-Dateien (PNG/ICO/Apple-Touch im Ordner <code>grafiken/</code>) werden dadurch nicht mehr benötigt und wurden entfernt.</li>
           <li><strong>v9.1.1</strong> (2026-07-06): Blockquote-Korrektur – steht die Fußnote <em>innerhalb</em> der Vorlage direkt hinter dem Zitat (z. B. <code>{{blockquote|… Text.&lt;ref name="x" /&gt;}}</code>), wird sie nun korrekt in <code>|ref=</code> übernommen und aus dem <code>Text</code> entfernt. Zuvor blieb <code>Text</code> leer, weil das <code>=</code> in <code>name="x"</code> fälschlich als Parametertrenner gedeutet wurde. Positionaler Zitattext mit einem <code>=</code> bleibt jetzt allgemein erhalten.</li>
           <li><strong>v9.1.0 &ldquo;Verbatim&rdquo;</strong> (2026-07-06): Neue Vorlage <code>{{blockquote}}</code> (auch <code>{{Blockquote}}</code> und der Alias <code>{{quote}}</code>) wird in die deutsche Vorlage <code>{{Zitat}}</code> umgewandelt. Der Zitattext wird aus dem ersten Parameter bzw. <code>text=</code> übernommen; ein enthaltenes <code>{{lang|xx|…}}</code> wird entpackt und liefert zugleich die <code>Sprache</code> (sonst automatische Erkennung, Standard <code>en</code>). Bei <code>multiline=yes</code> werden Zeilen mit <code>&lt;br /&gt;</code> verbunden. <code>author=</code> wird zu <code>Autor</code>, <code>title=</code> und <code>source=</code> werden zu <code>Quelle</code> zusammengeführt (<code>"Titel" - Quelle</code>). Ein direkt hinter der Vorlage stehendes <code>&lt;ref&gt;…&lt;/ref&gt;</code> (oder <code>&lt;ref … /&gt;</code>) wird in <code>|ref=</code> eingezogen; sonst bleibt ein leerer Platzhalter. <code>Übersetzung</code> bleibt leer.</li>

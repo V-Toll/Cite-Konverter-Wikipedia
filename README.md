@@ -1,8 +1,10 @@
 <div align="center">
 
-<img src="icon.svg" alt="Cite-Konverter für Wikipedia Logo" width="120" height="120">
+<img src="icon.svg" alt="Curly Logo" width="120" height="120">
 
-# Cite-Konverter für Wikipedia
+# Curly
+
+### der Cite-Konverter für Wikipedia
 
 **Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – mit automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts, Subreferenzierung (`{{rp}}` → `details=`), Redirect-Auflösung und Syntax-Highlighting. Alles in einer einzigen HTML-Datei, ganz ohne Server, Installation oder externe Abhängigkeiten.**
 
@@ -144,7 +146,7 @@ Rund 37 abgestimmte Farbthemen mit eigenen Hell- und Dunkelmodus-Varianten. Das 
 
 ## 📦 Version & Changelog
 
-Aktuelle Version: **v9.2.0 „Sigil"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
+Aktuelle Version: **v10.0.0 „Namesake"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
 
 ## 📄 Lizenz
 
