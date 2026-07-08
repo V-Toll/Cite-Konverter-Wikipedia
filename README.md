@@ -1,18 +1,89 @@
-# Cite-Konverter für Wikipedia
+<div align="center">
 
-Der *Cite-Konverter für Wikipedia* unterstützt dich dabei, [`{{cite web}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_web), [`{{cite news}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_news) und [`{{cite magazine}}`](https://en.wikipedia.org/wiki/Template:Cite_magazine) in die deutsche Vorlage [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) zu konvertieren. Zudem wird [`{{cite book}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_book), [`{{cite journal}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_journal), [`{{cite encyclopedia}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia) und [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) in [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) konvertiert (bei [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) ohne Seitenangabe und mit URL alternativ in [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle)). Außerdem wird [`{{blockquote}}`](https://en.wikipedia.org/wiki/Template:Blockquote) (auch [`{{quote}}`](https://en.wikipedia.org/wiki/Template:Blockquote)) in die deutsche Vorlage [`{{Zitat}}`](https://de.wikipedia.org/wiki/Vorlage:Zitat) überführt.
+# 📚 Cite-Konverter für Wikipedia
 
-Das Tool ist eine einzige, eigenständige HTML-Datei – kein Server, keine Installation, keine externen Abhängigkeiten. Einfach herunterladen und im Browser öffnen.
+**Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – in einer einzigen HTML-Datei, ganz ohne Server, Installation oder externe Abhängigkeiten.**
 
-## Intelligente Funktionen
+[![Version](https://img.shields.io/github/v/release/V-Toll/Cite-Konverter-Wikipedia?label=Version&color=8A2BE2)](https://github.com/V-Toll/Cite-Konverter-Wikipedia/releases)
+[![Lizenz](https://img.shields.io/badge/Lizenz-Unlicense-4CAF50)](LICENSE)
+[![Single-File](https://img.shields.io/badge/Single--File-HTML-FF8C00)](Cite-Konverter.html)
+[![Abhängigkeiten](https://img.shields.io/badge/Abh%C3%A4ngigkeiten-keine-2E7D32)](#-warum-dieses-tool)
+[![Für Wikipedia](https://img.shields.io/badge/f%C3%BCr-Wikipedia-lightgrey?logo=wikipedia&logoColor=white)](https://de.wikipedia.org)
+
+[⬇️ Neueste Version herunterladen](https://github.com/V-Toll/Cite-Konverter-Wikipedia/releases/latest) · [📜 Changelog](CHANGELOG.md) · [🐞 Problem melden](https://github.com/V-Toll/Cite-Konverter-Wikipedia/issues)
+
+</div>
+
+---
+
+## ✨ Warum dieses Tool?
+
+- 🗂️ **Eine einzige Datei** – herunterladen, im Browser öffnen, fertig. Kein Server, keine Installation, keine Tracker.
+- 🔄 **Viele Vorlagen** – von `{{cite web}}` bis `{{blockquote}}`, jeweils in die passende deutsche Entsprechung.
+- 🌍 **Wikidata & DeepL** – englische Wikilinks werden automatisch übersetzt, der Fließtext auf Wunsch per DeepL.
+- 🎨 **Rund 37 Farbthemen** inkl. Dunkelmodus – das Icon passt sich dem gewählten Theme an.
+- 🔒 **Datensparsam** – alles läuft lokal im Browser; nichts wird an Dritte gesendet.
+
+---
+
+## 🔄 Unterstützte Konvertierungen
+
+| Englische Vorlage | | Deutsche Vorlage |
+|---|:---:|---|
+| [`{{cite web}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_web) · [`{{cite news}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_news) · [`{{cite magazine}}`](https://en.wikipedia.org/wiki/Template:Cite_magazine) | → | [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) |
+| [`{{cite book}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_book) · [`{{cite journal}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_journal) · [`{{cite encyclopedia}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia) · [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) | → | [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) |
+| [`{{blockquote}}`](https://en.wikipedia.org/wiki/Template:Blockquote) · [`{{quote}}`](https://en.wikipedia.org/wiki/Template:Blockquote) | → | [`{{Zitat}}`](https://de.wikipedia.org/wiki/Vorlage:Zitat) |
+
+> [!NOTE]
+> [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) ohne Seitenangabe und mit URL wird alternativ in [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) konvertiert.
+
+---
+
+## 🧠 Intelligente Funktionen
 
 - **Automatische Subreferenzierung:** `{{rp|...}}`-Tags werden automatisch in das `details=`-Attribut konvertiert (z. B. `{{rp|10–20}}` → `details="S. 10–20"`). Mehrere `{{rp}}`-Tags werden zusammengeführt.
 - **Wikidata-Integration:** Englische Wikilinks werden automatisch ins Deutsche übersetzt (z. B. `[[Yellowstone National Park]]` → `[[Yellowstone-Nationalpark]]`). Display-Namen bleiben optional erhalten, fehlende deutsche Artikel werden intelligent behandelt. Die Titel werden dabei gebündelt abgefragt, sodass auch viele Wikilinks zügig übersetzt werden.
 - **Wikipedia-Redirects:** Automatische Verfolgung von Redirects – englische Wikilinks werden zum finalen Artikel aufgelöst und korrekt ins Deutsche übersetzt (z. B. `[[Eastern Band Cherokee]]` → `[[Eastern Band of Cherokee Indians]]`).
+- **Zitat-Konvertierung:** `{{blockquote}}` / `{{quote}}` werden zu `{{Zitat}}` – inklusive Sprach­erkennung, `{{lang|xx|…}}`-Entpackung, `multiline`-Umbrüchen und dem Einziehen eines direkt anschließenden `<ref>` in den `ref`-Parameter.
 - **Syntax-Highlighting:** Farbliche Hervorhebung für bessere Lesbarkeit von Eingabe und Ausgabe – inklusive grün markierter Wikilinks sowie kursiver (`''…''`) und fetter (`'''…'''`) Wikitext-Formatierung. Abgestimmt für Hell- und Dunkelmodus.
-- **Optionale DeepL-Übersetzung** der konvertierten Ausgabe – siehe [eigener Abschnitt](#übersetzung-mit-deepl-optional).
+- **Optionale DeepL-Übersetzung** der konvertierten Ausgabe – siehe [eigener Abschnitt](#-übersetzung-mit-deepl-optional).
 
-## Übersetzung mit DeepL (optional)
+---
+
+## 🚀 Nutzung
+
+1. Lade die Datei [`Cite-Konverter.html`](https://github.com/V-Toll/Cite-Konverter-Wikipedia/releases/latest) herunter und öffne sie im Browser deiner Wahl.
+2. Füge im ersten Eingabefeld den zu konvertierenden Code ein – gern inkl. `<ref>` bzw. `<ref name="…">`.
+3. Klicke auf **🔀 Konvertieren**. Im Ausgabefeld erscheint der fertig formatierte Einzelnachweis (`{{Internetquelle}}`, `{{Literatur}}` bzw. `{{Zitat}}`).
+4. Kopieren, auf der Wikipedia-Seite einfügen – und vor dem Speichern bitte noch einmal manuell prüfen. ✅
+
+> [!TIP]
+> Optionen, Farbschema und Versionsverlauf erreichst du über die Symbole oben rechts: **⚙️ Optionen**, **🎨 Farbschema** und **📜 Versionsverlauf** (jeweils als Fenster/Modal; Schließen per ✕, Klick außerhalb oder <kbd>Esc</kbd>).
+
+<details>
+<summary><strong>⚙️ Alle Optionen im Überblick</strong></summary>
+
+<br>
+
+- **Abrufdatum automatisch auf heute setzen** – setzt das Abrufdatum immer auf den heutigen Tag, unabhängig von der Vorgabe.
+- **Archiv-Parameter entfernen, wenn URL aktiv** (`url-status=live`) – entfernt alle Archivparameter, wenn die ursprüngliche URL noch live ist.
+- **`Sprache=de` unterdrücken** – wird bei der Ausgabe dann nicht ausgegeben.
+- **Ungekürzte Sprachcodes ausgeben** (z. B. `en-GB`) – standardmäßig werden Sprachcodes auf zwei Stellen gekürzt (`en`, `fr` …).
+- **Sprache manuell überschreiben** – `Sprache=` anhand der Top-Wikipedia-Sprachen manuell festlegen.
+- **Subreferenzierung konvertieren** – `{{rp|...}}` → `details=`.
+- **Konvertierte Ausgabe direkt in die Zwischenablage kopieren.**
+- **Wikilinks → Deutsch (Wikidata)** – optionale automatische Übersetzung englischer Wikilinks.
+- **Display-Namen beibehalten** – behält bei übersetzten Wikilinks den originalen Anzeigenamen bei (standardmäßig aktiv).
+- **Klammern entfernen bei fehlendem deutschen Artikel** – entfernt eckige Klammern, wenn kein deutscher Artikel existiert (standardmäßig aktiv).
+- **DeepL-API-Key & Zielsprache** – optional, für die DeepL-Übersetzung (siehe unten).
+- **Wahl aus rund 37 Farbthemen.**
+- **Darkmode** – automatisch, erzwingen oder abschalten.
+
+</details>
+
+---
+
+## 🌐 Übersetzung mit DeepL (optional)
 
 Ab Version 9.0 kann die konvertierte Ausgabe optional per [DeepL](https://www.deepl.com/) ins Deutsche (oder eine andere Zielsprache) übersetzt werden – praktisch, um einen englischen Artikelabschnitt samt Einzelnachweisen zu übertragen.
 
@@ -20,42 +91,31 @@ Ab Version 9.0 kann die konvertierte Ausgabe optional per [DeepL](https://www.de
 
 1. In den Optionen (⚙️) einen DeepL-API-Key eintragen (kostenloser Key mit `:fx`-Endung oder Pro-Key). Der Schlüssel wird ausschließlich lokal im Browser (`localStorage`) gespeichert, bleibt nach dem Schließen erhalten und wird **nur direkt an DeepL** gesendet.
 2. Optional die Zielsprache wählen (Standard: Deutsch).
-3. Auf „🌐 Übersetzen (DeepL)" klicken – das Ergebnis ersetzt die Ausgabe.
+3. Auf **🌐 Übersetzen (DeepL)** klicken – das Ergebnis ersetzt die Ausgabe.
 
 **Was unangetastet bleibt:** Übersetzt wird nur der Fließtext. `<ref>…</ref>` (inklusive selbstschließender `<ref … />`), Wikilinks `[[…]]` sowie Wiki-Kursiv/Fett (`''…''`, `'''…'''`) bleiben unverändert. So bleiben Belege, Verlinkungen und kursive Werktitel exakt erhalten – auch ein entlinkter Werktitel ohne deutschen Artikel bleibt korrekt kursiv (z. B. `''A Blank on the Map''`).
 
-**Wichtiger Hinweis (CORS):** Die DeepL-API erlaubt keine direkten Aufrufe aus dem Browser. Wenn du den Konverter als lokale HTML-Datei nutzt, brauchst du daher eine CORS-Erweiterung (z. B. „CORS Unblock" für Firefox/Chrome). Diese sollte **nur während der Übersetzung** aktiv sein und danach wieder deaktiviert werden, da sie eine Sicherheitsfunktion des Browsers vorübergehend abschaltet. Der Schlüssel verlässt deinen Browser dabei ausschließlich in Richtung DeepL – er läuft über keinen Drittanbieter.
+> [!WARNING]
+> **CORS-Hinweis:** Die DeepL-API erlaubt keine direkten Aufrufe aus dem Browser. Als lokale HTML-Datei brauchst du daher eine CORS-Erweiterung (z. B. „CORS Unblock" für Firefox/Chrome). Diese sollte **nur während der Übersetzung** aktiv sein und danach wieder deaktiviert werden, da sie eine Sicherheitsfunktion des Browsers vorübergehend abschaltet. Der Schlüssel verlässt deinen Browser dabei ausschließlich in Richtung DeepL – er läuft über keinen Drittanbieter.
 
-## Wie wird der Konverter genutzt?
+---
 
-Lade die `.html`-Datei herunter und öffne sie im Webbrowser deiner Wahl. Füge im ersten Eingabefeld den zu konvertierenden Code ein, das geht auch inkl. `ref` oder `ref name`. Nach der Nutzung des Buttons „🔀 Konvertieren" findest du im folgenden Feld den nach der Vorlage [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) bzw. [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) formatierten Einzelnachweis. Die Progress Bar zeigt den Fortschritt bei der Verarbeitung mehrerer Wikilinks und der Auflösung von Redirects. Den kannst du dann einfach kopieren und auf der jeweiligen Wikipedia-Seite einfügen. Bitte prüfe diesen noch einmal manuell vor dem Speichern.
+## ⚡ Performance
 
-Optionen, Farbschema und Versionsverlauf erreichst du über die Symbole oben rechts: ⚙️ Optionen, 🎨 Farbschema und 📜 Versionsverlauf (jeweils als Fenster/Modal; Schließen per ✕, Klick außerhalb oder `Esc`).
+Der Konverter nutzt intelligentes Caching (365 Tage für Wikidata-Übersetzungen, separater Cache für Redirects), gebündelte API-Abfragen und Rate Limiting für optimale Performance und einen schonenden Umgang mit Wikipedia-/Wikidata-Ressourcen.
 
-### Optionen
+---
 
-- **Abrufdatum automatisch auf heute setzen** (Wenn aktiviert: Setzt das Abrufdatum des Einzelnachweises immer auf den heutigen Tag, egal was in der Vorgabe steht.)
-- **Archiv-Parameter entfernen, wenn URL aktiv** (`url-status=live`) (Alle Archivparameter werden entfernt, wenn die ursprüngliche URL noch vorhanden/live ist.)
-- **`Sprache=de` unterdrücken** (Wird bei der Ausgabe nicht ausgegeben, wenn aktiviert.)
-- **Ungekürzte Sprachcodes ausgeben** (z. B. `en-GB`) (standardmäßig werden die Sprachcodes auf zwei Stellen gekürzt, `en`, `fr`, usw., auf Wunsch kann das deaktiviert werden.)
-- **Sprache manuell überschreiben** (`Sprache=` manuell festlegen anhand der Top-Wikipedia-Sprachen)
-- **Subreferenzierung konvertieren** (`{{rp|...}}` → `details=`)
-- **Konvertierte Ausgabe direkt in Zwischenablage kopieren**
-- **Wikilinks → Deutsch (Wikidata)** (Optional: Automatische Übersetzung englischer Wikilinks via Wikidata-API)
-- **Display-Namen beibehalten** (Standardmäßig aktiv: Behält originale Display-Namen bei übersetzten Wikilinks bei)
-- **Klammern entfernen bei fehlendem deutschen Artikel** (Standardmäßig aktiv: Entfernt eckige Klammern, wenn kein deutscher Wikipedia-Artikel existiert)
-- **DeepL-API-Key & Zielsprache** (Optional, für die DeepL-Übersetzung – siehe oben)
-- **Wahl aus rund 37 Farbthemen**
-- **Darkmode** (Automatisch, erzwingen oder abschalten)
+## 🎨 Design & Themes
 
-### Performance
+Rund 37 abgestimmte Farbthemen mit eigenen Hell- und Dunkelmodus-Varianten. Das Marken-Icon links vom Titel sowie das Browser-Tab-Favicon werden als eingebettetes SVG erzeugt und übernehmen automatisch die Akzentfarben des gewählten Themes – ganz ohne externe Bilddateien.
 
-Der Konverter nutzt intelligentes Caching (365 Tage für Wikidata-Übersetzungen, separater Cache für Redirects), gebündelte API-Abfragen und Rate Limiting für optimale Performance und schonenden Umgang mit Wikipedia-/Wikidata-Ressourcen.
+---
 
-## Versionsverlauf
+## 📦 Version & Changelog
 
-Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das 📜-Symbol. Aktuelle Version: **v9.2.0**.
+Aktuelle Version: **v9.2.0 „Sigil"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
 
-## Lizenz
+## 📄 Lizenz
 
-Veröffentlicht unter der [Unlicense](LICENSE) (Public Domain).
+Veröffentlicht unter der [Unlicense](LICENSE) (Public Domain) – frei nutzbar, veränderbar und weitergebbar.
