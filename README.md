@@ -92,6 +92,9 @@
 
 Ab Version 9.0 kann die konvertierte Ausgabe optional per [DeepL](https://www.deepl.com/) ins Deutsche (oder eine andere Zielsprache) übersetzt werden – praktisch, um einen englischen Artikelabschnitt samt Einzelnachweisen zu übertragen.
 
+> [!IMPORTANT]
+> Für die Übersetzung ist ein **eigener, persönlicher DeepL-API-Key** erforderlich – ohne ihn funktioniert die DeepL-Übersetzung nicht. Ein kostenloser Key (Endung `:fx`) genügt; du erhältst ihn nach der Registrierung bei [DeepL API](https://www.deepl.com/pro-api). Die reine Vorlagen-Konvertierung funktioniert selbstverständlich auch ganz ohne DeepL-Key.
+
 **Einrichtung**
 
 1. In den Optionen (⚙️) einen DeepL-API-Key eintragen (kostenloser Key mit `:fx`-Endung oder Pro-Key). Der Schlüssel wird ausschließlich lokal im Browser (`localStorage`) gespeichert, bleibt nach dem Schließen erhalten und wird **nur direkt an DeepL** gesendet.
@@ -151,3 +154,9 @@ Aktuelle Version: **v10.0.0 „Namesake"**. Den vollständigen Verlauf findest d
 ## 📄 Lizenz
 
 Veröffentlicht unter der [Unlicense](LICENSE) (Public Domain) – frei nutzbar, veränderbar und weitergebbar.
+
+---
+
+<div align="center">
+<sub>In unzähligen Stunden entstanden – von Hand und mit Unterstützung von <a href="https://www.anthropic.com/claude">Claude</a> (Anthropic). 🤖✍️</sub>
+</div>
