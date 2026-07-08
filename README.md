@@ -1,6 +1,6 @@
 # Cite-Konverter für Wikipedia
 
-Der *Cite-Konverter für Wikipedia* unterstützt dich dabei, [`{{cite web}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_web), [`{{cite news}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_news) und [`{{cite magazine}}`](https://en.wikipedia.org/wiki/Template:Cite_magazine) in die deutsche Vorlage [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) zu konvertieren. Zudem wird [`{{cite book}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_book), [`{{cite journal}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_journal), [`{{cite encyclopedia}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia) und [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) in [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) konvertiert (bei [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) ohne Seitenangabe und mit URL alternativ in [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle)).
+Der *Cite-Konverter für Wikipedia* unterstützt dich dabei, [`{{cite web}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_web), [`{{cite news}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_news) und [`{{cite magazine}}`](https://en.wikipedia.org/wiki/Template:Cite_magazine) in die deutsche Vorlage [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) zu konvertieren. Zudem wird [`{{cite book}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_book), [`{{cite journal}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_journal), [`{{cite encyclopedia}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia) und [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) in [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) konvertiert (bei [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) ohne Seitenangabe und mit URL alternativ in [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle)). Außerdem wird [`{{blockquote}}`](https://en.wikipedia.org/wiki/Template:Blockquote) (auch [`{{quote}}`](https://en.wikipedia.org/wiki/Template:Blockquote)) in die deutsche Vorlage [`{{Zitat}}`](https://de.wikipedia.org/wiki/Vorlage:Zitat) überführt.
 
 Das Tool ist eine einzige, eigenständige HTML-Datei – kein Server, keine Installation, keine externen Abhängigkeiten. Einfach herunterladen und im Browser öffnen.
 
@@ -54,7 +54,7 @@ Der Konverter nutzt intelligentes Caching (365 Tage für Wikidata-Übersetzungen
 
 ## Versionsverlauf
 
-Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das 📜-Symbol. Aktuelle Version: **v9.0.2**.
+Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das 📜-Symbol. Aktuelle Version: **v9.2.0**.
 
 ## Lizenz
 
