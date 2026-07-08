@@ -451,7 +451,7 @@
         var ws = (window.getSelection && window.getSelection()) ? String(window.getSelection()) : '';
         var weSel = selFromWikEd();
         var ls = lastSel ? (lastSel.mode + ', ' + (lastSel.text ? lastSel.text.length : 0) + ' Zeichen') : '–';
-        alert('Cite-Konverter-Bridge 1.4.0\n\n' +
+        alert('Cite-Konverter-Bridge 1.4.1\n\n' +
           '#wpTextbox1 vorhanden: ' + !!ta + '\n' +
           'aktives Element: ' + (ae ? (ae.tagName + (ae.id ? '#' + ae.id : '') + (ae.className ? '.' + String(ae.className).slice(0, 40) : '')) : '–') + '\n' +
           'wikEd-iframe (#wikEdFrame): ' + !!wikEdFrameEl() + ', erreichbar: ' + !!wikEdDoc() + '\n' +
