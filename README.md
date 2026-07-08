@@ -23,6 +23,7 @@
 - 🌍 **Wikidata & DeepL** – englische Wikilinks werden automatisch übersetzt, der Fließtext auf Wunsch per DeepL.
 - 🎨 **Rund 37 Farbthemen** inkl. Dunkelmodus – das Icon passt sich dem gewählten Theme an.
 - 🔒 **Datensparsam** – alles läuft lokal im Browser; nichts wird an Dritte gesendet.
+- 🔌 **Optionale Wikipedia-Bridge** – per Userscript direkt aus dem Bearbeitenfenster konvertieren (und übersetzen), ohne Kopieren. [Mehr dazu](#-optional-cite-konverter-bridge-userscript).
 
 ---
 
@@ -97,6 +98,33 @@ Ab Version 9.0 kann die konvertierte Ausgabe optional per [DeepL](https://www.de
 
 > [!WARNING]
 > **CORS-Hinweis:** Die DeepL-API erlaubt keine direkten Aufrufe aus dem Browser. Als lokale HTML-Datei brauchst du daher eine CORS-Erweiterung (z. B. „CORS Unblock" für Firefox/Chrome). Diese sollte **nur während der Übersetzung** aktiv sein und danach wieder deaktiviert werden, da sie eine Sicherheitsfunktion des Browsers vorübergehend abschaltet. Der Schlüssel verlässt deinen Browser dabei ausschließlich in Richtung DeepL – er läuft über keinen Drittanbieter.
+
+---
+
+## 🔌 Optional: Cite-Konverter Bridge (Userscript)
+
+Die **Cite-Konverter Bridge** verbindet die Wikipedia-Bearbeitenseite direkt mit einem geöffneten Konverter-Tab – ganz ohne manuelles Kopieren. Markiere im Editor den Wikitext (z. B. einen `<ref>…</ref>`-Block oder eine `{{cite …}}`-Vorlage) und klicke in der Leiste über dem Editor auf **🔀 Konvertieren** oder **🌐 Konvertieren + Übersetzen** – das Ergebnis ersetzt die Markierung an Ort und Stelle.
+
+**Besonderheiten**
+
+- Kein Kopieren/Einfügen nötig – der markierte Text wird gesendet und das Ergebnis automatisch wieder eingesetzt.
+- Die DeepL-Übersetzung läuft direkt aus dem Userscript über `GM_xmlhttpRequest` – **ohne CORS-Erweiterung**. `<ref>…</ref>`, Wikilinks `[[…]]` sowie Wiki-Kursiv/Fett (`''…''`, `'''…'''`) bleiben dabei geschützt.
+- Unterstützt den Quelltext-Editor (`#wpTextbox1`), den wikEd-Editor sowie VisualEditor/contenteditable (dort landet das Ergebnis zusätzlich in der Zwischenablage zum Einfügen mit <kbd>Strg</kbd>/<kbd>Cmd</kbd>+<kbd>V</kbd>).
+- Zusätzliche Befehle im Userscript-Menü, inklusive „Bridge: Diagnose" zur Fehlersuche.
+
+**Voraussetzungen**
+
+- Ein Userscript-Manager wie [Violentmonkey](https://violentmonkey.github.io/) oder Tampermonkey.
+- Beide Tabs offen: die Wikipedia-Bearbeitenseite **und** der Cite-Konverter.
+- Für den lokalen Konverter (`file://`): im Userscript-Manager den **Zugriff auf Datei-URLs** erlauben. Läuft der Konverter unter einer anderen Adresse (z. B. gehostet), im Skriptkopf eine passende `@match`-Zeile ergänzen.
+- Für „Konvertieren + Übersetzen": den DeepL-API-Key in den Optionen (⚙️) des Konverters hinterlegen.
+
+**Installation**
+
+[➡️ Bridge-Userscript installieren](https://github.com/V-Toll/Cite-Konverter-Wikipedia/raw/main/cite-konverter-bridge.user.js) – der Userscript-Manager erkennt die `.user.js`-Datei automatisch und bietet die Installation an. Quelltext: [`cite-konverter-bridge.user.js`](cite-konverter-bridge.user.js).
+
+> [!NOTE]
+> Die Bridge ist völlig optional. Der Konverter funktioniert eigenständig auch ohne sie – dann per Kopieren und Einfügen.
 
 ---
 
