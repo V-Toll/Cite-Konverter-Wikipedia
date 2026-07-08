@@ -2,7 +2,7 @@
 
 # 📚 Cite-Konverter für Wikipedia
 
-**Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – in einer einzigen HTML-Datei, ganz ohne Server, Installation oder externe Abhängigkeiten.**
+**Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – mit automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts, Subreferenzierung (`{{rp}}` → `details=`), Redirect-Auflösung und Syntax-Highlighting. Alles in einer einzigen HTML-Datei, ganz ohne Server, Installation oder externe Abhängigkeiten.**
 
 [![Version](https://img.shields.io/github/v/release/V-Toll/Cite-Konverter-Wikipedia?label=Version&color=8A2BE2)](https://github.com/V-Toll/Cite-Konverter-Wikipedia/releases)
 [![Lizenz](https://img.shields.io/badge/Lizenz-Unlicense-4CAF50)](LICENSE)
