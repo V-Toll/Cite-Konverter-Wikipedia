@@ -4,6 +4,7 @@ Alle nennenswerten Änderungen am *Cite-Konverter für Wikipedia* – neueste Ve
 
 Benannte Minor-Versionen (mit Codename) sind Funktions-Releases, Patches betreffen Fehlerbehebungen und Robustheit. Mehrere kleine, am selben Tag entstandene Patches sind zu Bereichen zusammengefasst (z. B. `v4.0 – v4.0.10`).
 
+- **v10.2.2** (2026-07-10): Behoben: Nach dem Konvertieren fehlte im Ausgabefeld manchmal die farbige Syntaxhervorhebung (erst nach dem Neuladen sichtbar). Ursache war die Bündelung über `requestAnimationFrame`, die in nicht sichtbaren Tabs hängen bleiben konnte. Das Ausgabe-Highlighting wird jetzt direkt aktualisiert.
 - **v10.2.1** (2026-07-10): Behoben bei `{{cite news}}`/`{{cite magazine}}`: Der Parameter `newspaper` bzw. `magazine`/`periodical` wird jetzt korrekt als `werk` übernommen (z. B. `newspaper=BBC News` → `werk=BBC News` statt „BBC“ aus dem Domain-Namen). Dadurch wird auch die Sprache zuverlässiger erkannt (z. B. `sprache=en`).
 - **v10.2.0 “Control Panel”** (2026-07-09): Das Optionen-Fenster wurde modernisiert – die Gruppen erscheinen als abgesetzte Karten, jede Zeile hat einen Hover-Effekt, und die Kontrollkästchen sind jetzt moderne Umschalter (Toggle-Switches) im Akzent-Verlauf des gewählten Themes. Funktion und Optionen sind unverändert.
 - **v10.1.3** (2026-07-09): Mehr Abstand zwischen den Routen-Pills und dem Eingabefeld; die Feldbeschriftungen „Eingabe“/„Ausgabe“ erscheinen jetzt als moderne, versale Labels mit kleinem Akzent-Punkt im Theme-Verlauf.

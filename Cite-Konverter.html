@@ -6,7 +6,7 @@
   <!-- Favicon: v9.2 „Sigil" – wird per Skript als eingebettetes SVG erzeugt und
        folgt dem gewählten Theme (siehe Skript am Seitenende). Keine externen Dateien. -->
   <link rel="icon" type="image/svg+xml" id="faviconSvg" />
-<title>Curly – der Cite-Konverter für Wikipedia – v10.2.1</title>
+<title>Curly – der Cite-Konverter für Wikipedia – v10.2.2</title>
 
 <style>
   html{min-height:100%}
@@ -734,7 +734,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v10.2.1</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v10.2.2</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
       <p class="brand-tagline">der Cite-Konverter für Wikipedia</p>
       <p class="lead">Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – inklusive automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts sowie Subreferenzierung und Syntax-Highlighting.</p>
       <div class="routes" aria-label="Unterstützte Konvertierungen">
@@ -926,6 +926,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       <div class="modal-body cl-body">
         <p class="cl-hint">Neueste Version zuerst.</p>
         <ul class="cl-list">
+          <li><strong>v10.2.2</strong> (2026-07-10): Behoben: Nach dem Konvertieren fehlte im Ausgabefeld manchmal die farbige Syntaxhervorhebung (erst nach dem Neuladen sichtbar). Ursache war die Bündelung über <code>requestAnimationFrame</code>, die in nicht sichtbaren Tabs hängen bleiben konnte. Das Ausgabe-Highlighting wird jetzt direkt aktualisiert.</li>
           <li><strong>v10.2.1</strong> (2026-07-10): Behoben bei <code>{{cite news}}</code>/<code>{{cite magazine}}</code>: Der Parameter <code>newspaper</code> bzw. <code>magazine</code>/<code>periodical</code> wird jetzt korrekt als <code>werk</code> übernommen (z. B. <code>newspaper=BBC News</code> → <code>werk=BBC News</code> statt „BBC" aus dem Domain-Namen). Dadurch wird auch die Sprache zuverlässiger erkannt (z. B. <code>sprache=en</code>).</li>
           <li><strong>v10.2.0 &ldquo;Control Panel&rdquo;</strong> (2026-07-09): Das Optionen-Fenster wurde modernisiert – die Gruppen erscheinen als abgesetzte Karten, jede Zeile hat einen Hover-Effekt, und die Kontrollkästchen sind jetzt moderne Umschalter (Toggle-Switches) im Akzent-Verlauf des gewählten Themes. Funktion und Optionen sind unverändert.</li>
           <li><strong>v10.1.3</strong> (2026-07-09): Mehr Abstand zwischen den Routen-Pills und dem Eingabefeld; die Feldbeschriftungen „Eingabe"/„Ausgabe" erscheinen jetzt als moderne, versale Labels mit kleinem Akzent-Punkt im Theme-Verlauf.</li>
@@ -2528,15 +2529,16 @@ function highlightTemplateText(text){
       pre.innerHTML = highlightTemplateText(txt);
     });
   }
-  let _outputHLraf = 0;
+  // v10.2.2: Ausgabe-Highlighting synchron statt über requestAnimationFrame.
+  // Die Ausgabe wird nur beim Konvertieren aktualisiert (kein Tippen), daher bringt
+  // das Bündeln pro Frame hier nichts. Zudem konnte der rAF-Wächter „hängen bleiben",
+  // wenn der (versteckte/inaktive) Tab keine Frames rendert – dann blieb das Feld
+  // dauerhaft ohne Hervorhebung, bis zum Neuladen. Ein direkter Schreibvorgang
+  // vermeidet dieses Problem vollständig.
   function updateOutputHighlight(){
-    if(_outputHLraf) return;                // für diesen Frame bereits geplant
-    _outputHLraf = requestAnimationFrame(function(){
-      _outputHLraf = 0;
-      const txt = document.getElementById('outputText').value;
-      const pre = document.getElementById('outputHighlight');
-      pre.innerHTML = highlightTemplateText(txt);
-    });
+    const outEl = document.getElementById('outputText');
+    const pre = document.getElementById('outputHighlight');
+    if(outEl && pre) pre.innerHTML = highlightTemplateText(outEl.value);
   }
   try { window.updateOutputHighlight = updateOutputHighlight; } catch(e){}
 
