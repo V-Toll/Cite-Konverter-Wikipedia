@@ -3153,7 +3153,7 @@ document.addEventListener("DOMContentLoaded", () => {
                      document.querySelector('.output-highlight') ||
                      document.querySelector('.highlight-output');
           if (over){
-            var hasMarkup = /<span|<mark|<em|<strong/i.test(over.innerHTML || '');
+            var hasMarkup = /<span\b|<mark\b|<em\b|<strong\b/i.test(over.innerHTML || '');
             if (hasMarkup) return; // Highlight aktiv, nicht überschreiben
           } else {
             // Kein Overlay-Element gefunden; dann Fallback setzen
