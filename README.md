@@ -40,7 +40,7 @@
 | [`{{cite book}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_book) · [`{{cite journal}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_journal) · [`{{cite encyclopedia}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia) · [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) | → | [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) |
 | [`{{blockquote}}`](https://en.wikipedia.org/wiki/Template:Blockquote) · [`{{quote}}`](https://en.wikipedia.org/wiki/Template:Blockquote) | → | [`{{Zitat}}`](https://de.wikipedia.org/wiki/Vorlage:Zitat) |
 
-| DOI (`doi.org`-Link · Verlags-URL · reine `10.xxxx/…`-Nummer) | → | [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) (über [Crossref](https://www.crossref.org/)) |
+| DOI (`doi.org`-Link · Verlags-URL · reine `10.xxxx/…`-Nummer) | → | [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) bzw. [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) (über [Crossref](https://www.crossref.org/)) |
 
 > [!NOTE]
 > [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) ohne Seitenangabe und mit URL wird alternativ in [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) konvertiert.
@@ -86,6 +86,7 @@
 - **Klammern entfernen bei fehlendem deutschen Artikel** – entfernt eckige Klammern, wenn kein deutscher Artikel existiert (standardmäßig aktiv).
 - **Vorlagenlose DOIs auflösen** – baut aus einem DOI ohne Vorlage automatisch `{{Literatur}}` (standardmäßig aktiv).
 - **`{{cite}}`-Vorlagen per Crossref ergänzen** – füllt fehlende Felder aus Crossref; abweichende Felder werden aufgelistet (standardmäßig aktiv).
+- **Zielformat bei DOI** – *Automatisch* (nach Crossref-Typ), *immer `{{Literatur}}`* oder *immer `{{Internetquelle}}`*.
 - **DeepL-API-Key & Zielsprache** – optional, für die DeepL-Übersetzung (siehe unten).
 - **Wahl aus rund 37 Farbthemen.**
 - **Darkmode** – automatisch, erzwingen oder abschalten.
@@ -130,10 +131,12 @@ wird automatisch:
 <ref>{{Literatur |Autor=Augustijn De Ketelaere, Jennifer Pullar, Gavin R. Broad |Titel=The description of a new genus of Pedunculinae (Hymenoptera: Ichneumonidae) from Chile and a key to the world genera |Sammelwerk=Journal of Natural History |Band=60 |Nummer=21-24 |Datum=2026-06-03 |Sprache=en |ISSN=0022-2933 |DOI=10.1080/00222933.2026.2663058 |Seiten=1167–1180 |Online=https://www.tandfonline.com/doi/full/10.1080/00222933.2026.2663058 |Abruf=…}}</ref>
 ```
 
-Unterstützt werden u. a. Journalartikel, Bücher, Buchkapitel und Tagungsbände. Es sind **zwei Optionen** verfügbar (beide standardmäßig aktiv, werden lokal gespeichert):
+**Print vs. Online:** Klassische Publikationen (Journalartikel, Bücher, Buchkapitel, Tagungsbände) werden zu `{{Literatur}}`. Web-native Inhalte – Preprints (`posted-content`), Datensätze, Reports, Lexikoneinträge u. a. – werden stattdessen zu [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) (mit der echten Artikel-URL, sonst dem `doi.org`-Link). Es sind **zwei Optionen** verfügbar (beide standardmäßig aktiv, werden lokal gespeichert):
 
 - **Vorlagenlose DOIs auflösen** – eine Referenz mit DOI, aber ohne `{{cite}}`-Vorlage, wird zu `{{Literatur}}` aufgebaut.
 - **`{{cite}}`-Vorlagen per Crossref ergänzen** – eine `{{cite…|doi=}}`-Vorlage wird um **fehlende** Felder ergänzt. Bereits vorhandene Werte werden **nicht** überschrieben; weicht ein Feld von Crossref ab, wird der Unterschied unter der Ausgabe aufgelistet und lässt sich per Häkchen gezielt übernehmen.
+
+Über die Option **Zielformat bei DOI** lässt sich die automatische Zuordnung übersteuern – *Automatisch* (nach Crossref-Typ), *immer `{{Literatur}}`* oder *immer `{{Internetquelle}}`*.
 
 > [!NOTE]
 > Die DOI-Auflösung läuft direkt aus dem Browser gegen Crossref – **kein API-Key und keine CORS-Erweiterung nötig**. Die Ergebnisse werden lokal 365 Tage zwischengespeichert. Bitte die erzeugten Angaben vor dem Speichern kurz prüfen.
@@ -181,7 +184,7 @@ Rund 37 abgestimmte Farbthemen mit eigenen Hell- und Dunkelmodus-Varianten. Das 
 
 ## 📦 Version & Changelog
 
-Aktuelle Version: **v11.0.0 „Rosetta"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
+Aktuelle Version: **v11.1.0 „Permalink"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
 
 ## 📄 Lizenz
 

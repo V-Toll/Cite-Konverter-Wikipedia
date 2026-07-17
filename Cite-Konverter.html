@@ -6,7 +6,7 @@
   <!-- Favicon: v9.2 „Sigil" – wird per Skript als eingebettetes SVG erzeugt und
        folgt dem gewählten Theme (siehe Skript am Seitenende). Keine externen Dateien. -->
   <link rel="icon" type="image/svg+xml" id="faviconSvg" />
-<title>Curly – der Cite-Konverter für Wikipedia – v11.0.0</title>
+<title>Curly – der Cite-Konverter für Wikipedia – v11.1.0</title>
 
 <style>
   html{min-height:100%}
@@ -339,6 +339,18 @@ body.dark .segmented button{color:#fff}
   .opt-panel input.opt-input, .opt-panel select.opt-input{width:100%;padding:8px 10px;border-radius:9px;border:1px solid rgba(0,0,0,0.15);background:rgba(255,255,255,0.72);font-size:13px;font-family:inherit;box-sizing:border-box}
   body.dark .opt-panel input.opt-input, body.force-dark .opt-panel input.opt-input, body.dark .opt-panel select.opt-input, body.force-dark .opt-panel select.opt-input{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);color:#e9eef6}
   .opt-hint{margin:8px 0 0;font-size:12px;opacity:.65;line-height:1.45}
+  /* v11.1: Feedback & Mitwirken – kleiner Aufklapp-Block unter den Buttons (GitHub-Links) */
+  .feedback{margin-top:14px;font-size:12.5px}
+  .feedback>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;color:rgba(0,0,0,0.55);font-weight:600;padding:4px 2px;user-select:none}
+  .feedback>summary::-webkit-details-marker{display:none}
+  .feedback>summary::before{content:"▸";display:inline-block;transition:transform .15s ease}
+  .feedback[open]>summary::before{transform:rotate(90deg)}
+  body.dark .feedback>summary, body.force-dark .feedback>summary{color:rgba(255,255,255,0.6)}
+  .feedback .feedback-body{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+  .feedback .feedback-body a{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:9px;font-weight:600;text-decoration:none;border:1px solid rgba(0,0,0,0.12);background:rgba(255,255,255,0.55);color:#1a2230;transition:background .15s ease,border-color .15s ease}
+  .feedback .feedback-body a:hover{background:rgba(255,255,255,0.85);border-color:rgba(0,0,0,0.22)}
+  body.dark .feedback .feedback-body a, body.force-dark .feedback .feedback-body a{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);color:#e9eef6}
+  body.dark .feedback .feedback-body a:hover, body.force-dark .feedback .feedback-body a:hover{background:rgba(255,255,255,0.20)}
   .opt-hint code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;padding:1px 5px;border-radius:5px;background:rgba(0,0,0,0.06)}
   body.dark .opt-hint code, body.force-dark .opt-hint code{background:rgba(255,255,255,0.12)}
   .translate-status{margin:6px 0 0;font-size:12.5px;min-height:1.2em}
@@ -750,7 +762,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.0.0</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.1.0</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
       <p class="brand-tagline">der Cite-Konverter für Wikipedia</p>
       <p class="lead">Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – inklusive automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts sowie Subreferenzierung und Syntax-Highlighting.</p>
       <div class="routes" aria-label="Unterstützte Konvertierungen">
@@ -802,6 +814,15 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
         <button id="translateBtn" class="btn-secondary" title="Schwarzen Text per DeepL übersetzen (ref/Wikilinks bleiben unverändert)">🌐 Übersetzen (DeepL)</button>
       </div>
       <p id="translateStatus" class="translate-status" role="status" aria-live="polite"></p>
+
+      <details class="feedback">
+        <summary>💬 Feedback &amp; Mitwirken</summary>
+        <div class="feedback-body">
+          <a id="reportBugLink" href="https://github.com/V-Toll/Cite-Konverter-Wikipedia/issues/new" target="_blank" rel="noopener">🐞 Fehler melden</a>
+          <a id="requestFeatureLink" href="https://github.com/V-Toll/Cite-Konverter-Wikipedia/issues/new" target="_blank" rel="noopener">💡 Funktion vorschlagen</a>
+          <a href="https://github.com/V-Toll/Cite-Konverter-Wikipedia" target="_blank" rel="noopener">📦 Projekt auf GitHub</a>
+        </div>
+      </details>
     </div>
   </div>
 
@@ -843,8 +864,16 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
         </div>
         <div class="opt-group">
           <h3>DOI (Crossref)</h3>
-          <label class="inline"><input type="checkbox" id="doiResolve" checked> <span class="info">Vorlagenlose DOIs auflösen (→ <code>{{Literatur}}</code>)</span></label>
+          <label class="inline"><input type="checkbox" id="doiResolve" checked> <span class="info">Vorlagenlose DOIs auflösen (→ <code>{{Literatur}}</code> / <code>{{Internetquelle}}</code>)</span></label>
           <label class="inline"><input type="checkbox" id="doiEnrich" checked> <span class="info"><code>{{cite}}</code>-Vorlagen per Crossref ergänzen (fehlende Felder)</span></label>
+          <div class="opt-field" style="margin-top:10px">
+            <label for="doiFormat">Zielformat bei DOI</label>
+            <select id="doiFormat" class="opt-input">
+              <option value="auto">Automatisch (nach Crossref-Typ)</option>
+              <option value="lit">Immer {{Literatur}}</option>
+              <option value="iq">Immer {{Internetquelle}}</option>
+            </select>
+          </div>
         </div>
         <div class="opt-group">
           <h3>Ausgabe</h3>
@@ -947,6 +976,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       <div class="modal-body cl-body">
         <p class="cl-hint">Neueste Version zuerst.</p>
         <ul class="cl-list">
+          <li><strong>v11.1.0 &ldquo;Permalink&rdquo;</strong> (2026-07-17): DOI-Konverter erweitert um <strong>Online-/Web-Quellen</strong>: DOIs von web-nativen Inhalten (Preprints/<code>posted-content</code>, Datensätze, Reports, Lexikoneinträge u.&nbsp;a.) werden jetzt als <code>{{Internetquelle}}</code> aufgebaut statt als <code>{{Literatur}}</code> (Journalartikel, Bücher, Buchkapitel, Tagungsbände bleiben <code>{{Literatur}}</code>). Als <code>url</code> wird die echte Artikel-/Landing-Page verwendet (sonst <code>doi.org</code>). Auch bestehende <code>{{Internetquelle}}</code>-Vorlagen mit DOI werden per Crossref um fehlende Felder ergänzt. Neue Option <em>Zielformat bei DOI</em> (Automatisch / immer Literatur / immer Internetquelle), um die Zuordnung selbst zu bestimmen. Außerdem neu: ein kleiner Aufklapp-Block <em>Feedback &amp; Mitwirken</em> unter den Buttons – „Fehler melden" und „Funktion vorschlagen" öffnen ein vorausgefülltes Formular im GitHub-Projekt.</li>
           <li><strong>v11.0.0 &ldquo;Rosetta&rdquo;</strong> (2026-07-17): Neuer <strong>DOI-Konverter</strong> über die Crossref-API. Enthält eine Referenz einen DOI (als <code>doi.org</code>-Link, in einer Verlags-URL oder als reine <code>10.xxxx/…</code>-Nummer), werden daraus automatisch die vollständigen Angaben geholt und als <code>{{Literatur}}</code> aufgebaut – Autor, Titel, Sammelwerk, Band/Nummer, Datum, Sprache, ISSN/ISBN, Seiten, DOI und Online-Link (Journalartikel, Bücher, Buchkapitel, Tagungsbände). Zwei Optionen (beide standardmäßig aktiv, werden gespeichert): <em>Vorlagenlose DOIs auflösen</em> und <em>{{cite}}-Vorlagen per Crossref ergänzen</em> (füllt fehlende Felder; abweichende Felder werden aufgelistet und lassen sich per Häkchen übernehmen). Ergebnisse werden lokal zwischengespeichert (365 Tage). Alles läuft direkt aus dem Browser – kein Schlüssel, keine CORS-Erweiterung nötig.</li>
           <li><strong>v10.2.3</strong> (2026-07-10): Endgültig behoben: Nach dem Konvertieren blieb das Ausgabefeld in sichtbaren Tabs ohne farbige Hervorhebung. Ursache war ein alter „Display-Sync"-Notbehelf, der die Hervorhebung zwei Frames nach dem Konvertieren durch reinen Text ersetzte. Er hebt die Ausgabe jetzt korrekt hervor, statt sie zu überschreiben.</li>
           <li><strong>v10.2.2</strong> (2026-07-10): Behoben: Nach dem Konvertieren fehlte im Ausgabefeld manchmal die farbige Syntaxhervorhebung (erst nach dem Neuladen sichtbar). Ursache war die Bündelung über <code>requestAnimationFrame</code>, die in nicht sichtbaren Tabs hängen bleiben konnte. Das Ausgabe-Highlighting wird jetzt direkt aktualisiert.</li>
@@ -3828,7 +3858,7 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     var o=String(y); if(m) o+='-'+String(m).padStart(2,'0'); if(m&&d) o+='-'+String(d).padStart(2,'0'); return o;
   }
   function crFirst(a){ return (a&&a.length)?a[0]:''; }
-  function crossrefToParams(msg, opt){
+  function crossrefToLiteraturParams(msg, opt){
     opt=opt||{}; var P={}; var type=(msg.type||'').toLowerCase();
     var authors=(msg.author||[]).map(crName).filter(Boolean);
     var editors=(msg.editor||[]).map(crName).filter(Boolean);
@@ -3857,6 +3887,46 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     return P;
   }
 
+  // ---- Web-/Online-DOIs -> {{Internetquelle}} ----
+  // Crossref hat keinen Typ "Webartikel"; wir behandeln die klar online-nativen
+  // Typen als {{Internetquelle}}, klassische Publikationen bleiben {{Literatur}}.
+  var WEB_TYPES = { 'posted-content':1, 'dataset':1, 'report':1, 'reference-entry':1, 'peer-review':1, 'standard':1, 'other':1, 'grant':1, 'component':1 };
+  function isWebType(type){ return !!WEB_TYPES[(type||'').toLowerCase()]; }
+
+  // Parameter-Reihenfolge wie bei der cite-web-Konvertierung (Konsistenz zur Ausgabe)
+  var IQ_ORDER = ['autor','url','titel','titelerg','werk','hrsg','datum','seiten','format','sprache','offline','archiv-url','archiv-datum','archiv-bot','abruf','abruf-verborgen','kommentar','zitat'];
+  var IQ_CANON = {}; IQ_ORDER.forEach(function(k){ IQ_CANON[k.toLowerCase()]=k; });
+  function buildInternetquelle(finalParams){
+    var parts=[], used={};
+    IQ_ORDER.forEach(function(k){ if(Object.prototype.hasOwnProperty.call(finalParams,k)){ parts.push('|'+k+'='+(finalParams[k]==null?'':finalParams[k])); used[k]=1; } });
+    Object.keys(finalParams).sort().forEach(function(k){ if(!used[k]) parts.push('|'+k+'='+finalParams[k]); });
+    return '{{Internetquelle '+parts.join(' ')+'}}';
+  }
+  function crossrefToInternetquelleParams(msg, opt){
+    opt=opt||{}; var P={};
+    var authors=(msg.author||[]).map(crName).filter(Boolean);
+    if(authors.length) P.autor=authors.join(', ');
+    var url=(msg.resource&&msg.resource.primary&&msg.resource.primary.URL)||(msg.DOI?('https://doi.org/'+msg.DOI):'');
+    if(url) P.url=url;
+    var title=crFirst(msg.title); if(title) P.titel=title;
+    var container=crFirst(msg['container-title']);
+    var inst=(msg.institution&&msg.institution[0]&&msg.institution[0].name)||msg['group-title']||'';
+    var publisher=msg.publisher?String(msg.publisher):'';
+    var werk = container || inst || publisher;
+    if(werk) P.werk=werk;
+    if(publisher && publisher!==werk) P.hrsg=publisher;
+    var datum=crDate(msg); if(datum) P.datum=datum;
+    var lang=normLang(msg.language||'', opt.fullLangCodes);
+    if(lang && !(opt.suppressGerman && lang.toLowerCase().indexOf('de')===0)) P.sprache=lang;
+    if(opt.today) P.abruf=opt.today;
+    return P;
+  }
+  // Konfiguration je Zielvorlage ('lit' = {{Literatur}}, 'iq' = {{Internetquelle}})
+  function kindCfg(kind){
+    if(kind==='iq') return { build:buildInternetquelle, toParams:crossrefToInternetquelleParams, canon:IQ_CANON, abrufKey:'abruf' };
+    return { build:buildLiteratur, toParams:crossrefToLiteraturParams, canon:CANON, abrufKey:'Abruf' };
+  }
+
   // ---- Cache + Fetch ----
   function fetchCrossref(doi){
     var cache = (typeof getCache==='function') ? getCache(DOI_CACHE_KEY) : {};
@@ -3875,31 +3945,34 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     if(!segs.length){ segs.push({ innerStart:0, innerEnd:text.length, inner:text }); }
     return segs;
   }
-  function findLiteraturTemplate(inner){
-    var open=inner.search(/\{\{\s*Literatur\b/i); if(open<0) return null;
+  // Findet die erste {{Literatur}}- ODER {{Internetquelle}}-Vorlage (klammer­sicher)
+  // und meldet die Art ('lit' bzw. 'iq') für den passenden Feld-Abgleich zurück.
+  function findTargetTemplate(inner){
+    var m = inner.match(/\{\{\s*(Literatur|Internetquelle)\b/i); if(!m) return null;
+    var open=m.index, kind=/internetquelle/i.test(m[1])?'iq':'lit';
     var i=open, depth=0;
     while(i<inner.length-1){
       if(inner[i]==='{'&&inner[i+1]==='{'){depth++;i+=2;continue;}
-      if(inner[i]==='}'&&inner[i+1]==='}'){depth--;i+=2; if(depth===0) return {start:open,end:i,text:inner.slice(open,i)}; continue;}
+      if(inner[i]==='}'&&inner[i+1]==='}'){depth--;i+=2; if(depth===0) return {start:open,end:i,text:inner.slice(open,i),kind:kind}; continue;}
       i++;
     }
     return null;
   }
   function hasTargetTemplate(inner){ return /\{\{\s*(Literatur|Internetquelle)\b/i.test(inner); }
-  function parseLiteraturParams(tplText){
+  function parseTemplateKV(tplText, canonMap){
     var inner = tplText.replace(/^\s*\{\{/,'').replace(/\}\}\s*$/,'');
     var toks = splitTopLevelPipes(inner); toks.shift();
     var params=[];
-    toks.forEach(function(t){ var eq=t.indexOf('='); if(eq<0) return; var k=t.slice(0,eq).trim(); if(!k) return; params.push({key:k, canon:(CANON[k.toLowerCase()]||k), value:t.slice(eq+1).trim()}); });
+    toks.forEach(function(t){ var eq=t.indexOf('='); if(eq<0) return; var k=t.slice(0,eq).trim(); if(!k) return; params.push({key:k, canon:(canonMap[k.toLowerCase()]||k), value:t.slice(eq+1).trim()}); });
     return params;
   }
-  function mergeEnrich(existingParams, crParams){
+  function mergeEnrich(existingParams, crParams, abrufKey){
     var finalParams={}, haveCanon={};
     existingParams.forEach(function(p){ finalParams[p.canon]=p.value; haveCanon[p.canon]=p.value; });
     var conflicts=[];
     Object.keys(crParams).forEach(function(K){
       var V=crParams[K];
-      if(K==='Abruf'){ if(!Object.prototype.hasOwnProperty.call(haveCanon,K)) finalParams[K]=V; return; }
+      if(K===abrufKey){ if(!Object.prototype.hasOwnProperty.call(haveCanon,K)) finalParams[K]=V; return; } // Abrufdatum nie als Konflikt
       if(!Object.prototype.hasOwnProperty.call(haveCanon,K)){ finalParams[K]=V; }
       else { var E=(''+haveCanon[K]).trim(); if(E!==(''+V).trim()) conflicts.push({key:K, tpl:E, cr:''+V}); }
     });
@@ -3956,11 +4029,12 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
 
   function applyOverrides(){
     var st=window.__doiApply; if(!st) return;
+    var cfg=kindCfg(st.kind||'lit');
     var checked={}; var boxes=document.querySelectorAll('#doiConflictPanel input[data-ci]');
     Array.prototype.forEach.call(boxes, function(b){ if(b.checked){ var i=+b.getAttribute('data-ci'); checked[st.conflicts[i].key]=st.conflicts[i].cr; } });
-    var merged=mergeEnrich(st.existingParams, st.crParams);
+    var merged=mergeEnrich(st.existingParams, st.crParams, cfg.abrufKey);
     Object.keys(checked).forEach(function(k){ merged.finalParams[k]=checked[k]; });
-    var rebuilt=buildLiteratur(merged.finalParams);
+    var rebuilt=cfg.build(merged.finalParams);
     var newInner=st.inner.slice(0, st.lit.start)+rebuilt+st.inner.slice(st.lit.end);
     var out=st.originalText.slice(0, st.innerStart)+newInner+st.originalText.slice(st.innerEnd);
     var outEl=document.getElementById('outputText'); if(outEl){ outEl.value=out; }
@@ -3979,7 +4053,7 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     segs.forEach(function(seg){
       var doi=extractDOI(seg.inner); if(!doi) return;
       if(hasTargetTemplate(seg.inner)){
-        var lit=findLiteraturTemplate(seg.inner);
+        var lit=findTargetTemplate(seg.inner);
         if(lit && doEnrich) tasks.push({seg:seg, doi:doi, mode:'enrich', lit:lit});
       } else if(doResolve){
         tasks.push({seg:seg, doi:doi, mode:'build'});
@@ -4004,19 +4078,25 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     applied.forEach(function(r){
       var t=r.task, seg=t.seg;
       if(r.error){ errors.push({doi:t.doi, error:r.error}); return; }
-      var crParams=crossrefToParams(r.msg, options);
       if(t.mode==='build'){
-        out = out.slice(0, seg.innerStart) + buildLiteratur(crParams) + out.slice(seg.innerEnd);
+        // Zielvorlage: fest gewähltes Format (Option „Zielformat bei DOI") oder
+        // automatisch nach Crossref-Typ (Web-Typen -> {{Internetquelle}}, sonst {{Literatur}}).
+        var fmt=(document.getElementById('doiFormat')||{}).value||'auto';
+        var bKind = fmt==='lit' ? 'lit' : (fmt==='iq' ? 'iq' : (isWebType(r.msg.type||'') ? 'iq' : 'lit'));
+        var bCfg = kindCfg(bKind);
+        out = out.slice(0, seg.innerStart) + bCfg.build(bCfg.toParams(r.msg, options)) + out.slice(seg.innerEnd);
       } else {
-        var existing=parseLiteraturParams(t.lit.text);
-        var merged=mergeEnrich(existing, crParams);
+        var eCfg = kindCfg(t.lit.kind);   // an der vorhandenen Vorlage ausgerichtet
+        var crParams = eCfg.toParams(r.msg, options);
+        var existing = parseTemplateKV(t.lit.text, eCfg.canon);
+        var merged = mergeEnrich(existing, crParams, eCfg.abrufKey);
         totalConflicts += merged.conflicts.length;
-        var rebuilt=buildLiteratur(merged.finalParams);
-        var newInner=seg.inner.slice(0, t.lit.start)+rebuilt+seg.inner.slice(t.lit.end);
+        var rebuilt = eCfg.build(merged.finalParams);
+        var newInner = seg.inner.slice(0, t.lit.start)+rebuilt+seg.inner.slice(t.lit.end);
         out = out.slice(0, seg.innerStart) + newInner + out.slice(seg.innerEnd);
         if(singleRef && merged.conflicts.length){
           singleState={ originalText:text, innerStart:seg.innerStart, innerEnd:seg.innerEnd, inner:seg.inner,
-                        lit:t.lit, existingParams:existing, crParams:crParams, conflicts:merged.conflicts };
+                        lit:t.lit, existingParams:existing, crParams:crParams, conflicts:merged.conflicts, kind:t.lit.kind };
         }
       }
     });
@@ -4027,14 +4107,34 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     return { text:out };
   };
 
-  // Toggles persistent machen (nach dem Laden)
-  function initDoi(){ initToggle('doiResolve'); initToggle('doiEnrich'); }
+  function initSelect(id){
+    var el=document.getElementById(id); if(!el) return;
+    try{ var saved=localStorage.getItem('opt_'+id); if(saved!==null) el.value=saved; }catch(e){}
+    el.addEventListener('change', function(){ try{ localStorage.setItem('opt_'+id, el.value); }catch(e){} });
+  }
+  // Feedback-Links (GitHub-Issues) mit Version + Browser vorbefüllen
+  function wireFeedback(){
+    var repo='https://github.com/V-Toll/Cite-Konverter-Wikipedia/issues/new';
+    var badge=document.getElementById('versionBadge');
+    var ver=((badge&&badge.textContent)||'').trim()||'?';
+    var bug=document.getElementById('reportBugLink');
+    if(bug) bug.href=repo+'?labels=bug&title='+encodeURIComponent('Fehler: ')+'&body='+
+      encodeURIComponent('**Version:** '+ver+'\n**Browser:** '+navigator.userAgent+'\n\n**Was ist passiert?**\n\n\n**Eingabe (Beispiel):**\n\n\n**Erwartetes Ergebnis:**\n');
+    var feat=document.getElementById('requestFeatureLink');
+    if(feat) feat.href=repo+'?labels=enhancement&title='+encodeURIComponent('Wunsch: ')+'&body='+
+      encodeURIComponent('**Version:** '+ver+'\n\n**Vorschlag:**\n\n\n**Warum ist das nützlich?**\n');
+  }
+  // Toggles/Auswahl persistent machen + Feedback verlinken (nach dem Laden)
+  function initDoi(){ initToggle('doiResolve'); initToggle('doiEnrich'); initSelect('doiFormat'); wireFeedback(); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', initDoi); else initDoi();
 
   // fuer Tests
   window.__doiExtract = extractDOI;
-  window.__doiCrossrefToParams = crossrefToParams;
+  window.__doiCrossrefToParams = crossrefToLiteraturParams;
   window.__doiBuildLiteratur = buildLiteratur;
+  window.__doiIsWebType = isWebType;
+  window.__doiCrossrefToIQParams = crossrefToInternetquelleParams;
+  window.__doiBuildInternetquelle = buildInternetquelle;
 })();
 </script>
 </body>
