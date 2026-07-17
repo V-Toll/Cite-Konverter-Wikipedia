@@ -6,7 +6,7 @@
 
 ### der Cite-Konverter für Wikipedia
 
-**Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – mit automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts, Subreferenzierung (`{{rp}}` → `details=`), Redirect-Auflösung und Syntax-Highlighting. Alles in einer einzigen HTML-Datei, ganz ohne Server, Installation oder externe Abhängigkeiten.**
+**Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – mit DOI-Auflösung über Crossref, automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts, Subreferenzierung (`{{rp}}` → `details=`), Redirect-Auflösung und Syntax-Highlighting. Alles in einer einzigen HTML-Datei, ganz ohne Server, Installation oder externe Abhängigkeiten.**
 
 [![Version](https://img.shields.io/github/v/release/V-Toll/Cite-Konverter-Wikipedia?label=Version&color=8A2BE2)](https://github.com/V-Toll/Cite-Konverter-Wikipedia/releases)
 [![Lizenz](https://img.shields.io/badge/Lizenz-Unlicense-4CAF50)](LICENSE)
@@ -24,6 +24,7 @@
 
 - 🗂️ **Eine einzige Datei** – herunterladen, im Browser öffnen, fertig. Kein Server, keine Installation, keine Tracker.
 - 🔄 **Viele Vorlagen** – von `{{cite web}}` bis `{{blockquote}}`, jeweils in die passende deutsche Entsprechung.
+- 🔗 **DOI-Auflösung** – aus einem DOI holt Curly per [Crossref](https://www.crossref.org/) automatisch alle Angaben und baut ein fertiges `{{Literatur}}`. [Mehr dazu](#-doi-auflösung-crossref).
 - 🌍 **Wikidata & DeepL** – englische Wikilinks werden automatisch übersetzt, der Fließtext auf Wunsch per DeepL.
 - 🎨 **Rund 37 Farbthemen** inkl. Dunkelmodus – das Icon passt sich dem gewählten Theme an.
 - 🔒 **Datensparsam** – alles läuft lokal im Browser; nichts wird an Dritte gesendet.
@@ -39,6 +40,8 @@
 | [`{{cite book}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_book) · [`{{cite journal}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_journal) · [`{{cite encyclopedia}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia) · [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) | → | [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) |
 | [`{{blockquote}}`](https://en.wikipedia.org/wiki/Template:Blockquote) · [`{{quote}}`](https://en.wikipedia.org/wiki/Template:Blockquote) | → | [`{{Zitat}}`](https://de.wikipedia.org/wiki/Vorlage:Zitat) |
 
+| DOI (`doi.org`-Link · Verlags-URL · reine `10.xxxx/…`-Nummer) | → | [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) (über [Crossref](https://www.crossref.org/)) |
+
 > [!NOTE]
 > [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) ohne Seitenangabe und mit URL wird alternativ in [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) konvertiert.
 
@@ -50,6 +53,7 @@
 - **Wikidata-Integration:** Englische Wikilinks werden automatisch ins Deutsche übersetzt (z. B. `[[Yellowstone National Park]]` → `[[Yellowstone-Nationalpark]]`). Display-Namen bleiben optional erhalten, fehlende deutsche Artikel werden intelligent behandelt. Die Titel werden dabei gebündelt abgefragt, sodass auch viele Wikilinks zügig übersetzt werden.
 - **Wikipedia-Redirects:** Automatische Verfolgung von Redirects – englische Wikilinks werden zum finalen Artikel aufgelöst und korrekt ins Deutsche übersetzt (z. B. `[[Eastern Band Cherokee]]` → `[[Eastern Band of Cherokee Indians]]`).
 - **Zitat-Konvertierung:** `{{blockquote}}` / `{{quote}}` werden zu `{{Zitat}}` – inklusive Sprach­erkennung, `{{lang|xx|…}}`-Entpackung, `multiline`-Umbrüchen und dem Einziehen eines direkt anschließenden `<ref>` in den `ref`-Parameter.
+- **DOI-Auflösung (Crossref):** DOIs werden erkannt und automatisch zu vollständigen `{{Literatur}}`-Angaben aufgelöst; bestehende `{{cite}}`-Vorlagen mit `doi=` lassen sich um fehlende Felder ergänzen – siehe [eigener Abschnitt](#-doi-auflösung-crossref).
 - **Syntax-Highlighting:** Farbliche Hervorhebung für bessere Lesbarkeit von Eingabe und Ausgabe – inklusive grün markierter Wikilinks sowie kursiver (`''…''`) und fetter (`'''…'''`) Wikitext-Formatierung. Abgestimmt für Hell- und Dunkelmodus.
 - **Optionale DeepL-Übersetzung** der konvertierten Ausgabe – siehe [eigener Abschnitt](#-übersetzung-mit-deepl-optional).
 
@@ -80,6 +84,8 @@
 - **Wikilinks → Deutsch (Wikidata)** – optionale automatische Übersetzung englischer Wikilinks.
 - **Display-Namen beibehalten** – behält bei übersetzten Wikilinks den originalen Anzeigenamen bei (standardmäßig aktiv).
 - **Klammern entfernen bei fehlendem deutschen Artikel** – entfernt eckige Klammern, wenn kein deutscher Artikel existiert (standardmäßig aktiv).
+- **Vorlagenlose DOIs auflösen** – baut aus einem DOI ohne Vorlage automatisch `{{Literatur}}` (standardmäßig aktiv).
+- **`{{cite}}`-Vorlagen per Crossref ergänzen** – füllt fehlende Felder aus Crossref; abweichende Felder werden aufgelistet (standardmäßig aktiv).
 - **DeepL-API-Key & Zielsprache** – optional, für die DeepL-Übersetzung (siehe unten).
 - **Wahl aus rund 37 Farbthemen.**
 - **Darkmode** – automatisch, erzwingen oder abschalten.
@@ -105,6 +111,32 @@ Ab Version 9.0 kann die konvertierte Ausgabe optional per [DeepL](https://www.de
 
 > [!WARNING]
 > **CORS-Hinweis:** Die DeepL-API erlaubt keine direkten Aufrufe aus dem Browser. Als lokale HTML-Datei brauchst du daher eine CORS-Erweiterung (z. B. „CORS Unblock" für Firefox/Chrome). Diese sollte **nur während der Übersetzung** aktiv sein und danach wieder deaktiviert werden, da sie eine Sicherheitsfunktion des Browsers vorübergehend abschaltet. Der Schlüssel verlässt deinen Browser dabei ausschließlich in Richtung DeepL – er läuft über keinen Drittanbieter.
+
+---
+
+## 🔗 DOI-Auflösung (Crossref)
+
+Ab Version 11 erkennt Curly **DOIs** in einer Referenz und holt die vollständigen bibliografischen Angaben automatisch über die [Crossref-API](https://www.crossref.org/) – als `doi.org`-Link, in einer Verlags-URL oder als reine `10.xxxx/…`-Nummer.
+
+Beispiel – aus dieser Referenz:
+
+```wikitext
+<ref>De Ketelaere A, Pullar J, Broad GR (2026) The description of a new genus of Pedunculinae … ''Journal of Natural History'' 60, 1167-1180 [https://www.tandfonline.com/doi/full/10.1080/00222933.2026.2663058 …]</ref>
+```
+
+wird automatisch:
+
+```wikitext
+<ref>{{Literatur |Autor=Augustijn De Ketelaere, Jennifer Pullar, Gavin R. Broad |Titel=The description of a new genus of Pedunculinae (Hymenoptera: Ichneumonidae) from Chile and a key to the world genera |Sammelwerk=Journal of Natural History |Band=60 |Nummer=21-24 |Datum=2026-06-03 |Sprache=en |ISSN=0022-2933 |DOI=10.1080/00222933.2026.2663058 |Seiten=1167–1180 |Online=https://www.tandfonline.com/doi/full/10.1080/00222933.2026.2663058 |Abruf=…}}</ref>
+```
+
+Unterstützt werden u. a. Journalartikel, Bücher, Buchkapitel und Tagungsbände. Es sind **zwei Optionen** verfügbar (beide standardmäßig aktiv, werden lokal gespeichert):
+
+- **Vorlagenlose DOIs auflösen** – eine Referenz mit DOI, aber ohne `{{cite}}`-Vorlage, wird zu `{{Literatur}}` aufgebaut.
+- **`{{cite}}`-Vorlagen per Crossref ergänzen** – eine `{{cite…|doi=}}`-Vorlage wird um **fehlende** Felder ergänzt. Bereits vorhandene Werte werden **nicht** überschrieben; weicht ein Feld von Crossref ab, wird der Unterschied unter der Ausgabe aufgelistet und lässt sich per Häkchen gezielt übernehmen.
+
+> [!NOTE]
+> Die DOI-Auflösung läuft direkt aus dem Browser gegen Crossref – **kein API-Key und keine CORS-Erweiterung nötig**. Die Ergebnisse werden lokal 365 Tage zwischengespeichert. Bitte die erzeugten Angaben vor dem Speichern kurz prüfen.
 
 ---
 
@@ -137,7 +169,7 @@ Die **Cite-Konverter Bridge** verbindet die Wikipedia-Bearbeitenseite direkt mit
 
 ## ⚡ Performance
 
-Der Konverter nutzt intelligentes Caching (365 Tage für Wikidata-Übersetzungen, separater Cache für Redirects), gebündelte API-Abfragen und Rate Limiting für optimale Performance und einen schonenden Umgang mit Wikipedia-/Wikidata-Ressourcen.
+Der Konverter nutzt intelligentes Caching (365 Tage für Wikidata-Übersetzungen und Crossref-DOI-Daten, separater Cache für Redirects), gebündelte API-Abfragen und Rate Limiting für optimale Performance und einen schonenden Umgang mit Wikipedia-/Wikidata-/Crossref-Ressourcen.
 
 ---
 
@@ -149,7 +181,7 @@ Rund 37 abgestimmte Farbthemen mit eigenen Hell- und Dunkelmodus-Varianten. Das 
 
 ## 📦 Version & Changelog
 
-Aktuelle Version: **v10.2.0 „Control Panel"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
+Aktuelle Version: **v11.0.0 „Rosetta"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
 
 ## 📄 Lizenz
 

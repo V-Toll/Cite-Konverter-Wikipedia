@@ -6,7 +6,7 @@
   <!-- Favicon: v9.2 „Sigil" – wird per Skript als eingebettetes SVG erzeugt und
        folgt dem gewählten Theme (siehe Skript am Seitenende). Keine externen Dateien. -->
   <link rel="icon" type="image/svg+xml" id="faviconSvg" />
-<title>Curly – der Cite-Konverter für Wikipedia – v10.2.3</title>
+<title>Curly – der Cite-Konverter für Wikipedia – v11.0.0</title>
 
 <style>
   html{min-height:100%}
@@ -350,6 +350,22 @@ body.dark .segmented button{color:#fff}
   /* conversion summary box */
   #conversionSummary{margin-top:12px;padding:12px;border-radius:10px;background:rgba(0,0,0,0.03);font-size:14px}
   body.force-dark #conversionSummary{background:rgba(255,255,255,0.03);}
+  /* v11.0 „Rosetta": DOI-/Crossref-Abgleich-Panel (Konfliktliste + Übernehmen) */
+  #doiConflictPanel{display:none;margin-top:12px;padding:14px 16px;border-radius:12px;background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);font-size:13.5px}
+  body.force-dark #doiConflictPanel{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.10);color:#e9eef6}
+  #doiConflictPanel h4{margin:0 0 10px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+  #doiConflictPanel .doi-conf{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-top:1px solid rgba(0,0,0,0.06)}
+  body.force-dark #doiConflictPanel .doi-conf{border-top-color:rgba(255,255,255,0.08)}
+  #doiConflictPanel .doi-conf:first-of-type{border-top:none}
+  #doiConflictPanel .doi-conf input{margin-top:3px;flex:none;width:auto}
+  #doiConflictPanel .doi-field{font-weight:700}
+  #doiConflictPanel .doi-old{opacity:.72}
+  #doiConflictPanel .doi-new{color:#1a7f37;font-weight:600}
+  body.force-dark #doiConflictPanel .doi-new{color:#5fd08a}
+  #doiConflictPanel .doi-note{opacity:.85}
+  #doiConflictPanel .doi-err{color:#b91c1c}
+  body.force-dark #doiConflictPanel .doi-err{color:#ff8a8a}
+  #doiApplyOverrides{margin-top:12px;border:none;border-radius:10px;padding:9px 16px;font-size:13.5px;font-weight:700;color:#fff;background:var(--th-accent, linear-gradient(135deg,#C250F2,#D76CD9));cursor:pointer}
 
   /* small responsive */
   @media(max-width:560px){ .swatch{width:48px;height:20px} pre.highlight{font-size:13px} textarea.overlay{font-size:13px} }
@@ -734,7 +750,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v10.2.3</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.0.0</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
       <p class="brand-tagline">der Cite-Konverter für Wikipedia</p>
       <p class="lead">Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – inklusive automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts sowie Subreferenzierung und Syntax-Highlighting.</p>
       <div class="routes" aria-label="Unterstützte Konvertierungen">
@@ -824,6 +840,11 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
           <label class="inline"><input type="checkbox" id="wikidataLookup" checked> <span class="info">Wikilinks → Deutsch (Wikidata)</span></label>
           <label class="inline"><input type="checkbox" id="keepDisplayNames" checked> <span class="info">Display-Namen beibehalten</span></label>
           <label class="inline"><input type="checkbox" id="removeNonExistingLinks" checked> <span class="info">Klammern entfernen, wenn kein deutscher Artikel existiert</span></label>
+        </div>
+        <div class="opt-group">
+          <h3>DOI (Crossref)</h3>
+          <label class="inline"><input type="checkbox" id="doiResolve" checked> <span class="info">Vorlagenlose DOIs auflösen (→ <code>{{Literatur}}</code>)</span></label>
+          <label class="inline"><input type="checkbox" id="doiEnrich" checked> <span class="info"><code>{{cite}}</code>-Vorlagen per Crossref ergänzen (fehlende Felder)</span></label>
         </div>
         <div class="opt-group">
           <h3>Ausgabe</h3>
@@ -926,6 +947,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       <div class="modal-body cl-body">
         <p class="cl-hint">Neueste Version zuerst.</p>
         <ul class="cl-list">
+          <li><strong>v11.0.0 &ldquo;Rosetta&rdquo;</strong> (2026-07-17): Neuer <strong>DOI-Konverter</strong> über die Crossref-API. Enthält eine Referenz einen DOI (als <code>doi.org</code>-Link, in einer Verlags-URL oder als reine <code>10.xxxx/…</code>-Nummer), werden daraus automatisch die vollständigen Angaben geholt und als <code>{{Literatur}}</code> aufgebaut – Autor, Titel, Sammelwerk, Band/Nummer, Datum, Sprache, ISSN/ISBN, Seiten, DOI und Online-Link (Journalartikel, Bücher, Buchkapitel, Tagungsbände). Zwei Optionen (beide standardmäßig aktiv, werden gespeichert): <em>Vorlagenlose DOIs auflösen</em> und <em>{{cite}}-Vorlagen per Crossref ergänzen</em> (füllt fehlende Felder; abweichende Felder werden aufgelistet und lassen sich per Häkchen übernehmen). Ergebnisse werden lokal zwischengespeichert (365 Tage). Alles läuft direkt aus dem Browser – kein Schlüssel, keine CORS-Erweiterung nötig.</li>
           <li><strong>v10.2.3</strong> (2026-07-10): Endgültig behoben: Nach dem Konvertieren blieb das Ausgabefeld in sichtbaren Tabs ohne farbige Hervorhebung. Ursache war ein alter „Display-Sync"-Notbehelf, der die Hervorhebung zwei Frames nach dem Konvertieren durch reinen Text ersetzte. Er hebt die Ausgabe jetzt korrekt hervor, statt sie zu überschreiben.</li>
           <li><strong>v10.2.2</strong> (2026-07-10): Behoben: Nach dem Konvertieren fehlte im Ausgabefeld manchmal die farbige Syntaxhervorhebung (erst nach dem Neuladen sichtbar). Ursache war die Bündelung über <code>requestAnimationFrame</code>, die in nicht sichtbaren Tabs hängen bleiben konnte. Das Ausgabe-Highlighting wird jetzt direkt aktualisiert.</li>
           <li><strong>v10.2.1</strong> (2026-07-10): Behoben bei <code>{{cite news}}</code>/<code>{{cite magazine}}</code>: Der Parameter <code>newspaper</code> bzw. <code>magazine</code>/<code>periodical</code> wird jetzt korrekt als <code>werk</code> übernommen (z. B. <code>newspaper=BBC News</code> → <code>werk=BBC News</code> statt „BBC" aus dem Domain-Namen). Dadurch wird auch die Sprache zuverlässiger erkannt (z. B. <code>sprache=en</code>).</li>
@@ -2739,7 +2761,24 @@ function highlightTemplateText(text){
       // Original-Konvertierung
       var textToConvert = (wikidataCheckbox && wikidataCheckbox.checked && processedText) ? processedText : inputTextEl.value;
       const res = transformTextAndReturnLog(textToConvert);
-      document.getElementById('outputText').value = res.result;
+      var converted = res.result;
+
+      // v11.0 „Rosetta": DOI-Auflösung/Anreicherung über Crossref (nach der
+      // Offline-Konvertierung). Baut vorlagenlose DOI-Refs zu {{Literatur}} und
+      // ergänzt {{cite}}→{{Literatur}} um fehlende Felder. Steuert sich über die
+      // eigenen Optionen (doiResolve/doiEnrich) selbst; Fehler brechen nicht ab.
+      if (typeof window.processDOIs === 'function') {
+        try {
+          var doiRes = await window.processDOIs(converted, {
+            today: todayISO(),
+            suppressGerman: document.getElementById('suppressGerman').checked,
+            fullLangCodes: document.getElementById('fullLangCodes').checked
+          });
+          if (doiRes && typeof doiRes.text === 'string') converted = doiRes.text;
+        } catch(e) { console.error('DOI processing failed:', e); }
+      }
+
+      document.getElementById('outputText').value = converted;
       updateOutputHighlight();
 
       // auto copy?
@@ -3728,6 +3767,274 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
+})();
+</script>
+
+<script>
+/* ==========================================================================
+   DOI -> {{Literatur}} via Crossref  —  v11.0.0 "Rosetta"
+   --------------------------------------------------------------------------
+   Eigenstaendiger Block. Nutzt getCache/setCache/fetchWithTimeout aus dem
+   Wikidata-Block; enthaelt eigene Kopien von buildLiteratur/Normalisierern,
+   da diese im Hauptskript gekapselt sind. Exponiert window.processDOIs.
+   Zwei Optionen (persistiert): doiResolve (vorlagenlose DOIs aufloesen) und
+   doiEnrich ({{cite}}->{{Literatur}} um fehlende Felder ergaenzen).
+   ========================================================================== */
+(function(){
+  'use strict';
+  var DOI_CACHE_KEY = 'crossrefDoiCacheV1';
+  var DOI_RATE_MS = 120;
+
+  var LIT_ORDER = ['Autor','Titel','TitelErg','Hrsg','Sammelwerk','WerkErg','Band','Nummer','Auflage','Verlag','Ort','Datum','Sprache','Umfang','Reihe','BandReihe','NummerReihe','HrsgReihe','ISBN','ISBNformalFalsch','ISBNdefekt','ISSN','ISSNformalFalsch','ZDB','DNB','OCLC','LCCN','Lizenznummer','arXiv','bibcode','DOI','JSTOR','PMC','PMID','URN','ID','Kapitel','Seiten','Spalten','ArtikelNr','Fundstelle','Kommentar','Online','Format','KBytes','Abruf','Originaltitel','Originalsprache','Originaljahr','Originalort','Übersetzer','JahrEA','VerlagEA','OrtEA','Zitat','Typ'];
+  var CANON = {}; LIT_ORDER.forEach(function(k){ CANON[k.toLowerCase()] = k; });
+
+  function normalizePages(p){ if(!p) return ''; return String(p).replace(/(\d+)\s*-\s*(\d+)/g,function(m,a,b){ var x=parseInt(a,10),y=parseInt(b,10); return x<y?(a+'–'+b):(a+'-'+b); }); }
+  function normalizeISBN(isbn){ if(!isbn) return ''; return String(isbn).trim().replace(/x$/i,'X').replace(/\s+/g,' '); }
+  function normLang(code, full){ if(!code) return ''; var c=String(code).trim(); return full?c:c.split('-')[0].toLowerCase(); }
+
+  function buildLiteratur(finalParams){
+    var parts=[], used={};
+    LIT_ORDER.forEach(function(k){ if(Object.prototype.hasOwnProperty.call(finalParams,k)){ parts.push('|'+k+'='+(finalParams[k]==null?'':finalParams[k])); used[k]=1; } });
+    Object.keys(finalParams).sort().forEach(function(k){ if(!used[k]) parts.push('|'+k+'='+finalParams[k]); });
+    return '{{Literatur '+parts.join(' ')+'}}';
+  }
+
+  // top-level pipe split (ignoriert Pipes in [[...]]/{{...}})
+  function splitTopLevelPipes(s){
+    var tokens=[], buf='', dl=0, dt=0;
+    for(var i=0;i<s.length;i++){ var ch=s[i], nx=s[i+1];
+      if(ch==='['&&nx==='['){dl++;buf+='[[';i++;continue;}
+      if(ch===']'&&nx===']'&&dl>0){dl--;buf+=']]';i++;continue;}
+      if(ch==='{'&&nx==='{'){dt++;buf+='{{';i++;continue;}
+      if(ch==='}'&&nx==='}'&&dt>0){dt--;buf+='}}';i++;continue;}
+      if(ch==='|'&&dl===0&&dt===0){tokens.push(buf);buf='';continue;}
+      buf+=ch;
+    }
+    tokens.push(buf); return tokens;
+  }
+
+  function extractDOI(text){
+    if(!text) return '';
+    var m = String(text).match(/10\.\d{4,9}\/[^\s"'<>{}|\\^`\[\]]+/);
+    if(!m) return '';
+    return m[0].split('#')[0].replace(/[.,;:)\]}>]+$/,'');
+  }
+
+  // ---- Crossref-Meta -> {{Literatur}}-Parameter (kanonische Keys) ----
+  function crName(a){ if(a&&a.name) return String(a.name).trim(); var g=(a&&a.given)||'', f=(a&&a.family)||''; return (g+' '+f).trim(); }
+  function crDate(msg){
+    var src=(msg['published-print']&&msg['published-print']['date-parts'])||(msg['published-online']&&msg['published-online']['date-parts'])||(msg['issued']&&msg['issued']['date-parts'])||null;
+    if(!src||!src[0]) return ''; var p=src[0], y=p[0], m=p[1], d=p[2]; if(!y) return '';
+    var o=String(y); if(m) o+='-'+String(m).padStart(2,'0'); if(m&&d) o+='-'+String(d).padStart(2,'0'); return o;
+  }
+  function crFirst(a){ return (a&&a.length)?a[0]:''; }
+  function crossrefToParams(msg, opt){
+    opt=opt||{}; var P={}; var type=(msg.type||'').toLowerCase();
+    var authors=(msg.author||[]).map(crName).filter(Boolean);
+    var editors=(msg.editor||[]).map(crName).filter(Boolean);
+    var bookLike=(type==='book'||type==='monograph'||type==='reference-book'||type==='edited-book');
+    var containerWork=(type==='book-chapter'||type==='proceedings-article');
+    if(authors.length) P.Autor=authors.join(', ');
+    if(editors.length) P.Hrsg=editors.join(', ');
+    var title=crFirst(msg.title), container=crFirst(msg['container-title']);
+    if(title) P.Titel=title;
+    if(!bookLike && container) P.Sammelwerk=container;   // Journal / Buch (bei Kapitel) / Tagungsband
+    if(msg.volume) P.Band=String(msg.volume);
+    if(msg.issue) P.Nummer=String(msg.issue);
+    if(msg['edition-number']) P.Auflage=String(msg['edition-number']);
+    if(msg.publisher && (bookLike||containerWork||type==='dataset'||type==='report'||type==='posted-content')) P.Verlag=String(msg.publisher);
+    if(msg['publisher-location']) P.Ort=String(msg['publisher-location']);
+    var datum=crDate(msg); if(datum) P.Datum=datum;
+    var lang=normLang(msg.language||'', opt.fullLangCodes);
+    if(lang && !(opt.suppressGerman && lang.toLowerCase().indexOf('de')===0)) P.Sprache=lang;
+    if(msg.ISSN&&msg.ISSN.length) P.ISSN=crFirst(msg.ISSN);
+    if(msg.ISBN&&msg.ISBN.length) P.ISBN=normalizeISBN(crFirst(msg.ISBN));
+    if(msg.DOI) P.DOI=String(msg.DOI);
+    if(msg.page) P.Seiten=normalizePages(String(msg.page));
+    var url=(msg.resource&&msg.resource.primary&&msg.resource.primary.URL)||(msg.DOI?('https://doi.org/'+msg.DOI):'');
+    if(url) P.Online=url;
+    if(opt.today) P.Abruf=opt.today;
+    return P;
+  }
+
+  // ---- Cache + Fetch ----
+  function fetchCrossref(doi){
+    var cache = (typeof getCache==='function') ? getCache(DOI_CACHE_KEY) : {};
+    if(Object.prototype.hasOwnProperty.call(cache, doi)) return Promise.resolve(cache[doi]);
+    var url='https://api.crossref.org/works/'+encodeURIComponent(doi);
+    var fx = (typeof fetchWithTimeout==='function') ? fetchWithTimeout(url,12000) : fetch(url);
+    return fx.then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+             .then(function(j){ var msg=j&&j.message; if(!msg) throw new Error('Keine Crossref-Daten'); if(typeof setCache==='function') setCache(DOI_CACHE_KEY, doi, msg); return msg; });
+  }
+  function delay(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+
+  // ---- Segment-/Template-Hilfen ----
+  function findRefSegments(text){
+    var segs=[]; var re=/(<ref\b[^>]*>)([\s\S]*?)(<\/ref>)/gi; var m;
+    while((m=re.exec(text))){ var s=m.index+m[1].length; segs.push({ innerStart:s, innerEnd:s+m[2].length, inner:m[2] }); }
+    if(!segs.length){ segs.push({ innerStart:0, innerEnd:text.length, inner:text }); }
+    return segs;
+  }
+  function findLiteraturTemplate(inner){
+    var open=inner.search(/\{\{\s*Literatur\b/i); if(open<0) return null;
+    var i=open, depth=0;
+    while(i<inner.length-1){
+      if(inner[i]==='{'&&inner[i+1]==='{'){depth++;i+=2;continue;}
+      if(inner[i]==='}'&&inner[i+1]==='}'){depth--;i+=2; if(depth===0) return {start:open,end:i,text:inner.slice(open,i)}; continue;}
+      i++;
+    }
+    return null;
+  }
+  function hasTargetTemplate(inner){ return /\{\{\s*(Literatur|Internetquelle)\b/i.test(inner); }
+  function parseLiteraturParams(tplText){
+    var inner = tplText.replace(/^\s*\{\{/,'').replace(/\}\}\s*$/,'');
+    var toks = splitTopLevelPipes(inner); toks.shift();
+    var params=[];
+    toks.forEach(function(t){ var eq=t.indexOf('='); if(eq<0) return; var k=t.slice(0,eq).trim(); if(!k) return; params.push({key:k, canon:(CANON[k.toLowerCase()]||k), value:t.slice(eq+1).trim()}); });
+    return params;
+  }
+  function mergeEnrich(existingParams, crParams){
+    var finalParams={}, haveCanon={};
+    existingParams.forEach(function(p){ finalParams[p.canon]=p.value; haveCanon[p.canon]=p.value; });
+    var conflicts=[];
+    Object.keys(crParams).forEach(function(K){
+      var V=crParams[K];
+      if(K==='Abruf'){ if(!Object.prototype.hasOwnProperty.call(haveCanon,K)) finalParams[K]=V; return; }
+      if(!Object.prototype.hasOwnProperty.call(haveCanon,K)){ finalParams[K]=V; }
+      else { var E=(''+haveCanon[K]).trim(); if(E!==(''+V).trim()) conflicts.push({key:K, tpl:E, cr:''+V}); }
+    });
+    return { finalParams:finalParams, conflicts:conflicts };
+  }
+
+  // ---- Optionen (persistiert) ----
+  function getToggle(id, def){ var el=document.getElementById(id); return el?el.checked:def; }
+  function initToggle(id){
+    var el=document.getElementById(id); if(!el) return;
+    try{ var saved=localStorage.getItem('opt_'+id); if(saved==='0') el.checked=false; else if(saved==='1') el.checked=true; }catch(e){}
+    el.addEventListener('change', function(){ try{ localStorage.setItem('opt_'+id, el.checked?'1':'0'); }catch(e){} });
+  }
+
+  // ---- Fortschritt (nutzt vorhandene .progress-*-Styles) ----
+  function progEl(){
+    var p=document.getElementById('doiProgress');
+    if(!p){
+      p=document.createElement('div'); p.id='doiProgress'; p.className='wikidata-progress-container';
+      p.innerHTML='<div class="progress-label"></div><div class="progress-track"><div class="progress-bar"></div></div>';
+      var wrap=document.querySelector('#outputWrap'); if(wrap&&wrap.parentElement) wrap.parentElement.insertBefore(p, wrap.parentElement.firstChild);
+    }
+    return p;
+  }
+  function showDoiProgress(total){ var p=progEl(); p.style.display='block'; updateDoiProgress(0,total); }
+  function updateDoiProgress(cur,total){ var p=document.getElementById('doiProgress'); if(!p) return; var pct=total?Math.round(cur/total*100):0; var b=p.querySelector('.progress-bar'), l=p.querySelector('.progress-label'); if(b)b.style.width=pct+'%'; if(l)l.textContent=cur+' von '+total+' DOI'+(total>1?'s':'')+' (Crossref, '+pct+'%)'; }
+  function hideDoiProgress(){ var p=document.getElementById('doiProgress'); if(p) setTimeout(function(){ p.style.display='none'; },1500); }
+
+  // ---- Konflikt-Panel ----
+  function panelEl(){
+    var p=document.getElementById('doiConflictPanel');
+    if(!p){ p=document.createElement('div'); p.id='doiConflictPanel'; var wrap=document.querySelector('#outputWrap'); if(wrap&&wrap.parentElement) wrap.parentElement.appendChild(p); }
+    return p;
+  }
+  function clearPanel(){ var p=document.getElementById('doiConflictPanel'); if(p){ p.style.display='none'; p.innerHTML=''; } window.__doiApply=null; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function showConflictPanel(state){
+    var p=panelEl(); window.__doiApply=state;
+    var html='<h4>Crossref-Abgleich: '+state.conflicts.length+' Abweichung'+(state.conflicts.length>1?'en':'')+'</h4>';
+    state.conflicts.forEach(function(c,idx){
+      html+='<label class="doi-conf"><input type="checkbox" data-ci="'+idx+'">'+
+            '<span><span class="doi-field">'+esc(c.key)+'</span>: '+
+            '<span class="doi-old">Vorlage «'+esc(c.tpl)+'»</span> ↔ '+
+            '<span class="doi-new">Crossref «'+esc(c.cr)+'»</span></span></label>';
+    });
+    html+='<button type="button" id="doiApplyOverrides">Ausgewählte übernehmen</button>';
+    p.innerHTML=html; p.style.display='block';
+    var btn=document.getElementById('doiApplyOverrides');
+    if(btn) btn.addEventListener('click', applyOverrides);
+  }
+  function showConflictNote(n){ var p=panelEl(); p.innerHTML='<span class="doi-note">Crossref-Abgleich: '+n+' Feld'+(n>1?'er':'')+' abweichend. Für die Auswahl zum Überschreiben bitte einzeln (eine Referenz) konvertieren.</span>'; p.style.display='block'; }
+  function showDoiErrors(errs){ var p=panelEl(); var cur=p.style.display==='block'?p.innerHTML:''; var h='<div class="doi-err">'+errs.map(function(e){ return 'DOI nicht aufgelöst: '+esc(e.doi)+' ('+esc(e.error)+')'; }).join('<br>')+'</div>'; p.innerHTML=cur+h; p.style.display='block'; }
+
+  function applyOverrides(){
+    var st=window.__doiApply; if(!st) return;
+    var checked={}; var boxes=document.querySelectorAll('#doiConflictPanel input[data-ci]');
+    Array.prototype.forEach.call(boxes, function(b){ if(b.checked){ var i=+b.getAttribute('data-ci'); checked[st.conflicts[i].key]=st.conflicts[i].cr; } });
+    var merged=mergeEnrich(st.existingParams, st.crParams);
+    Object.keys(checked).forEach(function(k){ merged.finalParams[k]=checked[k]; });
+    var rebuilt=buildLiteratur(merged.finalParams);
+    var newInner=st.inner.slice(0, st.lit.start)+rebuilt+st.inner.slice(st.lit.end);
+    var out=st.originalText.slice(0, st.innerStart)+newInner+st.originalText.slice(st.innerEnd);
+    var outEl=document.getElementById('outputText'); if(outEl){ outEl.value=out; }
+    try{ if(typeof window.updateOutputHighlight==='function') window.updateOutputHighlight(); }catch(e){}
+  }
+
+  // ---- Hauptfunktion ----
+  window.processDOIs = async function(text, options){
+    options = options || {};
+    clearPanel();
+    var doResolve=getToggle('doiResolve', true), doEnrich=getToggle('doiEnrich', true);
+    if(!doResolve && !doEnrich) return { text:text };
+
+    var segs=findRefSegments(text);
+    var tasks=[];
+    segs.forEach(function(seg){
+      var doi=extractDOI(seg.inner); if(!doi) return;
+      if(hasTargetTemplate(seg.inner)){
+        var lit=findLiteraturTemplate(seg.inner);
+        if(lit && doEnrich) tasks.push({seg:seg, doi:doi, mode:'enrich', lit:lit});
+      } else if(doResolve){
+        tasks.push({seg:seg, doi:doi, mode:'build'});
+      }
+    });
+    if(!tasks.length) return { text:text };
+
+    showDoiProgress(tasks.length);
+    var results=[];
+    for(var i=0;i<tasks.length;i++){
+      updateDoiProgress(i, tasks.length);
+      try{ results.push({ task:tasks[i], msg: await fetchCrossref(tasks[i].doi), error:null }); }
+      catch(e){ results.push({ task:tasks[i], msg:null, error:(e&&e.message)||String(e) }); }
+      await delay(DOI_RATE_MS);
+    }
+    updateDoiProgress(tasks.length, tasks.length); hideDoiProgress();
+
+    var applied=results.slice().sort(function(a,b){ return b.task.seg.innerStart - a.task.seg.innerStart; });
+    var out=text, errors=[], totalConflicts=0, singleState=null;
+    var singleRef=(tasks.length===1);
+
+    applied.forEach(function(r){
+      var t=r.task, seg=t.seg;
+      if(r.error){ errors.push({doi:t.doi, error:r.error}); return; }
+      var crParams=crossrefToParams(r.msg, options);
+      if(t.mode==='build'){
+        out = out.slice(0, seg.innerStart) + buildLiteratur(crParams) + out.slice(seg.innerEnd);
+      } else {
+        var existing=parseLiteraturParams(t.lit.text);
+        var merged=mergeEnrich(existing, crParams);
+        totalConflicts += merged.conflicts.length;
+        var rebuilt=buildLiteratur(merged.finalParams);
+        var newInner=seg.inner.slice(0, t.lit.start)+rebuilt+seg.inner.slice(t.lit.end);
+        out = out.slice(0, seg.innerStart) + newInner + out.slice(seg.innerEnd);
+        if(singleRef && merged.conflicts.length){
+          singleState={ originalText:text, innerStart:seg.innerStart, innerEnd:seg.innerEnd, inner:seg.inner,
+                        lit:t.lit, existingParams:existing, crParams:crParams, conflicts:merged.conflicts };
+        }
+      }
+    });
+
+    if(singleRef && singleState) showConflictPanel(singleState);
+    else if(totalConflicts>0) showConflictNote(totalConflicts);
+    if(errors.length) showDoiErrors(errors);
+    return { text:out };
+  };
+
+  // Toggles persistent machen (nach dem Laden)
+  function initDoi(){ initToggle('doiResolve'); initToggle('doiEnrich'); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', initDoi); else initDoi();
+
+  // fuer Tests
+  window.__doiExtract = extractDOI;
+  window.__doiCrossrefToParams = crossrefToParams;
+  window.__doiBuildLiteratur = buildLiteratur;
 })();
 </script>
 </body>
