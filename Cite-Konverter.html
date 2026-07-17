@@ -6,7 +6,7 @@
   <!-- Favicon: v9.2 „Sigil" – wird per Skript als eingebettetes SVG erzeugt und
        folgt dem gewählten Theme (siehe Skript am Seitenende). Keine externen Dateien. -->
   <link rel="icon" type="image/svg+xml" id="faviconSvg" />
-<title>Curly – der Cite-Konverter für Wikipedia – v11.1.0</title>
+<title>Curly – der Cite-Konverter für Wikipedia – v11.2.0</title>
 
 <style>
   html{min-height:100%}
@@ -362,6 +362,24 @@ body.dark .segmented button{color:#fff}
   /* conversion summary box */
   #conversionSummary{margin-top:12px;padding:12px;border-radius:10px;background:rgba(0,0,0,0.03);font-size:14px}
   body.force-dark #conversionSummary{background:rgba(255,255,255,0.03);}
+  /* v11.2 „Ledger": Konvertierungs-Log unter dem Eingabefeld */
+  #conversionLog{margin-top:10px;padding:12px 14px;border-radius:12px;background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);font-size:13px}
+  body.force-dark #conversionLog{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.10);color:#e9eef6}
+  #conversionLog .cl-head{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;opacity:.6;margin:0 0 8px}
+  #conversionLog .cl-empty{opacity:.7}
+  #conversionLog .cl-note{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:7px 0;border-top:1px solid rgba(0,0,0,0.06)}
+  body.force-dark #conversionLog .cl-note{border-top-color:rgba(255,255,255,0.08)}
+  #conversionLog .cl-note:first-of-type{border-top:none}
+  #conversionLog .cl-tag{flex:none;display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(217,119,6,0.15);color:#b45309;border:1px solid rgba(217,119,6,0.35)}
+  body.force-dark #conversionLog .cl-tag{background:rgba(251,191,36,0.16);color:#fbbf24;border-color:rgba(251,191,36,0.35)}
+  #conversionLog .cl-text{flex:1 1 auto;min-width:140px}
+  #conversionLog .cl-btn{flex:none;cursor:pointer;border:1px solid rgba(0,0,0,0.15);background:rgba(255,255,255,0.6);color:#1a2230;border-radius:9px;padding:5px 11px;font-size:12.5px;font-weight:600;font-family:inherit;transition:background .15s ease,border-color .15s ease}
+  #conversionLog .cl-btn:hover{background:rgba(255,255,255,0.9);border-color:rgba(0,0,0,0.28)}
+  body.force-dark #conversionLog .cl-btn{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);color:#e9eef6}
+  body.force-dark #conversionLog .cl-btn:hover{background:rgba(255,255,255,0.20)}
+  #conversionLog .cl-note.applied .cl-btn{background:var(--th-accent, linear-gradient(135deg,#C250F2,#D76CD9));color:#fff;border-color:transparent}
+  #conversionLog .cl-note.applied .cl-tag{background:rgba(26,127,55,0.15);color:#1a7f37;border-color:rgba(26,127,55,0.35)}
+  body.force-dark #conversionLog .cl-note.applied .cl-tag{background:rgba(95,208,138,0.16);color:#5fd08a;border-color:rgba(95,208,138,0.35)}
   /* v11.0 „Rosetta": DOI-/Crossref-Abgleich-Panel (Konfliktliste + Übernehmen) */
   #doiConflictPanel{display:none;margin-top:12px;padding:14px 16px;border-radius:12px;background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);font-size:13.5px}
   body.force-dark #doiConflictPanel{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.10);color:#e9eef6}
@@ -762,7 +780,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.1.0</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.2.0</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
       <p class="brand-tagline">der Cite-Konverter für Wikipedia</p>
       <p class="lead">Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – inklusive automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts sowie Subreferenzierung und Syntax-Highlighting.</p>
       <div class="routes" aria-label="Unterstützte Konvertierungen">
@@ -792,6 +810,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
             <pre id="inputHighlight" class="highlight" aria-hidden="true"></pre>
             <textarea id="inputText" class="overlay" placeholder="Hier den &lt;ref&gt;…&lt;/ref&gt; Block oder die {{cite …}}-Vorlage einfügen"></textarea>
           </div>
+          <div id="conversionLog" aria-live="polite" hidden></div>
         </div>
 
         <!-- CONVERT -->
@@ -976,6 +995,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       <div class="modal-body cl-body">
         <p class="cl-hint">Neueste Version zuerst.</p>
         <ul class="cl-list">
+          <li><strong>v11.2.0 &ldquo;Ledger&rdquo;</strong> (2026-07-17): Neues <strong>Konvertierungs-Log</strong> unter dem Eingabefeld. Es zeigt regelbedingte Hinweise – z.&nbsp;B. „Archiv-URL entfernt, weil <code>url-status=live</code>", „<code>sprache=de</code> unterdrückt", „Sprachcode gekürzt" sowie das gewählte Zielformat bei <code>{{Citation}}</code> und bei DOIs (<code>{{Literatur}}</code>/<code>{{Internetquelle}}</code>). Jeder Hinweis ist <strong>anklickbar</strong> und übernimmt die Alternative direkt in die Ausgabe (per „Rückgängig" wieder umschaltbar), ohne die gespeicherten Optionen zu ändern. Der Log leert sich automatisch, sobald das Eingabefeld neuen Inhalt bekommt. Zudem: überflüssige <code>&lt;i&gt;…&lt;/i&gt;</code>-Kursiv-Auszeichnung aus Crossref-Titeln wird beim DOI-Import entfernt (<code>&lt;sub&gt;</code>, <code>&lt;sup&gt;</code> und Entities wie <code>&amp;amp;</code> bleiben erhalten).</li>
           <li><strong>v11.1.0 &ldquo;Permalink&rdquo;</strong> (2026-07-17): DOI-Konverter erweitert um <strong>Online-/Web-Quellen</strong>: DOIs von web-nativen Inhalten (Preprints/<code>posted-content</code>, Datensätze, Reports, Lexikoneinträge u.&nbsp;a.) werden jetzt als <code>{{Internetquelle}}</code> aufgebaut statt als <code>{{Literatur}}</code> (Journalartikel, Bücher, Buchkapitel, Tagungsbände bleiben <code>{{Literatur}}</code>). Als <code>url</code> wird die echte Artikel-/Landing-Page verwendet (sonst <code>doi.org</code>). Auch bestehende <code>{{Internetquelle}}</code>-Vorlagen mit DOI werden per Crossref um fehlende Felder ergänzt. Neue Option <em>Zielformat bei DOI</em> (Automatisch / immer Literatur / immer Internetquelle), um die Zuordnung selbst zu bestimmen. Außerdem neu: ein kleiner Aufklapp-Block <em>Feedback &amp; Mitwirken</em> unter den Buttons – „Fehler melden" und „Funktion vorschlagen" öffnen ein vorausgefülltes Formular im GitHub-Projekt.</li>
           <li><strong>v11.0.0 &ldquo;Rosetta&rdquo;</strong> (2026-07-17): Neuer <strong>DOI-Konverter</strong> über die Crossref-API. Enthält eine Referenz einen DOI (als <code>doi.org</code>-Link, in einer Verlags-URL oder als reine <code>10.xxxx/…</code>-Nummer), werden daraus automatisch die vollständigen Angaben geholt und als <code>{{Literatur}}</code> aufgebaut – Autor, Titel, Sammelwerk, Band/Nummer, Datum, Sprache, ISSN/ISBN, Seiten, DOI und Online-Link (Journalartikel, Bücher, Buchkapitel, Tagungsbände). Zwei Optionen (beide standardmäßig aktiv, werden gespeichert): <em>Vorlagenlose DOIs auflösen</em> und <em>{{cite}}-Vorlagen per Crossref ergänzen</em> (füllt fehlende Felder; abweichende Felder werden aufgelistet und lassen sich per Häkchen übernehmen). Ergebnisse werden lokal zwischengespeichert (365 Tage). Alles läuft direkt aus dem Browser – kein Schlüssel, keine CORS-Erweiterung nötig.</li>
           <li><strong>v10.2.3</strong> (2026-07-10): Endgültig behoben: Nach dem Konvertieren blieb das Ausgabefeld in sichtbaren Tabs ohne farbige Hervorhebung. Ursache war ein alter „Display-Sync"-Notbehelf, der die Hervorhebung zwei Frames nach dem Konvertieren durch reinen Text ersetzte. Er hebt die Ausgabe jetzt korrekt hervor, statt sie zu überschreiben.</li>
@@ -2276,7 +2296,11 @@ function convertCitation(parsed, options) {
   var hasPage = Boolean(seiten);
   var hasUrl  = Boolean(cleanUrl);
 
-  if (!hasPage && hasUrl) {
+  // v11.2: erlaubt dem Konvertierungs-Log, das Zielformat gezielt umzustellen.
+  var _forced = options.forceCitationTarget; // 'iq' | 'lit' | undefined
+  var _toIQ = (_forced === 'iq') ? true : (_forced === 'lit') ? false : (!hasPage && hasUrl);
+
+  if (_toIQ) {
     // ── {{Internetquelle}} ─────────────────────────────────────────────
     log.push('→ {{Internetquelle}} (keine Seiten, URL vorhanden)');
     var IQ = {};
@@ -2594,6 +2618,9 @@ function highlightTemplateText(text){
     if(outEl && pre) pre.innerHTML = highlightTemplateText(outEl.value);
   }
   try { window.updateOutputHighlight = updateOutputHighlight; } catch(e){}
+  // v11.2: für das Konvertierungs-Log (rechnet Einzelvorlagen mit umgeschalteten Optionen nach)
+  try { window.convertTemplateString = convertTemplateString; } catch(e){}
+  try { window.findFirstTopLevelTemplate = findFirstTopLevelTemplate; } catch(e){}
 
   /* ----------------- Driver for transform + summary ----------------- */
 
@@ -2810,6 +2837,12 @@ function highlightTemplateText(text){
 
       document.getElementById('outputText').value = converted;
       updateOutputHighlight();
+
+      // v11.2 „Ledger": Konvertierungs-Log unter dem Eingabefeld füllen (regelbedingte
+      // Hinweise + Umschaltmöglichkeiten). Fehler dürfen die Konvertierung nicht stören.
+      try {
+        if (window.CKLog) window.CKLog.update(textToConvert, (typeof doiRes !== 'undefined' && doiRes && doiRes.notices) || []);
+      } catch(e) { console.error('Log update failed:', e); }
 
       // auto copy?
       if(document.getElementById('autoCopy').checked){
@@ -3851,7 +3884,14 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
   }
 
   // ---- Crossref-Meta -> {{Literatur}}-Parameter (kanonische Keys) ----
-  function crName(a){ if(a&&a.name) return String(a.name).trim(); var g=(a&&a.given)||'', f=(a&&a.family)||''; return (g+' '+f).trim(); }
+  // Crossref liefert manchmal Kursiv-Auszeichnung im Titel (z. B. <i>…</i>). Diese
+  // wird entfernt, da der Text ohnehin ohne <i> gesetzt wird. Absichtlich erhalten
+  // bleiben <sub>, <sup> (bedeutungstragend) und HTML-Entities wie &amp;.
+  function cleanCr(s){
+    if(s==null) return s;
+    return String(s).replace(/<\/?i\b[^>]*>/gi, '');
+  }
+  function crName(a){ if(a&&a.name) return cleanCr(String(a.name)); var g=(a&&a.given)||'', f=(a&&a.family)||''; return cleanCr((g+' '+f).trim()); }
   function crDate(msg){
     var src=(msg['published-print']&&msg['published-print']['date-parts'])||(msg['published-online']&&msg['published-online']['date-parts'])||(msg['issued']&&msg['issued']['date-parts'])||null;
     if(!src||!src[0]) return ''; var p=src[0], y=p[0], m=p[1], d=p[2]; if(!y) return '';
@@ -3866,14 +3906,14 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     var containerWork=(type==='book-chapter'||type==='proceedings-article');
     if(authors.length) P.Autor=authors.join(', ');
     if(editors.length) P.Hrsg=editors.join(', ');
-    var title=crFirst(msg.title), container=crFirst(msg['container-title']);
+    var title=cleanCr(crFirst(msg.title)), container=cleanCr(crFirst(msg['container-title']));
     if(title) P.Titel=title;
     if(!bookLike && container) P.Sammelwerk=container;   // Journal / Buch (bei Kapitel) / Tagungsband
     if(msg.volume) P.Band=String(msg.volume);
     if(msg.issue) P.Nummer=String(msg.issue);
     if(msg['edition-number']) P.Auflage=String(msg['edition-number']);
-    if(msg.publisher && (bookLike||containerWork||type==='dataset'||type==='report'||type==='posted-content')) P.Verlag=String(msg.publisher);
-    if(msg['publisher-location']) P.Ort=String(msg['publisher-location']);
+    if(msg.publisher && (bookLike||containerWork||type==='dataset'||type==='report'||type==='posted-content')) P.Verlag=cleanCr(String(msg.publisher));
+    if(msg['publisher-location']) P.Ort=cleanCr(String(msg['publisher-location']));
     var datum=crDate(msg); if(datum) P.Datum=datum;
     var lang=normLang(msg.language||'', opt.fullLangCodes);
     if(lang && !(opt.suppressGerman && lang.toLowerCase().indexOf('de')===0)) P.Sprache=lang;
@@ -3908,10 +3948,10 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     if(authors.length) P.autor=authors.join(', ');
     var url=(msg.resource&&msg.resource.primary&&msg.resource.primary.URL)||(msg.DOI?('https://doi.org/'+msg.DOI):'');
     if(url) P.url=url;
-    var title=crFirst(msg.title); if(title) P.titel=title;
-    var container=crFirst(msg['container-title']);
-    var inst=(msg.institution&&msg.institution[0]&&msg.institution[0].name)||msg['group-title']||'';
-    var publisher=msg.publisher?String(msg.publisher):'';
+    var title=cleanCr(crFirst(msg.title)); if(title) P.titel=title;
+    var container=cleanCr(crFirst(msg['container-title']));
+    var inst=cleanCr((msg.institution&&msg.institution[0]&&msg.institution[0].name)||msg['group-title']||'');
+    var publisher=cleanCr(msg.publisher?String(msg.publisher):'');
     var werk = container || inst || publisher;
     if(werk) P.werk=werk;
     if(publisher && publisher!==werk) P.hrsg=publisher;
@@ -4046,7 +4086,7 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     options = options || {};
     clearPanel();
     var doResolve=getToggle('doiResolve', true), doEnrich=getToggle('doiEnrich', true);
-    if(!doResolve && !doEnrich) return { text:text };
+    if(!doResolve && !doEnrich) return { text:text, notices:[] };
 
     var segs=findRefSegments(text);
     var tasks=[];
@@ -4059,7 +4099,7 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
         tasks.push({seg:seg, doi:doi, mode:'build'});
       }
     });
-    if(!tasks.length) return { text:text };
+    if(!tasks.length) return { text:text, notices:[] };
 
     showDoiProgress(tasks.length);
     var results=[];
@@ -4072,7 +4112,7 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     updateDoiProgress(tasks.length, tasks.length); hideDoiProgress();
 
     var applied=results.slice().sort(function(a,b){ return b.task.seg.innerStart - a.task.seg.innerStart; });
-    var out=text, errors=[], totalConflicts=0, singleState=null;
+    var out=text, errors=[], totalConflicts=0, singleState=null, doiNotes=[];
     var singleRef=(tasks.length===1);
 
     applied.forEach(function(r){
@@ -4084,7 +4124,16 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
         var fmt=(document.getElementById('doiFormat')||{}).value||'auto';
         var bKind = fmt==='lit' ? 'lit' : (fmt==='iq' ? 'iq' : (isWebType(r.msg.type||'') ? 'iq' : 'lit'));
         var bCfg = kindCfg(bKind);
-        out = out.slice(0, seg.innerStart) + bCfg.build(bCfg.toParams(r.msg, options)) + out.slice(seg.innerEnd);
+        var builtStr = bCfg.build(bCfg.toParams(r.msg, options));
+        out = out.slice(0, seg.innerStart) + builtStr + out.slice(seg.innerEnd);
+        // Log-Hinweis: alternatives Zielformat anbieten (Literatur <-> Internetquelle)
+        var otherKind = (bKind==='iq') ? 'lit' : 'iq';
+        var oCfg = kindCfg(otherKind);
+        var altStr = oCfg.build(oCfg.toParams(r.msg, options));
+        if(altStr && altStr!==builtStr){
+          doiNotes.push({ current:builtStr, alt:altStr, appliedFlag:false, tag:'Zielformat',
+            text:'DOI → {{'+(bKind==='iq'?'Internetquelle':'Literatur')+'}} – stattdessen als {{'+(bKind==='iq'?'Literatur':'Internetquelle')+'}}' });
+        }
       } else {
         var eCfg = kindCfg(t.lit.kind);   // an der vorhandenen Vorlage ausgerichtet
         var crParams = eCfg.toParams(r.msg, options);
@@ -4104,7 +4153,7 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
     if(singleRef && singleState) showConflictPanel(singleState);
     else if(totalConflicts>0) showConflictNote(totalConflicts);
     if(errors.length) showDoiErrors(errors);
-    return { text:out };
+    return { text:out, notices:doiNotes };
   };
 
   function initSelect(id){
@@ -4135,6 +4184,140 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
   window.__doiIsWebType = isWebType;
   window.__doiCrossrefToIQParams = crossrefToInternetquelleParams;
   window.__doiBuildInternetquelle = buildInternetquelle;
+})();
+</script>
+
+<script>
+/* ==========================================================================
+   Konvertierungs-Log — v11.2.0 „Ledger"
+   --------------------------------------------------------------------------
+   Zeigt unter dem Eingabefeld regelbedingte Hinweise: wenn eine Regel etwas
+   verändert/unterdrückt hat (Archiv bei url-status=live, sprache=de unterdrückt,
+   Sprachcode gekürzt, {{Citation}}/DOI-Zielformat), erscheint ein anklickbarer
+   Hinweis, der die Alternative in die Ausgabe übernimmt. Prinzip: für jede
+   Vorlage wird die Ausgabe mit einer umgeschalteten Option neu berechnet – nur
+   wenn sie sich unterscheidet, war die Regel wirksam und der Hinweis erscheint.
+   Der Log leert sich, sobald das Eingabefeld neuen Inhalt bekommt.
+   ========================================================================== */
+(function(){
+  function $(id){ return document.getElementById(id); }
+  function cbx(id){ var e=$(id); return e?!!e.checked:false; }
+  function val(id){ var e=$(id); return e?e.value:''; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function readOpts(){ return {
+    useToday: cbx('useTodayAbruf'), stripArchiveIfLive: cbx('stripArchiveIfLive'),
+    overrideLang: cbx('overrideLang'), langChoice: val('langSelect'),
+    fullLangCodes: cbx('fullLangCodes'), suppressGerman: cbx('suppressGerman'),
+    convertSubref: cbx('convertSubref')
+  }; }
+
+  function eachTemplate(text, fn){
+    if(typeof window.findFirstTopLevelTemplate!=='function' || typeof window.convertTemplateString!=='function') return;
+    var refRe=/(<ref\b[^>]*>)([\s\S]*?)(<\/ref>)/gi, m, any=false;
+    while((m=refRe.exec(text))){ any=true; var t=window.findFirstTopLevelTemplate(m[2]); if(t&&t.text) fn(t.text); }
+    if(!any){ var t2=window.findFirstTopLevelTemplate(text); if(t2&&t2.text) fn(t2.text); }
+  }
+
+  function convert(tpl, opts){
+    try{ return window.convertTemplateString(tpl, opts).output; }catch(e){ return null; }
+  }
+
+  // Regelbedingte Umschaltmöglichkeiten je Vorlage sammeln (Alternative-Diff)
+  function buildOffline(text){
+    var opts=readOpts(); var groups=[]; var idx=-1;
+    eachTemplate(text, function(tpl){
+      idx++;   // zählt jede gefundene Vorlage (deckungsgleich mit locateInOutput)
+      var actual=convert(tpl, opts);
+      if(!actual || actual===tpl) return;
+      var flips=[];
+      function tryFlip(guard, override, tag, txt){
+        if(!guard) return;
+        var alt=convert(tpl, Object.assign({}, opts, override));
+        if(alt && alt!==actual) flips.push({override:override, tag:tag, text:txt});
+      }
+      tryFlip(opts.stripArchiveIfLive, {stripArchiveIfLive:false}, 'Regel', 'Archiv-URL entfernt, weil url-status=live – trotzdem einfügen');
+      tryFlip(opts.suppressGerman,    {suppressGerman:false},     'Regel', 'sprache=de wurde unterdrückt – behalten');
+      tryFlip(!opts.fullLangCodes,    {fullLangCodes:true},        'Regel', 'Sprachcode gekürzt – vollständigen Code verwenden');
+      if(/\{\{\s*citation\b/i.test(tpl)){
+        var isIQ=/\{\{\s*Internetquelle\b/i.test(actual);
+        tryFlip(true, {forceCitationTarget:(isIQ?'lit':'iq')}, 'Zielformat',
+          'Als {{'+(isIQ?'Internetquelle':'Literatur')+'}} konvertiert – stattdessen als {{'+(isIQ?'Literatur':'Internetquelle')+'}}');
+      }
+      if(flips.length) groups.push({index:idx, inputTpl:tpl, baseOpts:opts, appliedKeys:[], flips:flips});
+    });
+    return groups;
+  }
+
+  // Findet die N-te Top-Level-Vorlage im AKTUELLEN Ausgabefeld (nach Ref-Reihenfolge).
+  // Robust gegen Whitespace-/Reihenfolge-Nachbearbeitung, da nicht per String-Vergleich.
+  function locateInOutput(index){
+    var out=$('outputText'); if(!out) return null; var s=out.value;
+    var refRe=/(<ref\b[^>]*>)([\s\S]*?)(<\/ref>)/gi, m, k=0, any=false;
+    while((m=refRe.exec(s))){ any=true; var innerStart=m.index+m[1].length; var t=window.findFirstTopLevelTemplate(m[2]); if(t){ if(k===index) return {start:innerStart+t.start, end:innerStart+t.end}; k++; } }
+    if(!any){ var t2=window.findFirstTopLevelTemplate(s); if(t2 && index===0) return {start:t2.start, end:t2.end}; }
+    return null;
+  }
+
+  var state={ offline:[], doi:[] };
+
+  function applyOfflineFlip(g, fi){
+    var pos=g.appliedKeys.indexOf(fi);
+    if(pos>=0) g.appliedKeys.splice(pos,1); else g.appliedKeys.push(fi);
+    var merged=Object.assign({}, g.baseOpts);
+    g.appliedKeys.forEach(function(k){ Object.assign(merged, g.flips[k].override); });
+    var newTpl=convert(g.inputTpl, merged);
+    if(newTpl==null){ if(pos>=0) g.appliedKeys.push(fi); else g.appliedKeys.pop(); return; }
+    var outEl=$('outputText'), loc=locateInOutput(g.index);
+    if(outEl && loc){
+      outEl.value=outEl.value.slice(0,loc.start)+newTpl+outEl.value.slice(loc.end);
+      try{ if(window.updateOutputHighlight) window.updateOutputHighlight(); }catch(e){}
+    }
+    render();
+  }
+  function applyDoiFlip(n){
+    var outEl=$('outputText'); if(!outEl) return;
+    var from=n.appliedFlag?n.alt:n.current, to=n.appliedFlag?n.current:n.alt;
+    if(outEl.value.indexOf(from)>=0){
+      outEl.value=outEl.value.replace(from, to); n.appliedFlag=!n.appliedFlag;
+      try{ if(window.updateOutputHighlight) window.updateOutputHighlight(); }catch(e){}
+    }
+    render();
+  }
+
+  function render(){
+    var box=$('conversionLog'); if(!box) return;
+    var count=0; state.offline.forEach(function(g){ count+=g.flips.length; }); count+=state.doi.length;
+    var html='<p class="cl-head">Konvertierungs-Log</p>';
+    if(!count){ html+='<div class="cl-empty">Keine Regel-Hinweise – nach den aktuellen Einstellungen konvertiert.</div>'; box.innerHTML=html; box.hidden=false; return; }
+    state.offline.forEach(function(g,gi){
+      g.flips.forEach(function(f,fi){
+        var on=g.appliedKeys.indexOf(fi)>=0;
+        html+='<div class="cl-note'+(on?' applied':'')+'"><span class="cl-tag">'+esc(f.tag)+'</span>'+
+              '<span class="cl-text">'+esc(f.text)+'</span>'+
+              '<button type="button" class="cl-btn" data-g="'+gi+'" data-f="'+fi+'">'+(on?'Rückgängig':'Übernehmen')+'</button></div>';
+      });
+    });
+    state.doi.forEach(function(n,ni){
+      html+='<div class="cl-note'+(n.appliedFlag?' applied':'')+'"><span class="cl-tag">'+esc(n.tag)+'</span>'+
+            '<span class="cl-text">'+esc(n.text)+'</span>'+
+            '<button type="button" class="cl-btn" data-d="'+ni+'">'+(n.appliedFlag?'Rückgängig':'Übernehmen')+'</button></div>';
+    });
+    box.innerHTML=html; box.hidden=false;
+    Array.prototype.forEach.call(box.querySelectorAll('.cl-btn'), function(b){
+      b.addEventListener('click', function(){
+        if(b.hasAttribute('data-d')) applyDoiFlip(state.doi[+b.getAttribute('data-d')]);
+        else applyOfflineFlip(state.offline[+b.getAttribute('data-g')], +b.getAttribute('data-f'));
+      });
+    });
+  }
+
+  window.CKLog={
+    update:function(text, doiNotes){ state.offline=buildOffline(text||''); state.doi=(doiNotes||[]).slice(); render(); },
+    clear:function(){ state.offline=[]; state.doi=[]; var box=$('conversionLog'); if(box){ box.hidden=true; box.innerHTML=''; } }
+  };
+
+  function initLog(){ var inp=$('inputText'); if(inp) inp.addEventListener('input', function(){ window.CKLog.clear(); }); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', initLog); else initLog();
 })();
 </script>
 </body>

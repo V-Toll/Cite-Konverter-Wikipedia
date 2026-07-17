@@ -54,6 +54,7 @@
 - **Wikipedia-Redirects:** Automatische Verfolgung von Redirects – englische Wikilinks werden zum finalen Artikel aufgelöst und korrekt ins Deutsche übersetzt (z. B. `[[Eastern Band Cherokee]]` → `[[Eastern Band of Cherokee Indians]]`).
 - **Zitat-Konvertierung:** `{{blockquote}}` / `{{quote}}` werden zu `{{Zitat}}` – inklusive Sprach­erkennung, `{{lang|xx|…}}`-Entpackung, `multiline`-Umbrüchen und dem Einziehen eines direkt anschließenden `<ref>` in den `ref`-Parameter.
 - **DOI-Auflösung (Crossref):** DOIs werden erkannt und automatisch zu vollständigen `{{Literatur}}`-Angaben aufgelöst; bestehende `{{cite}}`-Vorlagen mit `doi=` lassen sich um fehlende Felder ergänzen – siehe [eigener Abschnitt](#-doi-auflösung-crossref).
+- **Konvertierungs-Log:** Unter dem Eingabefeld erscheinen regelbedingte Hinweise – z. B. „Archiv-URL entfernt, weil `url-status=live`", „`sprache=de` unterdrückt", „Sprachcode gekürzt" oder das gewählte Zielformat bei `{{Citation}}`/DOIs. Jeder Hinweis ist anklickbar und übernimmt die Alternative direkt in die Ausgabe (umschaltbar); der Log leert sich, sobald sich die Eingabe ändert.
 - **Syntax-Highlighting:** Farbliche Hervorhebung für bessere Lesbarkeit von Eingabe und Ausgabe – inklusive grün markierter Wikilinks sowie kursiver (`''…''`) und fetter (`'''…'''`) Wikitext-Formatierung. Abgestimmt für Hell- und Dunkelmodus.
 - **Optionale DeepL-Übersetzung** der konvertierten Ausgabe – siehe [eigener Abschnitt](#-übersetzung-mit-deepl-optional).
 
@@ -184,7 +185,7 @@ Rund 37 abgestimmte Farbthemen mit eigenen Hell- und Dunkelmodus-Varianten. Das 
 
 ## 📦 Version & Changelog
 
-Aktuelle Version: **v11.1.0 „Permalink"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
+Aktuelle Version: **v11.2.0 „Ledger"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
 
 ## 📄 Lizenz
 
