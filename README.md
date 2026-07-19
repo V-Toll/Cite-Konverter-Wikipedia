@@ -57,6 +57,7 @@
 - **Konvertierungs-Log:** Unter dem Eingabefeld erscheinen regelbedingte Hinweise – z. B. „Archiv-URL entfernt, weil `url-status=live`", „`sprache=de` unterdrückt", „Sprachcode gekürzt" oder das gewählte Zielformat bei `{{Citation}}`/DOIs. Jeder Hinweis ist anklickbar und übernimmt die Alternative direkt in die Ausgabe (umschaltbar); der Log leert sich, sobald sich die Eingabe ändert.
 - **Syntax-Highlighting:** Farbliche Hervorhebung für bessere Lesbarkeit von Eingabe und Ausgabe – inklusive grün markierter Wikilinks sowie kursiver (`''…''`) und fetter (`'''…'''`) Wikitext-Formatierung. Abgestimmt für Hell- und Dunkelmodus.
 - **Optionale DeepL-Übersetzung** der konvertierten Ausgabe – siehe [eigener Abschnitt](#-übersetzung-mit-deepl-optional).
+- **Update-Prüfung:** Curly meldet automatisch (höchstens einmal pro Tag, still bei Offline/Fehlern), wenn auf GitHub eine neuere Version vorliegt – über ein **„⬆️ Update“-Abzeichen** neben der Versionsnummer, das einen Dialog mit direktem Download und Release-Notes öffnet. In den Optionen unter *Aktualisierung* abschaltbar.
 
 ---
 
@@ -91,6 +92,7 @@
 - **DeepL-API-Key & Zielsprache** – optional, für die DeepL-Übersetzung (siehe unten).
 - **Wahl aus rund 37 Farbthemen.**
 - **Darkmode** – automatisch, erzwingen oder abschalten.
+- **Beim Start auf neue Version prüfen (GitHub)** – blendet ein Update-Abzeichen ein, wenn eine neuere Version vorliegt (standardmäßig aktiv).
 
 </details>
 
@@ -185,7 +187,7 @@ Rund 37 abgestimmte Farbthemen mit eigenen Hell- und Dunkelmodus-Varianten. Das 
 
 ## 📦 Version & Changelog
 
-Aktuelle Version: **v11.3.0 „Locale"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
+Aktuelle Version: **v11.4.0 „Beacon"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
 
 ## 📄 Lizenz
 

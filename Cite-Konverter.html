@@ -6,7 +6,7 @@
   <!-- Favicon: v9.2 „Sigil" – wird per Skript als eingebettetes SVG erzeugt und
        folgt dem gewählten Theme (siehe Skript am Seitenende). Keine externen Dateien. -->
   <link rel="icon" type="image/svg+xml" id="faviconSvg" />
-<title>Curly – der Cite-Konverter für Wikipedia – v11.3.0</title>
+<title>Curly – der Cite-Konverter für Wikipedia – v11.4.0</title>
 
 <style>
   html{min-height:100%}
@@ -415,6 +415,15 @@ pre.highlight .tok-url{text-decoration:underline}
 /* compact version badge */
 #versionBadge{font-size:.58em;padding:1px 6px;border-radius:7px;align-self:flex-start;text-decoration:none;line-height:1}
 #versionBadge:hover{transform:translateY(-1px) scale(1.02)}
+/* v11.4: „Update verfügbar"-Abzeichen neben der Version */
+#updatePill{font-size:.58em;padding:1px 7px;border-radius:7px;align-self:flex-start;line-height:1;text-decoration:none;cursor:pointer;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;border:none;box-shadow:0 2px 6px rgba(0,0,0,0.18);animation:pillIn .3s ease-out}
+#updatePill:hover{transform:translateY(-1px) scale(1.02)}
+@keyframes pillIn{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#updatePill{animation:none}}
+.update-actions{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 2px}
+.update-actions .btn-main, .update-actions .btn-secondary{flex:1 1 200px;width:auto;min-width:0;text-align:center}
+.update-msg{margin:0 0 12px}
+.update-msg .update-current{opacity:.65;font-size:.92em}
 
 
 /* Theme-bound H1 title colors (restored) */
@@ -783,7 +792,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.3.0</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.4.0</a> <a href="#" id="updatePill" class="badge update-pill" data-modal-open="updateModal" aria-haspopup="dialog" title="Update verfügbar" hidden>⬆️ Update</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
       <p class="brand-tagline">der Cite-Konverter für Wikipedia</p>
       <p class="lead">Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – inklusive automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts sowie Subreferenzierung und Syntax-Highlighting.</p>
       <div class="routes" aria-label="Unterstützte Konvertierungen">
@@ -933,6 +942,10 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
           </select>
           </div>
         </div>
+        <div class="opt-group">
+          <h3>Aktualisierung</h3>
+          <label class="inline"><input type="checkbox" id="updateCheck" checked> <span class="info">Beim Start auf neue Version prüfen (GitHub)</span></label>
+        </div>
       </div>
     </div>
   </div>
@@ -988,6 +1001,24 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
     </div>
   </div>
 
+  <div id="updateModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="updateTitle">
+      <div class="modal-head">
+        <h2 id="updateTitle">⬆️ Update verfügbar</h2>
+        <button type="button" class="modal-close" data-close="1" aria-label="Schließen">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="update-msg">Eine neuere Version ist verfügbar: <strong id="updateLatest">–</strong> <span class="update-current">(deine Version: <span id="updateCurrent">–</span>)</span>.</p>
+        <div class="update-actions">
+          <a id="updateDownload" href="#" target="_blank" rel="noopener" class="btn-main">⬇️ Neue Version herunterladen</a>
+          <a id="updateRelease" href="#" target="_blank" rel="noopener" class="btn-secondary">📄 Was ist neu?</a>
+        </div>
+        <p class="opt-hint">Curly ist eine einzelne HTML-Datei. Lade die neue Version herunter (ZIP), entpacke sie und ersetze damit deine bisherige <code>Cite-Konverter.html</code>. Deine Einstellungen bleiben im Browser gespeichert.</p>
+      </div>
+    </div>
+  </div>
+
   <div id="changelogModal" class="modal" aria-hidden="true">
     <div class="modal-backdrop" data-close="1"></div>
     <div class="modal-dialog wide cl-dialog" role="dialog" aria-modal="true" aria-labelledby="clTitle">
@@ -998,6 +1029,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       <div class="modal-body cl-body">
         <p class="cl-hint">Neueste Version zuerst.</p>
         <ul class="cl-list">
+          <li><strong>v11.4.0 &ldquo;Beacon&rdquo;</strong> (2026-07-19): Neue <strong>Update-Prüfung</strong>. Curly schaut beim Start (höchstens einmal pro Tag, gedrosselt) über die GitHub-Releases-API nach, ob eine neuere Version vorliegt. Falls ja, erscheint neben der Versionsnummer ein <strong>&bdquo;⬆️ Update&ldquo;-Abzeichen</strong>, das einen Dialog mit direktem Download (ZIP) und Link zu den Release-Notes öffnet. Die Prüfung ist still bei Fehlern/Offline und lässt sich in den Optionen unter <em>Aktualisierung</em> abschalten. Da Curly eine einzelne HTML-Datei ist, ersetzt man die alte Datei einfach durch die heruntergeladene – die Einstellungen bleiben im Browser erhalten.</li>
           <li><strong>v11.3.0 &ldquo;Locale&rdquo;</strong> (2026-07-18): Erweiterte Sprach­erkennung. Findet die Wortheuristik keine Sprache, wird sie jetzt aus der Domain-Endung der URL abgeleitet (z.&nbsp;B. <code>.uk</code>/<code>.us</code>/<code>.edu</code>/<code>.gov</code>/<code>.au</code> → <code>en</code>; <code>.de</code>/<code>.at</code> → <code>de</code>; <code>.fr</code>/<code>.es</code>/<code>.it</code>/<code>.nl</code> entsprechend). So erhält z.&nbsp;B. eine Quelle von <code>ucl.ac.uk</code> nun <code>sprache=en</code>, auch wenn Titel und Herausgeber keine typischen Signalwörter enthalten. Mehrdeutige Endungen (<code>.com</code>/<code>.org</code>/<code>.net</code>/<code>.ca</code> …) bleiben unbestimmt; eine ausdrückliche Sprachangabe und die Wortheuristik haben weiterhin Vorrang.</li>
           <li><strong>v11.2.2</strong> (2026-07-18): Code-Review-Korrekturen am Konvertierungs-Log: Ein Hinweis wird jetzt eindeutig seiner <code>&lt;ref&gt;</code> zugeordnet (per Position statt Zählung), sodass „Übernehmen" bei gemischten Referenzen nicht mehr die falsche Vorlage trifft. Auf Referenzen, die per DOI/Crossref angereichert wurden, werden Offline-Umschaltungen nicht mehr angeboten (verhinderte den Verlust der DOI-Daten). Die DOI-Zielformat-Umschaltung arbeitet nun ebenfalls positionsbasiert (robust gegen Reformatierung/doppelte Referenzen). Außerdem: kein leeres <code>|url=</code> mehr, wenn eine <code>{{Citation}}</code> ohne URL nach <code>{{Internetquelle}}</code> umgestellt wird.</li>
           <li><strong>v11.2.1</strong> (2026-07-17): Farbschema-Auswahl: Lange Theme-Namen (z.&nbsp;B. „Burgundy Champagne") passen jetzt sauber in die Kacheln – etwas kompaktere Schrift und Farbfelder, und auf schmalen Bildschirmen wird die Auswahl einspaltig dargestellt.</li>
@@ -4353,6 +4385,92 @@ async function processWikidataLinks(text, keepDisplayNames, removeNonExisting) {
 
   function initLog(){ var inp=$('inputText'); if(inp) inp.addEventListener('input', function(){ window.CKLog.clear(); }); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', initLog); else initLog();
+})();
+</script>
+
+<script>
+/* ==========================================================================
+   Update-Prüfung — v11.4.0 „Beacon"
+   --------------------------------------------------------------------------
+   Prüft beim Start (max. 1×/24 h, gedrosselt per localStorage) über die
+   GitHub-Releases-API, ob eine neuere Version vorliegt. Falls ja, erscheint
+   ein „⬆️ Update"-Abzeichen neben der Versionsnummer, das einen Dialog mit
+   Download (ZIP-Asset) und Link zu den Release-Notes öffnet. Fehler/Offline
+   sind still. Kann in den Optionen deaktiviert werden.
+   ========================================================================== */
+(function(){
+  var REPO='V-Toll/Cite-Konverter-Wikipedia';
+  var API='https://api.github.com/repos/'+REPO+'/releases/latest';
+  var THROTTLE=24*60*60*1000;
+  var LS_TS='ckUpdTs', LS_TAG='ckUpdTag', LS_REL='ckUpdRel', LS_DL='ckUpdDl';
+  function $(id){ return document.getElementById(id); }
+  function localVersion(){ var b=$('versionBadge'); return b?b.textContent.replace(/^v/i,'').trim():''; }
+  function parseV(s){ return String(s||'').replace(/^v/i,'').split('.').map(function(x){ return parseInt(x,10)||0; }); }
+  function isNewer(remote, local){ var a=parseV(remote), b=parseV(local); for(var i=0;i<Math.max(a.length,b.length);i++){ var d=(a[i]||0)-(b[i]||0); if(d) return d>0; } return false; }
+  function enabled(){ var el=$('updateCheck'); return el?el.checked:true; }
+
+  // Füllt den Dialog. „deine Version" ist immer lokal bekannt; die neuere Version
+  // kommt aus dem Argument oder ersatzweise aus dem Cache – nie ein „–"-Platzhalter,
+  // sobald der Dialog geöffnet werden kann.
+  function populate(tag, relUrl, dlUrl){
+    tag = tag || localStorage.getItem(LS_TAG) || '';
+    relUrl = relUrl || localStorage.getItem(LS_REL) || '';
+    dlUrl = dlUrl || localStorage.getItem(LS_DL) || '';
+    var cur=$('updateCurrent'); if(cur) cur.textContent = 'v'+(localVersion()||'?');
+    if(tag && $('updateLatest')) $('updateLatest').textContent = 'v'+String(tag).replace(/^v/i,'');
+    var relFallback='https://github.com/'+REPO+'/releases/latest';
+    var dl=$('updateDownload'); if(dl) dl.href = dlUrl || relUrl || relFallback;
+    var rel=$('updateRelease'); if(rel) rel.href = relUrl || relFallback;
+  }
+
+  function showPill(tag, relUrl, dlUrl){
+    var pill=$('updatePill'); if(!pill) return;
+    if(!tag || !isNewer(tag, localVersion())){ pill.hidden=true; return; }  // aktuell → kein Abzeichen
+    populate(tag, relUrl, dlUrl);
+    pill.textContent='⬆️ Update v'+String(tag).replace(/^v/i,'');
+    pill.hidden=false;
+  }
+
+  function check(){
+    var pill=$('updatePill'); if(pill) pill.hidden=true;
+    if(!enabled()) return;
+    var now=Date.now();
+    var lastTs=parseInt(localStorage.getItem(LS_TS)||'0',10) || 0;
+    if(now - lastTs < THROTTLE){                 // gedrosselt: zwischengespeichertes Ergebnis nutzen
+      showPill(localStorage.getItem(LS_TAG), localStorage.getItem(LS_REL), localStorage.getItem(LS_DL));
+      return;
+    }
+    var fx = (typeof fetchWithTimeout==='function') ? fetchWithTimeout(API, 8000) : fetch(API);
+    fx.then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(j){
+        var tag=j && j.tag_name; if(!tag) return;
+        var relUrl=j.html_url||'';
+        var dlUrl='';
+        if(j.assets && j.assets.length){ for(var i=0;i<j.assets.length;i++){ if(/\.zip$/i.test(j.assets[i].name||'')){ dlUrl=j.assets[i].browser_download_url; break; } } }
+        try{ localStorage.setItem(LS_TS,String(now)); localStorage.setItem(LS_TAG,tag); localStorage.setItem(LS_REL,relUrl); localStorage.setItem(LS_DL,dlUrl); }catch(e){}
+        showPill(tag, relUrl, dlUrl);
+      })
+      .catch(function(){ /* offline / rate-limit / CORS → still, kein Nag */ });
+  }
+
+  function initToggle(){
+    var el=$('updateCheck'); if(!el) return;
+    try{ if(localStorage.getItem('opt_updateCheck')==='0') el.checked=false; }catch(e){}
+    el.addEventListener('change', function(){
+      try{ localStorage.setItem('opt_updateCheck', el.checked?'1':'0'); }catch(e){}
+      if(el.checked) check(); else { var p=$('updatePill'); if(p) p.hidden=true; }
+    });
+  }
+  function start(){
+    initToggle();
+    populate();                                 // „deine Version" sofort setzen, nie „–"
+    var pill=$('updatePill'); if(pill) pill.addEventListener('click', function(){ populate(); });  // vor dem Öffnen auffrischen
+    check();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start); else start();
+
+  // für Tests: erzwingt eine sofortige (ungedrosselte) Prüfung
+  window.__ckCheckUpdate = function(){ try{ localStorage.removeItem(LS_TS); }catch(e){} check(); };
 })();
 </script>
 </body>
