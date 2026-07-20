@@ -6,7 +6,7 @@
   <!-- Favicon: v9.2 „Sigil" – wird per Skript als eingebettetes SVG erzeugt und
        folgt dem gewählten Theme (siehe Skript am Seitenende). Keine externen Dateien. -->
   <link rel="icon" type="image/svg+xml" id="faviconSvg" />
-<title>Curly – der Cite-Konverter für Wikipedia – v11.4.1</title>
+<title>Curly – der Cite-Konverter für Wikipedia – v11.4.2</title>
 
 <style>
   html{min-height:100%}
@@ -796,7 +796,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.4.1</a> <a href="#" id="updatePill" class="badge update-pill" data-modal-open="updateModal" aria-haspopup="dialog" title="Update verfügbar" hidden>⬆️ Update</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.4.2</a> <a href="#" id="updatePill" class="badge update-pill" data-modal-open="updateModal" aria-haspopup="dialog" title="Update verfügbar" hidden>⬆️ Update</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
       <p class="brand-tagline">der Cite-Konverter für Wikipedia</p>
       <p class="lead">Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – inklusive automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts sowie Subreferenzierung und Syntax-Highlighting.</p>
       <div class="routes" aria-label="Unterstützte Konvertierungen">
@@ -1033,6 +1033,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       <div class="modal-body cl-body">
         <p class="cl-hint">Neueste Version zuerst.</p>
         <ul class="cl-list">
+          <li><strong>v11.4.2</strong> (2026-07-20): Korrekturen an der &bdquo;werk&ldquo;-Ableitung aus der URL. <strong>Mehrteilige Länder-Domains</strong> werden jetzt korrekt behandelt (z.&nbsp;B. <code>www.imperial.ac.uk</code> → <code>werk=imperial.ac.uk</code> statt bisher <code>ac.uk</code>; gilt für <code>.ac.uk</code>, <code>.gov.uk</code>, <code>.co.uk</code> u.&nbsp;a.). <strong>BBC-Quellen</strong> erhalten das Werk anhand der Subdomain (<code>news.bbc.co.uk</code>/<code>.com</code> → <code>BBC News</code>, <code>sport.…</code> → <code>BBC Sport</code>, <code>culture.…</code> → <code>BBC Culture</code>; unbekannte/keine Subdomain → <code>BBC</code>). Außerdem wird der Parameter <code>agency=</code> (Nachrichtenagentur) jetzt als <code>hrsg=</code> übernommen (z.&nbsp;B. <code>agency=Imperial College London</code> → <code>hrsg=Imperial College London</code>).</li>
           <li><strong>v11.4.1</strong> (2026-07-20): Zwei Korrekturen am Update-Abzeichen. Das &bdquo;⬆️ Update&ldquo;-Abzeichen wird jetzt <strong>nur noch angezeigt, wenn tatsächlich eine neuere Version vorliegt</strong> (zuvor hob die <code>.badge</code>-Regel <code>display:inline-block</code> das <code>hidden</code>-Attribut auf, sodass es dauerhaft sichtbar blieb). Außerdem übernimmt das Abzeichen nun die <strong>Akzentfarbe des gewählten Farbschemas</strong> (statt eines festen Orange­tons) und wechselt damit wie das Versions-Abzeichen mit dem Theme.</li>
           <li><strong>v11.4.0 &ldquo;Beacon&rdquo;</strong> (2026-07-19): Neue <strong>Update-Prüfung</strong>. Curly schaut beim Start (höchstens einmal pro Tag, gedrosselt) über die GitHub-Releases-API nach, ob eine neuere Version vorliegt. Falls ja, erscheint neben der Versionsnummer ein <strong>&bdquo;⬆️ Update&ldquo;-Abzeichen</strong>, das einen Dialog mit direktem Download (ZIP) und Link zu den Release-Notes öffnet. Die Prüfung ist still bei Fehlern/Offline und lässt sich in den Optionen unter <em>Aktualisierung</em> abschalten. Da Curly eine einzelne HTML-Datei ist, ersetzt man die alte Datei einfach durch die heruntergeladene – die Einstellungen bleiben im Browser erhalten.</li>
           <li><strong>v11.3.0 &ldquo;Locale&rdquo;</strong> (2026-07-18): Erweiterte Sprach­erkennung. Findet die Wortheuristik keine Sprache, wird sie jetzt aus der Domain-Endung der URL abgeleitet (z.&nbsp;B. <code>.uk</code>/<code>.us</code>/<code>.edu</code>/<code>.gov</code>/<code>.au</code> → <code>en</code>; <code>.de</code>/<code>.at</code> → <code>de</code>; <code>.fr</code>/<code>.es</code>/<code>.it</code>/<code>.nl</code> entsprechend). So erhält z.&nbsp;B. eine Quelle von <code>ucl.ac.uk</code> nun <code>sprache=en</code>, auch wenn Titel und Herausgeber keine typischen Signalwörter enthalten. Mehrdeutige Endungen (<code>.com</code>/<code>.org</code>/<code>.net</code>/<code>.ca</code> …) bleiben unbestimmt; eine ausdrückliche Sprachangabe und die Wortheuristik haben weiterhin Vorrang.</li>
@@ -1298,15 +1299,16 @@ function getDomainFromUrl(url){
   try{
     var u = new URL(url);
     var host = (u.hostname || '').replace(/^www\./i, '');
-    // reduce to eTLD+1 for common multi-part TLDs
-    var multi = ['co.uk','com.au','co.jp','co.nz','com.br','co.in','co.za','com.cn','com.mx','com.tr'];
-    for(var i=0;i<multi.length;i++){
-      if(host.toLowerCase().endsWith('.'+multi[i])){
-        var parts = host.split('.');
-        return parts.slice(-3).join('.'); // e.g. news.bbc.co.uk -> bbc.co.uk
-      }
-    }
     var parts = host.split('.');
+    // eTLD+1 bilden. Unter einer 2-Buchstaben-ccTLD (z. B. .uk, .au, .jp) ist der
+    // registrierbare Name oft dreiteilig, wenn davor ein bekanntes Registry-Label
+    // steht (z. B. imperial.ac.uk, bbc.co.uk, example.com.au) → dann 3 Labels behalten.
+    var secondLevel = ['co','com','org','net','ac','edu','gov','gob','go','or','ne','mil','sch','nhs','police','ltd','plc','me','asn','id','gen','nic'];
+    var tld = parts[parts.length-1] || '';
+    var sld = parts[parts.length-2] || '';
+    if(parts.length>=3 && tld.length===2 && secondLevel.indexOf(sld.toLowerCase())>=0){
+      return parts.slice(-3).join('.'); // news.bbc.co.uk -> bbc.co.uk ; www.imperial.ac.uk -> imperial.ac.uk
+    }
     if(parts.length>=2) return parts.slice(-2).join('.'); // sub.site.com -> site.com
     return host || '';
   }catch(e){
@@ -1317,7 +1319,28 @@ function getDomainFromUrl(url){
     return '';
   }
 }
+// v11.4.2: BBC leitet das Werk aus der Subdomain ab (news.bbc.co.uk → BBC News,
+// sport.bbc.com → BBC Sport …). Gilt nur für *.bbc.co.uk / *.bbc.com; nur bekannte
+// Sektionen werden benannt, www/bare/unbekannt → schlicht „BBC".
+function getBbcSectionName(url){
+  var host='';
+  try{ host = new URL(url).hostname.toLowerCase(); }
+  catch(e){ var mm=String(url||'').match(/^[a-z]+:\/\/([^\/]+)/i); if(mm) host=mm[1].toLowerCase(); }
+  if(!host || !/(^|\.)bbc\.(co\.uk|com)$/.test(host)) return '';   // nur BBC-Domains
+  var sections = {
+    news:'BBC News', sport:'BBC Sport', culture:'BBC Culture', weather:'BBC Weather',
+    travel:'BBC Travel', future:'BBC Future', food:'BBC Food', sounds:'BBC Sounds',
+    bitesize:'BBC Bitesize', newsround:'BBC Newsround', reel:'BBC Reel',
+    worklife:'BBC Worklife', ideas:'BBC Ideas'
+  };
+  var m2 = host.match(/(?:^|\.)([a-z0-9-]+)\.bbc\.(?:co\.uk|com)$/);  // Label direkt vor „bbc"
+  var sub = m2 ? m2[1] : '';
+  if(sub && sections[sub]) return sections[sub];   // bekannte Sektion → „BBC <Sektion>"
+  return 'BBC';                                    // www / bare / unbekannte Subdomain
+}
 function getDisplaySiteNameFromUrl(url){
+  var bbc = getBbcSectionName(url);
+  if(bbc) return bbc;
   var domain = getDomainFromUrl(url);
   if(!domain) return '';
   var map = {
@@ -1776,8 +1799,11 @@ function convertCiteWebFamily(parsed, options){
   if(params.periodical){ finalParams['werk'] = finalParams['werk'] || params.periodical; }
   if(params.publisher){
     if(params.website){ finalParams['hrsg'] = params.publisher; }
-    
+
   }
+  // v11.4.2: |agency= (Nachrichtenagentur/Herausgeber der Meldung, z. B. Reuters,
+  // Imperial College London) → hrsg, sofern nicht bereits über publisher gesetzt.
+  if(params.agency){ finalParams['hrsg'] = finalParams['hrsg'] || params.agency; }
   if(!finalParams['werk'] && params.publisher){ finalParams['werk'] = params.publisher; }
   if(!finalParams['werk'] && params.url){
     var _site = (typeof getDisplaySiteNameFromUrl==='function' ? getDisplaySiteNameFromUrl(params.url) : '');
