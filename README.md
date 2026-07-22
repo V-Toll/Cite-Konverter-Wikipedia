@@ -36,7 +36,7 @@
 
 | Englische Vorlage | | Deutsche Vorlage |
 |---|:---:|---|
-| [`{{cite web}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_web) · [`{{cite news}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_news) · [`{{cite magazine}}`](https://en.wikipedia.org/wiki/Template:Cite_magazine) | → | [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) |
+| [`{{cite web}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_web) · [`{{cite news}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_news) · [`{{cite magazine}}`](https://en.wikipedia.org/wiki/Template:Cite_magazine) · [`{{cite press release}}`](https://en.wikipedia.org/wiki/Template:Cite_press_release) | → | [`{{Internetquelle}}`](https://de.wikipedia.org/wiki/Vorlage:Internetquelle) |
 | [`{{cite book}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_book) · [`{{cite journal}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_journal) · [`{{cite encyclopedia}}`](https://de.wikipedia.org/wiki/Vorlage:Cite_encyclopedia) · [`{{Citation}}`](https://en.wikipedia.org/wiki/Template:Citation) | → | [`{{Literatur}}`](https://de.wikipedia.org/wiki/Vorlage:Literatur) |
 | [`{{blockquote}}`](https://en.wikipedia.org/wiki/Template:Blockquote) · [`{{quote}}`](https://en.wikipedia.org/wiki/Template:Blockquote) | → | [`{{Zitat}}`](https://de.wikipedia.org/wiki/Vorlage:Zitat) |
 
@@ -52,6 +52,7 @@
 - **Automatische Subreferenzierung:** `{{rp|...}}`-Tags werden automatisch in das `details=`-Attribut konvertiert (z. B. `{{rp|10–20}}` → `details="S. 10–20"`). Mehrere `{{rp}}`-Tags werden zusammengeführt.
 - **Wikidata-Integration:** Englische Wikilinks werden automatisch ins Deutsche übersetzt (z. B. `[[Yellowstone National Park]]` → `[[Yellowstone-Nationalpark]]`). Display-Namen bleiben optional erhalten, fehlende deutsche Artikel werden intelligent behandelt. Die Titel werden dabei gebündelt abgefragt, sodass auch viele Wikilinks zügig übersetzt werden.
 - **Wikipedia-Redirects:** Automatische Verfolgung von Redirects – englische Wikilinks werden zum finalen Artikel aufgelöst und korrekt ins Deutsche übersetzt (z. B. `[[Eastern Band Cherokee]]` → `[[Eastern Band of Cherokee Indians]]`).
+- **Pressemitteilungen:** `{{Cite press release}}` wird zu `{{Internetquelle}}` (Autoren/Herausgeber/Interviewer zusammengeführt in `autor`, inkl. Wikilinks über `*-link`). Enthält die Vorlage eine Druck-/Publikations-ID (ISBN, DOI, ISSN …), wird stattdessen `{{Literatur}}` gebaut.
 - **Zitat-Konvertierung:** `{{blockquote}}` / `{{quote}}` werden zu `{{Zitat}}` – inklusive Sprach­erkennung, `{{lang|xx|…}}`-Entpackung, `multiline`-Umbrüchen und dem Einziehen eines direkt anschließenden `<ref>` in den `ref`-Parameter.
 - **DOI-Auflösung (Crossref):** DOIs werden erkannt und automatisch zu vollständigen `{{Literatur}}`-Angaben aufgelöst; bestehende `{{cite}}`-Vorlagen mit `doi=` lassen sich um fehlende Felder ergänzen – siehe [eigener Abschnitt](#-doi-auflösung-crossref).
 - **Konvertierungs-Log:** Unter dem Eingabefeld erscheinen regelbedingte Hinweise – z. B. „Archiv-URL entfernt, weil `url-status=live`", „`sprache=de` unterdrückt", „Sprachcode gekürzt" oder das gewählte Zielformat bei `{{Citation}}`/DOIs. Jeder Hinweis ist anklickbar und übernimmt die Alternative direkt in die Ausgabe (umschaltbar); der Log leert sich, sobald sich die Eingabe ändert.
@@ -187,7 +188,7 @@ Rund 37 abgestimmte Farbthemen mit eigenen Hell- und Dunkelmodus-Varianten. Das 
 
 ## 📦 Version & Changelog
 
-Aktuelle Version: **v11.4.3** (Basis: „Beacon", v11.4.0). Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
+Aktuelle Version: **v11.5.0 „Communiqué"**. Den vollständigen Verlauf findest du in der [CHANGELOG.md](CHANGELOG.md) sowie direkt im Tool über das **📜**-Symbol.
 
 ## 📄 Lizenz
 

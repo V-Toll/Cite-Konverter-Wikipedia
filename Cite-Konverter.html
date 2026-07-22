@@ -6,7 +6,7 @@
   <!-- Favicon: v9.2 „Sigil" – wird per Skript als eingebettetes SVG erzeugt und
        folgt dem gewählten Theme (siehe Skript am Seitenende). Keine externen Dateien. -->
   <link rel="icon" type="image/svg+xml" id="faviconSvg" />
-<title>Curly – der Cite-Konverter für Wikipedia – v11.4.3</title>
+<title>Curly – der Cite-Konverter für Wikipedia – v11.5.0</title>
 
 <style>
   html{min-height:100%}
@@ -796,12 +796,12 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
 <body class="theme-sunset">
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="heading">
-      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.4.3</a> <a href="#" id="updatePill" class="badge update-pill" data-modal-open="updateModal" aria-haspopup="dialog" title="Update verfügbar" hidden>⬆️ Update</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
+      <h1 id="heading"><span class="brand-logo" aria-hidden="true"><svg viewBox="0 0 100 100" role="img"><g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M44 20 C34 20 36 33 35 40 C34 47 30 50 24 50 C30 50 34 53 35 60 C36 67 34 80 44 80"/><path d="M56 20 C66 20 64 33 65 40 C66 47 70 50 76 50 C70 50 66 53 65 60 C64 67 66 80 56 80"/></g></svg></span><span class="title-text">Curly</span> <a href="#" id="versionBadge" class="badge" data-modal-open="changelogModal" aria-haspopup="dialog" title="Versionsverlauf">v11.5.0</a> <a href="#" id="updatePill" class="badge update-pill" data-modal-open="updateModal" aria-haspopup="dialog" title="Update verfügbar" hidden>⬆️ Update</a> <span class="header-actions"><button type="button" id="themeBtn" class="icon-btn" data-modal-open="themeModal" aria-haspopup="dialog" aria-label="Farbschema öffnen" title="Farbschema">🎨</button><button type="button" id="optionsBtn" class="icon-btn" data-modal-open="optionsModal" aria-haspopup="dialog" aria-label="Optionen öffnen" title="Optionen">⚙️</button><button type="button" id="changelogBtn" class="icon-btn" data-modal-open="changelogModal" aria-haspopup="dialog" aria-label="Versionsverlauf öffnen" title="Versionsverlauf">📜</button></span></h1>
       <p class="brand-tagline">der Cite-Konverter für Wikipedia</p>
       <p class="lead">Konvertiert englische Wikipedia-Zitationsvorlagen in die passenden deutschen Vorlagen – inklusive automatischer Wikidata-Übersetzung der Wikilinks, optionaler DeepL-Übersetzung des Fließtexts sowie Subreferenzierung und Syntax-Highlighting.</p>
       <div class="routes" aria-label="Unterstützte Konvertierungen">
         <div class="route">
-          <span class="route-src"><a href="https://de.wikipedia.org/wiki/Vorlage:Cite_web" target="_blank" rel="noopener"><code>cite web</code></a><a href="https://de.wikipedia.org/wiki/Vorlage:Cite_news" target="_blank" rel="noopener"><code>cite news</code></a><a href="https://en.wikipedia.org/wiki/Template:Cite_magazine" target="_blank" rel="noopener"><code>cite magazine</code></a></span>
+          <span class="route-src"><a href="https://de.wikipedia.org/wiki/Vorlage:Cite_web" target="_blank" rel="noopener"><code>cite web</code></a><a href="https://de.wikipedia.org/wiki/Vorlage:Cite_news" target="_blank" rel="noopener"><code>cite news</code></a><a href="https://en.wikipedia.org/wiki/Template:Cite_magazine" target="_blank" rel="noopener"><code>cite magazine</code></a><a href="https://en.wikipedia.org/wiki/Template:Cite_press_release" target="_blank" rel="noopener"><code>cite press release</code></a></span>
           <span class="route-arrow" aria-hidden="true">→</span>
           <span class="route-dst"><a href="https://de.wikipedia.org/wiki/Vorlage:Internetquelle" target="_blank" rel="noopener"><code>Internetquelle</code></a></span>
         </div>
@@ -1033,6 +1033,7 @@ body.theme-evergreencream .progress-bar{background:linear-gradient(90deg,#143731
       <div class="modal-body cl-body">
         <p class="cl-hint">Neueste Version zuerst.</p>
         <ul class="cl-list">
+          <li><strong>v11.5.0 &ldquo;Communiqué&rdquo;</strong> (2026-07-22): Neue Konvertierung <code>{{Cite press release}}</code> → <code>{{Internetquelle}}</code>. Autoren (<code>first/last</code>), Herausgeber (<code>editor-*</code>) und Interviewer (<code>interviewer-*</code>) werden gemeinsam in <code>autor</code> geführt; ein zugehöriger <code>*-link</code>-Parameter verlinkt die Person als Wikilink (<code>[[Ziel|Name]]</code>). <code>publisher</code>/<code>agency</code> → <code>hrsg</code>, <code>work</code> → <code>werk</code>, <code>page</code>/<code>pages</code> → <code>seiten</code>, <code>minutes</code>/<code>time</code>/<code>at</code> → <code>kommentar</code>, <code>quote</code> → <code>zitat</code>. Enthält die Vorlage eine Druck-/Publikations-ID (ISBN, DOI, ISSN, PMID …), wird sie stattdessen als <code>{{Literatur}}</code> aufgebaut (die IDs bleiben erhalten). Außerdem: einheitlich <strong>ein Leerzeichen</strong> nach <code>{{Internetquelle</code> in allen Ausgabepfaden (zuvor entstanden an einigen Stellen zwei).</li>
           <li><strong>v11.4.3</strong> (2026-07-20): Die „werk“-Ableitung erkennt jetzt deutlich mehr <strong>mehrteilige Länder-Domains</strong>. Die Liste bekannter Second-Level-Kürzel wurde erweitert (u.&nbsp;a. <code>go.jp</code>, <code>ne.jp</code>, <code>gouv.fr</code>, <code>govt.nz</code>, <code>gob.mx</code>, <code>res.in</code>), sodass z.&nbsp;B. <code>www.mext.go.jp</code> → <code>werk=mext.go.jp</code> ergibt (statt <code>go.jp</code>).</li>
           <li><strong>v11.4.2</strong> (2026-07-20): Korrekturen an der &bdquo;werk&ldquo;-Ableitung aus der URL. <strong>Mehrteilige Länder-Domains</strong> werden jetzt korrekt behandelt (z.&nbsp;B. <code>www.imperial.ac.uk</code> → <code>werk=imperial.ac.uk</code> statt bisher <code>ac.uk</code>; gilt für <code>.ac.uk</code>, <code>.gov.uk</code>, <code>.co.uk</code> u.&nbsp;a.). <strong>BBC-Quellen</strong> erhalten das Werk anhand der Subdomain (<code>news.bbc.co.uk</code>/<code>.com</code> → <code>BBC News</code>, <code>sport.…</code> → <code>BBC Sport</code>, <code>culture.…</code> → <code>BBC Culture</code>; unbekannte/keine Subdomain → <code>BBC</code>). Außerdem wird der Parameter <code>agency=</code> (Nachrichtenagentur) jetzt als <code>hrsg=</code> übernommen (z.&nbsp;B. <code>agency=Imperial College London</code> → <code>hrsg=Imperial College London</code>).</li>
           <li><strong>v11.4.1</strong> (2026-07-20): Zwei Korrekturen am Update-Abzeichen. Das &bdquo;⬆️ Update&ldquo;-Abzeichen wird jetzt <strong>nur noch angezeigt, wenn tatsächlich eine neuere Version vorliegt</strong> (zuvor hob die <code>.badge</code>-Regel <code>display:inline-block</code> das <code>hidden</code>-Attribut auf, sodass es dauerhaft sichtbar blieb). Außerdem übernimmt das Abzeichen nun die <strong>Akzentfarbe des gewählten Farbschemas</strong> (statt eines festen Orange­tons) und wechselt damit wie das Versions-Abzeichen mit dem Theme.</li>
@@ -2428,6 +2429,163 @@ function convertCitation(parsed, options) {
   }
 }
 
+  /* ============================================================
+     v11.5 „Communiqué" – {{Cite press release}} → {{Internetquelle}}
+     ------------------------------------------------------------
+     Pressemitteilungen werden als Internetquelle behandelt. Autoren,
+     Herausgeber (editor-*) und Interviewer (interviewer-*) werden – der
+     Vorgabe entsprechend – gemeinsam in |autor= geführt; ein zugehöriger
+     *-linkN-Parameter verlinkt die Person als Wikilink ([[Ziel|Name]] bzw.
+     [[Name]]). Enthält die Vorlage eine Druck-/Publikations-ID (ISBN, DOI,
+     ISSN, …), ist es faktisch ein zitierfähiges Druck-/Fachprodukt → dann
+     wird stattdessen {{Literatur}} gebaut (die IDs bleiben erhalten).
+     ============================================================ */
+  function isCitePressRelease(name){ return (name||'').trim().toLowerCase() === 'cite press release'; }
+
+  // Sammelt Personen als „Vorname Nachname" inkl. optionaler Wikilinks.
+  // Nummeriert (…1, …2 …) mit Fallback auf unnummeriert. Ein vorhandener
+  // linkPfx+Index-Wert erzeugt [[Ziel|Name]] bzw. [[Name]] (wenn Ziel = Name).
+  function prCollectPersons(params, firstPfx, lastPfx, linkPfx){
+    var people=[]; var nums=[];
+    var re = new RegExp('^'+lastPfx.replace(/-/g,'[-]')+'(\\d+)$');
+    Object.keys(params).forEach(function(k){ var m=k.match(re); if(m) nums.push(parseInt(m[1],10)); });
+    nums.sort(function(a,b){ return a-b; });
+    function make(suf){
+      var f=(params[firstPfx+suf]||'').trim();
+      var l=(params[lastPfx+suf]||'').trim();
+      var name=(f+' '+l).trim();
+      if(!name) return null;
+      var link=(params[linkPfx+suf]||'').trim();
+      if(link){ name = (link===name) ? ('[['+name+']]') : ('[['+link+'|'+name+']]'); }
+      return name;
+    }
+    nums.forEach(function(n){ var nm=make(n); if(nm) people.push(nm); });
+    if(nums.length===0){ var nm=make(''); if(nm) people.push(nm); }
+    return people;
+  }
+
+  function convertCitePressRelease(parsed, options){
+    var p = parsed.params;
+    var log = [];
+
+    // Personen: Autoren + Herausgeber + Interviewer (jeweils inkl. Wikilink)
+    var authors = prCollectPersons(p,'first','last','author-link');
+    if(!authors.length && p['author']) authors.push(String(p['author']).trim());
+    var editors = prCollectPersons(p,'editor-first','editor-last','editor-link');
+    if(!editors.length && p['editor']) editors.push(String(p['editor']).trim());
+    var interviewers = prCollectPersons(p,'interviewer-first','interviewer-last','interviewer-link');
+
+    // Titel-/Zitat-Normalisierung wie bei cite web ({{*}}→•, {{!}}→ – , Spacing)
+    function normText(s){
+      var r=String(s).replace(/\{\{\*\}\}/g,'•').replace(/\{\{\s*!\s*\}\}/g,' – ');
+      return r.replace(/\s*–\s*/g,' – ').replace(/\s{2,}/g,' ').trim();
+    }
+
+    // Datum: publication-date > date > year
+    var datum = '';
+    var rawDate = p['publication-date'] || p['date'] || p['year'] || '';
+    if(rawDate){ datum = toISODate(String(rawDate).trim()); }
+
+    // Druck-/Publikations-IDs → dann {{Literatur}} statt {{Internetquelle}}
+    var PRINT_IDS = ['isbn','issn','eissn','ismn','doi','bibcode','jstor','lccn','oclc','ol','mr','zbl','jfm','osti','ssrn','arxiv','biorxiv','medrxiv','citeseerx','pmid','pmc','hdl','rfc','sbn','s2cid','asin'];
+    var foundIds = PRINT_IDS.filter(function(k){ return String(p[k]||'').trim(); });
+
+    if(foundIds.length){
+      // ── {{Literatur}} (Druckprodukt) ──────────────────────────────────
+      var F={};
+      var litAuthors = authors.concat(interviewers);
+      if(litAuthors.length) F['Autor']=litAuthors.join(', ');
+      if(editors.length) F['Hrsg']=editors.join(', ');
+      else if(p['agency']) F['Hrsg']=String(p['agency']).trim();
+      if(p['title']) F['Titel']=normText(p['title']);
+      if(p['work']) F['Sammelwerk']=String(p['work']).trim();
+      if(p['publisher']) F['Verlag']=String(p['publisher']).trim();
+      var ortL = p['location'] || p['publication-place'] || '';
+      if(ortL) F['Ort']=String(ortL).trim();
+      if(datum) F['Datum']=datum;
+      if(p['isbn']) F['ISBN']=normalizeISBN(p['isbn']);
+      if(p['issn']) F['ISSN']=String(p['issn']).trim();
+      if(p['doi']) F['DOI']=String(p['doi']).trim();
+      if(p['pmid']) F['PMID']=String(p['pmid']).trim();
+      if(p['pmc']) F['PMC']=String(p['pmc']).trim();
+      if(p['arxiv']) F['arXiv']=String(p['arxiv']).trim();
+      if(p['bibcode']) F['bibcode']=String(p['bibcode']).trim();
+      if(p['jstor']) F['JSTOR']=String(p['jstor']).trim();
+      if(p['lccn']) F['LCCN']=String(p['lccn']).trim();
+      if(p['oclc']) F['OCLC']=String(p['oclc']).trim();
+      var langL = chooseLanguage(options.langChoice, p['language'], p['title'], (F['Sammelwerk']||p['work']||''), options.overrideLang, options.fullLangCodes, p['url']);
+      if(langL && !(options.suppressGerman && String(langL).toLowerCase().startsWith('de'))) F['Sprache']=langL;
+      var seitenL = p['pages']||p['page']||p['quote-pages']||p['quote-page']||'';
+      if(seitenL) F['Seiten']=normalizePages(String(seitenL).trim());
+      if(p['quote']) F['Zitat']=normText(p['quote']);
+      if(p['format']||p['archive-format']) F['Format']=String(p['format']||p['archive-format']).trim();
+      var urlL = cleanCitationUrl(p['url']||'');
+      if(urlL){
+        F['Online']=urlL;
+        F['Abruf']= options.useToday ? todayISO() : (toISODate((p['access-date']||p['accessdate']||'').trim()) || todayISO());
+      }
+      log.push('Cite press release → {{Literatur}} (Druck-ID: '+foundIds.join(', ')+')');
+      return { output: buildLiteratur(F), log: log };
+    }
+
+    // ── {{Internetquelle}} (Standardfall) ───────────────────────────────
+    var IQ={};
+    var allPersons = authors.concat(editors).concat(interviewers);
+    if(allPersons.length) IQ['autor']=allPersons.join(', ');
+    if(p['url']) IQ['url']=cleanCitationUrl(p['url']);
+    if(p['title']) IQ['titel']=normText(p['title']);
+    if(p['work']) IQ['werk']=String(p['work']).trim();
+    var hrsg = p['publisher'] || p['agency'] || '';
+    if(hrsg) IQ['hrsg']=String(hrsg).trim();
+    // werk-Fallback über die Domain, wenn kein work angegeben ist
+    if(!IQ['werk'] && p['url']){
+      var site = (typeof getDisplaySiteNameFromUrl==='function' ? getDisplaySiteNameFromUrl(p['url']) : '');
+      if(!site && typeof getDomainFromUrl==='function') site=getDomainFromUrl(p['url']);
+      if(site) IQ['werk']=site;
+    }
+    if(datum) IQ['datum']=datum;
+
+    var lang = chooseLanguage(options.langChoice, p['language'], p['title'], (IQ['werk']||p['work']||hrsg||''), options.overrideLang, options.fullLangCodes, p['url']);
+    if(lang && !(options.suppressGerman && String(lang).toLowerCase().startsWith('de'))) IQ['sprache']=lang;
+
+    var seiten = p['pages']||p['page']||p['quote-pages']||p['quote-page']||'';
+    if(seiten) IQ['seiten']=normalizePages(String(seiten).trim());
+
+    if(p['format']||p['archive-format']) IQ['format']=String(p['format']||p['archive-format']).trim();
+    if(!IQ['format'] && p['url']){
+      var mm=String(p['url']).toLowerCase().match(/\.(pdf|pptx?|docx?|xlsx?)$/);
+      if(mm){ var mp={pdf:'PDF',ppt:'PPT',pptx:'PPTX',doc:'DOC',docx:'DOCX',xls:'XLS',xlsx:'XLSX'}; IQ['format']=mp[mm[1]]||mm[1].toUpperCase(); }
+    }
+
+    // Kommentar aus minutes / time-caption / time / at
+    var komm=['minutes','time-caption','time','at'].map(function(k){ return String(p[k]||'').trim(); }).filter(Boolean);
+    if(komm.length) IQ['kommentar']=komm.join(', ');
+
+    if(p['quote']) IQ['zitat']=normText(p['quote']);
+
+    // Archiv / offline (Logik wie bei cite web)
+    (function(){
+      var archiveurl = p['archive-url']||p['archiveurl'];
+      var archivedate = p['archive-date']||p['archivedate'];
+      var urlStatus = (p['url-status']||'').trim().toLowerCase();
+      if(!archiveurl) return;
+      if(options.stripArchiveIfLive && urlStatus==='live') return; // live + Option → weglassen
+      if(urlStatus && urlStatus!=='live') IQ['offline']='1';
+      else if(!options.stripArchiveIfLive && urlStatus==='live') IQ['offline']='0';
+      IQ['archiv-url']=cleanCitationUrl(archiveurl);
+      if(archivedate){ var ia=toISODate(archivedate); if(ia) IQ['archiv-datum']=ia; }
+    })();
+
+    if(options.useToday) IQ['abruf']=todayISO();
+    else { var acc=(p['access-date']||p['accessdate']||'').trim(); if(acc){ var ia2=toISODate(acc); if(ia2) IQ['abruf']=ia2; } }
+
+    var order=['autor','url','titel','titelerg','werk','hrsg','datum','seiten','format','sprache','offline','archiv-url','archiv-datum','archiv-bot','abruf','abruf-verborgen','kommentar','zitat','CH'];
+    var parts=[];
+    order.forEach(function(k){ if(IQ[k]) parts.push('|'+k+'='+IQ[k]); });
+    log.push('Cite press release → {{Internetquelle}}');
+    return { output: '{{Internetquelle '+parts.join(' ')+'}}', log: log };
+  }
+
   function isCiteWebFamily(name){
   const n = (name||'').trim().toLowerCase();
   const aliases = ['cite web','cite website','cite webpage','cite news','cite magazine','internetquelle'];
@@ -2613,6 +2771,7 @@ function convertCitation(parsed, options) {
     if(isCiteJournal(parsed.name)) return convertCiteJournal(parsed, options);
     if(isCiteEncyclopedia(parsed.name)) return convertCiteEncyclopedia(parsed, options);
     if(isCitation(parsed.name)) return convertCitation(parsed, options);
+    if(isCitePressRelease(parsed.name)) return convertCitePressRelease(parsed, options);
     if(isCiteWebFamily(parsed.name)) return convertCiteWebFamily(parsed, options);
     // v9.1: Blockquote-Sicherheitsnetz für den Fallback-Pfad (ohne ref-Einzug,
     // da hier kein Kontext hinter der Vorlage vorliegt).
@@ -3191,12 +3350,12 @@ document.addEventListener("DOMContentLoaded", () => {
         function push(k){ if(has(F2[k])) parts.push('|' + k + '=' + F2[k]); }
         IQ_ORDER.forEach(push);
         Object.keys(F2).forEach(function(k){ if(IQ_ORDER.indexOf(k) === -1) push(k); });
-        return '{{Internetquelle ' + (parts.length ? ' ' + parts.join(' ') : '') + '}}';
+        return '{{Internetquelle' + (parts.length ? ' ' + parts.join(' ') : '') + '}}';
       }catch(e){
         console.error('buildInternetquelle override failed', e);
         if(typeof orig === 'function') return orig(F);
         var raw=[]; for(var k in (F||{})) if(Object.prototype.hasOwnProperty.call(F,k)) raw.push('|'+k+'='+F[k]);
-        return '{{Internetquelle ' + (raw.length? ' '+raw.join(' ') : '') + '}}';
+        return '{{Internetquelle' + (raw.length? ' '+raw.join(' ') : '') + '}}';
       }
     };
   })();
@@ -3283,7 +3442,7 @@ document.addEventListener("DOMContentLoaded", () => {
           delete map[norm];
         }
       }
-      var out = '{{Internetquelle ' + (parts.length? ' '+parts.join(' ') : '') + '}}';
+      var out = '{{Internetquelle' + (parts.length? ' '+parts.join(' ') : '') + '}}';
       repl.push({ start:b.start, end:b.end, text: out });
     }
     if(!repl.length) return txt;
